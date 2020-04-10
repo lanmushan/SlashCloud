@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lanmushan.dysysservice.mapper.SysDictMapper" >
+    <resultMap id="baseResultMap" type="com.lanmushan.dysysservice.entity.SysDict" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="dict_value" property="dictValue" jdbcType="VARCHAR" />
+        <result column="dict_name" property="dictName" jdbcType="VARCHAR" />
+        <result column="dict_code" property="dictCode" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="selectList" resultMap="baseResultMap" parameterType="com.lanmushan.framework.dto.QueryInfo">
+
+    </select>
+    <select id="selectQueryById" resultMap="baseResultMap" parameterType="com.lanmushan.framework.dto.QueryInfo">
+        select  * from  sys_tb_dict
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
+                <choose>
+                    <when test="it.key == 'search_key'">
+                        dict_name like #{it.value} or
+                        dict_code  like #{it.value}
+                    </when>
+                    <otherwise>
+                        <if test="it.operate =='in'">
+                            ${it.key} ${it.operate} (#{it.value})
+                        </if>
+                        <if test="it.operate !='in'">
+                            ${it.key} ${it.operate} #{it.value}
+                        </if>
+                    </otherwise>
+                </choose>
+            </foreach>
+        </trim>
+    </select>
+
+</mapper>
