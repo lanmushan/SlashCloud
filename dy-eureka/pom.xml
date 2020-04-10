@@ -9,9 +9,9 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.lanmushan</groupId>
-    <artifactId>server-register-center</artifactId>
+    <artifactId>dy-eureka</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>server-register-center</name>
+    <name>dy-eureka</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
