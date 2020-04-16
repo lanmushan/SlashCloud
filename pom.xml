@@ -21,6 +21,7 @@
     </properties>
     <modules>
         <module>dy-framework</module>
+        <module>framework-test</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -44,8 +45,6 @@
                 <artifactId>spring-cloud-starter-config</artifactId>
                 <version>2.0.3.RELEASE</version>
             </dependency>
-
-
 
             <!--权限控制框架shiro-->
             <dependency>
@@ -193,7 +192,31 @@
             <!--</exclusions>-->
         <!--</dependency>-->
     </dependencies>
+
+    <profiles>
+    <profile>
+        <!--不同环境Profile的唯一id-->
+        <id>dev</id>
+        <properties>
+            <!--profiles.active是自定义的字段，自定义字段可以有多个-->
+            <profiles.active>dev</profiles.active>
+        </properties>
+    </profile>
+    <profile>
+        <id>prod</id>
+        <properties>
+            <profiles.active>prod</profiles.active>
+        </properties>
+    </profile>
+    <profile>
+        <id>test</id>
+        <properties>
+            <profiles.active>test</profiles.active>
+        </properties>
+    </profile>
+    </profiles>
     <build>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
