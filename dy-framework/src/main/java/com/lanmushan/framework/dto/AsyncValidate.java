@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * 异步校验请求接收类
- * @author Administrator
+ * @author dy
  */
 public class AsyncValidate {
     @NotNull(message = "字段名不能为空")

@@ -9,8 +9,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * 通用Controller,所有controller集成该类
- * @author Administrator
+ * 通用Controller,所有Controller需要继承该基类
+ * @author dy
  */
 public class BaseController {
     /**

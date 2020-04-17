@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * 通用数据传输通道，数据传输容器
- * @author Administrator
+ * @author dy
  */
 public class Message implements Serializable {
     private Boolean state = false;
@@ -108,7 +108,6 @@ public class Message implements Serializable {
         this.setPage(((int) total) % pageSize == 0 ? ((int) total) / pageSize : (((int) total) / pageSize) + 1);
         return this;
     }
-
     public Integer getPage() {
         return page;
     }
@@ -184,7 +183,7 @@ public class Message implements Serializable {
 }
 
 /**
- * 校验错误返回
+ * 通用字段校验错误情况返回
  */
 class Error {
     private String errMsg;

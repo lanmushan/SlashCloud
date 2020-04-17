@@ -17,12 +17,14 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
- * @author Administrator
+ * 通用查询接口
+ * （不安全）需要结合权限控制进行使用
+ * @author dy
  */
 @RequestMapping("/Admin")
 @RestController
 public class QueryController extends BaseController {
-    private Logger log = LoggerFactory.getLogger(getClass());
+    private Logger log = LoggerFactory.getLogger(QueryController.class);
     @GetMapping( value = "/{entityName}/{methodName}" )
     public Message queryList(QueryInfo queryInfo, @PathVariable("entityName") String entityName,@PathVariable("methodName") String methodName, HttpServletRequest request) {
         Message msg=new Message();

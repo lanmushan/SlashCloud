@@ -15,14 +15,12 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
+ *
  * @author Administrator
  */
 @Configuration
 public class WebAppConfig implements WebMvcConfigurer {
-    /**
-     * 自定义json转换器
-     * @return
-     */
+
     @Bean
     public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -37,6 +35,7 @@ public class WebAppConfig implements WebMvcConfigurer {
         converter.setObjectMapper(mapper);
         return converter;
     }
+
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         //将我们定义的时间格式转换器添加到转换器列表中,

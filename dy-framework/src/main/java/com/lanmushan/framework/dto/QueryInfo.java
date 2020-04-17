@@ -185,6 +185,11 @@ public class QueryInfo implements Serializable {
         this.otherMap = otherMap;
     }
 }
+
+/**
+ * 查询参数转换
+ * @author Administrator
+ */
 class QueryParam {
     private String key;
     private Object value;

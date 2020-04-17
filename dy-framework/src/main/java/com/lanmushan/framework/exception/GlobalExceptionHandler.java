@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
     {
         log.error(e.getMessage(),e);
         Message msg=new Message();
-        msg.setCode(ErrorCode.UNKNOWN_ERROR);
+      //  msg.setCode(HTTPCode.UNKNOWN_ERROR);
         msg.error("服务器内部错误");
         msg.setRow(e.getMessage());
         return msg;
