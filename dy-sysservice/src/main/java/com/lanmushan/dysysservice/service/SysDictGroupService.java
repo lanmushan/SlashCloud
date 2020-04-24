@@ -1,6 +1,6 @@
 package com.lanmushan.dysysservice.service;
 
-import com.lanmushan.dysysservice.bo.BSysDictGroup;
+import com.lanmushan.dysysservice.bo.SysDictGroupBO;
 import com.lanmushan.dysysservice.entity.SysDictGroup;
 import com.lanmushan.framework.service.BaseService;
 
@@ -15,26 +15,26 @@ public interface SysDictGroupService  extends BaseService<SysDictGroup> {
      * @param bSysDictGroup
      * @return
      */
-    public int insertService(BSysDictGroup bSysDictGroup);
+    public void insertService(SysDictGroupBO bSysDictGroup);
 
     /**
      * 批量新增
      * @param bSysDictGroupList
      * @return
      */
-    public int insertServiceList(List<BSysDictGroup> bSysDictGroupList);
+    public void insertServiceList(List<SysDictGroupBO> bSysDictGroupList);
 
     /**
      * 更新
      * @param bSysDictGroup
      * @return
      */
-    public int updateService(BSysDictGroup bSysDictGroup);
+    public void updateService(SysDictGroupBO bSysDictGroup);
 
     /**
      * 批量删除
      * @param ids
      * @return
      */
-    public int deleteServiceByIds(Long ids);
+    public void deleteServiceByIds(Long ids);
 }

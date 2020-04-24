@@ -1,4 +1,4 @@
-package com.lanmushan.framework.config;
+package com.lanmushan.framework.configure;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

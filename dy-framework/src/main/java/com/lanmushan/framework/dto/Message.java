@@ -180,6 +180,12 @@ public class Message implements Serializable {
     public Boolean getState() {
         return state;
     }
+
+    public static Message getInstance(String msg){
+
+        return  new Message();
+    }
+
 }
 
 /**

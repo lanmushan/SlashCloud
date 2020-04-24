@@ -1,6 +1,6 @@
 package com.lanmushan.dysysservice.service.impl;
 
-import com.lanmushan.dysysservice.bo.BSysDictGroup;
+import com.lanmushan.dysysservice.bo.SysDictGroupBO;
 import com.lanmushan.dysysservice.entity.SysDictGroup;
 import com.lanmushan.dysysservice.mapper.SysDictGroupMapper;
 import com.lanmushan.dysysservice.service.SysDictGroupService;
@@ -26,28 +26,28 @@ public class SysDictGroupServiceImpl implements SysDictGroupService {
     }
 
     @Override
-    public int insertService(BSysDictGroup bSysDictGroup) {
-      return   sysDictGroupMapper.insertSelective(bSysDictGroup);
+    public void insertService(SysDictGroupBO bSysDictGroup) {
+         sysDictGroupMapper.insertSelective(bSysDictGroup);
     }
 
     @Override
-    public int insertServiceList(List<BSysDictGroup> bSysDictGroupList) {
+    public void insertServiceList(List<SysDictGroupBO> bSysDictGroupList) {
       Date now= DateUtil.now();
       bSysDictGroupList.forEach(it->{
           it.setCreateTime(now);
           it.setUpdateTime(now);
           it.setId(MyUUID.getInstance().nextId());
       });
-      return sysDictGroupMapper.insertList(bSysDictGroupList);
+       sysDictGroupMapper.insertList(bSysDictGroupList);
     }
 
     @Override
-    public int updateService(BSysDictGroup bSysDictGroup) {
-        return 0;
+    public void updateService(SysDictGroupBO bSysDictGroup) {
+
     }
 
     @Override
-    public int deleteServiceByIds(Long ids) {
-        return 0;
+    public void deleteServiceByIds(Long ids) {
+
     }
 }

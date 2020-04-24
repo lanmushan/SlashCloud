@@ -1,13 +1,16 @@
 package com.lanmushan.dysysservice.entity;
 
 import com.lanmushan.framework.util.uuid.SeqGenId;
-import sun.rmi.runtime.Log;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
+/**
+ * 字典分组表
+ * @author Administrator
+ */
 @Table(name = "global_dict_group")
 public class SysDictGroup {
     @Id

@@ -1,7 +1,5 @@
 package com.lanmushan.dysysservice.entity;
 
-import com.alibaba.fastjson.serializer.ToStringSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.lanmushan.framework.util.uuid.SeqGenId;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -11,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 数据字典
  * @author Administrator
  */
 @Table(name = "sys_tb_dict")

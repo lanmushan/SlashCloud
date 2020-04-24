@@ -1,4 +1,4 @@
-package com.lanmushan.framework.config;
+package com.lanmushan.framework.configure;
 
 /**
  * 系统是否允许使用配置

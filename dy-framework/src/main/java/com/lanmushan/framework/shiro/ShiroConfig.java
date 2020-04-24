@@ -83,7 +83,7 @@ public class ShiroConfig {
      * 配置Session管理器
      * @return
      */
-    @Bean
+   // @Bean
     public SessionManager sessionManager(){
         TokenSessionManager tokenSessionManager = new TokenSessionManager();
         //修改为自定义的Sesion
