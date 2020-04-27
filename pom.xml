@@ -65,7 +65,6 @@
                 <artifactId>spring-session-data-redis</artifactId>
                 <version>2.0.3.RELEASE</version>
             </dependency>
-
             <!--基础工具或其他常用依赖相关-->
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
             <dependency>
