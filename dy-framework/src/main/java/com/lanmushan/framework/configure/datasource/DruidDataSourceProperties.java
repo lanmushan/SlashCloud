@@ -1,4 +1,4 @@
-package com.lanmushan.framework.configure;
+package com.lanmushan.framework.configure.datasource;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;

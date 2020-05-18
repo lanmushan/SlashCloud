@@ -1,4 +1,4 @@
-package com.lanmushan.framework.dto;
+package com.lanmushan.framework.constant;
 
 /**
  * 状态编号定义

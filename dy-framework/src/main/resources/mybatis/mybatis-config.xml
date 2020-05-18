@@ -2,9 +2,15 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <settings>
+        <!--针对HashMap无效-->
         <setting name="mapUnderscoreToCamelCase" value="true"/> <!-- 驼峰式命名 -->
+        <!--NULL字段显示-->
         <setting name="callSettersOnNulls" value="true"/>
     </settings>
+    <!--数据库适配-->
+    <!--<databaseIdProvider type="DB_VENDOR">-->
+        <!--<property name="MySQL" value="mysql"/>-->
+    <!--</databaseIdProvider>-->
     <typeAliases>
         <typeAlias type="java.lang.String" alias="String"></typeAlias>
         <typeAlias type="java.lang.Integer" alias="Integer"></typeAlias>

@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication(scanBasePackages = "com.lanmushan.*.*")
 @RestController
 public class FrameworkTestApplication extends BaseController {
-    @Value("${spring.redis.host}")
-    String host;
+
     public static void main(String[] args) {
         SpringApplication.run(FrameworkTestApplication.class, args);
     }

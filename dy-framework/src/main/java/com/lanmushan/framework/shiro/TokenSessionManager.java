@@ -19,8 +19,6 @@ public class TokenSessionManager extends DefaultWebSessionManager {
     protected Serializable getSessionId(ServletRequest request, ServletResponse response) {
         String token = WebUtils.toHttp(request).getHeader(AUTHORIZATION);
         //如果请求头中有 Authorization 则其值为sessionId
-
-
         if (!StringUtils.isEmpty(token)) {
            // id= AESUtil.decrypt(id);//进行解密返回sessionId
             return token;

@@ -63,25 +63,6 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources/</directory>
-                <!--打包时先排除掉三个文件夹-->
-                <excludes>
-                    <exclude>dev/*</exclude>
-                    <exclude>prod/*</exclude>
-                    <exclude>test/*</exclude>
-                </excludes>
-                <includes>
-                    <!--如果有其他定义通用文件，需要包含进来-->
-                    <!--<include>messages/*</include>-->
-                </includes>
-            </resource>
-            <resource>
-                <!--这里是关键！ 根据不同的环境，把对应文件夹里的配置文件打包-->
-                <directory>src/main/resources/${profiles.active}</directory>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
