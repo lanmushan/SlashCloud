@@ -18,8 +18,8 @@ import java.io.Serializable;
  * 基于redis分布式session实现
  * @author Administrator
  */
-@Configuration
-@Order(10)
+//@Configuration
+//@Order(10)
 public class ShiroRedisSessionDao extends CachingSessionDAO{
 
     @Autowired

@@ -1,7 +1,7 @@
 package com.lanmushan.framework.controller;
 
 import com.github.pagehelper.PageHelper;
-import com.lanmushan.framework.util.CommonUtil;
+import com.lanmushan.framework.util.StringCommonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -56,7 +56,7 @@ public class BaseController {
         {
             return null;
         }
-        field= CommonUtil.camelToUnderline(field,'_');
+        field= StringCommonUtil.camelToUnderline(field,'_');
         return field+" "+sort;
     }
 }

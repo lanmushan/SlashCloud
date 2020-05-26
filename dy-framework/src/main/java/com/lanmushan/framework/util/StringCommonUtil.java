@@ -1,7 +1,5 @@
 package com.lanmushan.framework.util;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
@@ -9,23 +7,31 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-public class CommonUtil {
+public class StringCommonUtil {
     //首字母转小写
-    public static String toLowerCaseFirstOne(String s){
-        if(Character.isLowerCase(s.charAt(0)))
+    public static String toLowerCaseFirstOne(String s) {
+        if (Character.isLowerCase(s.charAt(0))) {
             return s;
-        else
+        } else {
             return (new StringBuilder()).append(Character.toLowerCase(s.charAt(0))).append(s.substring(1)).toString();
+        }
     }
+
     //首字母转大写
-    public static String toUpperCaseFirstOne(String s){
-        if(Character.isUpperCase(s.charAt(0)))
+    public static String toUpperCaseFirstOne(String s) {
+        if (Character.isUpperCase(s.charAt(0)))
+        {
             return s;
+        }
         else
+        {
             return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
+        }
     }
+
     /**
      * 创建32位md5加密
+     *
      * @param plainText
      * @return
      */
@@ -52,34 +58,37 @@ public class CommonUtil {
         }
         return re_md5;
     }
-    public synchronized static String  createMark() {
-        Date date=new Date();
-        DateFormat df=new SimpleDateFormat("yyMMddhhmm");
-        String str1=Long.toString(Long.parseLong(df.format(date)),36).toUpperCase();
-        String str2=Long.toString(CommonUtil.createRandom(2),36).toString().toUpperCase();
-        return  str1+str2;
+
+    public synchronized static String createMark() {
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("yyMMddhhmm");
+        String str1 = Long.toString(Long.parseLong(df.format(date)), 36).toUpperCase();
+        String str2 = Long.toString(StringCommonUtil.createRandom(2), 36).toString().toUpperCase();
+        return str1 + str2;
     }
-    public  static  long createRandom(int n){
-        String str="";
-        long temp=0;
+
+    public static long createRandom(int n) {
+        String str = "";
+        long temp = 0;
         do {
-            temp=10;
-            while (--n>0){
-                temp*=10;
+            temp = 10;
+            while (--n > 0) {
+                temp *= 10;
             }
-            temp=(long) (Math.random()*temp);
-            str=Long.toString(temp);
-        }while (str.length()==n);
+            temp = (long) (Math.random() * temp);
+            str = Long.toString(temp);
+        } while (str.length() == n);
         return temp;
     }
 
     /**
      * 驼峰转大小写
+     *
      * @param param
      * @param underline
      * @return
      */
-    public static String camelToUnderline(String param,char underline) {
+    public static String camelToUnderline(String param, char underline) {
         if (param == null || "".equals(param.trim())) {
             return "";
         }
@@ -99,11 +108,12 @@ public class CommonUtil {
 
     /**
      * 下划线转驼峰
+     *
      * @param param
      * @param underline
      * @return
      */
-    public static String underlineToCamel(String param,char underline) {
+    public static String underlineToCamel(String param, char underline) {
         if (param == null || "".equals(param.trim())) {
             return "";
         }
@@ -121,6 +131,7 @@ public class CommonUtil {
         }
         return sb.toString();
     }
+
     public static String getRandomString(int length) {
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";
         Random random = new Random();

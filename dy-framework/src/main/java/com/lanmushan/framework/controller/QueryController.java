@@ -5,12 +5,11 @@ import com.lanmushan.framework.configure.ApplicationUtil;
 import com.lanmushan.framework.dto.Message;
 import com.lanmushan.framework.dto.QueryInfo;
 import com.lanmushan.framework.exception.OperateException;
+import com.lanmushan.framework.util.StringCommonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -21,14 +20,15 @@ import java.util.List;
  * （不安全）需要结合权限控制进行使用
  * @author dy
  */
-@RequestMapping("/Admin")
 @RestController
+@RequestMapping("/Admin")
 public class QueryController extends BaseController {
     private Logger log = LoggerFactory.getLogger(QueryController.class);
     @GetMapping( value = "/{entityName}/{methodName}" )
-    public Message queryList(QueryInfo queryInfo, @PathVariable("entityName") String entityName,@PathVariable("methodName") String methodName, HttpServletRequest request) {
+    public Message queryList(QueryInfo queryInfo, @PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, HttpServletRequest request) {
         Message msg=new Message();
         try {
+            entityName= StringCommonUtil.toLowerCaseFirstOne(entityName);
              Object  queryService=null;
              if(entityName.lastIndexOf("Service")>0||entityName.lastIndexOf("service")>0)
              {
@@ -36,8 +36,13 @@ public class QueryController extends BaseController {
              }else {
                  queryService=ApplicationUtil.getBean(entityName+"Mapper");
              }
+             Method methods[]=queryService.getClass().getDeclaredMethods();
+            for (int i = 0; i < methods.length; i++) {
+                System.out.println(methods[i].getName());
+            }
              Method method=  queryService.getClass().getMethod(methodName,queryInfo.getClass());
              Type t = method.getAnnotatedReturnType().getType();
+             System.out.println(method.getName());
              //列表查询
             if("java.util.List".equals(t.getTypeName()))
             {
@@ -45,6 +50,7 @@ public class QueryController extends BaseController {
                 {
                      startPage();
                 }
+                System.out.println(method.getName());
                 List list= (List) method.invoke(queryService,queryInfo);
                 msg.setRows(list);
                 return msg;

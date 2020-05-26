@@ -4,7 +4,7 @@ package com.lanmushan.framework.dto;
 
 
 import com.lanmushan.framework.exception.OperateException;
-import com.lanmushan.framework.util.CommonUtil;
+import com.lanmushan.framework.util.StringCommonUtil;
 
 import java.io.Serializable;
 import java.util.*;
@@ -29,7 +29,7 @@ public class QueryInfo implements Serializable {
         {
             return null;
         }
-        this.field=CommonUtil.camelToUnderline(field,'_');
+        this.field= StringCommonUtil.camelToUnderline(field,'_');
         return field+" "+sort;
     }
 
@@ -128,9 +128,9 @@ public class QueryInfo implements Serializable {
         Integer index=key.indexOf("-");
         if(index<0)
         {
-            return CommonUtil.camelToUnderline(key,'_');
+            return StringCommonUtil.camelToUnderline(key,'_');
         }else{
-            return CommonUtil.camelToUnderline(key.substring(0,index),'_');
+            return StringCommonUtil.camelToUnderline(key.substring(0,index),'_');
         }
     }
     private String getOperate(String key)
