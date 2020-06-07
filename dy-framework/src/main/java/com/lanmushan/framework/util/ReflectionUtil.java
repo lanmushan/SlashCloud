@@ -47,8 +47,9 @@ public class ReflectionUtil {
         }
         return result;
     }
-    public static String getFieldType(final Object object, final String fieldName)
-    {   Field field = getDeclaredField(object, fieldName);
+
+    public static String getFieldType(final Object object, final String fieldName) {
+        Field field = getDeclaredField(object, fieldName);
         return field.getType().toString();
     }
 
@@ -57,32 +58,29 @@ public class ReflectionUtil {
      */
     public static void setFieldValue(final Object object, final String fieldName, final Object value) {
         Field field = getDeclaredField(object, fieldName);
-        if (field == null)
+        if (field == null) {
             throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + object + "]");
-
+        }
         makeAccessible(field);
 
         try {
-            System.err.println("\n"+field.getType().toString());
-            if(field.getType().toString().equals("class java.lang.Integer"))
-            {
+            if (field.getType().toString().equals("class java.lang.Integer")) {
                 field.set(object, Integer.parseInt(value.toString()));
-            }
-            if(field.getType().toString().equals("class java.lang.String"))
-            {
+            } else if (field.getType().toString().equals("class java.lang.String")) {
                 field.set(object, value.toString());
-            }
-            if(field.getType().toString().equals("class java.lang.Long"))
-            {
+            } else if (field.getType().toString().equals("class java.lang.Long")) {
                 field.set(object, Long.parseLong(value.toString()));
+            } else if (field.getType().toString().equals("class java.util.Date")) {
+                SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ");
+                field.set(object, sdf.parse(value.toString()));
+            } else {
+                field.set(object, value);
             }
-            if(field.getType().toString().equals("class java.util.Date"))
-            {   SimpleDateFormat sdf =   new SimpleDateFormat( " yyyy-MM-dd HH:mm:ss " );
-                field.set(object,sdf.parse(value.toString()));
-            }
+
+
         } catch (IllegalAccessException e) {
             logger.error("不可能抛出的异常:{}", e.getMessage());
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             logger.error("日期转换出错:{}", e.getMessage());
         }
     }
@@ -124,10 +122,9 @@ public class ReflectionUtil {
     /**
      * 通过反射,获得定义Class时声明的父类的泛型参数的类型. 如public UserDao extends HibernateDao<User>
      *
-     * @param clazz
-     *            The class to introspect
+     * @param clazz The class to introspect
      * @return the first generic declaration, or Object.class if cannot be
-     *         determined
+     * determined
      */
     @SuppressWarnings("unchecked")
     public static Class getSuperClassGenricType(final Class clazz) {
@@ -138,12 +135,10 @@ public class ReflectionUtil {
      * 通过反射,获得定义Class时声明的父类的泛型参数的类型. 如public UserDao extends
      * HibernateDao<User,Long>
      *
-     * @param clazz
-     *            clazz The class to introspect
-     * @param index
-     *            the Index of the generic ddeclaration,start from 0.
+     * @param clazz clazz The class to introspect
+     * @param index the Index of the generic ddeclaration,start from 0.
      * @return the index generic declaration, or Object.class if cannot be
-     *         determined
+     * determined
      */
 
     @SuppressWarnings("unchecked")
@@ -172,10 +167,8 @@ public class ReflectionUtil {
     /**
      * 提取集合中的对象的属性,组合成List.
      *
-     * @param collection
-     *            来源集合.
-     * @param propertyName
-     *            要提取的属性名.
+     * @param collection   来源集合.
+     * @param propertyName 要提取的属性名.
      */
     @SuppressWarnings("unchecked")
     public static List fetchElementPropertyToList(final Collection collection, final String propertyName) throws Exception {
@@ -192,12 +185,9 @@ public class ReflectionUtil {
     /**
      * 提取集合中的对象的属性,组合成由分割符分隔的字符串.
      *
-     * @param collection
-     *            来源集合.
-     * @param propertyName
-     *            要提取的属性名.
-     * @param separator
-     *            分隔符.
+     * @param collection   来源集合.
+     * @param propertyName 要提取的属性名.
+     * @param separator    分隔符.
      */
     @SuppressWarnings("unchecked")
     public static String fetchElementPropertyToString(final Collection collection, final String propertyName, final String separator) throws Exception {

@@ -1,7 +1,7 @@
-package com.lanmushan.dysysservice.service;
+package com.lanmushan.sysservice.service;
 
-import com.lanmushan.dysysservice.bo.SysDictGroupBO;
-import com.lanmushan.dysysservice.entity.SysDictGroup;
+import com.lanmushan.sysservice.bo.SysDictGroupBO;
+import com.lanmushan.sysservice.entity.SysDictGroup;
 import com.lanmushan.framework.service.BaseService;
 
 import java.util.List;

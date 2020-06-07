@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -15,11 +16,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- *
+ *  全局数据格式化配置
  * @author Administrator
  */
 @Configuration
-public class WebAppConfig implements WebMvcConfigurer {
+public class DataFormatConfig implements WebMvcConfigurer {
 
     @Bean
     public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {
@@ -42,4 +43,5 @@ public class WebAppConfig implements WebMvcConfigurer {
         //这样jackson格式化时候但凡遇到Date类型就会转换成我们定义的格式
         converters.add(jackson2HttpMessageConverter());
     }
+
 }

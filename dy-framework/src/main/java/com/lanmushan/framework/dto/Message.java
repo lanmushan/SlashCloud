@@ -1,6 +1,7 @@
 package com.lanmushan.framework.dto;
 
 import com.github.pagehelper.PageInfo;
+import com.lanmushan.framework.constant.HTTPCode;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -8,20 +9,13 @@ import java.util.List;
 
 /**
  * 通用数据传输通道，数据传输容器
+ *
  * @author dy
  */
 public class Message implements Serializable {
-    private Boolean state = false;
-    private Object row;
-    private List rows;
-    /**
-     * 状态码
-     */
-    private int code = 0;
-    private String msg = "操作失败";
-    private List<Error> errors;
+    private int code = HTTPCode.Fail.code;
+    private String msg = HTTPCode.Fail.msg;
     private long time;
-    private String href;
     private int currentPage;
     private int pageSize;
     private int isFirstPage;
@@ -38,8 +32,50 @@ public class Message implements Serializable {
     private long total;
     private List<Integer> pageList;
 
+    private List<Error> errors;
+    private Object row;
+    private List rows;
+
+
+
     public Message() {
         this.time = System.currentTimeMillis();
+    }
+
+    public static
+/**
+ * 通用字段校验错误情况返回
+ */
+    class Error {
+        private String errMsg;
+        private String errName;
+
+        public Error() {
+        }
+
+        @Override
+        public String toString() {
+            return "Error{" +
+                    "errMsg='" + errMsg + '\'' +
+                    ", errName='" + errName + '\'' +
+                    '}';
+        }
+
+        public String getErrMsg() {
+            return errMsg;
+        }
+
+        public void setErrMsg(String errMsg) {
+            this.errMsg = errMsg;
+        }
+
+        public String getErrName() {
+            return errName;
+        }
+
+        public void setErrName(String errName) {
+            this.errName = errName;
+        }
     }
 
     public int getCode() {
@@ -56,9 +92,14 @@ public class Message implements Serializable {
 
     public Message setRow(Object row) {
         this.row = row;
+        this.setHttpCode(HTTPCode.OK);
         return this;
     }
-
+    public void setHttpCode(HTTPCode httpCode)
+    {
+        this.code=httpCode.code;
+        this.msg=httpCode.msg;
+    }
     public List getRows() {
         return rows;
     }
@@ -70,29 +111,33 @@ public class Message implements Serializable {
             this.setPageSize(pageInfo.getPageSize());
             this.setTotal(pageInfo.getTotal());
             this.rows = rows;
+            this.setHttpCode(HTTPCode.OK);
             this.success("查询成功");
         } else {
-            this.success("暂无相关数据");
+            this.setHttpCode(HTTPCode.OK204);
         }
 
         return this;
     }
 
     public Message error(String msg) {
+        this.setHttpCode(HTTPCode.Fail);
         this.msg = msg;
         return this;
     }
-
+    public Message error(HTTPCode httpCode,String msg) {
+        this.setHttpCode(httpCode);
+        this.msg = msg;
+        return this;
+    }
     public Message success(String msg) {
-        this.state = true;
+        this.setHttpCode(HTTPCode.OK);
         this.msg = msg;
         return this;
     }
-
     public void addError(String attrName, String attrMsg) {
-        if(null==errors)
-        {
-            errors=new ArrayList<>();
+        if (null == errors) {
+            errors = new ArrayList<>();
         }
         Error error = new Error();
         error.setErrMsg(attrMsg);
@@ -108,6 +153,7 @@ public class Message implements Serializable {
         this.setPage(((int) total) % pageSize == 0 ? ((int) total) / pageSize : (((int) total) / pageSize) + 1);
         return this;
     }
+
     public Integer getPage() {
         return page;
     }
@@ -177,50 +223,14 @@ public class Message implements Serializable {
         this.msg = msg;
     }
 
-    public Boolean getState() {
-        return state;
+
+    public static Message getInstance(String msg) {
+
+        return new Message();
     }
 
-    public static Message getInstance(String msg){
-
-        return  new Message();
-    }
 
 }
 
-/**
- * 通用字段校验错误情况返回
- */
-class Error {
-    private String errMsg;
-    private String errName;
-
-    public Error() {
-    }
-
-    @Override
-    public String toString() {
-        return "Error{" +
-                "errMsg='" + errMsg + '\'' +
-                ", errName='" + errName + '\'' +
-                '}';
-    }
-
-    public String getErrMsg() {
-        return errMsg;
-    }
-
-    public void setErrMsg(String errMsg) {
-        this.errMsg = errMsg;
-    }
-
-    public String getErrName() {
-        return errName;
-    }
-
-    public void setErrName(String errName) {
-        this.errName = errName;
-    }
-}
 
 

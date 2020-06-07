@@ -3,7 +3,6 @@ package com.lanmushan.framework.dto;
 
 
 
-import com.lanmushan.framework.exception.OperateException;
 import com.lanmushan.framework.util.StringCommonUtil;
 
 import java.io.Serializable;
@@ -18,9 +17,8 @@ public class QueryInfo implements Serializable {
     private Integer currentPage=1;
     private String sort="desc";//
     private String field ="";
-    private Map<String,Object> map=new HashMap<>();//筛选相关参数
-    private List<QueryParam> parList=null;//前端传参
-    private Map<String,Object> otherMap=new  HashMap();//其他参数
+    private String searchKey;
+    private List<QueryParam> parList=new ArrayList<>(0);//前端传参
     public QueryInfo() {
 
     }
@@ -31,14 +29,6 @@ public class QueryInfo implements Serializable {
         }
         this.field= StringCommonUtil.camelToUnderline(field,'_');
         return field+" "+sort;
-    }
-
-    public String getField() {
-        return field;
-    }
-
-    public void setField(String field) {
-        this.field = field;
     }
 
     public Integer getPageSize() {
@@ -57,18 +47,6 @@ public class QueryInfo implements Serializable {
         this.currentPage = currentPage;
     }
 
-    @Override
-    public String toString() {
-        return "QueryInfo{" +
-                "pageSize=" + pageSize +
-                ", currentPage=" + currentPage +
-                ", sort='" + sort + '\'' +
-                ", field='" + field + '\'' +
-                ", map=" + map +
-                ", parList=" + parList +
-                '}';
-    }
-
     public String getSort() {
         return sort;
     }
@@ -77,145 +55,73 @@ public class QueryInfo implements Serializable {
         this.sort = sort;
     }
 
-    public Map<String, Object> getMap() {
-        toParamList();
-        return map;
+    public String getField() {
+        return field;
     }
 
-    public void setMap(Map<String, Object> map) {
-        this.map = map;
+    public void setField(String field) {
+        this.field = field;
+    }
+
+    public String getSearchKey() {
+        return searchKey;
+    }
+
+    public void setSearchKey(String searchKey) {
+        this.searchKey = searchKey;
     }
 
     public List<QueryParam> getParList() {
-        this.toParamList();
         return parList;
     }
 
     public void setParList(List<QueryParam> parList) {
         this.parList = parList;
     }
-    private void  toParamList()
-    {
-        QueryParam queryParam=null;
-        if(parList==null)
-        {
-            parList=new ArrayList<QueryParam>();
-        }
-        for (String key:map.keySet()) {
-            queryParam=new QueryParam();
-            queryParam.setKey(this.getFieldName(key));
-            String op=this.getOperate(key);
-            queryParam.setOperate(op);
-            if(map.get(key)!="" && map.get(key)!=null){
-                queryParam.setValue(this.getValue(queryParam.getKey(),op,map.get(key)));
-                parList.add(queryParam);
-            }
-        }
-        this.map.clear();
-    }
+
 
     /**
-     * 获取字段名
-     * @param key
-     * @return
+     * 查询参数转换
+     * @author Administrator
      */
-    private String getFieldName(String key)
-    {
-        if(key.indexOf("_")!=-1)
-        {
-            throw new OperateException("参数错误");
+     public static class QueryParam {
+        private String key;
+        private Object value;
+        private String operate;
+        private int index;
+        public String getKey() {
+            return key;
         }
-        Integer index=key.indexOf("-");
-        if(index<0)
-        {
-            return StringCommonUtil.camelToUnderline(key,'_');
-        }else{
-            return StringCommonUtil.camelToUnderline(key.substring(0,index),'_');
-        }
-    }
-    private String getOperate(String key)
-    {
-        Integer index=key.indexOf("-");
-        if(index<0)
-        {
-            return "=";
-        }
-        String operate=key.substring(index+1,key.length());
-        operate=operate.toLowerCase();
-        switch (operate)
-        {
-            case "like":{return "like";}
-            case "in":{return "in";}
-            case "eq":{return "=";}
-            case "neq":{return "!=";}
-            case "gt":{return ">";}
-            case "lt":{return "<";}
-            case "gte":{return ">=";}
-            case "lte":{return "<=";}
-            default:{return "=";}
-        }
-    }
-    public Object getValue(String operate,Object value)
-    {
-        if(operate.equals("like"))
-        {
-            return value+"%";
-        }
-        return value;
-    }
-    public Object getValue(String key,String operate,Object value)
-    {
-        if(operate.equals("like")||key.equals("search_key"))
-        {
-            return value+"%";
-        }
-        return value;
-    }
-    public void defaultPageSize(){
-        if(this.pageSize==null){
-            this.pageSize=10;
-        }
-    }
 
-    public Map<String, Object> getOtherMap() {
-        return otherMap;
-    }
+        public void setKey(String key) {
+            this.key = key;
+        }
 
-    public void setOtherMap(Map<String, Object> otherMap) {
-        this.otherMap = otherMap;
-    }
+        public Object getValue() {
+            return value;
+        }
+
+        public void setValue(Object value) {
+            this.value = value;
+        }
+
+        public String getOperate() {
+            return operate;
+        }
+
+        public void setOperate(String operate) {
+            this.operate = operate;
+        }
+
+         public int getIndex() {
+             return index;
+         }
+
+         public void setIndex(int index) {
+             this.index = index;
+         }
+
+     }
+
 }
 
-/**
- * 查询参数转换
- * @author Administrator
- */
-class QueryParam {
-    private String key;
-    private Object value;
-    private String operate;
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public Object getValue() {
-        return value;
-    }
-
-    public void setValue(Object value) {
-        this.value = value;
-    }
-
-    public String getOperate() {
-        return operate;
-    }
-
-    public void setOperate(String operate) {
-        this.operate = operate;
-    }
-}

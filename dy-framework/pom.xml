@@ -14,9 +14,6 @@
     <name>framework</name>
     <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -39,6 +36,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -168,6 +169,14 @@
                 <configuration>
                     <skip>true</skip>
                     <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
         </plugins>

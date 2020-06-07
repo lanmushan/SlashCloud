@@ -11,6 +11,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
@@ -25,6 +26,8 @@ import java.util.Properties;
 @Configuration
 public class ShiroConfig {
     private Logger log = LoggerFactory.getLogger(getClass());
+    @Autowired
+    ShiroRedisSessionDao shiroRedisSessionDao;
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
 
@@ -58,8 +61,10 @@ public class ShiroConfig {
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher(){
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName("MD5");//散列算法:这里使用MD5算法;
-        hashedCredentialsMatcher.setHashIterations(3);//散列的次数，比如散列两次，相当于 md5(md5(""));
+        //散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashAlgorithmName("MD5");
+        //散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setHashIterations(3);
         return hashedCredentialsMatcher;
     }
 
@@ -83,17 +88,12 @@ public class ShiroConfig {
      * 配置Session管理器
      * @return
      */
-   // @Bean
+    @Bean
     public SessionManager sessionManager(){
         TokenSessionManager tokenSessionManager = new TokenSessionManager();
         //修改为自定义的Sesion
-        tokenSessionManager.setSessionDAO(sessionDAO());
+        tokenSessionManager.setSessionDAO(shiroRedisSessionDao);
         return tokenSessionManager;
-    }
-    //这里就是会话管理的操作类
-    @Bean
-    public SessionDAO sessionDAO() {
-        return new ShiroRedisSessionDao();
     }
 
     //这里需要设置一个cookie的名称  原因就是会跟原来的session的id值重复的

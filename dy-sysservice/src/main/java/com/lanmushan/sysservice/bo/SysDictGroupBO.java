@@ -1,6 +1,6 @@
-package com.lanmushan.dysysservice.bo;
+package com.lanmushan.sysservice.bo;
 
-import com.lanmushan.dysysservice.entity.SysDictGroup;
+import com.lanmushan.sysservice.entity.SysDictGroup;
 
 /**
  * @author Administrator

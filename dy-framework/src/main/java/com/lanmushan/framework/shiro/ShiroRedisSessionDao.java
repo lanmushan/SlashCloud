@@ -16,69 +16,53 @@ import java.io.Serializable;
 
 /**
  * 基于redis分布式session实现
+ *
  * @author Administrator
  */
-//@Configuration
-//@Order(10)
-public class ShiroRedisSessionDao extends CachingSessionDAO{
-
-    @Autowired
-    RedisTemplate redisTemplate;
+@Configuration
+@Order(10)
+public class ShiroRedisSessionDao extends CachingSessionDAO {
 
     private static final String PREFIX = "SESSION_ID";
-
     private static final int EXPRIE = 10000;
+    @Autowired
+    RedisTemplate<Object, Object> redisTemplate;
+    private Logger logger= LoggerFactory.getLogger(ShiroRedisSessionDao.class);
 
-    private Logger log = LoggerFactory.getLogger(getClass());
+    @Override
+    protected void doUpdate(Session session) {
 
+    }
+
+    @Override
+    protected void doDelete(Session session) {
+
+    }
 
     @Override
     protected Serializable doCreate(Session session) {
-        log.info("create");
+
         Serializable serializable = this.generateSessionId(session);
         assignSessionId(session, serializable);
-        //设置超时时间
-        session.setTimeout(EXPRIE*1000);
-        redisTemplate.opsForValue().set(getByteKey(serializable),SerializationUtils.serialize(session),EXPRIE);
-
+        String key=getKey(session.getId());
+        if(logger.isDebugEnabled())
+        {
+            logger.debug("redis session do create key:{}",key);
+        }
+        redisTemplate.opsForValue().set(key, SerializationUtils.serialize(session), EXPRIE);
         return serializable;
     }
 
     @Override
     protected Session doReadSession(Serializable serializable) {
-
-        Session session = null;
-        Serializable s = (Serializable) redisTemplate.opsForValue().get(getByteKey(serializable));
-        if (s != null) {
-            session = (Session) s;
-           // jedis.expire((PREFIX+serializable).getBytes(),EXPRIE);
-        }
-        if(session==null){
-            return null;
-        }
-        return session;
+      return (Session) redisTemplate.opsForValue().get(getKey(serializable));
     }
 
-    private byte[] getByteKey(Object k){
-        if(k instanceof String){
-            String key = PREFIX+k;
-            return key.getBytes();
-        }else {
-            return SerializationUtils.serialize(k);
+    private String getKey(Object obj) {
+        if (obj instanceof String) {
+            return PREFIX + obj.toString();
+        } else {
+            return new String(SerializationUtils.serialize(obj));
         }
-    }
-    @Override
-    protected void doUpdate(Session session) {
-        if(session==null){
-            return ;
-        }
-        redisTemplate.opsForValue().set(getByteKey(session.getId()),SerializationUtils.serialize(session),EXPRIE);
-
-    }
-
-
-    @Override
-    protected void doDelete(Session session) {
-        redisTemplate.delete(getByteKey(session.getId()));
     }
 }

@@ -1,6 +1,6 @@
-package com.lanmushan.dysysservice;
+package com.lanmushan.sysservice;
 
-import com.lanmushan.dysysservice.mapper.SysDictGroupMapper;
+import com.lanmushan.sysservice.mapper.SysDictGroupMapper;
 import com.lanmushan.framework.dto.QueryInfo;
 import com.lanmushan.framework.shiro.ShiroUsernamePasswordToken;
 import org.apache.shiro.SecurityUtils;

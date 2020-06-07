@@ -5,6 +5,7 @@ import com.lanmushan.framework.shiro.ShiroUsernamePasswordToken;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/Admin/auth")
 public class InfoController {
-    @Autowired
+    @Qualifier
     DictService dictService;
     @RequestMapping("/hi")
     public String home(@RequestParam(value = "name", defaultValue = "forezp") String name, HttpServletRequest request) {

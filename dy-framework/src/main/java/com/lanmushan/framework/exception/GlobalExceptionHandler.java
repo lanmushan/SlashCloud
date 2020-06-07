@@ -1,6 +1,8 @@
 package com.lanmushan.framework.exception;
 
+import com.lanmushan.framework.constant.HTTPCode;
 import com.lanmushan.framework.dto.Message;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindException;
@@ -16,10 +18,11 @@ import java.util.List;
 
 /**
  * 全局异常处理
+ * @author dy
  */
 @ControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
-     private Logger log = LoggerFactory.getLogger(getClass());
     /**
      * 处理其他异常
      * @param request
@@ -33,8 +36,7 @@ public class GlobalExceptionHandler {
     {
         log.error(e.getMessage(),e);
         Message msg=new Message();
-      //  msg.setCode(HTTPCode.UNKNOWN_ERROR);
-        msg.error("服务器内部错误");
+        msg.setHttpCode(HTTPCode.InnerError);
         msg.setRow(e.getMessage());
         return msg;
 }
@@ -52,9 +54,7 @@ public class GlobalExceptionHandler {
     {
         Message msg=new Message();
         log.error(e.getMessage(),e);
-        msg.error(e.getMessage());
-        if(null!=e.getCode())
-             msg.setCode(e.getCode());
+        msg.error(HTTPCode.PramError,e.getMessage());
         return msg;
     }
 
@@ -70,24 +70,7 @@ public class GlobalExceptionHandler {
     public Message BindExceptionHandler(HttpServletRequest request, BindException e) throws Exception
     {
         log.error(e.getMessage(),e);
-        Message msg=new Message();
-        BindingResult result=e.getBindingResult();
-        if (result.hasErrors()) {
-            List<FieldError> err = result.getFieldErrors();
-            int i=0;
-            for (FieldError fe : err) {
-                msg.addError(fe.getField().toString(), fe.getDefaultMessage());
-                if(i==0)
-                {
-                    msg.error(fe.getDefaultMessage());
-                    i++;
-                }
-            }
-            msg.setCode(101);
-            return msg;
-        }
-        msg.error(e.getMessage());
-        return msg;
+        return handerBindingResult(e.getBindingResult(),e.getMessage());
     }
     /**
      * json数据校验
@@ -101,8 +84,10 @@ public class GlobalExceptionHandler {
     public Message BindMethodArgumentNotValidExceptionHandler(HttpServletRequest request, MethodArgumentNotValidException e) throws Exception
     {
         log.error(e.getMessage(),e);
+        return handerBindingResult(e.getBindingResult(),e.getMessage());
+    }
+    private Message handerBindingResult(BindingResult result,String errorMsg){
         Message msg=new Message();
-        BindingResult result=e.getBindingResult();
         if (result.hasErrors()) {
             List<FieldError> err = result.getFieldErrors();
             int i=0;
@@ -114,13 +99,11 @@ public class GlobalExceptionHandler {
                     i++;
                 }
             }
-            msg.setCode(101);
             return msg;
 
         }
-        msg.error(e.getMessage());
+        msg.error(HTTPCode.PramError,errorMsg);
         return msg;
     }
-
 
 }

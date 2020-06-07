@@ -1,6 +1,6 @@
-package com.lanmushan.dysysservice.mapper;
+package com.lanmushan.sysservice.mapper;
 
-import com.lanmushan.dysysservice.entity.SysDict;
+import com.lanmushan.sysservice.entity.SysDict;
 import com.lanmushan.framework.mapper.QueryMapper;
 
 

@@ -1,9 +1,9 @@
-package com.lanmushan.dysysservice.service.impl;
+package com.lanmushan.sysservice.service.impl;
 
-import com.lanmushan.dysysservice.bo.SysDictGroupBO;
-import com.lanmushan.dysysservice.entity.SysDictGroup;
-import com.lanmushan.dysysservice.mapper.SysDictGroupMapper;
-import com.lanmushan.dysysservice.service.SysDictGroupService;
+import com.lanmushan.sysservice.bo.SysDictGroupBO;
+import com.lanmushan.sysservice.entity.SysDictGroup;
+import com.lanmushan.sysservice.mapper.SysDictGroupMapper;
+import com.lanmushan.sysservice.service.SysDictGroupService;
 import com.lanmushan.framework.dto.QueryInfo;
 import com.lanmushan.framework.util.date.DateUtil;
 import com.lanmushan.framework.util.uuid.MyUUID;

@@ -1,4 +1,4 @@
-package com.lanmushan.dysysservice.entity;
+package com.lanmushan.sysservice.entity;
 
 import com.lanmushan.framework.util.uuid.SeqGenId;
 import tk.mybatis.mapper.annotation.KeySql;

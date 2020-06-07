@@ -1,6 +1,6 @@
-package com.lanmushan.dysysservice.mapper;
+package com.lanmushan.sysservice.mapper;
 
-import com.lanmushan.dysysservice.entity.SysDictGroup;
+import com.lanmushan.sysservice.entity.SysDictGroup;
 import com.lanmushan.framework.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.common.special.InsertListMapper;

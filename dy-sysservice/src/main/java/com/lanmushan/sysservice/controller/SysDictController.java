@@ -1,12 +1,9 @@
-package com.lanmushan.dysysservice.controller;
+package com.lanmushan.sysservice.controller;
 
-import com.lanmushan.dysysservice.entity.SysDict;
-import com.lanmushan.dysysservice.mapper.SysDictMapper;
+import com.lanmushan.sysservice.mapper.SysDictMapper;
 import com.lanmushan.framework.controller.BaseController;
 import com.lanmushan.framework.dto.QueryInfo;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

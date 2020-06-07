@@ -4,7 +4,6 @@ import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.netflix.client.http.HttpResponse;
 import org.apache.tomcat.util.http.parser.HttpParser;
 
 import javax.imageio.ImageIO;
