@@ -6,6 +6,8 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/> <!-- 驼峰式命名 -->
         <!--NULL字段显示-->
         <setting name="callSettersOnNulls" value="true"/>
+        <!--日志输出-->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING" />-->
     </settings>
     <!--数据库适配-->
     <!--<databaseIdProvider type="DB_VENDOR">-->
