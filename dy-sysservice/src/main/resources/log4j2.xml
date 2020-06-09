@@ -2,7 +2,8 @@
 <configuration>
     <Properties>
         <!-- 配置日志文件输出目录 -->
-        <Property name="LOG_HOME" value="D:/logs/" />
+        <property name="PROJECT_NAME">${spring.application.name}</property>
+        <Property name="LOG_HOME" value="./logs/${ctx:appName}/" />
         <Property name="LOG_NAME">http</Property>
     </Properties>
     <appenders>

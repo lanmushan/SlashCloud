@@ -1,4 +1,5 @@
 package com.lanmushan.sysservice;
+import org.jboss.logging.MDC;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -16,10 +17,14 @@ import java.io.File;
 @EnableHystrix
 @SpringBootApplication(scanBasePackages = "com.lanmushan.*.**")
 public class SysServiceApplication {
-
+    static {
+        MDC.put("appName", "111221");
+    }
     public static void main(String[] args) {
 
-       SpringApplication.run(SysServiceApplication.class, args);
+
+        SpringApplication.run(SysServiceApplication.class, args);
+
     }
 
 }

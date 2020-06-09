@@ -193,6 +193,9 @@
         <profile>
             <!--不同环境Profile的唯一id-->
             <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <!--profiles.active是自定义的字段，自定义字段可以有多个-->
                 <profiles.active>dev</profiles.active>
@@ -214,6 +217,12 @@
     <build>
 
         <plugins>
+            <plugin>
+                <!--apache编译插件-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -256,6 +265,14 @@
                 <includes>
                     <!--如果有其他定义通用文件，需要包含进来-->
                     <!--<include>messages/*</include>-->
+                </includes>
+            </resource>
+            <!-- 独立设置对log4j2.xml进行过虑，即这些文件中的@key@会被替换掉为真正的值 -->
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>log4j2.xml</include>
                 </includes>
             </resource>
             <resource>
