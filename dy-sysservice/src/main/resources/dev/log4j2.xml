@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="ERROR">
-    <Appenders>
-        <RollingFile name="RollingFile" fileName="E:/webapp/logs/yadou-manage.log"
-                     filePattern="D:/logs/$${date:yyyy-MM}/yadou-manage-%d{MM-dd-yyyy}-%i.log.gz">
+<configuration>
+    <Properties>
+        <!-- 配置日志文件输出目录 -->
+        <Property name="LOG_HOME" value="D:/logs/" />
+        <Property name="LOG_NAME">http</Property>
+    </Properties>
+    <appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="%-20(%d{yyyy-MM-dd HH:mm:ss.SSS} [Thread]) %-5level %logger{80} - %msg%n">
+            </PatternLayout>
+        </Console>
+        <RollingFile name="service_error_appender" fileName="${LOG_HOME}error.log"
+                     filePattern="${LOG_HOME}/error.log.%d{yyyy-MM-dd}-%i" append="true" immediateFlush="true">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
             <PatternLayout>
-                <Pattern>%d %-5level [%t]%l - %msg%n</Pattern>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %class{36} %L %M -- %msg%xEx%n</pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="250 MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="500 MB"/>
             </Policies>
         </RollingFile>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%highlight{%d %-5level [%t]%l - %msg%n}"/>
-        </Console>
-    </Appenders>
-    <Loggers>
-        <!--控制输出debug,不继承-->
-        <Logger name="com.jia.yadou.manage" level="debug" additivity="false">
-            <!--保存文件,只存储info级别以上的日志-->
-            <AppenderRef ref="RollingFile" level="info"/>
-            <!--控制台打印指定包路径下面的debug-->
-            <AppenderRef ref="Console"/>
-        </Logger>
-        <!--默认info级别-->
-        <Root level="info">
-            <AppenderRef ref="Console"/>
-        </Root>
-    </Loggers>
-</Configuration>
+    </appenders>
+
+    <loggers>
+        <root lever="DEBUG">
+            <appender-ref ref="console"></appender-ref>
+            <appender-ref ref="service_error_appender"></appender-ref>
+        </root>
+    </loggers>
+</configuration>

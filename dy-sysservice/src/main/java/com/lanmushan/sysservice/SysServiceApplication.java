@@ -18,9 +18,8 @@ import java.io.File;
 public class SysServiceApplication {
 
     public static void main(String[] args) {
+
        SpringApplication.run(SysServiceApplication.class, args);
     }
-    static {
-        File file=new File("");
-    }
+
 }
