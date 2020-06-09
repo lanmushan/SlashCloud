@@ -11,7 +11,6 @@ import java.io.File;
  * @author Administrator
  */
 
-
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableHystrix
