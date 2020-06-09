@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="ERROR">
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="E:/webapp/logs/yadou-manage.log"
+                     filePattern="D:/logs/$${date:yyyy-MM}/yadou-manage-%d{MM-dd-yyyy}-%i.log.gz">
+            <PatternLayout>
+                <Pattern>%d %-5level [%t]%l - %msg%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+            </Policies>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{%d %-5level [%t]%l - %msg%n}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <!--控制输出debug,不继承-->
+        <Logger name="com.jia.yadou.manage" level="debug" additivity="false">
+            <!--保存文件,只存储info级别以上的日志-->
+            <AppenderRef ref="RollingFile" level="info"/>
+            <!--控制台打印指定包路径下面的debug-->
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <!--默认info级别-->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
