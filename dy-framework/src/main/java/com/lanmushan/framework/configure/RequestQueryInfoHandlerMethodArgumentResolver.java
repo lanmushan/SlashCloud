@@ -1,6 +1,5 @@
 package com.lanmushan.framework.configure;
 
-import com.alibaba.fastjson.JSONObject;
 import com.lanmushan.framework.annotations.RequestQueryInfo;
 import com.lanmushan.framework.dto.QueryInfo;
 import com.lanmushan.framework.exception.OperateException;
@@ -19,11 +18,17 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 /**
+ * @RequestQueryInfo 注解数据注入功能实现
  * @Author dy
  * @Date 2020/6/7 13:59
  * @Version 1.0
  */
 public class RequestQueryInfoHandlerMethodArgumentResolver  implements HandlerMethodArgumentResolver {
+    /**
+     * 判断是否属于该处理器处理，返回true的情况会调用resolveArgument
+     * @param methodParameter
+     * @return
+     */
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
         return methodParameter.hasParameterAnnotation(RequestQueryInfo.class);

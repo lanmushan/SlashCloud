@@ -13,7 +13,7 @@ import java.io.IOException;
  * @Author dy
  * @Date 2020/4/21 21:15
  * @Version 1.0
- * web资源文件配置,但节点使用最好
+ * 外部资源文件配置
  */
 @Configuration
 public class WebFileConfig implements WebMvcConfigurer {

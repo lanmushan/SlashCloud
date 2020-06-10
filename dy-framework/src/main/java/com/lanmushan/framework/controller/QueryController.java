@@ -29,7 +29,7 @@ import java.util.List;
 public class QueryController extends BaseController {
     @GetMapping( value = "/{entityName}/{methodName}" )
     public Message queryList(@RequestQueryInfo QueryInfo queryInfo, @PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, HttpServletRequest request) {
-
+        log.info("请求UID:"+request.getHeader("requestSeq"));
         Message msg=new Message();
         try {
             entityName= StringCommonUtil.toLowerCaseFirstOne(entityName);

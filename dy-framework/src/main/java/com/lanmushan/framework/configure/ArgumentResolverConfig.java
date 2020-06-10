@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 /**
- * 自定义参数解析配置
+ * 自定义SpringMVC参数解析器
  * @Author dy
  * @Date 2020/6/7 14:06
  * @Version 1.0

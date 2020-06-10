@@ -31,7 +31,6 @@ public class DataFormatConfig implements WebMvcConfigurer {
         SimpleModule simpleModule =new SimpleModule();
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
-
         mapper.registerModule(simpleModule);
         converter.setObjectMapper(mapper);
         return converter;
