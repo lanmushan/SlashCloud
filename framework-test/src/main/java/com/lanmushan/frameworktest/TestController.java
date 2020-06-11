@@ -5,6 +5,7 @@ import com.lanmushan.framework.annotations.RequestQueryInfo;
 import com.lanmushan.framework.controller.BaseController;
 import com.lanmushan.framework.dto.QueryInfo;
 import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
