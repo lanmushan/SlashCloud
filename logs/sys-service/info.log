@@ -1,0 +1,54 @@
+2020-06-11 20:09:23.284[main][] INFO  com.lanmushan.sysservice.SysServiceApplication - 
+The following profiles are active: db,redis,global,dev
+2020-06-11 20:09:24.496[main][] INFO  com.lanmushan.framework.shiro.ShiroConfig$$EnhancerBySpringCGLIB$$3d69b272 - 
+Shiro权限认证系统启动成功.....
+2020-06-11 20:09:24.984[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:09:24.984[main][] INFO  com.lanmushan.framework.configure.datasource.DruidConfiguration$$EnhancerBySpringCGLIB$$f1df0fd1 - 
+初始化数据库成功...
+2020-06-11 20:09:25.284[main][] INFO  com.lanmushan.framework.configure.ApplicationUtil - 
+------------applicationContext加载成功--------------
+2020-06-11 20:09:25.454[main][] WARN  com.netflix.config.sources.URLConfigurationSource - 
+No URLs will be polled as dynamic configuration sources.
+2020-06-11 20:09:25.455[main][] INFO  com.netflix.config.sources.URLConfigurationSource - 
+To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-06-11 20:09:25.458[main][] WARN  com.netflix.config.sources.URLConfigurationSource - 
+No URLs will be polled as dynamic configuration sources.
+2020-06-11 20:09:25.458[main][] INFO  com.netflix.config.sources.URLConfigurationSource - 
+To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-06-11 20:09:26.208[main][] INFO  com.alibaba.cloud.nacos.registry.NacosServiceRegistry - 
+nacos registry, sys-service 192.168.0.102:8000 register finished
+2020-06-11 20:09:26.211[main][] INFO  com.lanmushan.sysservice.SysServiceApplication - 
+Started SysServiceApplication in 3.708 seconds (JVM running for 4.691)
+2020-06-11 20:09:26.212[main][] INFO  com.lanmushan.framework.configure.ApplicationRunnerInit - 
+应用程序准备启动
+2020-06-11 20:09:38.721[main][] INFO  com.lanmushan.sysservice.SysServiceApplication - 
+The following profiles are active: db,redis,global,dev
+2020-06-11 20:09:39.855[main][] INFO  com.lanmushan.framework.shiro.ShiroConfig$$EnhancerBySpringCGLIB$$40d38d38 - 
+Shiro权限认证系统启动成功.....
+2020-06-11 20:09:40.294[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:09:40.294[main][] INFO  com.lanmushan.framework.configure.datasource.DruidConfiguration$$EnhancerBySpringCGLIB$$f548ea97 - 
+初始化数据库成功...
+2020-06-11 20:09:40.591[main][] INFO  com.lanmushan.framework.configure.ApplicationUtil - 
+------------applicationContext加载成功--------------
+2020-06-11 20:09:40.751[main][] WARN  com.netflix.config.sources.URLConfigurationSource - 
+No URLs will be polled as dynamic configuration sources.
+2020-06-11 20:09:40.752[main][] INFO  com.netflix.config.sources.URLConfigurationSource - 
+To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-06-11 20:09:40.755[main][] WARN  com.netflix.config.sources.URLConfigurationSource - 
+No URLs will be polled as dynamic configuration sources.
+2020-06-11 20:09:40.755[main][] INFO  com.netflix.config.sources.URLConfigurationSource - 
+To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2020-06-11 20:09:41.442[main][] INFO  com.alibaba.cloud.nacos.registry.NacosServiceRegistry - 
+nacos registry, sys-service 192.168.0.102:8000 register finished
+2020-06-11 20:09:41.444[main][] INFO  com.lanmushan.sysservice.SysServiceApplication - 
+Started SysServiceApplication in 3.457 seconds (JVM running for 4.324)
+2020-06-11 20:09:41.445[main][] INFO  com.lanmushan.framework.configure.ApplicationRunnerInit - 
+应用程序准备启动
+2020-06-11 20:09:48.139[http-nio-8000-exec-1][994D62985B6040C38565F83AEE9A2170] INFO  com.lanmushan.framework.interceptor.RequestUIDInterceptor - 
+Request-Uid994D62985B6040C38565F83AEE9A2170
+2020-06-11 20:09:48.159[http-nio-8000-exec-1][994D62985B6040C38565F83AEE9A2170] INFO  com.lanmushan.framework.controller.QueryController - 
+请求UID:null
+2020-06-11 20:09:48.203[http-nio-8000-exec-1][994D62985B6040C38565F83AEE9A2170] INFO  com.alibaba.druid.pool.DruidDataSource - 
+{dataSource-1} inited

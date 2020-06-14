@@ -1,0 +1,702 @@
+2020-06-11 20:10:34.049[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:12:08.623[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:28:59.220[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:29:01.044[main][] ERROR com.alibaba.cloud.nacos.registry.NacosServiceRegistry - 
+nacos registry, sys-service register failed...NacosRegistration{nacosDiscoveryProperties=NacosDiscoveryProperties{serverAddr='', endpoint='', namespace='', watchDelay=30000, logName='', service='sys-service', weight=1.0, clusterName='DEFAULT', namingLoadCacheAtStart='false', metadata={preserved.register.source=SPRING_CLOUD}, registerEnabled=true, ip='192.168.0.102', networkInterface='', port=8000, secure=false, accessKey='', secretKey=''}},
+java.lang.IllegalArgumentException: no server available
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:438) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:386) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.registerService(NamingProxy.java:188) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:205) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:184) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.register(NacosServiceRegistry.java:61) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.register(AbstractAutoServiceRegistration.java:219) [spring-cloud-commons-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration.register(NacosAutoServiceRegistration.java:74) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.start(AbstractAutoServiceRegistration.java:118) [spring-cloud-commons-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.bind(AbstractAutoServiceRegistration.java:82) [spring-cloud-commons-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:69) [spring-cloud-commons-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:32) [spring-cloud-commons-2.1.0.RELEASE.jar!/:2.1.0.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) [spring-context-5.1.10.RELEASE.jar!/:5.1.10.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) [spring-context-5.1.10.RELEASE.jar!/:5.1.10.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) [spring-context-5.1.10.RELEASE.jar!/:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:402) [spring-context-5.1.10.RELEASE.jar!/:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:359) [spring-context-5.1.10.RELEASE.jar!/:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:165) [spring-boot-2.1.9.RELEASE.jar!/:2.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar!/:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar!/:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar!/:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar!/:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar!/:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar!/:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar!/:2.1.9.RELEASE]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:24) [classes!/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:48) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:87) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:51) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.PropertiesLauncher.main(PropertiesLauncher.java:597) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+2020-06-11 20:29:28.836[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:35:34.625[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:48:03.121[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:49:29.803[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:51:23.136[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:52:01.233[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:52:41.807[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:53:04.432[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:54:27.815[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:54:53.256[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:55:49.833[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:56:29.272[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 20:57:41.138[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 21:05:37.767[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 21:05:38.269[main][] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field requestQueryInfoHandlerMethodArgumentResolver in com.lanmushan.framework.configure.ArgumentResolverConfig required a bean of type 'com.lanmushan.framework.configure.RequestQueryInfoHandlerMethodArgumentResolver' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.lanmushan.framework.configure.RequestQueryInfoHandlerMethodArgumentResolver' in your configuration.
+
+2020-06-11 21:06:05.251[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 21:06:50.677[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 21:50:27.993[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 21:50:35.193[main][] ERROR org.apache.catalina.util.LifecycleBase - 
+Failed to start component [Connector[HTTP/1.1-8000]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:297) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:163) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:24) [classes!/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:109) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.PropertiesLauncher.main(PropertiesLauncher.java:604) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[?:1.8.0_201]
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	... 22 more
+2020-06-11 21:50:35.584[main][] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8000 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8000, or configure this application to listen on another port.
+
+2020-06-11 21:51:16.942[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 21:51:24.024[main][] ERROR org.apache.catalina.util.LifecycleBase - 
+Failed to start component [Connector[HTTP/1.1-8000]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:297) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:163) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:24) [classes!/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:109) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.PropertiesLauncher.main(PropertiesLauncher.java:604) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[?:1.8.0_201]
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	... 22 more
+2020-06-11 21:51:24.408[main][] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8000 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8000, or configure this application to listen on another port.
+
+2020-06-11 21:52:39.234[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 21:52:48.017[main][] ERROR com.alibaba.cloud.nacos.registry.NacosServiceRegistry - 
+nacos registry, sys-service register failed...NacosRegistration{nacosDiscoveryProperties=NacosDiscoveryProperties{serverAddr='127.0.0.1:8848', endpoint='', namespace='', watchDelay=30000, logName='', service='sys-service', weight=1.0, clusterName='DEFAULT', namingLoadCacheAtStart='false', metadata={preserved.register.source=SPRING_CLOUD}, registerEnabled=true, ip='192.168.0.102', networkInterface='', port=8000, secure=false, accessKey='', secretKey=''}},
+java.lang.IllegalStateException: failed to req API:/nacos/v1/ns/instance after all servers([127.0.0.1:8848]) tried: failed to req API:127.0.0.1:8848/nacos/v1/ns/instance. code:500 msg: java.net.ConnectException: Connection refused: connect
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:464) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:386) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.registerService(NamingProxy.java:188) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:205) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:184) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.register(NacosServiceRegistry.java:61) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.register(AbstractAutoServiceRegistration.java:219) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration.register(NacosAutoServiceRegistration.java:74) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.start(AbstractAutoServiceRegistration.java:118) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.bind(AbstractAutoServiceRegistration.java:82) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:69) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:32) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:402) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:359) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:165) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:24) [classes!/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:109) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.PropertiesLauncher.main(PropertiesLauncher.java:604) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+2020-06-11 21:53:56.899[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 21:58:20.405[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 21:59:14.547[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:00:20.855[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:19:32.011[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:19:42.628[main][] ERROR org.apache.catalina.util.LifecycleBase - 
+Failed to start component [Connector[HTTP/1.1-8000]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:297) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:163) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:27) [classes!/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:109) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.PropertiesLauncher.main(PropertiesLauncher.java:604) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[?:1.8.0_201]
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	... 22 more
+2020-06-11 22:19:43.269[main][] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8000 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8000, or configure this application to listen on another port.
+
+2020-06-11 22:19:51.636[Thread-21][] ERROR com.alibaba.cloud.nacos.registry.NacosServiceRegistry - 
+ERR_NACOS_DEREGISTER, de-register failed...NacosRegistration{nacosDiscoveryProperties=NacosDiscoveryProperties{serverAddr='127.0.0.1:8848', endpoint='', namespace='', watchDelay=30000, logName='', service='sys-service', weight=1.0, clusterName='DEFAULT', namingLoadCacheAtStart='false', metadata={preserved.register.source=SPRING_CLOUD}, registerEnabled=true, ip='192.168.0.102', networkInterface='', port=8000, secure=false, accessKey='', secretKey=''}},
+java.lang.IllegalStateException: failed to req API:/nacos/v1/ns/instance after all servers([127.0.0.1:8848]) tried: failed to req API:127.0.0.1:8848/nacos/v1/ns/instance. code:500 msg: java.net.ConnectException: Connection refused: connect
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:464) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:386) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.deregisterService(NamingProxy.java:205) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.deregisterInstance(NacosNamingService.java:244) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.deregisterInstance(NacosNamingService.java:231) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.deregisterInstance(NacosNamingService.java:221) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.deregister(NacosServiceRegistry.java:85) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.deregister(AbstractAutoServiceRegistration.java:236) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.stop(AbstractAutoServiceRegistration.java:251) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.destroy(AbstractAutoServiceRegistration.java:188) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:363) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:321) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:156) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:242) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1040) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1033) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1057) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1026) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:945) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+2020-06-11 22:26:00.878[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:26:09.738[main][] ERROR com.alibaba.cloud.nacos.registry.NacosServiceRegistry - 
+nacos registry, sys-service register failed...NacosRegistration{nacosDiscoveryProperties=NacosDiscoveryProperties{serverAddr='127.0.0.1:8848', endpoint='', namespace='', watchDelay=30000, logName='', service='sys-service', weight=1.0, clusterName='DEFAULT', namingLoadCacheAtStart='false', metadata={preserved.register.source=SPRING_CLOUD}, registerEnabled=true, ip='192.168.0.102', networkInterface='', port=8000, secure=false, accessKey='', secretKey=''}},
+java.lang.IllegalStateException: failed to req API:/nacos/v1/ns/instance after all servers([127.0.0.1:8848]) tried: failed to req API:127.0.0.1:8848/nacos/v1/ns/instance. code:500 msg: java.net.ConnectException: Connection refused: connect
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:464) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:386) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.registerService(NamingProxy.java:188) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:205) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:184) ~[nacos-client-1.1.1.jar!/:?]
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.register(NacosServiceRegistry.java:61) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.register(AbstractAutoServiceRegistration.java:219) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration.register(NacosAutoServiceRegistration.java:74) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.start(AbstractAutoServiceRegistration.java:118) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.bind(AbstractAutoServiceRegistration.java:82) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:69) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:32) [spring-cloud-commons-2.1.0.RELEASE.jar!/:?]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:402) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:359) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:165) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:27) [classes!/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:109) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.PropertiesLauncher.main(PropertiesLauncher.java:604) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+2020-06-11 22:27:19.703[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:27:22.249[main][] ERROR com.alibaba.cloud.nacos.registry.NacosServiceRegistry - 
+nacos registry, sys-service register failed...NacosRegistration{nacosDiscoveryProperties=NacosDiscoveryProperties{serverAddr='127.0.0.1:8848', endpoint='', namespace='', watchDelay=30000, logName='', service='sys-service', weight=1.0, clusterName='DEFAULT', namingLoadCacheAtStart='false', metadata={preserved.register.source=SPRING_CLOUD}, registerEnabled=true, ip='192.168.0.102', networkInterface='', port=8000, secure=false, accessKey='', secretKey=''}},
+java.lang.IllegalStateException: failed to req API:/nacos/v1/ns/instance after all servers([127.0.0.1:8848]) tried: failed to req API:127.0.0.1:8848/nacos/v1/ns/instance. code:500 msg: java.net.ConnectException: Connection refused: connect
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:464) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:386) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.registerService(NamingProxy.java:188) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:205) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:184) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.register(NacosServiceRegistry.java:61) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.register(AbstractAutoServiceRegistration.java:219) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration.register(NacosAutoServiceRegistration.java:74) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.start(AbstractAutoServiceRegistration.java:118) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.bind(AbstractAutoServiceRegistration.java:82) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:69) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:32) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:402) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:359) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:165) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:27) [classes/:?]
+2020-06-11 22:27:59.255[Thread-23][] ERROR com.alibaba.cloud.nacos.registry.NacosServiceRegistry - 
+ERR_NACOS_DEREGISTER, de-register failed...NacosRegistration{nacosDiscoveryProperties=NacosDiscoveryProperties{serverAddr='127.0.0.1:8848', endpoint='', namespace='', watchDelay=30000, logName='', service='sys-service', weight=1.0, clusterName='DEFAULT', namingLoadCacheAtStart='false', metadata={preserved.register.source=SPRING_CLOUD}, registerEnabled=true, ip='192.168.0.102', networkInterface='', port=8000, secure=false, accessKey='', secretKey=''}},
+java.lang.IllegalStateException: failed to req API:/nacos/v1/ns/instance after all servers([127.0.0.1:8848]) tried: failed to req API:127.0.0.1:8848/nacos/v1/ns/instance. code:500 msg: java.net.ConnectException: Connection refused: connect
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:464) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:386) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.deregisterService(NamingProxy.java:205) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.deregisterInstance(NacosNamingService.java:244) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.deregisterInstance(NacosNamingService.java:231) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.deregisterInstance(NacosNamingService.java:221) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.deregister(NacosServiceRegistry.java:85) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.deregister(AbstractAutoServiceRegistration.java:236) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.stop(AbstractAutoServiceRegistration.java:251) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.destroy(AbstractAutoServiceRegistration.java:188) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleElement.invoke(InitDestroyAnnotationBeanPostProcessor.java:363) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor$LifecycleMetadata.invokeDestroyMethods(InitDestroyAnnotationBeanPostProcessor.java:321) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.annotation.InitDestroyAnnotationBeanPostProcessor.postProcessBeforeDestruction(InitDestroyAnnotationBeanPostProcessor.java:156) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DisposableBeanAdapter.destroy(DisposableBeanAdapter.java:242) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroyBean(DefaultSingletonBeanRegistry.java:571) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingleton(DefaultSingletonBeanRegistry.java:543) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingleton(DefaultListableBeanFactory.java:1040) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.destroySingletons(DefaultSingletonBeanRegistry.java:504) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.destroySingletons(DefaultListableBeanFactory.java:1033) [spring-beans-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.destroyBeans(AbstractApplicationContext.java:1057) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:1026) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext$1.run(AbstractApplicationContext.java:945) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+2020-06-11 22:30:47.438[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:30:48.883[main][] ERROR org.apache.catalina.util.LifecycleBase - 
+Failed to start component [Connector[HTTP/1.1-8000]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227) [tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:297) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:163) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:27) [classes/:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[?:1.8.0_201]
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	... 14 more
+2020-06-11 22:30:48.939[main][] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8000 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8000, or configure this application to listen on another port.
+
+2020-06-11 22:31:44.990[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:31:54.559[main][] ERROR org.apache.catalina.util.LifecycleBase - 
+Failed to start component [Connector[HTTP/1.1-8000]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:297) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:163) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:27) [classes!/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:109) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.PropertiesLauncher.main(PropertiesLauncher.java:604) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[?:1.8.0_201]
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	... 22 more
+2020-06-11 22:31:55.190[main][] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8000 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8000, or configure this application to listen on another port.
+
+2020-06-11 22:34:39.482[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:34:51.948[main][] ERROR org.apache.catalina.util.LifecycleBase - 
+Failed to start component [Connector[HTTP/1.1-8000]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227) [tomcat-embed-core-9.0.26.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:297) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:163) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar!/:?]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar!/:?]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:27) [classes!/:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_201]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_201]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_201]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_201]
+	at org.springframework.boot.loader.MainMethodRunner.run(MainMethodRunner.java:49) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:109) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+	at org.springframework.boot.loader.PropertiesLauncher.main(PropertiesLauncher.java:604) [dy-dictservice-0.0.1-SNAPSHOT-exec.jar:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[?:1.8.0_201]
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005) ~[tomcat-embed-core-9.0.26.jar!/:?]
+	... 22 more
+2020-06-11 22:34:52.591[main][] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8000 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8000, or configure this application to listen on another port.
+
+2020-06-11 22:37:14.823[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:37:16.374[main][] ERROR org.apache.catalina.util.LifecycleBase - 
+Failed to start component [Connector[HTTP/1.1-8000]]
+org.apache.catalina.LifecycleException: Protocol handler start failed
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1008) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:227) [tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:263) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:195) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.startWebServer(ServletWebServerApplicationContext.java:297) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:163) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:27) [classes/:?]
+Caused by: java.net.BindException: Address already in use: bind
+	at sun.nio.ch.Net.bind0(Native Method) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:433) ~[?:1.8.0_201]
+	at sun.nio.ch.Net.bind(Net.java:425) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223) ~[?:1.8.0_201]
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74) ~[?:1.8.0_201]
+	at org.apache.tomcat.util.net.NioEndpoint.initServerSocket(NioEndpoint.java:230) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.tomcat.util.net.NioEndpoint.bind(NioEndpoint.java:213) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.tomcat.util.net.AbstractEndpoint.bindWithCleanup(AbstractEndpoint.java:1124) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1210) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:585) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1005) ~[tomcat-embed-core-9.0.26.jar:9.0.26]
+	... 14 more
+2020-06-11 22:37:16.434[main][] ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The Tomcat connector configured to listen on port 8000 failed to start. The port may already be in use or the connector may be misconfigured.
+
+Action:
+
+Verify the connector's configuration, identify and stop any process that's listening on port 8000, or configure this application to listen on another port.
+
+2020-06-11 22:38:23.812[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:38:34.264[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:38:36.877[main][] ERROR com.alibaba.cloud.nacos.registry.NacosServiceRegistry - 
+nacos registry, sys-service register failed...NacosRegistration{nacosDiscoveryProperties=NacosDiscoveryProperties{serverAddr='127.0.0.1:8848', endpoint='', namespace='', watchDelay=30000, logName='', service='sys-service', weight=1.0, clusterName='DEFAULT', namingLoadCacheAtStart='false', metadata={preserved.register.source=SPRING_CLOUD}, registerEnabled=true, ip='192.168.0.102', networkInterface='', port=8000, secure=false, accessKey='', secretKey=''}},
+java.lang.IllegalStateException: failed to req API:/nacos/v1/ns/instance after all servers([127.0.0.1:8848]) tried: failed to req API:127.0.0.1:8848/nacos/v1/ns/instance. code:500 msg: java.net.ConnectException: Connection refused: connect
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:464) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.reqAPI(NamingProxy.java:386) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.net.NamingProxy.registerService(NamingProxy.java:188) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:205) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.nacos.client.naming.NacosNamingService.registerInstance(NacosNamingService.java:184) ~[nacos-client-1.1.1.jar:?]
+	at com.alibaba.cloud.nacos.registry.NacosServiceRegistry.register(NacosServiceRegistry.java:61) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.register(AbstractAutoServiceRegistration.java:219) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at com.alibaba.cloud.nacos.registry.NacosAutoServiceRegistration.register(NacosAutoServiceRegistration.java:74) [spring-cloud-alibaba-nacos-discovery-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.start(AbstractAutoServiceRegistration.java:118) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.bind(AbstractAutoServiceRegistration.java:82) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:69) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.cloud.client.serviceregistry.AbstractAutoServiceRegistration.onApplicationEvent(AbstractAutoServiceRegistration.java:32) [spring-cloud-commons-2.1.0.RELEASE.jar:2.1.0.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:172) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:165) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:139) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:402) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:359) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.finishRefresh(ServletWebServerApplicationContext.java:165) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:552) [spring-context-5.1.10.RELEASE.jar:5.1.10.RELEASE]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:141) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:744) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:391) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:312) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1204) [spring-boot-2.1.9.RELEASE.jar:2.1.9.RELEASE]
+	at com.lanmushan.sysservice.SysServiceApplication.main(SysServiceApplication.java:27) [classes/:?]
+2020-06-11 22:40:40.959[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:40:55.751[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:42:05.408[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:45:26.029[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 22:48:25.530[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 23:03:01.254[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 23:12:51.489[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 23:13:11.554[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 23:13:48.736[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 23:14:28.456[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 23:29:22.708[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
+2020-06-11 23:30:13.935[main][] ERROR com.alibaba.druid.pool.DruidAbstractDataSource - 
+minEvictableIdleTimeMillis should be greater than 30000
