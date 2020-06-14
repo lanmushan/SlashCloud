@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
-<configuration>
+<configuration >
     <Properties>
         <!-- 配置日志文件输出目录 -->
         <property name="PROJECT_NAME">${spring.application.name}</property>
@@ -41,10 +41,10 @@
 
     </appenders>
     <loggers>
-        <root lever="info">
+        <root  level="info">
             <appender-ref ref="console"></appender-ref>
-            <appender-ref ref="service_error_appender"></appender-ref>
-            <appender-ref ref="service_info_appender"></appender-ref>
-        </root>
+            <!--<appender-ref ref="service_error_appender"></appender-ref>-->
+            <!--<appender-ref ref="service_info_appender"></appender-ref>-->
+        </root >
     </loggers>
 </configuration>

@@ -1,8 +1,11 @@
 package com.lanmushan.framework.configure;
 
 import com.lanmushan.framework.util.file.LocalResourceUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.AntPathMatcher;
 import org.springframework.util.ResourceUtils;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,7 +19,14 @@ import java.io.IOException;
  * 外部资源文件配置
  */
 @Configuration
-public class WebFileConfig implements WebMvcConfigurer {
+@Slf4j
+public class WebFileMvcConfigurer implements WebMvcConfigurer {
+    @Override
+    public void configurePathMatch(PathMatchConfigurer configurer) {
+        AntPathMatcher matcher = new AntPathMatcher();
+        matcher.setCaseSensitive(false);
+        configurer.setPathMatcher(matcher);
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -32,5 +42,6 @@ public class WebFileConfig implements WebMvcConfigurer {
         }else {
             registry.addResourceHandler("/resource/public/**").addResourceLocations("file:"+LocalResourceUtils.getLocalResourcePublicPath());
         }
+        log.info("外部资源文件设置成功{}","file:"+ LocalResourceUtils.getLocalResourcePublicPath());
     }
 }

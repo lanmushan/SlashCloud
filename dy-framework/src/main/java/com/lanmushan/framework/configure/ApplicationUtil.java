@@ -1,5 +1,6 @@
 package com.lanmushan.framework.configure;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -11,16 +12,16 @@ import org.springframework.stereotype.Component;
  * @author dy
  */
 @Component
+@Slf4j
 public class ApplicationUtil implements ApplicationContextAware {
     private static ApplicationContext application=null;
-    private Logger log = LoggerFactory.getLogger(getClass());
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         if(application==null)
         {
             application=applicationContext;
         }
-        log.info("------------applicationContext加载成功--------------");
+        log.info("applicationContext加载成功");
     }
     public static ApplicationContext getApplication() {
         return application;

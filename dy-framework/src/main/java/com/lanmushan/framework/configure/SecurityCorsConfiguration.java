@@ -1,5 +1,7 @@
 package com.lanmushan.framework.configure;
 
+import com.lanmushan.framework.util.file.LocalResourceUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,7 @@ import java.util.Arrays;
  * 跨域配置
  */
 @Configuration
+@Slf4j
 public class SecurityCorsConfiguration {
 
     @SuppressWarnings("unchecked")
@@ -28,6 +31,7 @@ public class SecurityCorsConfiguration {
         source.registerCorsConfiguration("/**", corsConfiguration);
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        log.info("跨域请求设置成功");
         return bean;
     }
 }

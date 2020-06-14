@@ -16,4 +16,9 @@ public class OperateException extends RuntimeException {
       super(message);
       this.httpCode=httpCode;
     }
+    public OperateException( HTTPCode httpCode) {
+        super(httpCode.msg);
+        this.httpCode=httpCode;
+
+    }
 }

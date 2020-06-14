@@ -1,6 +1,7 @@
 package com.lanmushan.framework.service;
 
 import com.lanmushan.framework.dto.QueryInfo;
+import springfox.documentation.annotations.Cacheable;
 
 
 import java.util.List;

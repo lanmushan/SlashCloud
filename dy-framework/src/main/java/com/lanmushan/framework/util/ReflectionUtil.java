@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -71,8 +72,16 @@ public class ReflectionUtil {
             } else if (field.getType().toString().equals("class java.lang.Long")) {
                 field.set(object, Long.parseLong(value.toString()));
             } else if (field.getType().toString().equals("class java.util.Date")) {
-                SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss ");
-                field.set(object, sdf.parse(value.toString()));
+                if(value instanceof Long)
+                {
+                    field.set(object,value);
+                }if(value instanceof Timestamp){
+                    field.set(object, value);
+                }else{
+                    SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss.S");
+                    field.set(object, sdf.parse(value.toString()));
+                }
+
             } else {
                 field.set(object, value);
             }

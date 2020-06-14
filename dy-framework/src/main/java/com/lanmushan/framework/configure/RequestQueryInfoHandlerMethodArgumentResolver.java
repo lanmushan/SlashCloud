@@ -7,8 +7,8 @@ import com.lanmushan.framework.util.ReflectionUtil;
 import com.lanmushan.framework.util.StringCommonUtil;
 import com.lanmushan.framework.util.util.ServletUtil;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
@@ -23,6 +23,7 @@ import java.util.*;
  * @Date 2020/6/7 13:59
  * @Version 1.0
  */
+@Component
 public class RequestQueryInfoHandlerMethodArgumentResolver  implements HandlerMethodArgumentResolver {
     /**
      * 判断是否属于该处理器处理，返回true的情况会调用resolveArgument
@@ -36,7 +37,7 @@ public class RequestQueryInfoHandlerMethodArgumentResolver  implements HandlerMe
 
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        Class<T> clazz= (Class<T>) methodParameter.getParameterType();
+        Class<?> clazz= (Class<?>) methodParameter.getParameterType();
         if(!clazz.equals(QueryInfo.class))
         {
             return clazz.newInstance();

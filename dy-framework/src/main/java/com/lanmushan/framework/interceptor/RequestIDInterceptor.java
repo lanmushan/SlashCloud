@@ -1,7 +1,6 @@
 package com.lanmushan.framework.interceptor;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.ThreadContext;
 import org.jboss.logging.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -17,16 +16,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 @Slf4j
-public class RequestUIDInterceptor implements HandlerInterceptor {
+public class RequestIDInterceptor implements HandlerInterceptor {
     /**
      * 预处理回调方法，实现处理器的预处理
      * 返回值：true表示继续流程；false表示流程中断，不会继续调用其他的拦截器或处理器
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-     String  requestId=request.getHeader("requestId");
-        MDC.put("requestId", requestId);
-      log.info("Request-Uid{}",requestId);
+        String requestId = request.getHeader("requestId");
+        if (requestId == null) {
+            requestId="0";
+        }
+            MDC.put("requestId", requestId);
+
         //业务代码
         return true;
     }
@@ -40,6 +42,7 @@ public class RequestUIDInterceptor implements HandlerInterceptor {
         // TODO Auto-generated method stub
 
     }
+
     /**
      * 整个请求处理完毕回调方法，即在视图渲染完毕时回调，
      * 如性能监控中我们可以在此记录结束时间并输出消耗时间，

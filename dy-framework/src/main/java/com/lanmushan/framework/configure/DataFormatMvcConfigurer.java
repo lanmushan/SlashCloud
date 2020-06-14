@@ -20,7 +20,7 @@ import java.util.List;
  * @author Administrator
  */
 @Configuration
-public class DataFormatConfig implements WebMvcConfigurer {
+public class DataFormatMvcConfigurer implements WebMvcConfigurer {
 
     @Bean
     public MappingJackson2HttpMessageConverter jackson2HttpMessageConverter() {

@@ -16,8 +16,8 @@ public class Message implements Serializable {
     private int code = HTTPCode.Fail.code;
     private String msg = HTTPCode.Fail.msg;
     private long time;
-    private int currentPage;
-    private int pageSize;
+    private Integer currentPage;
+    private Integer pageSize;
     private int isFirstPage;
     private int isLastPage;
     private int previusPage;
