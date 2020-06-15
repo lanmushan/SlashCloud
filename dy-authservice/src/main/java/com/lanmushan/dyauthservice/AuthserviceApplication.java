@@ -1,20 +1,24 @@
 package com.lanmushan.dyauthservice;
 
+import org.apache.logging.log4j.ThreadContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
+
+import java.util.ResourceBundle;
 
 @SpringBootApplication(scanBasePackages = "com.lanmushan.*.**")
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableHystrix
-public class DyAuthserviceApplication {
+public class AuthserviceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DyAuthserviceApplication.class, args);
+        ResourceBundle bundle = ResourceBundle.getBundle("application");
+        String appName=bundle.getString("spring.application.name");
+        ThreadContext.put("appName", appName);
+        SpringApplication.run(AuthserviceApplication.class, args);
     }
 }
