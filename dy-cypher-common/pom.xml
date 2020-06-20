@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>com.lanmushan</groupId>
-    <artifactId>cypher</artifactId>
+    <artifactId>cypher-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cypher</name>
     <description>Demo project for Spring Boot</description>
