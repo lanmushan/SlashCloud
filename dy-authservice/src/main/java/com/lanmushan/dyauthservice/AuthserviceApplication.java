@@ -1,7 +1,9 @@
 package com.lanmushan.dyauthservice;
 
+import com.lanmushan.framework.configure.datasource.DruidConfiguration;
 import org.apache.logging.log4j.ThreadContext;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
@@ -11,7 +13,6 @@ import java.util.ResourceBundle;
 
 @SpringBootApplication(scanBasePackages = "com.lanmushan.*.**")
 @EnableDiscoveryClient
-@EnableFeignClients
 @EnableHystrix
 public class AuthserviceApplication {
 

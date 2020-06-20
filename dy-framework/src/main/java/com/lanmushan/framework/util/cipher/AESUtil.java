@@ -4,6 +4,7 @@ package com.lanmushan.framework.util.cipher;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.logging.Level;
@@ -20,18 +21,19 @@ public class AESUtil {
     private static final String password="23slfjlajwaljosj78/123";
     /**
      * AES 加密操作
-     *
+     * {@link java.security.MessageDigest}
      * @param content 待加密内容
      * @param password 加密密码
      * @return 返回Base64转码后的加密数据
      */
     public static String encrypt(String content, String password) {
         try {
-            Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);// 创建密码器
+            // 创建密码器
+            Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
 
-            byte[] byteContent = content.getBytes("utf-8");
-
-            cipher.init(Cipher.ENCRYPT_MODE, getSecretKey(password));// 初始化为加密模式的密码器
+            byte[] byteContent = content.getBytes(StandardCharsets.UTF_8);
+            // 初始化为加密模式的密码器
+            cipher.init(Cipher.ENCRYPT_MODE, getSecretKey(password));
 
             byte[] result = cipher.doFinal(byteContent);// 加密
 
@@ -63,7 +65,7 @@ public class AESUtil {
             //执行操作
             byte[] result = cipher.doFinal(Base64.decodeBase64(content));
 
-            return new String(result, "utf-8");
+            return new String(result, StandardCharsets.UTF_8);
         } catch (Exception ex) {
             Logger.getLogger(AESUtil.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lanmushan.dyauthservice.mapper.AuthFkDeptPostMapper">
+
+    <resultMap type="com.lanmushan.dyauthservice.entity.AuthFkDeptPost" id="baseResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="fkDeptId" column="fk_dept_id" jdbcType="INTEGER"/>
+        <result property="fkPostId" column="fk_post_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+        <result property="updateUser" column="update_user" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectList" resultMap="baseResultMap" parameterType="com.lanmushan.framework.dto.QueryInfo">
+        select id, fk_dept_id, fk_post_id, create_time, update_time, create_user, update_user from auth_fk_dept_post
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
+                <choose>
+                    <when test="it.key == 'search_key'">
+                    </when>
+                    <otherwise>
+                        <if test="it.operate =='in'">
+                            ${it.key} ${it.operate} (#{it.value})
+                        </if>
+                        <if test="it.operate !='in'">
+                            ${it.key} ${it.operate} #{it.value}
+                        </if>
+                    </otherwise>
+                </choose>
+            </foreach>
+        </trim>
+    </select>
+
+</mapper>

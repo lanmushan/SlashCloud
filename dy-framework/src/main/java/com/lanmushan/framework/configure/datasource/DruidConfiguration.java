@@ -19,8 +19,8 @@ import javax.sql.DataSource;
 /**
  * @author Administrator
  */
-@Configuration
-@ConditionalOnProperty(prefix="spring",name = "datasource",matchIfMissing = true)
+//@Configuration
+//@ConditionalOnProperty(prefix="spring",name = "datasource",matchIfMissing = true)
 public class DruidConfiguration {
     private Logger log = LoggerFactory.getLogger(getClass());
     @Autowired
