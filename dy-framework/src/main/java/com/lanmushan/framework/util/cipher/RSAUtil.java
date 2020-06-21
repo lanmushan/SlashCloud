@@ -21,9 +21,6 @@ public class RSAUtil {
     private static String privateKeyStr = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAL86lWv5pC7oHey1JSCwtxlalrFq2x63zNOpq3UUXnjeGgQJxOdGoNcrB9fT0n5EsJz/V9shO3SzjBRTAk1TuUolJMZmnn/EdwSIUmNNr5djqlAdAq+9mMBAyTLMLcfm2Zo1Nqkpgk4BbDu7V3FxE0V0PeTkT4SKpKeWjfS7tIsLAgMBAAECgYBicjt4geV3TIITWVJK2Q76G3vWzIcP8lmdYgzl0l2sZdMI3yqiUeb9vqZkAyWrYZt2x7GoGxyrwL9Nu0pFGuQZFaZIrHRj6LoNq/dgGUpN5zviXUDq2RrhhP7dW4Zc2UbbZqtTzn4jgv8/dviT+LACBmbavojjbb6YZHO/YDml2QJBAPWWu7SkyqfHSDOBBYWyI0GON2ApqTOIsENpQ572IvjNzT8TcXsNRr1hy4o5JfJN4KutBSsJkxAv3+nCc7pvRo0CQQDHVefkgjyuCyQjTtm8WPeIP7Ny8Rul44SmoyaSOANiPufsjIAPvxtNwyvkyUKtI7AMx6XrAWltRMWWiByVH533AkBp87fTfWz46V7a6YTqYyoWtDZrxE19MDFrQ9SqleIMmS09UzQYNGgaeECJx5H5cWPGbQTXxm+uAhmGDiBDhJJZAkEAu84SR1b1OL1CdQmrVyszPGlX9ul3NRphNmbsxkKD3aKK/HF7jlptrRw/VLTSXzIKgl/v0LRp0gtDZgojc9RwDQJBAJ2d0E9huqG9yP0bA9q0lIFwqJogLnoRvQCkNW6hATUrA5b7lrZYniPbwRfSALW2jgweTeTaeouPBHPWbVz/ws8=";
     private static RSAUtil ourInstance = new RSAUtil();
 
-    public static RSAUtil getInstance() {
-        return ourInstance;
-    }
 
     // 生成密钥对
     private void generateKeyPair() throws NoSuchAlgorithmException {
@@ -33,10 +30,10 @@ public class RSAUtil {
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
         // 获取公钥，并以base64格式打印出来
         PublicKey publicKey = keyPair.getPublic();
-        publicKeyStr = new String(base64Encoder.encode(publicKey.getEncoded()));
+        publicKeyStr = base64Encoder.encode(publicKey.getEncoded());
         // 获取私钥，并以base64格式打印出来
         PrivateKey privateKey = keyPair.getPrivate();
-        privateKeyStr = new String(base64Encoder.encode(privateKey.getEncoded()));
+        privateKeyStr = base64Encoder.encode(privateKey.getEncoded());
     }
 
     // 将base64编码后的公钥字符串转成PublicKey实例
