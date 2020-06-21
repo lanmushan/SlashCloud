@@ -15,7 +15,6 @@ import java.util.ResourceBundle;
 @EnableDiscoveryClient
 @EnableHystrix
 public class AuthserviceApplication {
-
     public static void main(String[] args) {
         ResourceBundle bundle = ResourceBundle.getBundle("application");
         String appName=bundle.getString("spring.application.name");
