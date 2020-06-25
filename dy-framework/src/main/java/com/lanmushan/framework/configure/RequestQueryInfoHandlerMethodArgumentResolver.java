@@ -6,6 +6,7 @@ import com.lanmushan.framework.exception.OperateException;
 import com.lanmushan.framework.util.ReflectionUtil;
 import com.lanmushan.framework.util.StringCommonUtil;
 import com.lanmushan.framework.util.util.ServletUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ import java.util.*;
  * @Version 1.0
  */
 @Component
+@Slf4j
 public class RequestQueryInfoHandlerMethodArgumentResolver  implements HandlerMethodArgumentResolver {
     /**
      * 判断是否属于该处理器处理，返回true的情况会调用resolveArgument
@@ -37,7 +39,8 @@ public class RequestQueryInfoHandlerMethodArgumentResolver  implements HandlerMe
 
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        Class<?> clazz= (Class<?>) methodParameter.getParameterType();
+        log.info("自定义处理器");
+        Class<?> clazz = methodParameter.getParameterType();
         if(!clazz.equals(QueryInfo.class))
         {
             return clazz.newInstance();
@@ -65,7 +68,7 @@ public class RequestQueryInfoHandlerMethodArgumentResolver  implements HandlerMe
                continue;
             }
             QueryInfo.QueryParam queryParam=new QueryInfo.QueryParam();
-            String keys[]=key.split("-");
+            String[] keys = key.split("-");
             String fiexedName="";
             String operateCode="";
 
@@ -96,6 +99,7 @@ public class RequestQueryInfoHandlerMethodArgumentResolver  implements HandlerMe
                 return -(o1.getIndex()-o2.getIndex());
             }
         });
+        ReflectionUtil.setFieldValue(obj, "map", map);
         ReflectionUtil.setFieldValue(obj,"parList",params);
         return obj;
     }

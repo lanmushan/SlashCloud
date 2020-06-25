@@ -40,6 +40,7 @@
         </RollingFile>
 
     </appenders>
+    <loggers name="io.seata.core"></loggers>
     <loggers>
         <root  level="info">
             <appender-ref ref="console"></appender-ref>

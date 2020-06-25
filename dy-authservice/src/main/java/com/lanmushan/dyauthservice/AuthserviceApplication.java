@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 @SpringBootApplication(scanBasePackages = "com.lanmushan.*.**")
 @EnableDiscoveryClient
 @EnableHystrix
+@EnableFeignClients
 public class AuthserviceApplication {
     public static void main(String[] args) {
         ResourceBundle bundle = ResourceBundle.getBundle("application");

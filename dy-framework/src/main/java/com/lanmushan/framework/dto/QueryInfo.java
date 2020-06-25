@@ -1,8 +1,6 @@
 package com.lanmushan.framework.dto;
 
 
-
-
 import com.lanmushan.framework.util.StringCommonUtil;
 
 import java.io.Serializable;
@@ -10,25 +8,41 @@ import java.util.*;
 
 /**
  * 通用查询参数封装
+ *
  * @author Administrator
  */
 public class QueryInfo implements Serializable {
+    /**
+     * feign 特殊处理时的标记
+     */
+    private String queryInfoMark = infoMark.mark.value;
     private Integer pageSize;
-    private Integer currentPage=1;
-    private String sort="desc";//
-    private String field ="";
+    private Integer currentPage = 1;
+    private String sort = "desc";
+    private String field = "";
     private String searchKey;
-    private List<QueryParam> parList=new ArrayList<>(0);//前端传参
+    private Map<String, Object> map = new HashMap<String, Object>(0);
+    //前端传参
+    private List<QueryParam> parList = new ArrayList<>(0);
+
     public QueryInfo() {
 
     }
-    public String getOrders(){
-        if (field.equals(""))
-        {
+
+    public Map<String, Object> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<String, Object> map) {
+        this.map = map;
+    }
+
+    public String getOrders() {
+        if (field.equals("")) {
             return null;
         }
-        this.field= StringCommonUtil.camelToUnderline(field,'_');
-        return field+" "+sort;
+        this.field = StringCommonUtil.camelToUnderline(field, '_');
+        return field + " " + sort;
     }
 
     public Integer getPageSize() {
@@ -79,16 +93,25 @@ public class QueryInfo implements Serializable {
         this.parList = parList;
     }
 
+    public String getQueryInfoMark() {
+        return queryInfoMark;
+    }
+
+    public void setQueryInfoMark(String queryInfoMark) {
+        this.queryInfoMark = queryInfoMark;
+    }
 
     /**
      * 查询参数转换
+     *
      * @author Administrator
      */
-     public static class QueryParam {
+    public static class QueryParam {
         private String key;
         private Object value;
         private String operate;
         private int index;
+
         public String getKey() {
             return key;
         }
@@ -113,15 +136,31 @@ public class QueryInfo implements Serializable {
             this.operate = operate;
         }
 
-         public int getIndex() {
-             return index;
-         }
+        public int getIndex() {
+            return index;
+        }
 
-         public void setIndex(int index) {
-             this.index = index;
-         }
+        public void setIndex(int index) {
+            this.index = index;
+        }
 
-     }
+        public QueryParam() {
+        }
+    }
 
+    public enum infoMark {
+        /**
+         * 标记
+         */
+        mark("queryInfoMark", "queryInfoMark");
+        public String key;
+        public String value;
+
+        infoMark(String key, String value) {
+            this.key = key;
+            this.value = value;
+
+        }
+    }
 }
 

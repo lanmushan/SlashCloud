@@ -1,5 +1,6 @@
-package com.lanmushan.dyauthservice.rpcservice;
+package com.lanmushan.dyauthservice.rpcservice.hystric;
 
+import com.lanmushan.dyauthservice.rpcservice.DictService;
 import org.springframework.stereotype.Component;
 
 @Component

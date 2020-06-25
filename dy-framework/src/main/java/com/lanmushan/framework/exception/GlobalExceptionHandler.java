@@ -37,8 +37,9 @@ public class GlobalExceptionHandler {
     {
         log.error(e.getMessage(),e);
         Message msg=new Message();
-        msg.setHttpCode(HTTPCode.InnerError);
+
         msg.setRow(e.getMessage());
+        msg.setHttpCode(HTTPCode.InnerError);
         return msg;
 }
 
@@ -93,7 +94,7 @@ public class GlobalExceptionHandler {
             List<FieldError> err = result.getFieldErrors();
             int i=0;
             for (FieldError fe : err) {
-                msg.addError(fe.getField().toString(), fe.getDefaultMessage());
+                msg.addError(fe.getField(), fe.getDefaultMessage());
                 if(i==0)
                 {
                     msg.error(fe.getDefaultMessage());

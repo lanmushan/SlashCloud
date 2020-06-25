@@ -3,12 +3,14 @@ package com.lanmushan.framework.util.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +21,7 @@ import java.util.regex.Pattern;
  * @Date 2020/6/4 21:59
  * @Version 1.0
  */
+@Slf4j
 public class ServletUtil {
     private static final String N255 = "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
     private static final Pattern PATTERN = Pattern.compile("^(?:" + N255 + "\\.){3}" + N255 + "$");
@@ -74,7 +77,8 @@ public class ServletUtil {
     public static Map<String,Object>  getDataFromRequest(HttpServletRequest httpServletRequest){
             String type = httpServletRequest.getContentType();
             Map<String,Object> receiveMap = new HashMap<String,Object>();
-            if(type==null||"application/x-www-form-urlencoded".equals(type)){
+        log.info("请求方式:{}", httpServletRequest.getMethod());
+        if ("GET".equals(httpServletRequest.getMethod()) || type == null || "application/x-www-form-urlencoded".equals(type)) {
                 Enumeration<String> enu = httpServletRequest.getParameterNames();
                 while (enu.hasMoreElements()) {
                     String key = String.valueOf(enu.nextElement());
@@ -85,7 +89,7 @@ public class ServletUtil {
                 BufferedReader reader = null;
                 StringBuilder sb = new StringBuilder();
                 try{
-                    reader = new BufferedReader(new InputStreamReader(httpServletRequest.getInputStream(), "utf-8"));
+                    reader = new BufferedReader(new InputStreamReader(httpServletRequest.getInputStream(), StandardCharsets.UTF_8));
                     String line = null;
                     while ((line = reader.readLine()) != null){
                         sb.append(line);

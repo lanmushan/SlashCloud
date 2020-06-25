@@ -5,6 +5,7 @@ import com.lanmushan.framework.constant.HTTPCode;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author dy
  */
-public class Message implements Serializable {
+public class Message<T> implements Serializable {
     private int code = HTTPCode.Fail.code;
     private String msg = HTTPCode.Fail.msg;
     private long time;
@@ -34,7 +35,7 @@ public class Message implements Serializable {
 
     private List<Error> errors;
     private Object row;
-    private List rows;
+    private Collection<T> rows;
 
 
 
@@ -100,7 +101,8 @@ public class Message implements Serializable {
         this.code=httpCode.code;
         this.msg=httpCode.msg;
     }
-    public List getRows() {
+
+    public Collection<T> getRows() {
         return rows;
     }
 
@@ -147,6 +149,9 @@ public class Message implements Serializable {
 
     public Message setTotal(long total) {
         this.total = total;
+        if (currentPage == null) {
+            return this;
+        }
         if (currentPage == page) {
             isLastPage = 1;
         }
