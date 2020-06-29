@@ -1,0 +1,16 @@
+{
+  "pageSize": null,
+  "currentPage": 1,
+  "sort": "desc",
+  "field": "",
+  "searchKey": null,
+  "parList": [
+    {
+      "key": "dict_group_code",
+      "value": "pay_method",
+      "operate": "=",
+      "index": 0
+    }
+  ],
+  "orders": null
+}
