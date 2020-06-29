@@ -1,6 +1,9 @@
 package com.lanmushan.framework.shiro;
 
 
+import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
+import com.lanmushan.framework.configure.RedisClient;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
 import org.slf4j.Logger;
@@ -11,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.util.SerializationUtils;
+import redis.clients.jedis.Jedis;
 
 import java.io.Serializable;
 
@@ -21,41 +25,47 @@ import java.io.Serializable;
  */
 @Configuration
 @Order(10)
+@Slf4j
 public class ShiroRedisSessionDao extends CachingSessionDAO {
 
-    private static final String PREFIX = "SESSION_ID";
+    private static final String PREFIX = "SESSION_ID|";
     private static final int EXPRIE = 10000;
     @Autowired
-    RedisTemplate<Object, Object> redisTemplate;
-    private Logger logger= LoggerFactory.getLogger(ShiroRedisSessionDao.class);
+    RedisClient redisClient;
 
     @Override
     protected void doUpdate(Session session) {
-
+        String key = getKey(session.getId());
+        log.info("更新Session|" + key);
+        redisClient.setObject(key, session);
     }
 
     @Override
     protected void doDelete(Session session) {
-
+        String key = getKey(session.getId());
+        log.info("刪除Session|" + key);
+        redisClient.deleteObject(getKey(session));
     }
 
     @Override
     protected Serializable doCreate(Session session) {
-
         Serializable serializable = this.generateSessionId(session);
         assignSessionId(session, serializable);
-        String key=getKey(session.getId());
-        if(logger.isDebugEnabled())
-        {
-            logger.debug("redis session do create key:{}",key);
-        }
-        redisTemplate.opsForValue().set(key, SerializationUtils.serialize(session), EXPRIE);
+        String key = getKey(serializable);
+        log.info("创建Session|" + key);
+        redisClient.setObject(key, session);
         return serializable;
     }
 
     @Override
     protected Session doReadSession(Serializable serializable) {
-      return (Session) redisTemplate.opsForValue().get(getKey(serializable));
+        String key = getKey(serializable);
+        log.info("读取Session|" + key);
+        Session session = (Session) redisClient.getObject(key);
+        if (session == null) {
+            return null;
+        }
+        return session;
     }
 
     private String getKey(Object obj) {
