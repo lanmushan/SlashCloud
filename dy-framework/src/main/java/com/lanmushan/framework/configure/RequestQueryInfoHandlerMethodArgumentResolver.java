@@ -154,7 +154,7 @@ public class RequestQueryInfoHandlerMethodArgumentResolver  implements HandlerMe
            try {
                if(key.equals("searchKey"))
                {
-                   ReflectionUtil.setFieldValue(obj,key,"%"+value.toString());
+                   ReflectionUtil.setFieldValue(obj, key, value.toString() + "%");
                }else {
                    ReflectionUtil.setFieldValue(obj,key,value);
                }
