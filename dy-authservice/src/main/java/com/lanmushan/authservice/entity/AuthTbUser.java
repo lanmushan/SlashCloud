@@ -8,7 +8,10 @@ import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+
 import com.alibaba.excel.annotation.ExcelProperty;
+import org.hibernate.validator.constraints.Length;
 import tk.mybatis.mapper.annotation.KeySql;
 
 /**
@@ -35,26 +38,33 @@ public class AuthTbUser implements Serializable {
     private Long deptId;
 
     @ExcelProperty(value = " ")
+    @NotBlank(message = "用户名称不能为空")
     private String nickName;
     /**
      * 姓名
      */
     @ExcelProperty(value = " 姓名")
+    @NotBlank(message = "用户姓名不能为空")
     private String username;
     /**
      * 电话
      */
     @ExcelProperty(value = " 电话")
+    @NotBlank(message = "联系电话不能为空")
+    @Length(min = 11, max = 11, message = "联系电话只能11位")
     private String phone;
     /**
      * 身份证号
      */
     @ExcelProperty(value = " 身份证号")
+    @NotBlank(message = "证件号码不能为空")
+    @Length(min = 15, max = 18, message = "身份证号长度为15或18位")
     private String idCard;
     /**
      * 邮箱
      */
     @ExcelProperty(value = " 邮箱")
+    @NotBlank(message = "请输入正确的联系邮箱")
     private String email;
     /**
      * 性别
@@ -65,6 +75,8 @@ public class AuthTbUser implements Serializable {
      * 账号
      */
     @ExcelProperty(value = " 账号")
+    @NotBlank(message = "登录账号不能为空")
+    @Length(min = 2, message = "登录账号长度最少2位")
     private String account;
     /**
      * 登录密码

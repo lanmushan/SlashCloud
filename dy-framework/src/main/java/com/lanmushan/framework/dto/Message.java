@@ -14,8 +14,8 @@ import java.util.List;
  * @author dy
  */
 public class Message<T> implements Serializable {
-    private int code = HTTPCode.Fail.code;
-    private String msg = HTTPCode.Fail.msg;
+    private int code = HTTPCode.E205.code;
+    private String msg = HTTPCode.E205.msg;
     private long time;
     private Integer currentPage;
     private Integer pageSize;
@@ -38,16 +38,19 @@ public class Message<T> implements Serializable {
     private Collection<T> rows;
 
 
+    public List<Error> getErrors() {
+        return errors;
+    }
+
 
     public Message() {
         this.time = System.currentTimeMillis();
     }
 
-    public static
-/**
- * 通用字段校验错误情况返回
- */
-    class Error {
+    /**
+     * 通用字段校验错误情况返回
+     */
+    public static class Error {
         private String errMsg;
         private String errName;
 
@@ -93,7 +96,7 @@ public class Message<T> implements Serializable {
 
     public Message setRow(Object row) {
         this.row = row;
-        this.setHttpCode(HTTPCode.OK);
+        this.setHttpCode(HTTPCode.E200);
         return this;
     }
     public void setHttpCode(HTTPCode httpCode)
@@ -113,17 +116,17 @@ public class Message<T> implements Serializable {
             this.setPageSize(pageInfo.getPageSize());
             this.setTotal((int) pageInfo.getTotal());
             this.rows = rows;
-            this.setHttpCode(HTTPCode.OK);
+            this.setHttpCode(HTTPCode.E200);
             this.success("查询成功");
         } else {
-            this.setHttpCode(HTTPCode.OK204);
+            this.setHttpCode(HTTPCode.E204);
         }
 
         return this;
     }
 
     public Message error(String msg) {
-        this.setHttpCode(HTTPCode.Fail);
+        this.setHttpCode(HTTPCode.E205);
         this.msg = msg;
         return this;
     }
@@ -133,7 +136,7 @@ public class Message<T> implements Serializable {
         return this;
     }
     public Message success(String msg) {
-        this.setHttpCode(HTTPCode.OK);
+        this.setHttpCode(HTTPCode.E200);
         this.msg = msg;
         return this;
     }

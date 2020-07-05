@@ -58,15 +58,15 @@ public class QueryController extends BaseController {
                 if (obj != null) {
                     msg.success("查询成功");
                 } else {
-                    msg.setHttpCode(HTTPCode.OK204);
+                    msg.setHttpCode(HTTPCode.E204);
                 }
                 return msg;
             }
         } catch (OperateException e) {
-            msg.setHttpCode(HTTPCode.PramError);
+            msg.setHttpCode(HTTPCode.C400);
             log.error("查询失败:{};Exception:", request.getRequestURI(), e);
         } catch (Exception e) {
-            msg.setHttpCode(HTTPCode.InnerError);
+            msg.setHttpCode(HTTPCode.C404);
             msg.error("查询失败" + e.getLocalizedMessage());
             log.error("查询失败:{};Exception:", request.getRequestURI(), e);
         }
