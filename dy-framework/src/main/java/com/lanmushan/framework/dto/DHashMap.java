@@ -28,8 +28,7 @@ public class DHashMap<T> extends HashMap {
     }
     public static List  toEntityList(List<DHashMap> dHashMapList,Class t){
         List list=new ArrayList();
-        for (DHashMap row:
-                dHashMapList) {
+        for (DHashMap row : dHashMapList) {
             list.add(row.toEntity(t));
         }
         return list;

@@ -49,14 +49,18 @@ public class BaseController {
      * @return
      */
     public String getOrders() {
-        String field = null;
+        String fixed = null;
         String sort = "desc";
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        field = request.getParameter("field");
-        if (StringUtils.isEmpty(field)) {
+        fixed = request.getParameter("fixed");
+        if (StringUtils.isEmpty(fixed)) {
             return null;
         }
-        field = StringCommonUtil.camelToUnderline(field, '_');
-        return field + " " + sort;
+        String sortStr = request.getParameter("sort");
+        if (!StringUtils.isEmpty(sortStr)) {
+            sort = sortStr;
+        }
+        fixed = StringCommonUtil.camelToUnderline(fixed, '_');
+        return fixed + " " + sort;
     }
 }

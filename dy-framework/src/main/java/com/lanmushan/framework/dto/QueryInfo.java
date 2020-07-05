@@ -19,8 +19,9 @@ public class QueryInfo implements Serializable {
     private Integer pageSize;
     private Integer currentPage = 1;
     private String sort = "desc";
-    private String field = "";
+    private String fixed = "";
     private String searchKey;
+
     private Map<String, Object> map = new HashMap<String, Object>(0);
     //前端传参
     private List<QueryParam> parList = new ArrayList<>(0);
@@ -38,11 +39,11 @@ public class QueryInfo implements Serializable {
     }
 
     public String getOrders() {
-        if (field.equals("")) {
+        if (fixed.equals("")) {
             return null;
         }
-        this.field = StringCommonUtil.camelToUnderline(field, '_');
-        return field + " " + sort;
+        this.fixed = StringCommonUtil.camelToUnderline(fixed, '_');
+        return fixed + " " + sort;
     }
 
     public Integer getPageSize() {
@@ -69,12 +70,12 @@ public class QueryInfo implements Serializable {
         this.sort = sort;
     }
 
-    public String getField() {
-        return field;
+    public String getFiexd() {
+        return fixed;
     }
 
-    public void setField(String field) {
-        this.field = field;
+    public void setFiexd(String field) {
+        this.fixed = field;
     }
 
     public String getSearchKey() {

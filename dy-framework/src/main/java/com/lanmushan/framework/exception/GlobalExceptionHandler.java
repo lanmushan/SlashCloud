@@ -39,7 +39,7 @@ public class GlobalExceptionHandler {
         Message msg=new Message();
 
         msg.setRow(e.getMessage());
-        msg.setHttpCode(HTTPCode.InnerError);
+        msg.setHttpCode(HTTPCode.S500);
         return msg;
 }
 
@@ -56,7 +56,7 @@ public class GlobalExceptionHandler {
     {
         Message msg=new Message();
         log.error(e.getMessage(),e);
-        msg.error(HTTPCode.PramError,e.getMessage());
+        msg.error(HTTPCode.E205, e.getMessage());
         return msg;
     }
 
@@ -101,10 +101,8 @@ public class GlobalExceptionHandler {
                     i++;
                 }
             }
-            return msg;
-
         }
-        msg.error(HTTPCode.PramError,errorMsg);
+        msg.setCode(HTTPCode.C400.code);
         return msg;
     }
 

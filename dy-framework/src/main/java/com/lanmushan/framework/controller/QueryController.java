@@ -1,6 +1,7 @@
 package com.lanmushan.framework.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.lanmushan.framework.annotations.RequestQueryInfo;
 import com.lanmushan.framework.configure.ApplicationUtil;
 import com.lanmushan.framework.constant.HTTPCode;
@@ -36,15 +37,11 @@ import java.util.List;
 public class QueryController extends BaseController {
     @GetMapping(value = "/{entityName}/{methodName}")
     public Message queryList(@PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request) {
+        log.info(JSONObject.toJSONString(queryInfo));
         Message msg = new Message();
         try {
             entityName = StringCommonUtil.toLowerCaseFirstOne(entityName);
-            Object queryService = null;
-            if (entityName.lastIndexOf("Service") > 0 || entityName.lastIndexOf("service") > 0) {
-                queryService = ApplicationUtil.getBean(entityName);
-            } else {
-                queryService = ApplicationUtil.getBean(entityName + "Mapper");
-            }
+            Object queryService = ApplicationUtil.getBean(entityName + "Service");
             Method method = queryService.getClass().getMethod(methodName, queryInfo.getClass());
             Type t = method.getAnnotatedReturnType().getType();
             //列表查询
@@ -61,15 +58,15 @@ public class QueryController extends BaseController {
                 if (obj != null) {
                     msg.success("查询成功");
                 } else {
-                    msg.setHttpCode(HTTPCode.OK204);
+                    msg.setHttpCode(HTTPCode.E204);
                 }
                 return msg;
             }
         } catch (OperateException e) {
-            msg.setHttpCode(HTTPCode.PramError);
+            msg.setHttpCode(HTTPCode.C400);
             log.error("查询失败:{};Exception:", request.getRequestURI(), e);
         } catch (Exception e) {
-            msg.setHttpCode(HTTPCode.InnerError);
+            msg.setHttpCode(HTTPCode.C404);
             msg.error("查询失败" + e.getLocalizedMessage());
             log.error("查询失败:{};Exception:", request.getRequestURI(), e);
         }

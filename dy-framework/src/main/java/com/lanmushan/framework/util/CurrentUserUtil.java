@@ -18,7 +18,7 @@ public class CurrentUserUtil {
         CurrentUser currentUser= (CurrentUser) session.getAttribute(USER_KEY);
         if(currentUser==null)
         {
-            throw new OperateException("请先登录后进行操作", HTTPCode.Fail);
+            throw new OperateException("请先登录后进行操作", HTTPCode.D600);
         }
         return currentUser;
     }

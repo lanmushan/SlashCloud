@@ -6,6 +6,7 @@ import com.lanmushan.authservice.mapper.AuthTbRoleMapper;
 import com.lanmushan.authservice.service.AuthTbResourceService;
 import com.lanmushan.framework.entity.CurrentUser;
 import com.lanmushan.framework.util.CurrentUserUtil;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import com.lanmushan.framework.dto.Message;
 import com.lanmushan.authservice.bo.BoAuthTbResource;
@@ -45,7 +46,7 @@ public class AuthTbResourceController {
     }
 
     @PostMapping("/add")
-    public Message add(@RequestBody @Valid BoAuthTbResource obj) {
+    public Message add(@RequestBody BoAuthTbResource obj) {
         Message msg = new Message();
         authTbResourceService.insertService(obj);
         msg.setRow(obj).success("添加成功");

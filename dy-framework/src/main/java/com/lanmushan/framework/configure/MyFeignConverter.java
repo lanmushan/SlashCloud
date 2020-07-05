@@ -68,9 +68,9 @@ public class MyFeignConverter extends MappingJackson2HttpMessageConverter {
 
                 JavaType type = super.getJavaType(Message.class, Message.class);
                 Message message = objectMapper.readValue(inputMessage.getBody(), type);
-                if (message.getCode() == HTTPCode.OK204.code) {
+                if (message.getCode() == HTTPCode.E204.code) {
                     return new ArrayList<>();
-                } else if (message.getCode() == HTTPCode.OK.code) {   //这里会自动转换
+                } else if (message.getCode() == HTTPCode.E200.code) {   //这里会自动转换
                     return message.getRows();
                 } else {
                     throw new HttpMessageConversionException("远程接口返回错误!code=" + message.getCode() + ",msg=" + message.getMsg());
@@ -80,7 +80,7 @@ public class MyFeignConverter extends MappingJackson2HttpMessageConverter {
                 //其他Object情况，所有接口返回Message,所以进行特殊处理
                 JavaType type = super.getJavaType(Message.class, Message.class);
                 Message message = objectMapper.readValue(inputMessage.getBody(), type);
-                if (message.getCode() == HTTPCode.OK204.code || message.getCode() == HTTPCode.OK.code) {
+                if (message.getCode() == HTTPCode.E200.code || message.getCode() == HTTPCode.E204.code) {
                     Class<?> reslutClass = (Class<?>) ReflectionUtil.getFieldValue(javaType, "_class");
                     //请求成功，但是无数据或有数据情况直接返回数据
                     return JSONObject.toJavaObject((JSON) JSONObject.toJSON(message.getRow()), reslutClass);

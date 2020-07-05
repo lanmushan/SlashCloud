@@ -36,7 +36,7 @@ public class AuthTbUserController {
     }
 
     @PostMapping("/add")
-    public Message add(@RequestBody @Valid BoAuthTbUser obj) {
+    public Message add(@RequestBody BoAuthTbUser obj) {
         Message msg = new Message();
         authTbUserService.insertService(obj);
         msg.setRow(obj).success("添加成功");

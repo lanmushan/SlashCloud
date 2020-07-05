@@ -1,8 +1,10 @@
 package com.lanmushan.authservice.service.impl;
 
 
+import com.lanmushan.authservice.mapper.AuthTbRoleMapper;
 import com.lanmushan.authservice.mapper.AuthTbUserMapper;
 import com.lanmushan.authservice.service.AuthTbUserService;
+import com.lanmushan.authservice.vo.VoAuthTbUser;
 import com.lanmushan.framework.constant.HTTPCode;
 import com.lanmushan.framework.exception.OperateException;
 import com.lanmushan.authservice.bo.BoAuthTbUser;
@@ -26,10 +28,17 @@ import java.util.List;
 public class AuthTbUserServiceImpl implements AuthTbUserService {
     @Autowired
     private AuthTbUserMapper authTbUserMapper;
+    @Autowired
+    private AuthTbRoleMapper authTbRoleMapper;
 
     @Override
     public List selectList(QueryInfo queryInfo) {
-        return authTbUserMapper.selectList(queryInfo);
+
+        List<VoAuthTbUser> list = authTbUserMapper.selectList(queryInfo);
+        list.forEach(it -> {
+            it.setAuthTbRoleList(authTbRoleMapper.selectRolesByUserId(it.getId()));
+        });
+        return list;
     }
 
     @Override

@@ -32,7 +32,7 @@
             </foreach>
         </trim>
     </select>
-
+    <!--根据用户ID查询所有关联的角色-->
     <select id="selectRolesByUserId" parameterType="java.lang.Long" resultMap="baseResultMap">
         SELECT b.*
         FROM auth_fk_user_role AS a
