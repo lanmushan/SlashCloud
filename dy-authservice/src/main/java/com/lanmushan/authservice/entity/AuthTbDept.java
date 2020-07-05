@@ -3,12 +3,14 @@ package com.lanmushan.authservice.entity;
 import java.util.Date;
 import java.io.Serializable;
 
+import com.lanmushan.framework.entity.BaseEntity;
+import com.lanmushan.framework.entity.TreeNode;
+import com.lanmushan.framework.util.TreeUtil;
 import com.lanmushan.framework.util.uuid.SeqGenId;
 import lombok.Data;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import com.alibaba.excel.annotation.ExcelProperty;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -16,12 +18,12 @@ import tk.mybatis.mapper.annotation.KeySql;
  * 部门表(AuthTbDept)实体类
  *
  * @author makejava
- * @since 2020-06-15 22:13:48
+ * @since 2020-07-02 22:14:51
  */
 @Table(name = "auth_tb_dept")
 @Data
-public class AuthTbDept implements Serializable {
-    private static final long serialVersionUID = -53970534869734610L;
+public class AuthTbDept extends BaseEntity implements Serializable {
+    private static final long serialVersionUID = -29261044802391350L;
     /**
      * 部门id
      */
@@ -33,17 +35,15 @@ public class AuthTbDept implements Serializable {
      * 父部门id
      */
     @ExcelProperty(value = " 父部门id")
-    private Long parentId;
-    /**
-     * 祖级列表
-     */
-    @ExcelProperty(value = " 祖级列表")
-    private String ancestors;
+    private Long fkParentId;
     /**
      * 部门名称
      */
     @ExcelProperty(value = " 部门名称")
     private String deptName;
+
+    @ExcelProperty(value = "部门全称")
+    private String fullDeptName;
     /**
      * 显示顺序
      */
@@ -68,17 +68,12 @@ public class AuthTbDept implements Serializable {
      * 部门状态（0正常 1停用）
      */
     @ExcelProperty(value = " 部门状态（0正常 1停用）")
-    private String status;
-    /**
-     * 删除标志（0代表存在 2代表删除）
-     */
-    @ExcelProperty(value = " 删除标志（0代表存在 2代表删除）")
-    private String delFlag;
+    private Integer deleted;
     /**
      * 创建者
      */
     @ExcelProperty(value = " 创建者")
-    private String createUser;
+    private String createUserId;
     /**
      * 创建时间
      */
@@ -88,12 +83,25 @@ public class AuthTbDept implements Serializable {
      * 更新者
      */
     @ExcelProperty(value = " 更新者")
-    private String updateUser;
+    private String updateUserId;
     /**
      * 更新时间
      */
     @ExcelProperty(value = " 更新时间")
     private Date updateTime;
 
+    @Override
+    public boolean isRoot() {
+        if (fkParentId != null) {
+            return fkParentId.compareTo(0L) == 0;
+        }
+        return false;
+    }
 
+    @Override
+    public boolean isChildren(TreeNode treeNode) {
+        AuthTbDept authTbDept = (AuthTbDept) treeNode;
+        return this.getId().equals(authTbDept.getFkParentId());
+
+    }
 }

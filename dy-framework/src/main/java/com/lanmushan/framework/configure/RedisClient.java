@@ -55,6 +55,7 @@ public class RedisClient {
     }
 
     public static Object getObject(byte[] bs) {
+
         try {
             ByteArrayInputStream bais = new ByteArrayInputStream(bs);
             ObjectInputStream ois = new ObjectInputStream(bais);
@@ -74,6 +75,9 @@ public class RedisClient {
         if (jedis != null) {
             try {
                 bytes = jedis.get(key.getBytes());
+                if (bytes == null || bytes.length == 0) {
+                    return null;
+                }
                 obj = getObject(bytes);
             } catch (Exception e) {
                 e.printStackTrace();

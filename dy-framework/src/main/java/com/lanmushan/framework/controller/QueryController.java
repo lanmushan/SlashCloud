@@ -1,6 +1,7 @@
 package com.lanmushan.framework.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.lanmushan.framework.annotations.RequestQueryInfo;
 import com.lanmushan.framework.configure.ApplicationUtil;
 import com.lanmushan.framework.constant.HTTPCode;
@@ -36,15 +37,11 @@ import java.util.List;
 public class QueryController extends BaseController {
     @GetMapping(value = "/{entityName}/{methodName}")
     public Message queryList(@PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request) {
+        log.info(JSONObject.toJSONString(queryInfo));
         Message msg = new Message();
         try {
             entityName = StringCommonUtil.toLowerCaseFirstOne(entityName);
-            Object queryService = null;
-            if (entityName.lastIndexOf("Service") > 0 || entityName.lastIndexOf("service") > 0) {
-                queryService = ApplicationUtil.getBean(entityName);
-            } else {
-                queryService = ApplicationUtil.getBean(entityName + "Mapper");
-            }
+            Object queryService = ApplicationUtil.getBean(entityName + "Service");
             Method method = queryService.getClass().getMethod(methodName, queryInfo.getClass());
             Type t = method.getAnnotatedReturnType().getType();
             //列表查询

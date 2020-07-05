@@ -26,11 +26,11 @@ public class Message<T> implements Serializable {
     /**
      * 总页数 该属性用于bootstrap-table分页
      */
-    private int page;
+    private int totalPage;
     /**
      * 总记录数，该属性用于bootstrap-table分页
      */
-    private long total;
+    private int total;
     private List<Integer> pageList;
 
     private List<Error> errors;
@@ -111,7 +111,7 @@ public class Message<T> implements Serializable {
             PageInfo pageInfo = new PageInfo(rows);
             this.setCurrentPage(pageInfo.getPageNum());
             this.setPageSize(pageInfo.getPageSize());
-            this.setTotal(pageInfo.getTotal());
+            this.setTotal((int) pageInfo.getTotal());
             this.rows = rows;
             this.setHttpCode(HTTPCode.OK);
             this.success("查询成功");
@@ -147,20 +147,20 @@ public class Message<T> implements Serializable {
         this.errors.add(error);
     }
 
-    public Message setTotal(long total) {
+    public Message setTotal(int total) {
         this.total = total;
         if (currentPage == null) {
             return this;
         }
-        if (currentPage == page) {
+        if (currentPage == totalPage) {
             isLastPage = 1;
         }
-        this.setPage(((int) total) % pageSize == 0 ? ((int) total) / pageSize : (((int) total) / pageSize) + 1);
+        this.setPage(total % pageSize == 0 ? total / pageSize : (total / pageSize) + 1);
         return this;
     }
 
-    public Integer getPage() {
-        return page;
+    public Integer getTotalPage() {
+        return totalPage;
     }
 
     public List<Integer> getPageList() {
@@ -172,16 +172,16 @@ public class Message<T> implements Serializable {
      */
     private void calcPageList() {
         pageList = new ArrayList();
-        int temp = page - currentPage - 2;
+        int temp = totalPage - currentPage - 2;
         int start = currentPage - 2 + (temp < 0 ? temp : 0);
         int n = 5 - ((start < 0 ? start : 0) - 1);
         for (int i = 0; i < n; i++) {
-            if (start >= 1 && start <= page) {
+            if (start >= 1 && start <= totalPage) {
                 pageList.add(start);
             }
             start++;
         }
-        if (this.currentPage < page) {
+        if (this.currentPage < totalPage) {
             this.nextPage = currentPage + 1;
         } else {
             this.nextPage = currentPage;
@@ -196,7 +196,7 @@ public class Message<T> implements Serializable {
     }
 
     public Message setPage(Integer page) {
-        this.page = page;
+        this.totalPage = page;
         return this;
     }
 
@@ -216,7 +216,7 @@ public class Message<T> implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public long getTotal() {
+    public int getTotal() {
         return total;
     }
 
@@ -230,6 +230,10 @@ public class Message<T> implements Serializable {
 
 
     public static Message getInstance(String msg) {
+        return new Message();
+    }
+
+    public static Message getInstance() {
 
         return new Message();
     }
