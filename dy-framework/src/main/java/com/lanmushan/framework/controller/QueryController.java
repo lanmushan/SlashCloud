@@ -46,9 +46,7 @@ public class QueryController extends BaseController {
             Type t = method.getAnnotatedReturnType().getType();
             //列表查询
             if ("java.util.List".equals(t.getTypeName())) {
-                if (queryInfo.getPageSize() != null) {
-                    startPage();
-                }
+                startPage();
                 List list = (List) method.invoke(queryService, queryInfo);
                 msg.setRows(list);
                 return msg;

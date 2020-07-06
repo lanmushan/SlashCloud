@@ -32,9 +32,9 @@
         <fastjson.version>fastjson</fastjson.version>
     </properties>
     <modules>
+        <module>dy-auth-service</module>
+        <module>dy-sys-service</module>
         <module>dy-framework</module>
-        <module>framework-test</module>
-        <module>dy-sysservice</module>
         <module>dy-excel-common</module>
     </modules>
     <dependencyManagement>
@@ -160,6 +160,11 @@
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
                 <version>2.9.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>swagger-bootstrap-ui</artifactId>
+                <version>1.9.4</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
             <dependency>

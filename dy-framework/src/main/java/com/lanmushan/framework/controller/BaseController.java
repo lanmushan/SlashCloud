@@ -19,7 +19,7 @@ public class BaseController {
      */
     public void startPage() {
         Integer currentPage = 1;
-        Integer pageSize = 10;
+        Integer pageSize = 10000;
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String currentPageStr = request.getParameter("currentPage");
         String pageSizeStr = request.getParameter("pageSize");
