@@ -23,7 +23,7 @@
                             ${it.key} ${it.operate} (#{it.value})
                         </if>
                         <if test="it.operate !='in'">
-                            ${it.key} ${it.operate} #{it.value}
+                            ${it.key} ${it.operate} #{it.value} 
                         </if>
                     </otherwise>
                 </choose>
