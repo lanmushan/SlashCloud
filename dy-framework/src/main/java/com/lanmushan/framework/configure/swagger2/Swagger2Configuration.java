@@ -1,7 +1,6 @@
 package com.lanmushan.framework.configure.swagger2;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -22,7 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 //@ConditionalOnProperty(value = "swagger2.enabled",havingValue = "true")
 @Slf4j
-//@Profile({"dev", "sit"})
+@Profile({"dev", "sit"})
 public class Swagger2Configuration {
     /**
      * 创建API应用
@@ -48,7 +47,7 @@ public class Swagger2Configuration {
         return new ApiInfoBuilder()
                 .title("DY服务接口")
                 .description("XXXX")
-                //   .termsOfServiceUrl("http://localhost:8081/doc.html")
+                // .termsOfServiceUrl("http://localhost:8081/doc.html")
                 .version("1.0")
                 .build();
     }
