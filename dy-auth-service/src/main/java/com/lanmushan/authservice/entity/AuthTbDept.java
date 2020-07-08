@@ -17,7 +17,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 /**
  * 部门表(AuthTbDept)实体类
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-07-02 22:14:51
  */
 @Table(name = "auth_tb_dept")

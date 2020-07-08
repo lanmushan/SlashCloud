@@ -7,7 +7,7 @@ import com.lanmushan.sysservice.entity.SysTbDictGroup;
 /**
  * (SysTbDictGroup)表服务接口
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-14 21:15:05
  */
 public interface SysTbDictGroupService extends BaseService<SysTbDictGroup> {

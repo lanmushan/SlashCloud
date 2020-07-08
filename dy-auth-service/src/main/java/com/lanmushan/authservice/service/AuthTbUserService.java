@@ -10,7 +10,7 @@ import com.lanmushan.authservice.entity.AuthTbUser;
 /**
  * 用户表(AuthTbUser)表服务接口
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-15 22:13:48
  */
 public interface AuthTbUserService extends BaseService<AuthTbUser> {

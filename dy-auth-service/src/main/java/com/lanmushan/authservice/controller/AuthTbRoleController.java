@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 角色表(AuthTbRole)表控制层
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-15 22:13:48
  */
 @RestController
@@ -59,7 +59,7 @@ public class AuthTbRoleController {
      * @param ids
      * @return
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public Message delete(@RequestParam List<Long> ids) {
         Message msg = new Message();
         authTbRoleService.deleteServiceByIds(ids);

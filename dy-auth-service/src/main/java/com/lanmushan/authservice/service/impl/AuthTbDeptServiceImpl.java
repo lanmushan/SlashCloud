@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 /**
  * 部门表(AuthTbDept)表服务实现类
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-07-02 22:14:54
  */
 @Service("authTbDeptService")

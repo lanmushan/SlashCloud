@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * (SysTbDict)表控制层
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-14 21:15:04
  */
 @RestController
@@ -58,7 +58,7 @@ public class SysTbDictController {
      * @param ids
      * @return
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public Message delete(@RequestParam List<Long> ids) {
         Message msg = new Message();
         sysTbDictService.deleteServiceByIds(ids);

@@ -14,7 +14,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 /**
  * (SysTbDictGroup)实体类
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-14 21:15:05
  */
 @Table(name = "sys_tb_dict_group")

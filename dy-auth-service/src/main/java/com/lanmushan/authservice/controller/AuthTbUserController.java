@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * 用户表(AuthTbUser)表控制层
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-15 22:13:48
  */
 @RestController

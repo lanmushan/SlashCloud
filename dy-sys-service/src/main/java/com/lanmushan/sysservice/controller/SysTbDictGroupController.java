@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * (SysTbDictGroup)表控制层
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-14 21:15:06
  */
 @RestController
@@ -58,7 +58,7 @@ public class SysTbDictGroupController {
      * @param ids
      * @return
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public Message delete(@RequestParam List<Long> ids) {
         Message msg = new Message();
         sysTbDictGroupService.deleteServiceByIds(ids);

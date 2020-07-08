@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * (SysTbDict)表服务接口
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-21 16:23:40
  */
 @FeignClient(value = "sys-service", fallback = SchedualServiceHiHystric.class)

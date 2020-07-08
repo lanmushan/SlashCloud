@@ -9,7 +9,7 @@ import com.lanmushan.authservice.entity.AuthTbUserLoginLog;
 /**
  * 用户登录记录(AuthTbUserLoginLog)表数据库访问层
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-15 22:13:48
  */
 @org.apache.ibatis.annotations.Mapper

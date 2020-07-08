@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * 菜单表(AuthTbResource)表数据库访问层
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-15 22:13:48
  */
 @org.apache.ibatis.annotations.Mapper

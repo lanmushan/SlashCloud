@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * (SysTbDictGroup)表数据库访问层
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-14 21:15:05
  */
 @org.apache.ibatis.annotations.Mapper 

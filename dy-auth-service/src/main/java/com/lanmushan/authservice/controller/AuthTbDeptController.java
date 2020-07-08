@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 部门表(AuthTbDept)表控制层
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-07-02 22:14:54
  */
 @RestController
@@ -69,7 +69,7 @@ public class AuthTbDeptController {
      * @param ids
      * @return
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public Message delete(@RequestParam List<Long> ids) {
         Message msg = new Message();
         authTbDeptService.deleteServiceByIds(ids);

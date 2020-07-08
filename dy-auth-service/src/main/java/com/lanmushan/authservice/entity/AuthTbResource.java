@@ -15,7 +15,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 /**
  * 菜单表(AuthTbResource)实体类
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-25 13:03:43
  */
 @Table(name = "auth_tb_resource")

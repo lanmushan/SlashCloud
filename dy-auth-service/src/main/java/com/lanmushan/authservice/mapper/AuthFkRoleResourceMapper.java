@@ -9,7 +9,7 @@ import com.lanmushan.authservice.entity.AuthFkRoleResource;
 /**
  * (AuthFkRoleResource)表数据库访问层
  *
- * @author makejava
+ * @author daiyu
  * @since 2020-06-15 22:13:47
  */
 @org.apache.ibatis.annotations.Mapper
