@@ -9,7 +9,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import java.util.ResourceBundle;
 
-@SpringBootApplication(scanBasePackages = "com.lanmushan.*.**")
+/**
+ * 用户权限服务
+ *
+ * @author daiyu
+ */
+@SpringBootApplication(scanBasePackages = "com.lanmushan")
 @EnableDiscoveryClient
 @EnableHystrix
 @EnableFeignClients

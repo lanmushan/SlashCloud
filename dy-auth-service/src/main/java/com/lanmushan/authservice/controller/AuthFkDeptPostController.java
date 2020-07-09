@@ -27,6 +27,12 @@ public class AuthFkDeptPostController {
     @Autowired
     private AuthFkDeptPostService authFkDeptPostService;
 
+    /**
+     * 根据Id查询
+     *
+     * @param id
+     * @return
+     */
     @GetMapping("/selectById")
     public Message selectById(@RequestParam("id") Long id) {
         Message msg = new Message();
