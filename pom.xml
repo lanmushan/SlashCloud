@@ -28,7 +28,6 @@
         <module>dy-auth-service</module>
         <module>dy-sys-service</module>
         <module>dy-framework</module>
-        <module>dy-excel-common</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -180,7 +179,6 @@
                 <version>11.0</version>
             </dependency>
         </dependencies>
-
     </dependencyManagement>
     <dependencies>
     </dependencies>
@@ -214,6 +212,15 @@
         <!--<finalName>${project.artifactId}</finalName>-->
         <plugins>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <resources>
             <resource>
                 <directory>src/main/java</directory>

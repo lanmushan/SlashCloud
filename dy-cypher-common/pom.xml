@@ -11,7 +11,7 @@
     <groupId>com.lanmushan</groupId>
     <artifactId>cypher-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>cypher</name>
+    <name>cypher-common</name>
     <description>Demo project for Spring Boot</description>
 
 
@@ -40,13 +40,6 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+
 
 </project>
