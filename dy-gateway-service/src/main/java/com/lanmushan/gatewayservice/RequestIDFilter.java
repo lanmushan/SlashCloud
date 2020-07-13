@@ -27,7 +27,7 @@ import java.util.function.Consumer;
  * @Date 2020/6/10 22:15
  * @Version 1.0
  */
-//@Component
+@Component
 public class RequestIDFilter implements GlobalFilter, Ordered {
      private Logger log = LoggerFactory.getLogger(getClass());
     @Override
