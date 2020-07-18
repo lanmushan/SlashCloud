@@ -4,33 +4,34 @@ import com.lanmushan.authservice.entity.AuthTbRole;
 import com.lanmushan.authservice.service.AuthTbRoleService;
 import org.springframework.web.bind.annotation.*;
 import com.lanmushan.framework.dto.Message;
+import com.lanmushan.framework.dto.QueryInfo;
 import com.lanmushan.authservice.bo.BoAuthTbRole;
 import com.lanmushan.authservice.mapper.AuthTbRoleMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.*;
+import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.List;
-
 /**
  * 角色表(AuthTbRole)表控制层
  *
  * @author daiyu
- * @since 2020-06-15 22:13:48
+ * @since 2020-07-13 21:28:55
  */
 @RestController
 @RequestMapping("/authTbRole")
 @Slf4j
 public class AuthTbRoleController {
-    @Autowired
+      @Autowired
     private AuthTbRoleMapper authTbRoleMapper;
     @Autowired
     private AuthTbRoleService authTbRoleService;
-
+ 
     @GetMapping("/selectById")
     public Message selectById(@RequestParam("id") Long id) {
         Message msg = new Message();
-        AuthTbRole authTbRole = authTbRoleMapper.selectByPrimaryKey(id);
+        AuthTbRole authTbRole= authTbRoleMapper.selectByPrimaryKey(id);
         msg.setRow(authTbRole);
         return msg;
     }
@@ -42,7 +43,6 @@ public class AuthTbRoleController {
         msg.setRow(obj).success("添加成功");
         return msg;
     }
-
     /**
      * @param obj
      * @return
@@ -54,12 +54,11 @@ public class AuthTbRoleController {
         msg.setRow(obj).success("更新成功");
         return msg;
     }
-
     /**
      * @param ids
      * @return
      */
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     public Message delete(@RequestParam List<Long> ids) {
         Message msg = new Message();
         authTbRoleService.deleteServiceByIds(ids);

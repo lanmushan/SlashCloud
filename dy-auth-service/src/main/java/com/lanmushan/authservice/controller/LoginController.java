@@ -45,7 +45,6 @@ public class LoginController {
      */
     @RequestMapping("/userLogin")
     public Message userLogin(@RequestBody BUserLogin account, HttpSession session, HttpServletRequest request) {
-        System.out.println("Session"+session.getId());
         BoAuthTbUserLoginLog log = new BoAuthTbUserLoginLog();
         log.setLoginSource("平台登录");
         log.setLoginName(account.getAccount());
@@ -87,7 +86,6 @@ public class LoginController {
             loginService.insertService(log);
             return msg;
         }
-        msg.setRow(session.getId());
         msg.success("登录成功");
         log.setLoginMsg(msg.getMsg());
         loginService.insertService(log);

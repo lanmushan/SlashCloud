@@ -31,10 +31,10 @@ public class RSAUtil {
         KeyPair keyPair = keyPairGenerator.generateKeyPair();
         // 获取公钥，并以base64格式打印出来
         PublicKey publicKey = keyPair.getPublic();
-        String publicKeyString = Base64Util.encodeString(publicKey.getEncoded());
+        String publicKeyString = Base64Util.encodeToString(publicKey.getEncoded());
         // 获取私钥，并以base64格式打印出来
         PrivateKey privateKey = keyPair.getPrivate();
-        String privateKeyString = Base64Util.encodeString(privateKey.getEncoded());
+        String privateKeyString = Base64Util.encodeToString(privateKey.getEncoded());
         System.out.println("公钥:" + publicKeyString);
         System.out.println("私钥:" + privateKeyString);
     }
@@ -47,7 +47,7 @@ public class RSAUtil {
      * @throws Exception
      */
     private static PublicKey getPublicKey(String publicKey) throws Exception {
-        byte[] keyBytes = Base64Util.decodeByte(publicKey);
+        byte[] keyBytes = Base64Util.decodeToByte(publicKey);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         return keyFactory.generatePublic(keySpec);
@@ -55,7 +55,7 @@ public class RSAUtil {
 
     // 将base64编码后的私钥字符串转成PrivateKey实例
     private static PrivateKey getPrivateKey(String privateKey) throws Exception {
-        byte[] keyBytes = Base64Util.decodeByte(privateKey);
+        byte[] keyBytes = Base64Util.decodeToByte(privateKey);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         return keyFactory.generatePrivate(keySpec);
@@ -85,7 +85,7 @@ public class RSAUtil {
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] cipherText = cipher.doFinal(content.getBytes());
-        String cipherStr = Base64Util.encodeString(cipherText);
+        String cipherStr = Base64Util.encodeToString(cipherText);
         return cipherStr;
     }
 
@@ -102,7 +102,7 @@ public class RSAUtil {
         PrivateKey privateKey = getPrivateKey(privateKeyStr);
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, privateKey);
-        byte[] cipherText = Base64Util.decodeByte(content);
+        byte[] cipherText = Base64Util.decodeToByte(content);
         byte[] decryptText = cipher.doFinal(cipherText);
         return new String(decryptText);
     }
@@ -120,7 +120,7 @@ public class RSAUtil {
         PublicKey publicKey = getPublicKey(publicKeyStr);
         Cipher cipher = Cipher.getInstance("RSA");
         cipher.init(Cipher.DECRYPT_MODE, publicKey);
-        byte[] cipherText = Base64Util.decodeByte(content);
+        byte[] cipherText = Base64Util.decodeToByte(content);
         byte[] decryptText = cipher.doFinal(cipherText);
         return new String(decryptText);
     }
@@ -138,7 +138,7 @@ public class RSAUtil {
         Signature signature = Signature.getInstance("MD5withRSA");
         signature.initSign(key);
         signature.update(content.getBytes());
-        return Base64Util.encodeString(signature.sign());
+        return Base64Util.encodeToString(signature.sign());
     }
 
     /**
@@ -172,7 +172,7 @@ public class RSAUtil {
         Signature signature = Signature.getInstance("MD5withRSA");
         signature.initVerify(key);
         signature.update(content.getBytes());
-        return signature.verify(Base64Util.decodeByte(sign));
+        return signature.verify(Base64Util.decodeToByte(sign));
     }
 
     public static void main(String[] args) throws Exception {

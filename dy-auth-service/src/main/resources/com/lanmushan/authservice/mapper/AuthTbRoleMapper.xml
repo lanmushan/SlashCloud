@@ -36,7 +36,7 @@
     <select id="selectRolesByUserId" parameterType="java.lang.Long" resultMap="baseResultMap">
         SELECT b.*
         FROM auth_fk_user_role AS a
-                 LEFT JOIN auth_tb_role AS b ON a.fk_role_id = b.id
+                 LEFT JOIN auth_tb_role AS b ON a.fk_role_code = b.role_code
         WHERE b.disabled = 0
           and a.fk_user_id = #{userId}
     </select>

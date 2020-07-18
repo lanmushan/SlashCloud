@@ -16,20 +16,20 @@ public class Base64Util {
     public static BASE64Encoder base64Encoder = new BASE64Encoder();
     public static BASE64Decoder base64Decoder = new BASE64Decoder();
 
-    public static String encodeString(byte[] bytes) {
+
+    public static String encodeToString(String content) {
+        return Base64Util.encodeToString(content.getBytes(StandardCharsets.UTF_8));
+    }
+    public static String encodeToString(byte[] bytes) {
         return base64Encoder.encode(bytes);
     }
 
-    public static String encodeString(String content) {
-        return Base64Util.encodeString(content.getBytes(StandardCharsets.UTF_8));
-    }
-
-    public static String decodeString(String content) {
-        byte[] bytes = Base64Util.decodeByte(content);
+    public static String decodeToString(String content) {
+        byte[] bytes = Base64Util.decodeToByte(content);
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
-    public static byte[] decodeByte(String content) {
+    public static byte[] decodeToByte(String content) {
         try {
             return base64Decoder.decodeBuffer(content);
         } catch (Exception e) {
@@ -40,8 +40,8 @@ public class Base64Util {
 
     public static void main(String[] args) {
         String content = "asdfasdlfjasljas";
-        String temp = Base64Util.encodeString(content);
+        String temp = Base64Util.encodeToString(content);
         log.info("编码:{}", temp);
-        log.info("明文:{}", Base64Util.decodeString(temp));
+        log.info("明文:{}", Base64Util.decodeToString(temp));
     }
 }

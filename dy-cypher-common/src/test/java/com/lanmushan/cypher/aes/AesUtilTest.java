@@ -9,18 +9,12 @@ import org.junit.Test;
  * @Version 1.0
  */
 @Slf4j
+
 public class AesUtilTest {
 
     @Test
     public void encryptString() {
-        String content = "sdaflsdjflasj";
-        String passowrd = "asdflasjlasjlj";
-        String temp;
 
-        temp = AESUtil.encryptString(content, passowrd);
-        log.info("密文:{}", temp);
-        temp = AESUtil.decryptString(temp, passowrd);
-        log.info("明文:{}", temp);
 
     }
 
