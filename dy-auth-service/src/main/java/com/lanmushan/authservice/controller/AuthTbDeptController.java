@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 部门表(AuthTbDept)表控制层
  *
- * @author daiyu
+ * @author dy
  * @since 2020-07-02 22:14:54
  */
 @RestController

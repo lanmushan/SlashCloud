@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 /**
  * 用户权限服务
  *
- * @author daiyu
+ * @author dy
  */
 @SpringBootApplication(scanBasePackages = "com.lanmushan")
 @EnableDiscoveryClient

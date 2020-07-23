@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * 部门表(AuthTbDept)表数据库访问层
  *
- * @author daiyu
+ * @author dy
  * @since 2020-07-02 22:14:52
  */
 @org.apache.ibatis.annotations.Mapper

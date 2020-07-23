@@ -2,8 +2,10 @@ package com.lanmushan.cypher.hex;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.math.BigInteger;
+
 /**
- * @Author daiyu
+ * @author  dy
  * @Date 2020/7/13 22:43
  * @Version 1.0
  */

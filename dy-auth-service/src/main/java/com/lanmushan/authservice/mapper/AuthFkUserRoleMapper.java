@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 用户角色关系表(AuthFkUserRole)表数据库访问层
  *
- * @author daiyu
+ * @author dy
  * @since 2020-07-13 21:33:05
  */
 @org.apache.ibatis.annotations.Mapper 

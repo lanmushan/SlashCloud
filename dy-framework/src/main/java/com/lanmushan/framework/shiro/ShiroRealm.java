@@ -5,10 +5,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
-
-import javax.servlet.http.HttpSession;
 
 
 /**
@@ -25,7 +22,7 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        ShiroUsernamePasswordToken token=(ShiroUsernamePasswordToken) authenticationToken;
+        CustomUsernamePasswordToken token=(CustomUsernamePasswordToken) authenticationToken;
         if(null!=token.getUsername()){
             SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(token.getUsername(), token.getDpassword(), getName());
             authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(token.getSalt()));

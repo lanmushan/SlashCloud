@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 /**
  * 角色表(AuthTbRole)表服务实现类
  *
- * @author daiyu
+ * @author dy
  * @since 2020-07-13 21:28:55
  */
 @Service("authTbRoleService")

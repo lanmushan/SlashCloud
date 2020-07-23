@@ -18,4 +18,5 @@ public class AuthConstant {
      * 初始化盐值
      */
     public static final String INIT_LOGIN_SALT="ASDFNEW456FQOD";
+
 }

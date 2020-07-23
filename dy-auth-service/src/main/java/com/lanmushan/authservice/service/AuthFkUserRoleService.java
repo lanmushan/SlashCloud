@@ -7,7 +7,7 @@ import com.lanmushan.authservice.entity.AuthFkUserRole;
 /**
  * 用户角色关系表(AuthFkUserRole)表服务接口
  *
- * @author daiyu
+ * @author dy
  * @since 2020-07-13 21:33:05
  */
 public interface AuthFkUserRoleService extends BaseService<AuthFkUserRole> {

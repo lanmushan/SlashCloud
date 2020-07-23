@@ -10,7 +10,7 @@ import com.lanmushan.authservice.entity.AuthTbPost;
 /**
  * 岗位信息表(AuthTbPost)表服务接口
  *
- * @author daiyu
+ * @author dy
  * @since 2020-06-15 22:13:48
  */
 public interface AuthTbPostService extends BaseService<AuthTbPost> {

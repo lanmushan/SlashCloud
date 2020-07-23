@@ -35,8 +35,9 @@ public class ReflectionUtil {
     public static Object getFieldValue(final Object object, final String fieldName) {
         Field field = getDeclaredField(object, fieldName);
 
-        if (field == null)
+        if (field == null) {
             throw new IllegalArgumentException("Could not find field [" + fieldName + "] on target [" + object + "]");
+        }
 
         makeAccessible(field);
 
@@ -72,12 +73,12 @@ public class ReflectionUtil {
             } else if (field.getType().toString().equals("class java.lang.Long")) {
                 field.set(object, Long.parseLong(value.toString()));
             } else if (field.getType().toString().equals("class java.util.Date")) {
-                if(value instanceof Long)
-                {
-                    field.set(object,value);
-                }if(value instanceof Timestamp){
+                if (value instanceof Long) {
                     field.set(object, value);
-                }else{
+                }
+                if (value instanceof Timestamp) {
+                    field.set(object, value);
+                } else {
                     SimpleDateFormat sdf = new SimpleDateFormat(" yyyy-MM-dd HH:mm:ss.S");
                     field.set(object, sdf.parse(value.toString()));
                 }

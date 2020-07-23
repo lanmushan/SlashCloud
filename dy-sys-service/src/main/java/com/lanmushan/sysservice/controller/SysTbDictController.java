@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * (SysTbDict)表控制层
  *
- * @author daiyu
+ * @author dy
  * @since 2020-06-14 21:15:04
  */
 @RestController

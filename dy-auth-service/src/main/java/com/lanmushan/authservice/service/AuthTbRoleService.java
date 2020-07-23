@@ -7,7 +7,7 @@ import com.lanmushan.authservice.entity.AuthTbRole;
 /**
  * 角色表(AuthTbRole)表服务接口
  *
- * @author daiyu
+ * @author dy
  * @since 2020-07-13 21:28:55
  */
 public interface AuthTbRoleService extends BaseService<AuthTbRole> {

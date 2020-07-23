@@ -7,7 +7,7 @@ import com.lanmushan.sysservice.entity.SysTbDict;
 /**
  * (SysTbDict)表服务接口
  *
- * @author daiyu
+ * @author dy
  * @since 2020-06-14 21:15:03
  */
 public interface SysTbDictService extends BaseService<SysTbDict> {

@@ -13,7 +13,7 @@ import java.util.Date;
 /**
  * (SysTbDictGroup)实体类
  *
- * @author daiyu
+ * @author dy
  * @since 2020-06-14 21:15:05
  */
 @Table(name = "sys_tb_dict_group")

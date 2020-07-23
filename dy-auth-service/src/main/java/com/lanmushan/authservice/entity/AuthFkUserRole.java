@@ -14,7 +14,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 /**
  * 用户角色关系表(AuthFkUserRole)实体类
  *
- * @author daiyu
+ * @author dy
  * @since 2020-07-13 21:33:05
  */
 @Table(name = "auth_fk_user_role")

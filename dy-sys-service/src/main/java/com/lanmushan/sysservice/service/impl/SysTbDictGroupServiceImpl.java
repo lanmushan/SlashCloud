@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 /**
  * (SysTbDictGroup)表服务实现类
  *
- * @author daiyu
+ * @author dy
  * @since 2020-06-14 21:15:06
  */
 @Service("sysTbDictGroupService")

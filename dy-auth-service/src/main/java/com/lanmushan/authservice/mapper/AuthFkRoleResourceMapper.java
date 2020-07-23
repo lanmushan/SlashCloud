@@ -11,7 +11,7 @@ import com.lanmushan.authservice.entity.AuthFkRoleResource;
  * (AuthFkRoleResource)表数据库访问层
  *
  * @see com.lanmushan.framework.mapper.QueryMapper#selectQueryById(QueryInfo)
- * @author daiyu
+ * @author dy
  * @since 2020-06-15 22:13:47
  */
 @org.apache.ibatis.annotations.Mapper

@@ -15,7 +15,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 /**
  * 角色和部门关联表(AuthFkDeptPost)实体类
  *
- * @author daiyu
+ * @author dy
  * @since 2020-06-15 22:13:47
  */
 @Table(name = "auth_fk_dept_post")

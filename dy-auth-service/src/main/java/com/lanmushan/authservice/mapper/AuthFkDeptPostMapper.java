@@ -9,7 +9,7 @@ import com.lanmushan.authservice.entity.AuthFkDeptPost;
 /**
  * 角色和部门关联表(AuthFkDeptPost)表数据库访问层
  *
- * @author daiyu
+ * @author dy
  * @since 2020-06-15 22:13:47
  */
 @org.apache.ibatis.annotations.Mapper

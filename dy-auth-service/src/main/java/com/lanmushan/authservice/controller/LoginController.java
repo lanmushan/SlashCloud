@@ -3,15 +3,19 @@ package com.lanmushan.authservice.controller;
 
 import com.lanmushan.authservice.bo.BUserLogin;
 import com.lanmushan.authservice.bo.BoAuthTbUserLoginLog;
-import com.lanmushan.authservice.constant.AuthConstant;
 import com.lanmushan.authservice.entity.AuthTbUser;
 import com.lanmushan.authservice.mapper.AuthTbUserMapper;
 import com.lanmushan.authservice.service.AuthTbUserLoginLogService;
 import com.lanmushan.framework.constant.StateTypeConstant;
 import com.lanmushan.framework.dto.Message;
+import com.lanmushan.framework.entity.CurrentUser;
+import com.lanmushan.framework.shiro.CustomUsernamePasswordToken;
+import com.lanmushan.framework.util.CurrentUserUtil;
 import com.lanmushan.framework.util.IpUtil;
+import com.lanmushan.framework.util.date.DateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,75 +24,79 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 
+/**
+ * 登录控制器
+ * @author Administrator
+ */
 @RestController
 @RequestMapping("/authLogin")
+@Slf4j
 public class LoginController {
     @Autowired
     private AuthTbUserMapper authUserMapper;
     @Autowired
     private AuthTbUserLoginLogService loginService;
+
     @RequestMapping("/loginOut")
-    public Message loginOut(HttpSession session){
-        Message msg=new Message();
+    public Message loginOut(HttpSession session) {
+        Message msg = new Message();
         session.invalidate();
         msg.success("退出成功");
         return msg;
     }
+
     /**
-     * 普通用户登录方法
+     * 后台管理登录方法
+     *
      * @param account
-     * @param session
      * @param request
      * @return
      */
-    @RequestMapping("/userLogin")
-    public Message userLogin(@RequestBody BUserLogin account, HttpSession session, HttpServletRequest request) {
-        BoAuthTbUserLoginLog log = new BoAuthTbUserLoginLog();
-        log.setLoginSource("平台登录");
-        log.setLoginName(account.getAccount());
-        log.setCreateTime(new Date());
+    @RequestMapping("/loginManage")
+    public Message userLogin(@RequestBody BUserLogin account, HttpServletRequest request) {
         Message msg = new Message();
-        log.setLoginIp(IpUtil.getRemoteHost(request));
-        Integer loginCount = (Integer) session.getAttribute(AuthConstant.USER_LOGIN_KEY);
-        if (loginCount == null) {
-            loginCount = 1;
-        } else {
-            loginCount++;
-        }
-        session.setAttribute(AuthConstant.USER_LOGIN_KEY, loginCount);
-        if (loginCount > 5) {
-            msg.error("登录次数过多,请24小时候重试");
-            msg.setRow(loginCount);
-            return msg;
-        }
-        AuthTbUser tbUser = authUserMapper.selectLoginUser(account.getAccount());
-        if (tbUser == null) {
-            msg.error("账号不存在");
-            return msg;
-        }
-        log.setFkUserId(tbUser.getId());
-        if (tbUser.getIsLock().equals(StateTypeConstant.DISABLED)) {
-            msg.error("账号已被锁定，请联系管理员");
-            log.setLoginMsg(msg.getMsg());
-            loginService.insertService(log);
-            return msg;
-        }
-        Subject subject = SecurityUtils.getSubject();
+        BoAuthTbUserLoginLog loginLog = new BoAuthTbUserLoginLog();
+        loginLog.setLoginSource("后台登录");
+        loginLog.setLoginName(account.getAccount());
+        loginLog.setCreateTime(DateUtil.now());
         try {
-            UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(tbUser.getAccount(), account.getPassword());
-            subject.login(usernamePasswordToken);
-        } catch (Exception e) {
-            e.printStackTrace();
+            loginLog.setLoginIp(IpUtil.getRemoteHost(request));
+            AuthTbUser tbUser = authUserMapper.selectLoginUser(account.getAccount());
+            if (tbUser == null) {
+                msg.error("账户不存在");
+                return msg;
+            }
+            loginLog.setFkUserId(tbUser.getId());
+            if (tbUser.getIsLock().equals(StateTypeConstant.DISABLED)) {
+                msg.error("账号已被锁定，请联系管理员");
+                loginLog.setLoginMsg(msg.getMsg());
+                return msg;
+            }
+            Subject subject = SecurityUtils.getSubject();
+            CustomUsernamePasswordToken customUsernamePasswordToken = new CustomUsernamePasswordToken(account.getAccount(), account.getPassword());
+            //带上数据库密码
+            customUsernamePasswordToken.setDpassword(tbUser.getLoginPassword());
+            customUsernamePasswordToken.setSalt(tbUser.getSalt());
+            subject.login(customUsernamePasswordToken);
+            /**设置一些常用参数到当前用户，方便使用*/
+            CurrentUser currentUser=new CurrentUser();
+            currentUser.setDeptId(tbUser.getDeptId());
+            currentUser.setHeadImgAddress(tbUser.getHeadImgAddress());
+
+            currentUser.setNickName(tbUser.getNickName());
+            currentUser.setSex(tbUser.getSex());
+            currentUser.setUsername(tbUser.getUsername());
+            CurrentUserUtil.setCurrentUser(currentUser);
+            msg.setRow(CurrentUserUtil.getToken());
+            loginLog.setLoginMsg(msg.getMsg());
+        } catch (IncorrectCredentialsException e) {
             msg.error("登录失败账号或密码错误");
-            log.setLoginMsg(msg.getMsg());
-            loginService.insertService(log);
+            loginLog.setLoginMsg(msg.getMsg());
             return msg;
+        }finally {
+            loginService.insertService(loginLog);
         }
-        msg.success("登录成功");
-        log.setLoginMsg(msg.getMsg());
-        loginService.insertService(log);
         return msg;
     }
 }
