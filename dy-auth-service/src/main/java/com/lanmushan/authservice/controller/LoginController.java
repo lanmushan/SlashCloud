@@ -3,30 +3,35 @@ package com.lanmushan.authservice.controller;
 
 import com.lanmushan.authservice.bo.BUserLogin;
 import com.lanmushan.authservice.bo.BoAuthTbUserLoginLog;
+import com.lanmushan.authservice.constant.AuthConstant;
 import com.lanmushan.authservice.entity.AuthTbUser;
 import com.lanmushan.authservice.mapper.AuthTbUserMapper;
 import com.lanmushan.authservice.service.AuthTbUserLoginLogService;
+import com.lanmushan.cypher.base64.Base64Util;
+import com.lanmushan.framework.constant.HTTPCode;
 import com.lanmushan.framework.constant.StateTypeConstant;
 import com.lanmushan.framework.dto.Message;
 import com.lanmushan.framework.entity.CurrentUser;
 import com.lanmushan.framework.shiro.CustomUsernamePasswordToken;
 import com.lanmushan.framework.util.CurrentUserUtil;
 import com.lanmushan.framework.util.IpUtil;
+import com.lanmushan.framework.util.VerifyCodeUtils;
 import com.lanmushan.framework.util.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.ByteArrayOutputStream;
 
 /**
  * 登录控制器
+ *
  * @author Administrator
  */
 @RestController
@@ -38,7 +43,7 @@ public class LoginController {
     @Autowired
     private AuthTbUserLoginLogService loginService;
 
-    @RequestMapping("/loginOut")
+    @PostMapping("/loginOut")
     public Message loginOut(HttpSession session) {
         Message msg = new Message();
         session.invalidate();
@@ -80,23 +85,49 @@ public class LoginController {
             customUsernamePasswordToken.setSalt(tbUser.getSalt());
             subject.login(customUsernamePasswordToken);
             /**设置一些常用参数到当前用户，方便使用*/
-            CurrentUser currentUser=new CurrentUser();
+            CurrentUser currentUser = new CurrentUser();
             currentUser.setDeptId(tbUser.getDeptId());
             currentUser.setHeadImgAddress(tbUser.getHeadImgAddress());
-
             currentUser.setNickName(tbUser.getNickName());
             currentUser.setSex(tbUser.getSex());
             currentUser.setUsername(tbUser.getUsername());
             CurrentUserUtil.setCurrentUser(currentUser);
-            msg.setRow(CurrentUserUtil.getToken());
+            msg.setRow(CurrentUserUtil.getToken()).success("登录成功");
             loginLog.setLoginMsg(msg.getMsg());
         } catch (IncorrectCredentialsException e) {
+            log.error(e.getLocalizedMessage(),e);
             msg.error("登录失败账号或密码错误");
             loginLog.setLoginMsg(msg.getMsg());
             return msg;
+        }catch (Exception e){
+            log.error(e.getLocalizedMessage(),e);
+            msg.error("登录未知错误").setCode(HTTPCode.S500.code);
+            loginLog.setLoginMsg(msg.getMsg());
         }finally {
             loginService.insertService(loginLog);
         }
         return msg;
     }
+
+    @GetMapping("/selectVerificationCode")
+    @CrossOrigin(allowCredentials = "true")
+    public Message getSysManageLoginCode(HttpServletResponse response, HttpServletRequest request, HttpSession session) {
+        Message msg = Message.getInstance();
+        try {
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+            String code = VerifyCodeUtils.outputVerifyImage(80, 30, byteArrayOutputStream, 4);
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+            ;
+            String base64 = Base64Util.encodeToString(bytes);
+            base64 = base64.replaceAll("\n", "").replaceAll("\r", "");
+            session.setAttribute(AuthConstant.VERIFICATION_CODE, code.toLowerCase());
+            msg.setRow("data:image/png;base64,"+base64);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return msg;
+    }
+
 }

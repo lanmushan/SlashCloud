@@ -50,5 +50,33 @@
             </if>
         </trim>
     </select>
+    <select id="selectLoginUser" parameterType="java.lang.String" resultMap="baseResultMap">
+        select tb.id,
+               tb.username,
+               tb.phone,
+               tb.id_card,
+               tb.email,
+               tb.sex,
+               tb.account,
+               tb.login_password,
+               tb.operate_password,
+               tb.salt,
+               tb.create_time,
+               tb.update_time,
+               tb.is_lock,
+               tb.account_type,
+               tb.head_img_address
+        from auth_tb_user as tb
+        where account = #{account}
+           or phone = #{account}
+    </select>
+    <select id="selectUserByRoleCode" parameterType="java.lang.String" resultMap="baseResultMap">
+        select *
+        from auth_tb_user as l
+                 right join (select fk_user_id as id
+                             from auth_fk_user_role
+                             where fk_role_id in (select id from auth_tb_role WHERE role_code = #{roleCode})) as r
+                            on l.id = r.id
 
+    </select>
 </mapper>

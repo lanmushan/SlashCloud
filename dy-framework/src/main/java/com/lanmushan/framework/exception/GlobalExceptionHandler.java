@@ -37,7 +37,6 @@ public class GlobalExceptionHandler {
     {
         log.error(e.getMessage(),e);
         Message msg=new Message();
-
         msg.setRow(e.getMessage());
         msg.setHttpCode(HTTPCode.S500);
         return msg;

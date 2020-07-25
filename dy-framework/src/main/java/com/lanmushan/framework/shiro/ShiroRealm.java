@@ -30,6 +30,12 @@ public class ShiroRealm extends AuthorizingRealm {
         }
         return null;
     }
+
+    /**
+     * 权限认证
+     * @param principalCollection
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         Session session = SecurityUtils.getSubject().getSession();

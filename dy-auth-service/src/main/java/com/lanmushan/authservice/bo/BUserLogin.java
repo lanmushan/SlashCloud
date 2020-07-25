@@ -15,6 +15,6 @@ public class BUserLogin {
     private String account;
     @NotBlank(message = "登录密码不能为空")
     private String password;
-    //验证码
-    private String identifyingCode;
+    @NotBlank(message = "验证码不能为空")
+    private String verificationCode;
 }
