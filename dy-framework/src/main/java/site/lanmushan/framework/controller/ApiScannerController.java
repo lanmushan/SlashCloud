@@ -17,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @Api(tags = "API服务接口")
+
 @RequestMapping("/authService")
 public class ApiScannerController {
     @ApiOperation("查询该服务所有接口")
