@@ -35,6 +35,11 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>1.21</version>
+            </dependency>
+            <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>framework</artifactId>
                 <version>0.0.1-SNAPSHOT</version>

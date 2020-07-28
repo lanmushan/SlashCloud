@@ -16,6 +16,7 @@ import site.lanmushan.framework.entity.CurrentUser;
 import site.lanmushan.framework.shiro.CustomUsernamePasswordToken;
 import site.lanmushan.framework.util.CurrentUserUtil;
 import site.lanmushan.framework.util.IpUtil;
+import site.lanmushan.framework.util.ServletUtil;
 import site.lanmushan.framework.util.VerifyCodeUtils;
 import site.lanmushan.framework.util.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -50,8 +51,8 @@ public class LoginController {
     RedisTemplate<String,String> redisTemplate;
     @PostMapping("/loginOut")
     public Message loginOut(HttpSession session) {
-        Message msg = new Message();
-        session.invalidate();
+        Message msg = Message.getInstance();
+        redisTemplate.expire(GlobalConstant.SESSION_ID_PREFIX + session.getId(), 5000, TimeUnit.MILLISECONDS);
         msg.success("退出成功");
         return msg;
     }
@@ -72,6 +73,8 @@ public class LoginController {
         loginLog.setCreateTime(DateUtil.now());
         try {
             loginLog.setLoginIp(IpUtil.getRemoteHost(request));
+            loginLog.setLoginOs(ServletUtil.getLoginOs(request));
+            loginLog.setLoginBrowser(ServletUtil.getLoginBrowser(request));
             AuthTbUser tbUser = authUserMapper.selectLoginUser(account.getAccount());
             if (tbUser == null) {
                 msg.error("账户不存在");

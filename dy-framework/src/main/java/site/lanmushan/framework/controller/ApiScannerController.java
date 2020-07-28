@@ -1,5 +1,6 @@
 package site.lanmushan.framework.controller;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.entity.DaiYuApiInfo;
 import site.lanmushan.framework.util.api.ApiScannerUtils;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @RestController
 @Api(tags = "API服务接口")
+@RequestMapping("/authService")
 public class ApiScannerController {
     @ApiOperation("查询该服务所有接口")
     @GetMapping(value = "/getAllApiInfo")
