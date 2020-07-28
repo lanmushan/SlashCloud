@@ -137,7 +137,7 @@ public class LoginController {
             JSONObject data=new JSONObject();
             data.put("img","data:image/png;base64," + base64);
             String uuid= UUID.randomUUID().toString();
-            redisTemplate.opsForValue().set(GlobalConstant.VERIFICATION_CODE+uuid,code,1800, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(GlobalConstant.VERIFICATION_CODE+uuid,code,300, TimeUnit.SECONDS);
             redisTemplate.expire(GlobalConstant.SESSION_ID_PREFIX+session.getId(),5000 , TimeUnit.MILLISECONDS);
             data.put("uid",uuid);
             msg.setRow(data);
