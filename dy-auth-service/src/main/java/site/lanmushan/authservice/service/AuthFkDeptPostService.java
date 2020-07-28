@@ -15,7 +15,6 @@ import site.lanmushan.framework.service.BaseService;
  */
 public interface AuthFkDeptPostService extends BaseService<AuthFkDeptPost> {
 
-
     /**
      * 新增数据
      *
