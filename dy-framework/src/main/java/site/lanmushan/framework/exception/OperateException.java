@@ -8,7 +8,7 @@ import site.lanmushan.framework.constant.HTTPCode;
  */
 public class OperateException extends RuntimeException {
     public HTTPCode httpCode;
-
+    private Object input;
     public OperateException(String message) {
         super(message);
     }
@@ -16,9 +16,22 @@ public class OperateException extends RuntimeException {
       super(message);
       this.httpCode=httpCode;
     }
+
+    public OperateException(String message, HTTPCode httpCode, Object input) {
+        super(message);
+        this.httpCode = httpCode;
+        this.input = input;
+    }
     public OperateException( HTTPCode httpCode) {
         super(httpCode.msg);
         this.httpCode=httpCode;
+    }
 
+    public Object getInput() {
+        return input;
+    }
+
+    public void setInput(Object input) {
+        this.input = input;
     }
 }

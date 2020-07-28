@@ -140,6 +140,7 @@ public class LoginController {
             data.put("uid",uuid);
             msg.setRow(data);
         } catch (Exception e) {
+            log.error(e.getMessage(), e);
             e.printStackTrace();
         }
         return msg;

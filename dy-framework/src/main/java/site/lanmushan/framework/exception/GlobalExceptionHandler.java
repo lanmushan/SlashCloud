@@ -1,5 +1,6 @@
 package site.lanmushan.framework.exception;
 
+import com.alibaba.fastjson.JSONObject;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.Message;
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +54,15 @@ public class GlobalExceptionHandler {
     public Message CustomExceptionHandler(HttpServletRequest request, OperateException e) throws Exception {
         Message msg = new Message();
         log.error(e.getMessage(), e);
+        if (null != e.getInput()) {
+            String input = "";
+            if (e.getInput() instanceof String) {
+                input = e.getInput().toString();
+            } else {
+                input = JSONObject.toJSONString(e.getInput());
+            }
+            log.error("输入报文{}", input);
+        }
         msg.error(HTTPCode.E205, e.getMessage());
         return msg;
     }
