@@ -10,7 +10,7 @@
         #end
 
         #if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}mapper;
-import com.lanmushan.framework.mapper.QueryMapper;
+import site.lanmushan.framework.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.common.special.InsertListMapper;
 

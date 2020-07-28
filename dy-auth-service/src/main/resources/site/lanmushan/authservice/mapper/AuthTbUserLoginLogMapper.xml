@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.lanmushan.authservice.mapper.AuthTbUserLoginLogMapper">
+
+    <resultMap type="site.lanmushan.authservice.entity.AuthTbUserLoginLog" id="baseResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="loginName" column="login_name" jdbcType="VARCHAR"/>
+        <result property="loginIp" column="login_ip" jdbcType="VARCHAR"/>
+        <result property="loginMsg" column="login_msg" jdbcType="VARCHAR"/>
+        <result property="fkUserId" column="fk_user_id" jdbcType="INTEGER"/>
+        <result property="loginBrowser" column="login_browser" jdbcType="VARCHAR"/>
+        <result property="loginOs" column="login_os" jdbcType="VARCHAR"/>
+        <result property="loginSource" column="login_source" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
+        select id, login_name, login_ip, login_msg, fk_user_id, login_browser, login_os, login_source, create_time,
+        update_time from auth_tb_user_login_log
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
+                <choose>
+                    <when test="it.key == 'search_key'">
+                    </when>
+                    <otherwise>
+                        <if test="it.operate =='in'">
+                            ${it.key} ${it.operate} (#{it.value})
+                        </if>
+                        <if test="it.operate !='in'">
+                            ${it.key} ${it.operate} #{it.value}
+                        </if>
+                    </otherwise>
+                </choose>
+            </foreach>
+        </trim>
+    </select>
+
+</mapper>

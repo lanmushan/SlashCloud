@@ -14,13 +14,13 @@
 
 import $!{tableInfo.savePackageName}.mapper.$!{tableInfo.name}Mapper;
 import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}Service;
-import com.lanmushan.framework.constant.HTTPCode;
-import com.lanmushan.framework.exception.OperateException;
-import com.lanmushan.sysservice.bo.Bo$!{tableInfo.name};
-import com.lanmushan.sysservice.entity.$!{tableInfo.name};
-import com.lanmushan.framework.dto.QueryInfo;
-import com.lanmushan.framework.util.date.DateUtil;
-import com.lanmushan.framework.util.uuid.MyUUID;
+import site.lanmushan.framework.constant.HTTPCode;
+import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.sysservice.bo.Bo$!{tableInfo.name};
+import site.lanmushan.sysservice.entity.$!{tableInfo.name};
+import site.lanmushan.framework.dto.QueryInfo;
+import site.lanmushan.framework.util.date.DateUtil;
+import site.lanmushan.framework.util.uuid.MyUUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

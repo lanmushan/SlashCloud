@@ -13,8 +13,8 @@
 
 import $!{tableInfo.savePackageName}.bo.Bo$!{tableInfo.name};
 import java.util.List;
-import com.lanmushan.framework.service.BaseService;
-import com.lanmushan.sysservice.entity.$!{tableInfo.name};
+import site.lanmushan.framework.service.BaseService;
+import site.lanmushan.sysservice.entity.$!{tableInfo.name};
 /**
  * $!{tableInfo.comment}($!{tableInfo.name})表服务接口
  *

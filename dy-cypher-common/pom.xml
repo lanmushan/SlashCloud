@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>dy-parent</artifactId>
-        <groupId>com.lanmushan</groupId>
+        <groupId>site.lanmushan</groupId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>com.lanmushan</groupId>
+    <groupId>site.lanmushan</groupId>
     <artifactId>cypher-common</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cypher-common</name>

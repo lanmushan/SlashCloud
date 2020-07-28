@@ -15,8 +15,8 @@
         <!--<property name="MySQL" value="mysql"/>-->
     <!--</databaseIdProvider>-->
     <typeAliases>
-        <typeAlias type="com.lanmushan.framework.dto.DHashMap" alias="DHashMap"></typeAlias>
-        <typeAlias type="com.lanmushan.framework.dto.QueryInfo" alias="QueryInfo"></typeAlias>
+        <typeAlias type="site.lanmushan.framework.dto.DHashMap" alias="DHashMap"></typeAlias>
+        <typeAlias type="site.lanmushan.framework.dto.QueryInfo" alias="QueryInfo"></typeAlias>
         <typeAlias type="java.lang.String" alias="String"></typeAlias>
         <typeAlias type="java.lang.Integer" alias="Integer"></typeAlias>
         <typeAlias type="java.lang.Short" alias="Short"></typeAlias>

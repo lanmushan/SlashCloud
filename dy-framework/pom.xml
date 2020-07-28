@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.lanmushan</groupId>
+        <groupId>site.lanmushan</groupId>
         <artifactId>dy-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>com.lanmushan</groupId>
+    <groupId>site.lanmushan</groupId>
     <artifactId>framework</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>dy-framework</name>
@@ -181,7 +181,7 @@
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.lanmushan</groupId>
+            <groupId>site.lanmushan</groupId>
             <artifactId>cypher-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>

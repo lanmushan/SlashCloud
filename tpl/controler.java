@@ -13,8 +13,8 @@
 import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name};
 import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}Service;
 import org.springframework.web.bind.annotation.*;
-import com.lanmushan.framework.dto.Message;
-import com.lanmushan.framework.dto.QueryInfo;
+import site.lanmushan.framework.dto.Message;
+import site.lanmushan.framework.dto.QueryInfo;
 import $!{tableInfo.savePackageName}.bo.Bo$!{tableInfo.name};
 import $!{tableInfo.savePackageName}.mapper.$!{tableInfo.name}Mapper;
 import lombok.extern.slf4j.Slf4j;
