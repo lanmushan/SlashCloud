@@ -31,6 +31,8 @@
         <module>dy-auth-service</module>
         <module>dy-sys-service</module>
         <module>dy-framework</module>
+        <module>dy-gateway-service</module>
+        <module>dy-cypher-common</module>
     </modules>
     <dependencyManagement>
         <dependencies>
