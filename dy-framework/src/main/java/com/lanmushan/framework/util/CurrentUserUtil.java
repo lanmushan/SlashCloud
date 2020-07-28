@@ -52,4 +52,9 @@ public class CurrentUserUtil {
         String token = aesUtil.encryptToBase64(session.getId().toString());
         return token;
     }
+    public static String getSessionId(String token){
+        AesUtil aesUtil = new AesUtil();
+        aesUtil.setSecretKey(USER_TOKEN_SECRETKEY);
+        return aesUtil.decryptByBase64ToString(token);
+    }
 }

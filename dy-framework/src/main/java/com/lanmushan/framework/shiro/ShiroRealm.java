@@ -1,4 +1,5 @@
 package com.lanmushan.framework.shiro;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -12,17 +13,20 @@ import org.apache.shiro.util.ByteSource;
  * 登录认证和权限认证
  * @author Administrator
  */
+@Slf4j
 public class ShiroRealm extends AuthorizingRealm {
 
     /**
      * 登录认证
      * @param authenticationToken
-     * @return
+     * @returnHashedCredentialsMatcher
      * @throws AuthenticationException
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
+
         CustomUsernamePasswordToken token=(CustomUsernamePasswordToken) authenticationToken;
+        log.info("用户{}登录认证",token.getUsername());
         if(null!=token.getUsername()){
             SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(token.getUsername(), token.getDpassword(), getName());
             authenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(token.getSalt()));

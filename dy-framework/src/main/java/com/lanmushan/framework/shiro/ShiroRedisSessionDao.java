@@ -3,6 +3,7 @@ package com.lanmushan.framework.shiro;
 
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.lanmushan.framework.configure.RedisClient;
+import com.lanmushan.framework.constant.GlobalConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
@@ -28,7 +29,7 @@ import java.io.Serializable;
 @Slf4j
 public class ShiroRedisSessionDao extends CachingSessionDAO {
 
-    private static final String PREFIX = "SESSION_ID|";
+
     private static final int EXPRIE = 10000;
     @Autowired
     RedisClient redisClient;
@@ -70,7 +71,7 @@ public class ShiroRedisSessionDao extends CachingSessionDAO {
 
     private String getKey(Object obj) {
         if (obj instanceof String) {
-            return PREFIX + obj.toString();
+            return GlobalConstant.SESSION_ID_PREFIX + obj.toString();
         } else {
             return new String(SerializationUtils.serialize(obj));
         }

@@ -18,8 +18,5 @@ public class AuthConstant {
      * 初始化盐值
      */
     public static final String INIT_LOGIN_SALT="ASDFNEW456FQOD";
-    /**
-     * 验证码
-     */
-    public static final String VERIFICATION_CODE="verification-code";
+
 }

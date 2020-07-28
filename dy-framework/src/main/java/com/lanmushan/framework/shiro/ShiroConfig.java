@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -34,20 +35,18 @@ public class ShiroConfig {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //拦截器.
+        Map<String, Filter> filterMap=new LinkedHashMap<>();
+        filterMap.put("perms",new UrlFilter());
+        filterMap.put("corsAuthenticationFilter",new CorsAuthenticationFilter());
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
-        //  filterChainDefinitionMap.put("/**", "anon");
-//        filterChainDefinitionMap.put("/css/**", "anon");
-//        filterChainDefinitionMap.put("/fonts/**", "anon");
-//        filterChainDefinitionMap.put("/img/**", "anon");
-//        filterChainDefinitionMap.put("/js/**", "anon");
-//        filterChainDefinitionMap.put("/html/**", "anon");
-//        filterChainDefinitionMap.put("/logout", "logout");
-//        filterChainDefinitionMap.put("/auth/user/userLogin", "anon");
-//        filterChainDefinitionMap.put("/**", "authc");
-//        shiroFilterFactoryBean.setLoginUrl("/login");
-//        shiroFilterFactoryBean.setSuccessUrl("/index");
-//        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+
+        filterChainDefinitionMap.put("/authLogin/selectVerificationCode","anon");
+        filterChainDefinitionMap.put("/authLogin/loginManage","anon");
+        filterChainDefinitionMap.put("/**","anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
+        shiroFilterFactoryBean.setFilters(filterMap);
+        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+
         log.info("Shiro权限认证系统启动成功.....");
         return shiroFilterFactoryBean;
     }

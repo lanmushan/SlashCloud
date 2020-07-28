@@ -12,7 +12,7 @@ import java.io.*;
  */
 public class RedisClient {
     private JedisPool jedisPool;
-    private static int expireTime = 1800;
+    private static int expireTime = 200;
 
     public RedisClient(JedisPool jedisPool) {
         this.jedisPool = jedisPool;
@@ -92,7 +92,6 @@ public class RedisClient {
     public void deleteObject(String key) {
         Jedis jedis = getJedis();
         try {
-
             jedis.del(key.getBytes());
             closeJedis(jedis);
         } catch (Exception e) {

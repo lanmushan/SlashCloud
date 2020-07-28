@@ -50,8 +50,7 @@ public class RequestIDInterceptor implements HandlerInterceptor {
      * 但仅调用处理器执行链中
      */
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-            throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // TODO Auto-generated method stub
 
     }
