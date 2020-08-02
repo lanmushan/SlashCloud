@@ -24,7 +24,7 @@ public class WebSecurityConfig {
 
     //security的鉴权排除列表
     private static final String[] excludedAuthPages = {
-            "/unauthorized",
+            "/api/authLogin/selectVerificationCode",
             "/unLogin",
             "/health",
             "/api/socket/**"
