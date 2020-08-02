@@ -1,6 +1,9 @@
 package site.lanmushan.authservice.controller;
 
+import org.apache.commons.lang3.StringUtils;
+import site.lanmushan.authservice.constant.ResourceConstant;
 import site.lanmushan.authservice.entity.AuthTbResource;
+import site.lanmushan.authservice.entity.AuthTbRole;
 import site.lanmushan.authservice.mapper.AuthTbRoleMapper;
 import site.lanmushan.authservice.service.AuthTbResourceService;
 import org.springframework.web.bind.annotation.*;
@@ -9,12 +12,15 @@ import site.lanmushan.authservice.bo.BoAuthTbResource;
 import site.lanmushan.authservice.mapper.AuthTbResourceMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import site.lanmushan.framework.entity.CurrentUser;
+import site.lanmushan.framework.util.CurrentUserUtil;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 菜单表(AuthTbResource)表控制层
@@ -74,28 +80,31 @@ public class AuthTbResourceController {
     }
 
     /**
-     * @param session
-     * @param type    资源类型
+     * 返回当前用户拥有的所有菜单
      * @return
      */
-    @RequestMapping("/select/{type}")
-    public Message selectMenus(HttpSession session, @PathVariable("type") String type) {
-
+    @GetMapping("/select/menu")
+    public Message selectMenus() {
+        return selectResource(ResourceConstant.RESOURCE_MENU);
+    }
+    private Message selectResource(String type){
         Message msg = new Message();
-//        CurrentUser currentUser = CurrentUserUtil.getCurrentUser();
-        //    List<AuthTbRole> roles = authTbRoleMapper.selectRolesByUserId(currentUser.getUserId());
-//        if (roles.size() == 0) {
-//            msg.error("您没有角色，请联系管理员");
-//            return msg;
-//        }
-//        String roleIds = "";
-//        for (AuthTbRole ar : roles) {
-//            roleIds += ar.getId().toString() + ",";
-//        }
-//        if (roleIds.length() > 1) {
-//            roleIds = roleIds.substring(0, roleIds.length() - 1);
-//        }
-        List<AuthTbResource> authResourceList = authTbResourceMapper.selectResourceByRoleIds("1,2,3,4,5", type);
+        CurrentUser currentUser = CurrentUserUtil.getCurrentUser();
+            List<AuthTbRole> roleList = authTbRoleMapper.selectRolesByUserId(currentUser.getUserId());
+        if (roleList.size() == 0) {
+            msg.error("您没有角色，请联系管理员");
+            return msg;
+        }
+
+        List<AuthTbResource> authResourceList;
+       if( CurrentUserUtil.isAdmin())
+       {
+           authResourceList = authTbResourceMapper.selectResourceByRoleCodes(null, type);
+       }else {
+           List<String> roleCodeList=roleList.stream().map(AuthTbRole::getRoleCode).collect(Collectors.toList());
+           String roleCodes =  StringUtils.join(roleCodeList, ",");
+           authResourceList = authTbResourceMapper.selectResourceByRoleCodes(roleCodes, type);
+       }
         Collections.sort(authResourceList, new Comparator<AuthTbResource>() {
             @Override
             public int compare(AuthTbResource s1, AuthTbResource s2) {

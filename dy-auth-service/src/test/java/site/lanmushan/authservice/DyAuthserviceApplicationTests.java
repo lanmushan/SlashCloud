@@ -16,7 +16,7 @@ public class DyAuthserviceApplicationTests {
 
     @Before
     public void befor() {
-        throw new RuntimeException("11`");
+
     }
 
     @Test

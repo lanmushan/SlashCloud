@@ -1,4 +1,4 @@
-package site.lanmushan.framework.shiro;
+package site.lanmushan.framework.configure.shiro;
 
 import site.lanmushan.framework.util.CurrentUserUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -28,11 +28,11 @@ public class TokenSessionManager extends DefaultWebSessionManager {
         String token = WebUtils.toHttp(request).getHeader(AUTHORIZATION);
         //如果请求头中有 Authorization 则其值为sessionId
         Serializable sessionId = "";
-
         if (!StringUtils.isEmpty(token)) {
             sessionId = CurrentUserUtil.getSessionId(token);
             log.debug("根据Token获取SessionId|{}",sessionId);
-        } else {
+        }
+        if(sessionId==null){
             //否则按默认规则从cookie取sessionId
             sessionId = super.getSessionId(request, response);
             log.debug("根据Cokie获取Session|{}",sessionId);

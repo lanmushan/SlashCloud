@@ -1,9 +1,11 @@
-package site.lanmushan.framework.shiro;
+package site.lanmushan.framework.configure.shiro;
 
 import com.alibaba.fastjson.JSON;
 import site.lanmushan.framework.dto.Message;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter;
+import site.lanmushan.framework.entity.CurrentUser;
+import site.lanmushan.framework.util.CurrentUserUtil;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -23,8 +25,8 @@ public class UrlFilter extends PermissionsAuthorizationFilter {
         System.out.println("URL拦截");
         Subject subject = getSubject(request, response);
         String url=((HttpServletRequest) request).getRequestURI();
-        //return true;
-        if(subject.isPermitted(url)){
+        ((HttpServletRequest) request).getHeader("xxx");
+        if(CurrentUserUtil.isAdmin()||subject.isPermitted(url)){
             return true;
         }else {
             return false;
@@ -32,25 +34,25 @@ public class UrlFilter extends PermissionsAuthorizationFilter {
 
     }
 
-    /**
-     * 未授权拦截
-     * @param request
-     * @param response
-     * @return
-     * @throws IOException
-     */
-    @Override
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws IOException {
-        HttpServletResponse res = (HttpServletResponse)response;
-        res.setHeader( "authorization",res.getHeader("authorization"));
-        res.setStatus(HttpServletResponse.SC_OK);
-        res.setCharacterEncoding("UTF-8");
-        PrintWriter writer = res.getWriter();
-        Message message=new Message();
-        message.success("没有权限访问");
-        message.setCode(403);
-        writer.write(JSON.toJSONString(message));
-        writer.close();
-        return false;
-    }
+//    /**
+//     * 未授权拦截
+//     * @param request
+//     * @param response
+//     * @return
+//     * @throws IOException
+//     */
+//    @Override
+//    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws IOException {
+//        HttpServletResponse res = (HttpServletResponse)response;
+//        res.setHeader( "authorization",res.getHeader("authorization"));
+//        res.setStatus(HttpServletResponse.SC_OK);
+//        res.setCharacterEncoding("UTF-8");
+//        PrintWriter writer = res.getWriter();
+//        Message message=new Message();
+//        message.success("没有权限访问");
+//        message.setCode(403);
+//        writer.write(JSON.toJSONString(message));
+//        writer.close();
+//        return false;
+//}
 }

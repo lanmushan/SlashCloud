@@ -37,7 +37,7 @@
             </foreach>
         </trim>
     </select>
-    <select id="selectResourceByRoleIds" resultMap="baseResultMap">
+    <select id="selectResourceByRoleCodes" resultMap="baseResultMap">
         SELECT
         distinct
         b.*
@@ -45,7 +45,10 @@
         auth_fk_role_resource AS a
         LEFT JOIN auth_tb_resource AS b ON a.fk_resource_id = b.id
         WHERE
-        b.disabled=0 and a.fk_role_id in (${roleIds})
+        b.disabled=0
+        <if test="roleCodes != null">
+            and a.fk_role_code in (#{roleCodes})
+        </if>
         <if test="type != null">
             and b.resource_type=#{type}
         </if>

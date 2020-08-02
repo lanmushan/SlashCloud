@@ -1,9 +1,10 @@
-package site.lanmushan.framework.shiro;
+package site.lanmushan.framework.configure.shiro;
 
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -11,23 +12,34 @@ import org.apache.shiro.web.servlet.SimpleCookie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import site.lanmushan.framework.annotations.EnabledQuickSelect;
 
 import javax.servlet.Filter;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Properties;
+
+import java.lang.reflect.Method;
+import java.util.*;
 
 /**
  * ShiroConfig配置
  */
 @Configuration
 public class ShiroConfig {
+    @Value("${server.servlet.context-path}")
+    private String contextPath;
+    @Autowired
+    private  WebApplicationContext applicationContext;
     private Logger log = LoggerFactory.getLogger(getClass());
     @Autowired
-    ShiroRedisSessionDao shiroRedisSessionDao;
+    RedisSessionDao shiroRedisSessionDao;
     @Bean
     public ShiroFilterFactoryBean shirFilter(SecurityManager securityManager) {
 
@@ -36,16 +48,19 @@ public class ShiroConfig {
         //拦截器.
         Map<String, Filter> filterMap=new LinkedHashMap<>();
         filterMap.put("perms",new UrlFilter());
-        filterMap.put("corsAuthenticationFilter",new CorsAuthenticationFilter());
+        filterMap.put("authc",new ShiroLoginFilter());
         Map<String,String> filterChainDefinitionMap = new LinkedHashMap<String,String>();
 
         filterChainDefinitionMap.put("/authLogin/selectVerificationCode","anon");
         filterChainDefinitionMap.put("/authLogin/loginManage","anon");
-        filterChainDefinitionMap.put("/**","anon");
+        filterChainDefinitionMap.put("/unLogin","anon");
+        filterChainDefinitionMap.put("/unauthorized","anon");
+        filterChainDefinitionMap.put("/**","authc");
+//        filterChainDefinitionMap.put("/**","anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         shiroFilterFactoryBean.setFilters(filterMap);
-        shiroFilterFactoryBean.setUnauthorizedUrl("/403");
-
+        shiroFilterFactoryBean.setLoginUrl("/unLogin");
+        shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized");
         log.info("Shiro权限认证系统启动成功.....");
         return shiroFilterFactoryBean;
     }
@@ -75,10 +90,10 @@ public class ShiroConfig {
 
 
     @Bean
-    public SecurityManager securityManager(){
+    public SecurityManager securityManager(SessionDAO sessionDAO){
         DefaultWebSecurityManager securityManager =  new DefaultWebSecurityManager();
         securityManager.setRealm(myShiroRealm());
-        securityManager.setSessionManager(sessionManager());
+        securityManager.setSessionManager(sessionManager(sessionDAO));
         return securityManager;
     }
 
@@ -87,13 +102,18 @@ public class ShiroConfig {
      * @return
      */
     @Bean
-    public SessionManager sessionManager(){
+    public SessionManager sessionManager( SessionDAO sessionDAO){
         TokenSessionManager tokenSessionManager = new TokenSessionManager();
+        tokenSessionManager.setSessionIdUrlRewritingEnabled(false);
         //修改为自定义的Sesion
-        tokenSessionManager.setSessionDAO(shiroRedisSessionDao);
+        tokenSessionManager.setSessionIdCookie(simpleCookie());
+        tokenSessionManager.setSessionDAO(sessionDAO);
         return tokenSessionManager;
     }
-
+    @Bean
+    public SessionDAO sessionDAO() {
+        return   shiroRedisSessionDao;
+    }
     //这里需要设置一个cookie的名称  原因就是会跟原来的session的id值重复的
     @Bean
     public SimpleCookie simpleCookie() {
@@ -114,6 +134,7 @@ public class ShiroConfig {
         return authorizationAttributeSourceAdvisor;
     }
 
+
     @Bean(name="simpleMappingExceptionResolver")
     public SimpleMappingExceptionResolver
     createSimpleMappingExceptionResolver() {
@@ -127,4 +148,5 @@ public class ShiroConfig {
         //r.setWarnLogCategory("example.MvcLogger");     // No default
         return r;
     }
+
 }

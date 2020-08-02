@@ -4,6 +4,7 @@ package site.lanmushan.authservice.service.impl;
 import site.lanmushan.authservice.mapper.AuthFkUserRoleMapper;
 import site.lanmushan.authservice.service.AuthFkUserRoleService;
 import site.lanmushan.authservice.bo.BoAuthFkUserRole;
+import site.lanmushan.framework.annotations.EnabledQuickSelect;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.exception.OperateException;
 import site.lanmushan.framework.dto.QueryInfo;
@@ -27,7 +28,8 @@ public class AuthFkUserRoleServiceImpl implements AuthFkUserRoleService {
      @Autowired
     private AuthFkUserRoleMapper authFkUserRoleMapper;
       @Override
-    public List selectList(QueryInfo queryInfo) {
+      @EnabledQuickSelect
+      public List selectList(QueryInfo queryInfo) {
       return  authFkUserRoleMapper.selectList(queryInfo);
     }
     @Override

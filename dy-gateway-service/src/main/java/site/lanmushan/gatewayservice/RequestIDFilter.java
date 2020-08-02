@@ -29,11 +29,12 @@ import java.util.function.Consumer;
  */
 @Component
 public class RequestIDFilter implements GlobalFilter, Ordered {
+    private static final String PREFIX="GATEWAY-";
      private Logger log = LoggerFactory.getLogger(getClass());
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         //period time
-        final String uuid = UUID.randomUUID().toString().replace("-","").toUpperCase();
+        final String uuid = PREFIX+UUID.randomUUID().toString().replace("-","").toUpperCase();
         long startTime=System.currentTimeMillis();
         Consumer<HttpHeaders> httpHeaders = httpHeader -> {
             httpHeader.set("requestId", uuid);

@@ -1,4 +1,4 @@
-package site.lanmushan.framework.shiro;
+package site.lanmushan.framework.configure.shiro;
 
 import org.apache.shiro.authc.UsernamePasswordToken;
 

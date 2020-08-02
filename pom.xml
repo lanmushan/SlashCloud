@@ -82,11 +82,11 @@
                 <version>1.5.3</version>
             </dependency>
             <!--redis相关依赖-->
-            <dependency>
-                <groupId>org.springframework.session</groupId>
-                <artifactId>spring-session-data-redis</artifactId>
-                <version>2.0.3.RELEASE</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.springframework.session</groupId>-->
+                <!--<artifactId>spring-session-data-redis</artifactId>-->
+                <!--<version>2.0.3.RELEASE</version>-->
+            <!--</dependency>-->
             <!--基础工具或其他常用依赖相关-->
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
             <dependency>
@@ -187,6 +187,12 @@
                 <groupId>io.github.openfeign</groupId>
                 <artifactId>feign-okhttp</artifactId>
                 <version>11.0</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>1.65</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -32,7 +32,6 @@ public class ApiScannerUtils {
         for (BeanDefinition beanDefinition : beanDefinitionSet) {
             resolveApis(beanDefinition.getBeanClassName(),allApiInfo);
         }
-
         return allApiInfo;
     }
 

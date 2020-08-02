@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import javax.validation.Valid;
+
 /**
  * @Author dy
  * @Date 2020/6/25 16:28
@@ -25,10 +27,10 @@ public class RedisClientConfig {
     @Bean
     public RedisClient redisClient() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        jedisPoolConfig.setMaxTotal(1000);//设置最大连接数
-        jedisPoolConfig.setMaxIdle(100);//设置最大空闲数
+        jedisPoolConfig.setMaxTotal(1000);
+        jedisPoolConfig.setMaxIdle(100);
         jedisPoolConfig.setMinIdle(5);
-        jedisPoolConfig.setMaxWaitMillis(1000);
+        jedisPoolConfig.setMaxWaitMillis(500);
         jedisPoolConfig.setTimeBetweenEvictionRunsMillis(300);
         jedisPoolConfig.setSoftMinEvictableIdleTimeMillis(10000);
         jedisPoolConfig.setTestWhileIdle(false);

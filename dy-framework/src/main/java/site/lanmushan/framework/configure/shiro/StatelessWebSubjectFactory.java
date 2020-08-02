@@ -1,11 +1,10 @@
-package site.lanmushan.framework.shiro;
+package site.lanmushan.framework.configure.shiro;
 
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.SubjectContext;
 import org.apache.shiro.web.mgt.DefaultWebSubjectFactory;
-import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class StatelessWebSubjectFactory extends DefaultWebSubjectFactory {
     @Override
     public Subject createSubject(SubjectContext context) {

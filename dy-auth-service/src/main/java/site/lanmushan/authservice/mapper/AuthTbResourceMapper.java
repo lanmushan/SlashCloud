@@ -21,9 +21,9 @@ public interface AuthTbResourceMapper extends QueryMapper<AuthTbResource>, IdLis
     /**
      * 根据角色查询资源
      *
-     * @param roleIds
+     * @param roleCodes
      * @param type
      * @return
      */
-    List<AuthTbResource> selectResourceByRoleIds(@Param("roleIds") String roleIds, @Param("type") String type);
+    List<AuthTbResource> selectResourceByRoleCodes(@Param("roleCodes") String roleCodes, @Param("type") String type);
 }
