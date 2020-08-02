@@ -13,7 +13,7 @@
 import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name};
 import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}Service;
 import org.springframework.web.bind.annotation.*;
-import site.lanmushan.framework.dto.Message;
+import site.lanmushan.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
 import $!{tableInfo.savePackageName}.bo.Bo$!{tableInfo.name};
 import $!{tableInfo.savePackageName}.mapper.$!{tableInfo.name}Mapper;

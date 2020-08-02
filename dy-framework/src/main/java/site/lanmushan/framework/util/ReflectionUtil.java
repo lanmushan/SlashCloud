@@ -1,5 +1,6 @@
 package site.lanmushan.framework.util;
 
+
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -186,7 +187,7 @@ public class ReflectionUtil {
         List list = new ArrayList();
 
         for (Object obj : collection) {
-            list.add(PropertyUtils.getProperty(obj, propertyName));
+                list.add(PropertyUtils.getProperty(obj, propertyName));
         }
 
         return list;

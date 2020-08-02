@@ -3,7 +3,6 @@ package site.lanmushan.sysservice.service.impl;
 
 import site.lanmushan.sysservice.mapper.SysTbDictMapper;
 import site.lanmushan.sysservice.service.SysTbDictService;
-import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.exception.OperateException;
 import site.lanmushan.sysservice.bo.BoSysTbDict;
 import site.lanmushan.framework.dto.QueryInfo;

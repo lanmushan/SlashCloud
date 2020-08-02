@@ -33,13 +33,54 @@
         <module>dy-framework</module>
         <module>dy-gateway-service</module>
         <module>dy-cypher-common</module>
+        <module>dy-dto-common</module>
+        <module>dy-base-common</module>
+        <module>dy-const-common</module>
+        <module>dy-authorization-common</module>
+        <module>dy-redis-common</module>
+        <module>dy-exception-common</module>
     </modules>
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>cypher-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>exception-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>redis-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>authorization-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
                 <groupId>eu.bitwalker</groupId>
                 <artifactId>UserAgentUtils</artifactId>
                 <version>1.21</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>dto-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>base-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>const-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
@@ -179,6 +220,11 @@
                 <version>2.10.0</version>
             </dependency>
             <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.9.3</version>
+            </dependency>
+            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>1.18.12</version>
@@ -193,6 +239,12 @@
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk15on</artifactId>
                 <version>1.65</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt -->
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>8.19</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -3,6 +3,8 @@ package site.lanmushan.authservice.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
+import site.lanmushan.authorization.CurrentUser;
+import site.lanmushan.authorization.CurrentUserUtil;
 import site.lanmushan.authservice.bo.BUserLogin;
 import site.lanmushan.authservice.bo.BoAuthTbUserLoginLog;
 import site.lanmushan.authservice.constant.ResourceConstant;
@@ -12,24 +14,19 @@ import site.lanmushan.authservice.entity.AuthTbUser;
 import site.lanmushan.authservice.mapper.AuthTbResourceMapper;
 import site.lanmushan.authservice.mapper.AuthTbRoleMapper;
 import site.lanmushan.authservice.mapper.AuthTbUserMapper;
-import site.lanmushan.authservice.service.AuthTbRoleService;
 import site.lanmushan.authservice.service.AuthTbUserLoginLogService;
+import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.cypher.base64.Base64Util;
 import site.lanmushan.framework.constant.GlobalConstant;
-import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.constant.StateTypeConstant;
 import site.lanmushan.framework.dto.Message;
-import site.lanmushan.framework.entity.CurrentUser;
-import site.lanmushan.framework.configure.shiro.CustomUsernamePasswordToken;
-import site.lanmushan.framework.util.CurrentUserUtil;
+
 import site.lanmushan.framework.util.IpUtil;
 import site.lanmushan.framework.util.ServletUtil;
 import site.lanmushan.framework.util.VerifyCodeUtils;
 import site.lanmushan.framework.util.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.IncorrectCredentialsException;
-import org.apache.shiro.subject.Subject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -85,7 +82,7 @@ public class LoginController {
         loginLog.setLoginSource("后台登录");
         loginLog.setLoginName(account.getAccount());
         loginLog.setCreateTime(DateUtil.now());
-        try {
+    //    try {
             loginLog.setLoginIp(IpUtil.getRemoteHost(request));
             loginLog.setLoginOs(ServletUtil.getLoginOs(request));
             loginLog.setLoginBrowser(ServletUtil.getLoginBrowser(request));
@@ -100,27 +97,28 @@ public class LoginController {
                 loginLog.setLoginMsg(msg.getMsg());
                 return msg;
             }
-            Subject subject = SecurityUtils.getSubject();
-            CustomUsernamePasswordToken customUsernamePasswordToken = new CustomUsernamePasswordToken(account.getAccount(), account.getPassword());
-            //带上数据库密码
-            customUsernamePasswordToken.setDpassword(tbUser.getLoginPassword());
-            customUsernamePasswordToken.setSalt(tbUser.getSalt());
-            subject.login(customUsernamePasswordToken);
-            handerCurentUser(tbUser);
-            msg.setRow(CurrentUserUtil.getToken()).success("登录成功");
-            loginLog.setLoginMsg(msg.getMsg());
-        } catch (IncorrectCredentialsException e) {
-            log.error(e.getLocalizedMessage(), e);
-            msg.error("登录失败账号或密码错误");
-            loginLog.setLoginMsg(msg.getMsg());
-            return msg;
-        } catch (Exception e) {
-            log.error(e.getLocalizedMessage(), e);
-            msg.error("登录未知错误").setCode(HTTPCode.S500.code);
-            loginLog.setLoginMsg(msg.getMsg());
-        } finally {
-            loginService.insertService(loginLog);
-        }
+//            Subject subject = SecurityUtils.getSubject();
+//            CustomUsernamePasswordToken customUsernamePasswordToken = new CustomUsernamePasswordToken(account.getAccount(), account.getPassword());
+//            //带上数据库密码
+//            customUsernamePasswordToken.setDpassword(tbUser.getLoginPassword());
+//            customUsernamePasswordToken.setSalt(tbUser.getSalt());
+//            subject.login(customUsernamePasswordToken);
+//            handerCurentUser(tbUser);
+//            msg.setRow(CurrentUserUtil.getToken()).success("登录成功");
+//            loginLog.setLoginMsg(msg.getMsg());
+//        } catch (Exception e) {
+//           // log.error(e.getLocalizedMessage(), e);
+//            msg.error("登录失败账号或密码错误");
+//            loginLog.setLoginMsg(msg.getMsg());
+//            return msg;
+//        }
+//        catch (Exception e) {
+//            log.error(e.getLocalizedMessage(), e);
+//            msg.error("登录未知错误").setCode(HTTPCode.S500.code);
+//            loginLog.setLoginMsg(msg.getMsg());
+//        } finally {
+//            loginService.insertService(loginLog);
+//        }
         return msg;
     }
     private void handerCurentUser(AuthTbUser tbUser){
@@ -144,7 +142,7 @@ public class LoginController {
         List<String> apiList=resourceList.stream().map(AuthTbResource::getResourceUrl).collect(toList());
         currentUser.setApiList(apiList);
 
-        CurrentUserUtil.setCurrentUser(currentUser);
+       // CurrentUserUtil.(currentUser);
     }
     /**
      * 同时支持token和cookie验证，如果客户端不携带cookie过来第一次创建的session就会浪费

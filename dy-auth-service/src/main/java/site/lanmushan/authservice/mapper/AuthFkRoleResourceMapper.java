@@ -1,7 +1,6 @@
 package site.lanmushan.authservice.mapper;
 
 import site.lanmushan.authservice.entity.AuthFkRoleResource;
-import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.common.special.InsertListMapper;

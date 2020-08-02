@@ -1,6 +1,8 @@
 package site.lanmushan.authservice.controller;
 
 import org.apache.commons.lang3.StringUtils;
+import site.lanmushan.authorization.CurrentUser;
+import site.lanmushan.authorization.CurrentUserUtil;
 import site.lanmushan.authservice.constant.ResourceConstant;
 import site.lanmushan.authservice.entity.AuthTbResource;
 import site.lanmushan.authservice.entity.AuthTbRole;
@@ -12,10 +14,7 @@ import site.lanmushan.authservice.bo.BoAuthTbResource;
 import site.lanmushan.authservice.mapper.AuthTbResourceMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import site.lanmushan.framework.entity.CurrentUser;
-import site.lanmushan.framework.util.CurrentUserUtil;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Comparator;

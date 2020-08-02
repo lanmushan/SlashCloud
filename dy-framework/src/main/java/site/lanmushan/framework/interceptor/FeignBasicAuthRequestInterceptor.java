@@ -2,6 +2,7 @@ package site.lanmushan.framework.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
 import site.lanmushan.framework.dto.QueryInfo;
+
 import feign.Request;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

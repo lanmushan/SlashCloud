@@ -3,11 +3,11 @@ package site.lanmushan.authservice.controller;
 import site.lanmushan.authservice.entity.AuthTbUser;
 import site.lanmushan.authservice.service.AuthTbUserService;
 import org.springframework.web.bind.annotation.*;
-import site.lanmushan.framework.dto.Message;
 import site.lanmushan.authservice.bo.BoAuthTbUser;
 import site.lanmushan.authservice.mapper.AuthTbUserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import site.lanmushan.framework.dto.Message;
 
 import javax.validation.Valid;
 import java.util.List;

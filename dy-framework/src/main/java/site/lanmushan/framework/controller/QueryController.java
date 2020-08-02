@@ -2,22 +2,20 @@ package site.lanmushan.framework.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
-import site.lanmushan.framework.annotations.RequestQueryInfo;
-import site.lanmushan.framework.configure.ApplicationUtil;
 import site.lanmushan.framework.constant.HTTPCode;
-import site.lanmushan.framework.dto.DHashMap;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.annotations.RequestQueryInfo;
+import site.lanmushan.framework.configure.ApplicationUtil;
+
 import site.lanmushan.framework.util.ReflectionUtil;
 import site.lanmushan.framework.util.StringCommonUtil;
-import site.lanmushan.framework.util.excel.EasyExcelUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import sun.reflect.generics.repository.ClassRepository;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -67,41 +65,41 @@ public class QueryController extends BaseController {
         }
         return msg;
     }
-
-    @GetMapping(value = "/{entityName}/export")
-    public void export(@PathVariable("entityName") String entityName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request, HttpServletResponse response) {
-        try {
-            String methodName="selectList";
-            entityName = StringCommonUtil.toLowerCaseFirstOne(entityName);
-            Object queryService = null;
-            if (entityName.lastIndexOf("Service") > 0 || entityName.lastIndexOf("service") > 0) {
-                queryService = ApplicationUtil.getBean(entityName);
-            } else {
-                queryService = ApplicationUtil.getBean(entityName + "Mapper");
-            }
-            Method method = queryService.getClass().getMethod(methodName, queryInfo.getClass());
-            Type t = method.getAnnotatedReturnType().getType();
-            //列表查询
-            if ("java.util.List".equals(t.getTypeName())) {
-                if (queryInfo.getPageSize() != null) {
-                    startPage();
-                }
-                List list = (List) method.invoke(queryService, queryInfo);
-                Type type = getGenerics(queryService);
-                Class<?> entityClass = Class.forName(type.getTypeName());
-                List sysDictList = DHashMap.toEntityList(list, entityClass);
-                sysDictList.forEach(it -> {
-                    log.info(it.toString());
-                });
-                EasyExcelUtil.export(entityClass, sysDictList, response);
-            }
-        } catch (OperateException e) {
-            log.error("查询失败:{};Exception:", request.getRequestURI(), e);
-        } catch (Exception e) {
-            log.error("查询失败:{};Exception:", request.getRequestURI(), e);
-        }
-
-    }
+//
+//    @GetMapping(value = "/{entityName}/export")
+//    public void export(@PathVariable("entityName") String entityName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request, HttpServletResponse response) {
+//        try {
+//            String methodName="selectList";
+//            entityName = StringCommonUtil.toLowerCaseFirstOne(entityName);
+//            Object queryService = null;
+//            if (entityName.lastIndexOf("Service") > 0 || entityName.lastIndexOf("service") > 0) {
+//                queryService = ApplicationUtil.getBean(entityName);
+//            } else {
+//                queryService = ApplicationUtil.getBean(entityName + "Mapper");
+//            }
+//            Method method = queryService.getClass().getMethod(methodName, queryInfo.getClass());
+//            Type t = method.getAnnotatedReturnType().getType();
+//            //列表查询
+//            if ("java.util.List".equals(t.getTypeName())) {
+//                if (queryInfo.getPageSize() != null) {
+//                    startPage();
+//                }
+//                List list = (List) method.invoke(queryService, queryInfo);
+//                Type type = getGenerics(queryService);
+//                Class<?> entityClass = Class.forName(type.getTypeName());
+//                List sysDictList = DHashMap.toEntityList(list, entityClass);
+//                sysDictList.forEach(it -> {
+//                    log.info(it.toString());
+//                });
+//                EasyExcelUtil.export(entityClass, sysDictList, response);
+//            }
+//        } catch (OperateException e) {
+//            log.error("查询失败:{};Exception:", request.getRequestURI(), e);
+//        } catch (Exception e) {
+//            log.error("查询失败:{};Exception:", request.getRequestURI(), e);
+//        }
+//
+//    }
 
     private Type getGenerics(Object object) {
         Type interfacesTypes = object.getClass().getGenericInterfaces()[0];

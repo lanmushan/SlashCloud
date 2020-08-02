@@ -15,7 +15,7 @@
 import $!{tableInfo.savePackageName}.mapper.$!{tableInfo.name}Mapper;
 import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}Service;
 import site.lanmushan.framework.constant.HTTPCode;
-import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.exception.OperateException;
 import site.lanmushan.sysservice.bo.Bo$!{tableInfo.name};
 import site.lanmushan.sysservice.entity.$!{tableInfo.name};
 import site.lanmushan.framework.dto.QueryInfo;
