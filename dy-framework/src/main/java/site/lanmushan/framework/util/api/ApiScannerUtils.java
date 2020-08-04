@@ -1,5 +1,9 @@
 package site.lanmushan.framework.util.api;
 
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import site.lanmushan.framework.configure.ApplicationUtil;
 import site.lanmushan.framework.entity.DaiYuApiInfo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -12,9 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author cayden
@@ -24,29 +26,36 @@ import java.util.Set;
 public class ApiScannerUtils {
 
     public static List<DaiYuApiInfo> initApiList() {
-        ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
-        provider.addIncludeFilter(new AnnotationTypeFilter(RequestMapping.class));
-        Set<BeanDefinition> beanDefinitionSet = provider.findCandidateComponents("site.lanmushan.*..controller");
+        RequestMappingHandlerMapping mapping = ApplicationUtil.getApplication().getBean(RequestMappingHandlerMapping.class);
+        // 获取url与类和方法的对应信息
+        Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
+
+        Set<Object> objects = new HashSet<>();
+        for (RequestMappingInfo requestMappingInfo : map.keySet()){
+            HandlerMethod handlerMethod = map.get(requestMappingInfo);
+            if (handlerMethod.getBeanType().getName().startsWith("org.")){
+                continue;
+            }
+            Object bean = ApplicationUtil.getApplication().getBean(handlerMethod.getBean().toString());
+            objects.add(bean);
+        }
 
         List<DaiYuApiInfo> allApiInfo = new ArrayList<>();
-        for (BeanDefinition beanDefinition : beanDefinitionSet) {
-            resolveApis(beanDefinition.getBeanClassName(),allApiInfo);
+
+        for (Object object : objects) {
+            resolveApis(object,allApiInfo);
         }
         return allApiInfo;
     }
 
-    private static void resolveApis(String controllerFullClassName, List<DaiYuApiInfo> apiInfos) {
-        Class<?> clazz = null;
-        try {
-            clazz = Class.forName(controllerFullClassName);
-        } catch (ClassNotFoundException e) {
-            log.error(e.getMessage(), e);
-            return;
-        }
-
+    private static void resolveApis(Object ob, List<DaiYuApiInfo> apiInfos) {
+        Class<?> clazz = ob.getClass();
         String apiPrefix = "";
 
         RequestMapping controllerMapping = clazz.getAnnotation(RequestMapping.class);
+        if (controllerMapping == null){
+            return;
+        }
         String[] controllerMappingValues = controllerMapping.value();
         if (controllerMappingValues != null && controllerMappingValues.length > 1) {
             throw new RuntimeException("只能填写一个path");
@@ -63,6 +72,9 @@ public class ApiScannerUtils {
             RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
             if (requestMapping != null) {
                 paths = requestMapping.value();
+                if (paths == null || paths.length == 0){
+                    continue;
+                }
                 String path = paths[0];
                 if (path.startsWith("/") && hasSlashEnd) {
                     apiStr += path.substring(1);
