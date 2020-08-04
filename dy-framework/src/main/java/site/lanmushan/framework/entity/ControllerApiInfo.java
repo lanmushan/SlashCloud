@@ -8,7 +8,7 @@ import lombok.Data;
  * @date 2020/7/6 0:11
  */
 @Data
-public class DaiYuApiInfo {
+public class ControllerApiInfo {
 
     @ApiModelProperty("api名称")
     private String apiName;

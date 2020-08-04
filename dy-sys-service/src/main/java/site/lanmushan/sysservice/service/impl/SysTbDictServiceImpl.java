@@ -1,6 +1,7 @@
 package site.lanmushan.sysservice.service.impl;
 
 
+import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.sysservice.mapper.SysTbDictMapper;
 import site.lanmushan.sysservice.service.SysTbDictService;
 import site.lanmushan.framework.utils.OperateException;
