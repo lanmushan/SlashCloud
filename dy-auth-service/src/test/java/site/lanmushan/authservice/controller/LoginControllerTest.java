@@ -1,5 +1,6 @@
 package site.lanmushan.authservice.controller;
 
+import site.lanmushan.authorization.CurrentUserUtil;
 import site.lanmushan.authservice.AuthServiceApplication;
 
 import org.junit.After;
@@ -27,9 +28,9 @@ public class LoginControllerTest {
 
     @Test
     public void userLogin() {
-
-     //   String loginPassword = new Md5Hash("e10adc3949ba59abbe56e057f20f883e", "3dbi17ad5lp2", 3).toString();
-       // System.out.println("登录密码" + loginPassword);
+       String loginPassword=CurrentUserUtil.createPassword("e10adc3949ba59abbe56e057f20f883e","3dbi17ad5lp2");
+     //   String loginPassword = new Md5Hash("", "3dbi17ad5lp2", 3).toString();
+        System.out.println("登录密码" + loginPassword);
     }
 
     @Test

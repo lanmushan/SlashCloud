@@ -9,11 +9,16 @@ import org.springframework.security.config.annotation.web.reactive.EnableWebFlux
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.reactive.config.CorsRegistry;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebFluxSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig {
+public class WebSecurityConfig implements WebFluxConfigurer {
 
     @Autowired
     UnauthorizedHanderWebFlux unauthorizedHanderWebFlux;
@@ -37,7 +42,7 @@ public class WebSecurityConfig {
                 //  .authenticationManager(loginReactiveAuthenticationManager)
                 .authorizeExchange()
                 //无需进行权限过滤的请求路径
-                .pathMatchers(excludedAuthPages).permitAll()
+            //    .pathMatchers(excludedAuthPages).permitAll()
                 //option 请求默认放行
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()
                 .and()
@@ -65,5 +70,13 @@ public class WebSecurityConfig {
 
 
         return http.build();
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowCredentials(true)
+                .allowedMethods(CorsConfiguration.ALL).
+                allowedHeaders(CorsConfiguration.ALL)
+                .allowedOrigins(CorsConfiguration.ALL);
     }
 }

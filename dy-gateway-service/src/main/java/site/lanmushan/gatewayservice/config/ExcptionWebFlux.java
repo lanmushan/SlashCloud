@@ -29,6 +29,8 @@ public class ExcptionWebFlux implements ServerAuthenticationEntryPoint {
         msg.setHttpCode(HTTPCode.D601);
         String result = JSONObject.toJSONString(msg);
         serverHttpResponse.setStatusCode(HttpStatus.OK);
+        serverHttpResponse.getHeaders().set("Access-Control-Allow-Origin","*");
+        serverHttpResponse.getHeaders().set("Access-Control-Allow-Methods","POST,GET,OPTIONS");
         serverHttpResponse.getHeaders().set("Content-Type","application/json;charset=utf-8'");
         DataBuffer buffer = serverHttpResponse.bufferFactory().wrap(result.getBytes(StandardCharsets.UTF_8));
         return serverHttpResponse.writeWith(Mono.just(buffer));

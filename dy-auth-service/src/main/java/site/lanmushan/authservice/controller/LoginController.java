@@ -15,6 +15,7 @@ import site.lanmushan.authservice.mapper.AuthTbResourceMapper;
 import site.lanmushan.authservice.mapper.AuthTbRoleMapper;
 import site.lanmushan.authservice.mapper.AuthTbUserMapper;
 import site.lanmushan.authservice.service.AuthTbUserLoginLogService;
+import site.lanmushan.cypher.md5.MD5Util;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.cypher.base64.Base64Util;
 import site.lanmushan.framework.constant.GlobalConstant;
@@ -31,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -59,7 +61,8 @@ public class LoginController {
     @Autowired
     private AuthTbResourceMapper authTbResourceMapper;
     @Autowired
-    RedisTemplate<String,String> redisTemplate;
+    RedisTemplate<String, String> redisTemplate;
+
     @PostMapping("/loginOut")
     public Message loginOut(HttpSession session) {
         Message msg = Message.getInstance();
@@ -82,7 +85,7 @@ public class LoginController {
         loginLog.setLoginSource("后台登录");
         loginLog.setLoginName(account.getAccount());
         loginLog.setCreateTime(DateUtil.now());
-    //    try {
+        try {
             loginLog.setLoginIp(IpUtil.getRemoteHost(request));
             loginLog.setLoginOs(ServletUtil.getLoginOs(request));
             loginLog.setLoginBrowser(ServletUtil.getLoginBrowser(request));
@@ -97,31 +100,22 @@ public class LoginController {
                 loginLog.setLoginMsg(msg.getMsg());
                 return msg;
             }
-//            Subject subject = SecurityUtils.getSubject();
-//            CustomUsernamePasswordToken customUsernamePasswordToken = new CustomUsernamePasswordToken(account.getAccount(), account.getPassword());
-//            //带上数据库密码
-//            customUsernamePasswordToken.setDpassword(tbUser.getLoginPassword());
-//            customUsernamePasswordToken.setSalt(tbUser.getSalt());
-//            subject.login(customUsernamePasswordToken);
-//            handerCurentUser(tbUser);
-//            msg.setRow(CurrentUserUtil.getToken()).success("登录成功");
-//            loginLog.setLoginMsg(msg.getMsg());
-//        } catch (Exception e) {
-//           // log.error(e.getLocalizedMessage(), e);
-//            msg.error("登录失败账号或密码错误");
-//            loginLog.setLoginMsg(msg.getMsg());
-//            return msg;
-//        }
-//        catch (Exception e) {
-//            log.error(e.getLocalizedMessage(), e);
-//            msg.error("登录未知错误").setCode(HTTPCode.S500.code);
-//            loginLog.setLoginMsg(msg.getMsg());
-//        } finally {
-//            loginService.insertService(loginLog);
-//        }
-        return msg;
+            String password = CurrentUserUtil.createPassword(account.getPassword(), tbUser.getSalt());
+            if (!tbUser.getLoginPassword().equals(password)) {
+                msg.error("账号或密码错误");
+                loginLog.setLoginMsg(msg.getMsg());
+                return msg;
+            }
+            String token = handerCurentUser(tbUser);
+            msg.setRow(token).success("登录成功");
+            return msg;
+        } finally {
+            loginService.insertService(loginLog);
+        }
+
     }
-    private void handerCurentUser(AuthTbUser tbUser){
+
+    private String handerCurentUser(AuthTbUser tbUser) {
         /**设置一些常用参数到当前用户，方便使用*/
         CurrentUser currentUser = new CurrentUser();
         currentUser.setAccount(tbUser.getAccount());
@@ -132,28 +126,30 @@ public class LoginController {
         currentUser.setSex(tbUser.getSex());
         currentUser.setUsername(tbUser.getUsername());
         /**查询并设置所有的角色*/
-        List<AuthTbRole> list= authTbRoleMapper.selectRolesByUserId(tbUser.getId());
-        List<String>  roleCodes =list.stream().map(AuthTbRole::getRoleCode).collect(toList());
-        String roleCodeJoin =  StringUtils.join(roleCodes, ",");
+        List<AuthTbRole> list = authTbRoleMapper.selectRolesByUserId(tbUser.getId());
+        List<String> roleCodes = list.stream().map(AuthTbRole::getRoleCode).collect(toList());
+        String roleCodeJoin = StringUtils.join(roleCodes, ",");
         currentUser.setRoleCodes(roleCodes);
 
         /**查询并设置所有的api权限*/
-        List<AuthTbResource> resourceList= authTbResourceMapper.selectResourceByRoleCodes(roleCodeJoin, ResourceConstant.RESOURCE_API);
-        List<String> apiList=resourceList.stream().map(AuthTbResource::getResourceUrl).collect(toList());
-        currentUser.setApiList(apiList);
+        List<AuthTbResource> resourceList = authTbResourceMapper.selectResourceByRoleCodes(roleCodeJoin, ResourceConstant.RESOURCE_API);
+        List<String> apiList = resourceList.stream().map(AuthTbResource::getResourceUrl).collect(toList());
 
-       // CurrentUserUtil.(currentUser);
+        String token = CurrentUserUtil.createToken(currentUser);
+        return token;
     }
+
     /**
-     * 同时支持token和cookie验证，如果客户端不携带cookie过来第一次创建的session就会浪费
-     * 所以获取验证码时讲原有的session清除掉
+     *
+     *
+     * 获取验证码时必须传入账号
      * @param response
      * @param request
-     * @param session
+
      * @return
      */
     @GetMapping("/selectVerificationCode")
-    public Message getSysManageLoginCode(HttpServletResponse response, HttpServletRequest request, HttpSession session) {
+    public Message getSysManageLoginCode(BUserLogin account, HttpServletResponse response, HttpServletRequest request) {
         Message msg = Message.getInstance();
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -161,22 +157,25 @@ public class LoginController {
             byte[] bytes = byteArrayOutputStream.toByteArray();
             String base64 = Base64Util.encodeToString(bytes);
             base64 = base64.replaceAll("\n", "").replaceAll("\r", "");
-            session.setAttribute(GlobalConstant.VERIFICATION_CODE, code.toLowerCase());
-            JSONObject data=new JSONObject();
-            data.put("img","data:image/png;base64," + base64);
-            String uuid= UUID.randomUUID().toString();
-            redisTemplate.opsForValue().set(GlobalConstant.VERIFICATION_CODE+uuid,code,300, TimeUnit.SECONDS);
-            redisTemplate.expire(GlobalConstant.SESSION_ID_PREFIX+session.getId(),2000 , TimeUnit.MILLISECONDS);
-            data.put("uid",uuid);
+            JSONObject data = new JSONObject();
+            data.put("img", "data:image/png;base64," + base64);
+            String ip = IpUtil.getRemoteHost(request);
+            String os = ServletUtil.getLoginOs(request);
+            String browser = ServletUtil.getLoginBrowser(request);
+            /**以ip，操作系统，浏览器，账号为基础生成uuid*/
+            String uuid=MD5Util.createMD532(ip+os+browser+account.getAccount());
+            redisTemplate.opsForValue().set(GlobalConstant.IMG_VERIFICATION_CODE + uuid, code, 300, TimeUnit.SECONDS);
+            data.put("uid", uuid);
             msg.setRow(data);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
         return msg;
     }
+
     @GetMapping("/notLogin")
-    public Message NotLogin(){
-        Message msg=Message.getInstance();
+    public Message NotLogin() {
+        Message msg = Message.getInstance();
         msg.setHttpCode(HTTPCode.D600);
         return msg;
     }

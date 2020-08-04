@@ -8,5 +8,5 @@ public class GlobalConstant {
     /**
      * 验证码
      */
-    public static final String VERIFICATION_CODE="verification_code";
+    public static final String IMG_VERIFICATION_CODE="img_verification_code";
 }

@@ -14,19 +14,17 @@ import java.security.NoSuchAlgorithmException;
 public class MD5Util {
     private static final String KEY_ALGORITHM = "MD5";
 
-    public static final String createMD564(String plainText) {
-        try {
-            // 确定计算方法
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-            BASE64Encoder base64en = new BASE64Encoder();
-            // 加密后的字符串
-            String newstr = base64en.encode(md5.digest(plainText.getBytes(StandardCharsets.UTF_8)));
-            return newstr;
-        } catch (Exception e) {
-            return null;
+    public static String createMD5AndSalt(String plainText,String salt,int n)
+    {
+        for (int i=0; i<n;i++)
+        {
+            plainText=createMD532(plainText+salt);
+             salt=new StringBuilder(salt+i).reverse().toString();
+             plainText=new StringBuilder(plainText+(n-i)).reverse().toString();
         }
-    }
+        return  createMD532(salt+plainText);
 
+    }
     /**
      * 创建32位md5加密
      *
@@ -60,8 +58,8 @@ public class MD5Util {
     }
 
     public static void main(String[] args) {
-        String text = "asdfassafsdzzzzzzzzzzzzzzzzzzzasdfassafsdzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzasdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffasasdfassafsdzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzasdfffffffffffffffffffffffffffffffffffffafffffffffffffffffffffasasdfassafsdzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzasdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffaszzzzzzzzzzzzasdffffffffffffffffffffffffffffffffffffffffffffffffffffffffffas";
-        System.out.println(MD5Util.createMD532(text));
-        System.out.println(MD5Util.createMD564(text));
+        String text = "aa";
+        System.out.println(MD5Util.createMD5AndSalt(text,"asdf",3));
+        System.out.println(MD5Util.createMD5AndSalt(text,"a",3));
     }
 }

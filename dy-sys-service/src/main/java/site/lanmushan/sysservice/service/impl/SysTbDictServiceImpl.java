@@ -3,7 +3,7 @@ package site.lanmushan.sysservice.service.impl;
 
 import site.lanmushan.sysservice.mapper.SysTbDictMapper;
 import site.lanmushan.sysservice.service.SysTbDictService;
-import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.utils.OperateException;
 import site.lanmushan.sysservice.bo.BoSysTbDict;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.util.date.DateUtil;

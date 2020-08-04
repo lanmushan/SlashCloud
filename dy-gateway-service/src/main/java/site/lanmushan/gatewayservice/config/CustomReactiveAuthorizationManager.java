@@ -25,6 +25,12 @@ public class CustomReactiveAuthorizationManager implements ReactiveAuthorization
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
+        URI uri = authorizationContext.getExchange().getRequest().getURI();
+
+        if(LoginWebFilter.allowUrl.contains(uri.getPath()))
+        {
+            return Mono.just(new AuthorizationDecision(true));
+        }
         log.info("权限校验");
         List<String> headers = authorizationContext.getExchange().getRequest().getHeaders().get(CurrentUserUtil.AUTHORIZATION);
         if (null == headers || headers.size() > 1) {
@@ -41,7 +47,9 @@ public class CustomReactiveAuthorizationManager implements ReactiveAuthorization
         }
         List<String> userApisList = CurrentUserUtil.getCurrentUserApis(currentUser);
 
-        URI uri = authorizationContext.getExchange().getRequest().getURI();
+
+
+
         if(userApisList.contains(uri.getPath()))
         {
             return Mono.just(new AuthorizationDecision(true));

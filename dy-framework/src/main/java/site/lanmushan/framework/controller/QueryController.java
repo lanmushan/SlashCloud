@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
-import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.utils.OperateException;
 import site.lanmushan.framework.annotations.RequestQueryInfo;
 import site.lanmushan.framework.configure.ApplicationUtil;
 

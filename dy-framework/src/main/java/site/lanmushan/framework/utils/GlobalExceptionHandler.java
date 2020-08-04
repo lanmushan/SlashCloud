@@ -1,4 +1,4 @@
-package site.lanmushan.framework.exception;
+package site.lanmushan.framework.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import site.lanmushan.framework.constant.HTTPCode;

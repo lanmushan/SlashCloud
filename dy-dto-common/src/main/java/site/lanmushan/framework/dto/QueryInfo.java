@@ -1,7 +1,7 @@
 package site.lanmushan.framework.dto;
 
 
-import site.lanmushan.framework.exception.StringCommonUtil;
+import site.lanmushan.framework.utils.StringCommonUtil;
 
 import java.io.Serializable;
 import java.util.ArrayList;

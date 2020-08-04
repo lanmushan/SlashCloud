@@ -20,6 +20,5 @@ public class CurrentUser implements Serializable {
     private Integer sex;
     private String headImgAddress;
     private List<String> roleCodes;
-    private List<String> apiList;
     private long loginTime=System.currentTimeMillis();
 }

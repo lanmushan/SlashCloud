@@ -5,7 +5,7 @@ import site.lanmushan.authservice.mapper.AuthFkRoleResourceMapper;
 import site.lanmushan.authservice.service.AuthFkRoleResourceService;
 import site.lanmushan.authservice.bo.BoAuthFkRoleResource;
 import site.lanmushan.framework.constant.HTTPCode;
-import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.utils.OperateException;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.util.date.DateUtil;
 import site.lanmushan.framework.util.uuid.MyUUID;

@@ -12,15 +12,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * 跨域配置
+ * FIXME 这个东西有毛病，设置后经过网关跨域无效了，暂时不处理
  */
-@Configuration
 //@Configuration
 @Slf4j
 public class SecurityCorsConfiguration {
 
     @SuppressWarnings("unchecked")
-    @Bean
+    //@Bean
     public FilterRegistrationBean corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();

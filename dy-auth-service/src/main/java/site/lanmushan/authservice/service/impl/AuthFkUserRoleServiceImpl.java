@@ -6,7 +6,7 @@ import site.lanmushan.authservice.service.AuthFkUserRoleService;
 import site.lanmushan.authservice.bo.BoAuthFkUserRole;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
-import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.utils.OperateException;
 import site.lanmushan.framework.annotations.EnabledQuickSelect;
 
 import site.lanmushan.framework.util.date.DateUtil;

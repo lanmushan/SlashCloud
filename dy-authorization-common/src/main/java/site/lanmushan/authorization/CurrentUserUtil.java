@@ -3,11 +3,14 @@ package site.lanmushan.authorization;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import site.lanmushan.authorization.util.TokenUtil;
-import site.lanmushan.cypher.base64.Base64Util;
+import site.lanmushan.cypher.md5.MD5Util;
+import site.lanmushan.framework.constant.HTTPCode;
+import site.lanmushan.framework.utils.OperateException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,28 +23,26 @@ import java.util.List;
 public class CurrentUserUtil {
     public final static String tokenSecretKey = "cvj5^2)(136aje,";
     public final static String USER_KEY = "currentUser";
-    public final static String AUTHORIZATION="authorization";
-    public static CurrentUser createCurrentUser() {
-        return new CurrentUser();
+    public final static String AUTHORIZATION = "authorization";
+
+    public static String createPassword(String oldPassword, String salt) {
+        return MD5Util.createMD5AndSalt(oldPassword, salt, 3);
     }
-    public static boolean isLogin(String token) {
-       if(StringUtils.isEmpty(token))
-       {
-           return false;
-       }
-       if(null!= getCurrentUser(token))
-       {
-           return true;
-       }
-       return false;
+
+    public static boolean isLogin() {
+        CurrentUser currentUser = getCurrentUser();
+        return currentUser == null ? false : true;
     }
 
     public static boolean isAdmin() {
-
-    return false;
+        CurrentUser currentUser = getCurrentUser();
+        if (null == currentUser) {
+            throw new OperateException("用户未登录", HTTPCode.D600);
+        }
+        return isAdmin(currentUser);
     }
-    public static boolean isAdmin(CurrentUser currentUser) {
 
+    public static boolean isAdmin(CurrentUser currentUser) {
         List<String> roleList = currentUser.getRoleCodes();
         if (null == roleList || roleList.size() == 0) {
             return false;
@@ -54,12 +55,10 @@ public class CurrentUserUtil {
      *
      * @return
      */
-    public static String createToekn(CurrentUser currentUser) {
+    public static String createToken(CurrentUser currentUser) {
         return TokenUtil.createToekn(currentUser, tokenSecretKey);
     }
-    public static CurrentUser getCurrentUser() {
-return null;
-    }
+
     public static CurrentUser getCurrentUser(String token) {
         try {
             String jsonStr = TokenUtil.resolveToken(token, tokenSecretKey);
@@ -69,32 +68,40 @@ return null;
         }
         return null;
     }
-    public static List<String> getCurrentUserApis(CurrentUser currentUser)
-    {
-        List<String> list=new ArrayList<>();
+
+    /**
+     * 只能在含有RequestContextHolder的依赖下使用
+     *
+     * @return
+     */
+    public static CurrentUser getCurrentUser() {
+        try {
+            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            String token = request.getHeader(AUTHORIZATION);
+            return getCurrentUser(token);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return null;
+    }
+
+    public static List<String> getCurrentUserApis(CurrentUser currentUser) {
+        List<String> list = new ArrayList<>();
         list.add("/api/test/test");
         return list;
     }
-    public static List<String> savaCurrentUserApis(CurrentUser currentUser,List<String> apiList)
-    {
 
-         return null;
+    public static List<String> savaCurrentUserApis(CurrentUser currentUser, List<String> apiList) {
+        return null;
     }
-    public static String toBase64(CurrentUser currentUser){
-          byte[]bytes=  SerializationUtils.serialize(currentUser);
-          return   Base64Util.encodeToString(bytes).replaceAll("\r","").replaceAll("\n","");
-    }
-    public static CurrentUser toCurrentUser(String base64){
-        byte[]bytes=  SerializationUtils.deserialize(Base64Util.decodeToByte(base64));
-       return SerializationUtils.deserialize(bytes);
-    }
+
     public static void main(String args[]) {
         CurrentUser currentUser = new CurrentUser();
         currentUser.setAccount("asdfasfsa");
         currentUser.setNickName("xxxxx");
         currentUser.setUserId(1000000L);
         currentUser.setSex(1);
-        String token = CurrentUserUtil.createToekn(currentUser);
+        String token = CurrentUserUtil.createToken(currentUser);
         System.out.println(token);
         CurrentUserUtil.getCurrentUser(token);
     }

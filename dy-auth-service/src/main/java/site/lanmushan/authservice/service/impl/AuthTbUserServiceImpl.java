@@ -5,7 +5,7 @@ import site.lanmushan.authservice.mapper.AuthTbRoleMapper;
 import site.lanmushan.authservice.mapper.AuthTbUserMapper;
 import site.lanmushan.authservice.service.AuthTbUserService;
 import site.lanmushan.authservice.vo.VoAuthTbUser;
-import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.utils.OperateException;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.authservice.bo.BoAuthTbUser;
