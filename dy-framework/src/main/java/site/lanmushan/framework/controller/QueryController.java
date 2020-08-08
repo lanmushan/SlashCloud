@@ -2,6 +2,7 @@ package site.lanmushan.framework.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageInfo;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
@@ -43,6 +44,10 @@ public class QueryController extends BaseController {
             if ("java.util.List".equals(t.getTypeName())) {
                 startPage();
                 List list = (List) method.invoke(queryService, queryInfo);
+                PageInfo pageInfo = new PageInfo(list);
+                msg.setCurrentPage(pageInfo.getPageNum());
+                msg.setPageSize(pageInfo.getPageSize());
+                msg.setTotal((int) pageInfo.getTotal());
                 msg.setRows(list);
                 return msg;
             } else {

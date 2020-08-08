@@ -3,6 +3,7 @@ package site.lanmushan.framework.entity;
 import lombok.Data;
 
 import javax.persistence.Transient;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,19 +12,19 @@ import java.util.List;
  * @Version 1.0
  */
 @Data
-public class TreeNode<T extends TreeNode> {
+public abstract class TreeNode<T extends TreeNode> {
     @Transient
-    private List<T> children;
+    private List<T> children= new ArrayList<T>();;
 
     /**
      * @return
      */
-    public boolean isRoot() {
+    public  boolean isRoot(){
         return false;
     }
 
-    public boolean isChildren(TreeNode treeNode) {
-        return true;
+    public  boolean isChildren(TreeNode treeNode){
+        return false;
     }
 
 }

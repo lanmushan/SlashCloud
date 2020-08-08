@@ -1,4 +1,4 @@
-package site.lanmushan.gatewayservice;
+package site.lanmushan.gatewayservice.filter;
 
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
@@ -10,6 +10,7 @@ import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
@@ -19,6 +20,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
@@ -50,6 +53,11 @@ public class RequestIDFilter implements GlobalFilter, Ordered {
                // log.info("修改UID:{}",uuid);
                 headers.set("requestId",uuid);
                 headers.set("times",Long.toString(endTime-startTime));
+                headers.setAccessControlAllowCredentials(true);
+                headers.setAccessControlAllowOrigin("*");
+                headers.setAccessControlMaxAge(3000);
+                List<HttpMethod> methods= Arrays.asList(HttpMethod.GET,HttpMethod.POST,HttpMethod.OPTIONS);
+                headers.setAccessControlAllowMethods(methods);
                 return headers;
             }
 //            @Override
@@ -82,6 +90,6 @@ public class RequestIDFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return -2222;
+        return 1;
     }
 }

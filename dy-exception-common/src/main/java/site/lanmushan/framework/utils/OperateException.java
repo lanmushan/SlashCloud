@@ -34,4 +34,12 @@ public class OperateException extends BaseException {
     public void setInput(Object input) {
         this.input = input;
     }
+
+    public HTTPCode getHttpCode() {
+        return httpCode;
+    }
+
+    public void setHttpCode(HTTPCode httpCode) {
+        this.httpCode = httpCode;
+    }
 }
