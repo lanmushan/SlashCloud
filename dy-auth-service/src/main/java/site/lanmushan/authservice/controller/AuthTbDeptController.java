@@ -1,5 +1,7 @@
 package site.lanmushan.authservice.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import site.lanmushan.authservice.entity.AuthTbDept;
 import site.lanmushan.authservice.service.AuthTbDeptService;
 import site.lanmushan.framework.annotations.RequestQueryInfo;
@@ -23,11 +25,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/authTbDept")
 @Slf4j
+@Api(tags = "部门服务接口")
 public class AuthTbDeptController {
     @Autowired
     private AuthTbDeptMapper authTbDeptMapper;
     @Autowired
     private AuthTbDeptService authTbDeptService;
+    @ApiOperation("根据ID查询部门")
     @GetMapping("/selectById")
     public Message selectById(@RequestParam("id") Long id) {
         Message msg = new Message();
@@ -35,13 +39,13 @@ public class AuthTbDeptController {
         msg.setRow(authTbDept);
         return msg;
     }
-
+    @ApiOperation("查询部门树形列表")
     @GetMapping("/selectTreeList")
     public Message selectTreeList(@RequestQueryInfo QueryInfo queryInfo) {
         List deptList = authTbDeptMapper.selectList(queryInfo);
         return Message.getInstance().setRows(TreeUtil.listToTree(deptList));
     }
-
+    @ApiOperation("新增")
     @PostMapping("/add")
     public Message add(@RequestBody @Valid BoAuthTbDept obj) {
         Message msg = new Message();
@@ -54,6 +58,7 @@ public class AuthTbDeptController {
      * @return
      */
     @PostMapping("/update")
+    @ApiOperation("修改")
     public Message update(@RequestBody @Valid BoAuthTbDept obj) {
         Message msg = new Message();
         authTbDeptService.updateService(obj);
@@ -64,6 +69,7 @@ public class AuthTbDeptController {
      * @param ids
      * @return
      */
+    @ApiOperation("删除")
     @PostMapping("/delete")
     public Message delete(@RequestParam List<Long> ids) {
         Message msg = new Message();

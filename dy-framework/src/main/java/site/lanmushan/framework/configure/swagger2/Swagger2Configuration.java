@@ -35,6 +35,7 @@ public class Swagger2Configuration {
     public Docket createRestApi() {
         log.info("Swagger2Configuration配置成功");
         return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("appApi")
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("site.lanmushan"))
@@ -45,8 +46,9 @@ public class Swagger2Configuration {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("DY服务接口")
+                .title("SLASH服务接口")
                 .description("XXXX")
+            //   .termsOfServiceUrl("http://localhost:8081/doc.html")
                 // .termsOfServiceUrl("http://localhost:8081/doc.html")
                 .version("1.0")
                 .build();

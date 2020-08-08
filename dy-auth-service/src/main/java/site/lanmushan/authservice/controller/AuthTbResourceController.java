@@ -1,6 +1,8 @@
 package site.lanmushan.authservice.controller;
 
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import site.lanmushan.authorization.CurrentUser;
 import site.lanmushan.authorization.CurrentUserUtil;
@@ -35,6 +37,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/authTbResource")
 @Slf4j
+@Api(tags = "资源服务接口")
 public class AuthTbResourceController extends BaseController {
     @Autowired
     private AuthTbResourceMapper authTbResourceMapper;

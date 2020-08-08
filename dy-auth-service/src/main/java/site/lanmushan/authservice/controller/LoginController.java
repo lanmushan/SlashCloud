@@ -2,6 +2,7 @@ package site.lanmushan.authservice.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.apache.commons.lang3.StringUtils;
 import site.lanmushan.authorization.CurrentUser;
 import site.lanmushan.authorization.CurrentUserUtil;
@@ -49,6 +50,7 @@ import static java.util.stream.Collectors.toList;
 @RestController
 @RequestMapping("/authLogin")
 @Slf4j
+@Api(tags = "登录服务接口")
 public class LoginController {
     @Autowired
     private AuthTbUserMapper authUserMapper;
@@ -76,7 +78,7 @@ public class LoginController {
      * @param request
      * @return
      */
-    @RequestMapping("/loginManage")
+    @PostMapping("/loginManage")
     public Message userLogin(@RequestBody BUserLogin account, HttpServletRequest request) {
         Message msg = new Message();
         BoAuthTbUserLoginLog loginLog = new BoAuthTbUserLoginLog();

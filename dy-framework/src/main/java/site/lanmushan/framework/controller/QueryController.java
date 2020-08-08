@@ -3,6 +3,7 @@ package site.lanmushan.framework.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
@@ -30,9 +31,10 @@ import java.util.List;
  */
 @RestController
 @Slf4j
+@Api(tags = "通用查询接口")
 public class QueryController extends BaseController {
     @GetMapping(value = "/{entityName}/{methodName}")
-    public Message queryList(@PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request) {
+    public Message selectList(@PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request) {
         log.info(JSONObject.toJSONString(queryInfo));
         Message msg = new Message();
         try {

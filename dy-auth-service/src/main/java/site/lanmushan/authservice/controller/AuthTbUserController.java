@@ -1,5 +1,6 @@
 package site.lanmushan.authservice.controller;
 
+import io.swagger.annotations.Api;
 import site.lanmushan.authservice.entity.AuthTbUser;
 import site.lanmushan.authservice.service.AuthTbUserService;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/authTbUser")
 @Slf4j
+@Api(tags = "用户服务接口")
+
 public class AuthTbUserController {
     @Autowired
     private AuthTbUserMapper authTbUserMapper;
