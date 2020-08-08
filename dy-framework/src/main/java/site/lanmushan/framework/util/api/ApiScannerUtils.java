@@ -4,13 +4,10 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import site.lanmushan.framework.configure.ApplicationUtil;
-import site.lanmushan.framework.entity.DaiYuApiInfo;
+import site.lanmushan.framework.entity.ControllerApiInfo;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.core.type.filter.AnnotationTypeFilter;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +22,7 @@ import java.util.*;
 @Slf4j
 public class ApiScannerUtils {
 
-    public static List<DaiYuApiInfo> initApiList() {
+    public static List<ControllerApiInfo> initApiList() {
         RequestMappingHandlerMapping mapping = ApplicationUtil.getApplication().getBean(RequestMappingHandlerMapping.class);
         // 获取url与类和方法的对应信息
         Map<RequestMappingInfo, HandlerMethod> map = mapping.getHandlerMethods();
@@ -40,7 +37,7 @@ public class ApiScannerUtils {
             objects.add(bean);
         }
 
-        List<DaiYuApiInfo> allApiInfo = new ArrayList<>();
+        List<ControllerApiInfo> allApiInfo = new ArrayList<>();
 
         for (Object object : objects) {
             resolveApis(object,allApiInfo);
@@ -48,7 +45,7 @@ public class ApiScannerUtils {
         return allApiInfo;
     }
 
-    private static void resolveApis(Object ob, List<DaiYuApiInfo> apiInfos) {
+    private static void resolveApis(Object ob, List<ControllerApiInfo> apiInfos) {
         Class<?> clazz = ob.getClass();
         String apiPrefix = "";
 
@@ -112,7 +109,7 @@ public class ApiScannerUtils {
                     }
                 }
             }
-            DaiYuApiInfo apiInfo = new DaiYuApiInfo();
+            ControllerApiInfo apiInfo = new ControllerApiInfo();
             ApiOperation apiOperation = method.getAnnotation(ApiOperation.class);
             String apiRemark = (apiOperation == null || StringUtils.isBlank(apiOperation.value())) ? method.getName() : apiOperation.value();
             apiInfo.setApiName(apiRemark);

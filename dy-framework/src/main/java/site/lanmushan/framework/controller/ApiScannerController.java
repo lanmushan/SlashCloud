@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import site.lanmushan.framework.dto.Message;
-import site.lanmushan.framework.entity.DaiYuApiInfo;
+import site.lanmushan.framework.entity.ControllerApiInfo;
 import site.lanmushan.framework.util.api.ApiScannerUtils;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class ApiScannerController {
     @GetMapping(value = "/getAllApiInfo")
     public Message getAllApiInfo(){
         Message message = Message.getInstance("查询成功");
-        List<DaiYuApiInfo> daiYuApiInfos = ApiScannerUtils.initApiList();
+        List<ControllerApiInfo> daiYuApiInfos = ApiScannerUtils.initApiList();
         message.setRows(daiYuApiInfos);
         return message;
     }
