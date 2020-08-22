@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.Valid;
 import java.util.List;
+
 /**
  * 部门表(AuthTbDept)表控制层
  *
@@ -31,6 +32,7 @@ public class AuthTbDeptController {
     private AuthTbDeptMapper authTbDeptMapper;
     @Autowired
     private AuthTbDeptService authTbDeptService;
+
     @ApiOperation("根据ID查询部门")
     @GetMapping("/selectById")
     public Message selectById(@RequestParam("id") Long id) {
@@ -39,12 +41,14 @@ public class AuthTbDeptController {
         msg.setRow(authTbDept);
         return msg;
     }
+
     @ApiOperation("查询部门树形列表")
     @GetMapping("/selectTreeList")
     public Message selectTreeList(@RequestQueryInfo QueryInfo queryInfo) {
         List deptList = authTbDeptMapper.selectList(queryInfo);
         return Message.getInstance().setRows(TreeUtil.listToTree(deptList));
     }
+
     @ApiOperation("新增")
     @PostMapping("/add")
     public Message add(@RequestBody @Valid BoAuthTbDept obj) {
@@ -53,6 +57,7 @@ public class AuthTbDeptController {
         msg.setRow(obj).success("添加成功");
         return msg;
     }
+
     /**
      * @param obj
      * @return
@@ -65,6 +70,7 @@ public class AuthTbDeptController {
         msg.setRow(obj).success("更新成功");
         return msg;
     }
+
     /**
      * @param ids
      * @return
