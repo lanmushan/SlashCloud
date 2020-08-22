@@ -1,6 +1,7 @@
 package site.lanmushan.cypher.aes;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider;
 import site.lanmushan.cypher.base64.Base64Util;
 import site.lanmushan.cypher.hex.HexUtil;
@@ -78,6 +79,10 @@ public class AesEbcUtil {
     public static String decryptByHex(String content, String password) {
 
         try {
+            if(StringUtils.isEmpty(content))
+            {
+                throw new NullPointerException("解密内容不能为空");
+            }
             //实例化
             Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
             //使用密钥初始化，设置为解密模式

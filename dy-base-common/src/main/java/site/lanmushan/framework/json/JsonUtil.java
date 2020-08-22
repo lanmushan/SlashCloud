@@ -15,14 +15,12 @@ import java.nio.charset.StandardCharsets;
 public class JsonUtil {
 
 
-
     public static JSONObject loadJsonByClassPath(String filePath) {
         try {
-            String str=readFileByClassPath(filePath);
-           return (JSONObject) JSONObject.parse(str);
-        }catch (Exception e)
-        {
-            log.error(e.getMessage(),e);
+            String str = readFileByClassPath(filePath);
+            return (JSONObject) JSONObject.parse(str);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
         return null;
     }
@@ -35,8 +33,7 @@ public class JsonUtil {
         InputStream inputStream = JsonUtil.class.getClassLoader().getResourceAsStream(filePath);
         StringBuilder sb = new StringBuilder();
         byte[] bytes = new byte[1024];
-        while (inputStream.read(bytes)!=-1)
-        {
+        while (inputStream.read(bytes) != -1) {
             sb.append(new String(bytes, StandardCharsets.UTF_8));
         }
         return sb.toString();

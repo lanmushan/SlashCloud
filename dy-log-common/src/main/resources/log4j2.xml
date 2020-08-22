@@ -44,8 +44,8 @@
     <loggers>
         <root  level="info">
             <appender-ref ref="console"></appender-ref>
-            <!--<appender-ref ref="service_error_appender"></appender-ref>-->
-            <!--<appender-ref ref="service_info_appender"></appender-ref>-->
+            <appender-ref ref="service_error_appender"></appender-ref>
+            <appender-ref ref="service_info_appender"></appender-ref>
         </root >
     </loggers>
 </configuration>

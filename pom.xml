@@ -30,6 +30,7 @@
     <modules>
         <module>dy-auth-service</module>
         <module>dy-sys-service</module>
+        <module>dy-file-service</module>
         <module>dy-framework</module>
         <module>dy-gateway-service</module>
         <module>dy-cypher-common</module>
@@ -39,9 +40,15 @@
         <module>dy-authorization-common</module>
         <module>dy-redis-common</module>
         <module>dy-exception-common</module>
+        <module>dy-log-common</module>
     </modules>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>log-common</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>cypher-common</artifactId>

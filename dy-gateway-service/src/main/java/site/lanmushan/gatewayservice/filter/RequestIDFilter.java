@@ -60,26 +60,26 @@ public class RequestIDFilter implements GlobalFilter, Ordered {
                 headers.setAccessControlAllowMethods(methods);
                 return headers;
             }
-//            @Override
-//            public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
-//                if (body instanceof Flux) {
-//                    Flux<? extends DataBuffer> fluxBody = (Flux<? extends DataBuffer>) body;
-//                    return super.writeWith(fluxBody.map(dataBuffer -> {
-//                        // probably should reuse buffers
-//                        byte[] content = new byte[dataBuffer.readableByteCount()];
-//                        dataBuffer.read(content);
-//                        //释放掉内存
-//                        DataBufferUtils.release(dataBuffer);
-//                        String s = new String(content, Charset.forName("UTF-8"));
-//                        //TODO，s就是response的值，想修改、查看就随意而为了
-//                        byte[] uppedContent = new String(content, Charset.forName("UTF-8")).getBytes();
-//                        System.out.println(s);
-//                        return bufferFactory.wrap(uppedContent);
-//                    }));
-//                }
-//                // if body is not a flux. never got there.
-//                return super.writeWith(body);
-//            }
+            @Override
+            public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
+                if (body instanceof Flux) {
+                    Flux<? extends DataBuffer> fluxBody = (Flux<? extends DataBuffer>) body;
+                    return super.writeWith(fluxBody.map(dataBuffer -> {
+                        // probably should reuse buffers
+                        byte[] content = new byte[dataBuffer.readableByteCount()];
+                        dataBuffer.read(content);
+                        //释放掉内存
+                        DataBufferUtils.release(dataBuffer);
+                        String s = new String(content, Charset.forName("UTF-8"));
+                        //TODO，s就是response的值，想修改、查看就随意而为了
+                        byte[] uppedContent = new String(content, Charset.forName("UTF-8")).getBytes();
+                        System.out.println(s);
+                        return bufferFactory.wrap(uppedContent);
+                    }));
+                }
+                // if body is not a flux. never got there.
+                return super.writeWith(body);
+            }
         };
         exchange.mutate().request(serverHttpRequest).build();
         // replace response with decorator

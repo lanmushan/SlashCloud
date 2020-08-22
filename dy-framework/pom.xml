@@ -16,6 +16,10 @@
     <description>Demo project for Spring Boot</description>
     <dependencies>
         <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>log-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>eu.bitwalker</groupId>
             <artifactId>UserAgentUtils</artifactId>
         </dependency>

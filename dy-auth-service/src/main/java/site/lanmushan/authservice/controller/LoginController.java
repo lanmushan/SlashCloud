@@ -80,6 +80,12 @@ public class LoginController {
      */
     @PostMapping("/loginManage")
     public Message userLogin(@RequestBody BUserLogin account, HttpServletRequest request) {
+        String ip = IpUtil.getRemoteHost(request);
+        String os = ServletUtil.getLoginOs(request);
+        String browser = ServletUtil.getLoginBrowser(request);
+        /**以ip，操作系统，浏览器，账号为基础生成uuid,在登录接口验证*/
+        String uuid=MD5Util.createMD532(ip+os+browser+account.getAccount());
+
         Message msg = new Message();
         BoAuthTbUserLoginLog loginLog = new BoAuthTbUserLoginLog();
         loginLog.setLoginSource("后台登录");
@@ -149,9 +155,14 @@ public class LoginController {
      * @return
      */
     @GetMapping("/selectVerificationCode")
-    public Message getSysManageLoginCode(BUserLogin account, HttpServletResponse response, HttpServletRequest request) {
+    public Message getSysManageLoginCode(String account, HttpServletResponse response, HttpServletRequest request) {
         Message msg = Message.getInstance();
         try {
+            if(StringUtils.isEmpty(account))
+            {
+                msg.error("登录账号不能为空");
+                return msg;
+            }
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             String code = VerifyCodeUtils.outputVerifyImage(80, 30, byteArrayOutputStream, 4);
             byte[] bytes = byteArrayOutputStream.toByteArray();
@@ -162,10 +173,9 @@ public class LoginController {
             String ip = IpUtil.getRemoteHost(request);
             String os = ServletUtil.getLoginOs(request);
             String browser = ServletUtil.getLoginBrowser(request);
-            /**以ip，操作系统，浏览器，账号为基础生成uuid*/
-            String uuid=MD5Util.createMD532(ip+os+browser+account.getAccount());
+            /**以ip，操作系统，浏览器，账号为基础生成uuid,在登录接口验证*/
+            String uuid=MD5Util.createMD532(ip+os+browser+account);
             redisTemplate.opsForValue().set(GlobalConstant.IMG_VERIFICATION_CODE + uuid, code, 300, TimeUnit.SECONDS);
-            data.put("uid", uuid);
             msg.setRow(data);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
