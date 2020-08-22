@@ -25,6 +25,7 @@ import java.util.regex.Pattern;
 public class ServletUtil {
     private static final String N255 = "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
     private static final Pattern PATTERN = Pattern.compile("^(?:" + N255 + "\\.){3}" + N255 + "$");
+
     private static String longToIpV4(long longIp) {
         int octet3 = (int) ((longIp >> 24) % 256);
         int octet2 = (int) ((longIp >> 16) % 256);
@@ -52,65 +53,66 @@ public class ServletUtil {
 
     /**
      * 获取IP地址
+     *
      * @param request
      * @return
      */
-    public static String getIPAddress(HttpServletRequest request){
+    public static String getIPAddress(HttpServletRequest request) {
         String ip = request.getHeader("x-forwarded-for");
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("Proxy-Client-IP");
         }
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getHeader("WL-Proxy-Client-IP");
         }
-        if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
             ip = request.getRemoteAddr();
         }
-        return ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip;
+        return ip.equals("0:0:0:0:0:0:0:1") ? "127.0.0.1" : ip;
     }
 
     /**
      * 获取request参数
+     *
      * @param httpServletRequest
      * @return
      */
-    public static Map<String,Object>  getDataFromRequest(HttpServletRequest httpServletRequest){
-            String type = httpServletRequest.getContentType();
-            Map<String,Object> receiveMap = new HashMap<String,Object>();
+    public static Map<String, Object> getDataFromRequest(HttpServletRequest httpServletRequest) {
+        String type = httpServletRequest.getContentType();
+        Map<String, Object> receiveMap = new HashMap<String, Object>();
         log.info("请求方式:{}", httpServletRequest.getMethod());
-        if ("GET".equals(httpServletRequest.getMethod()) || type == null || "application/x-www-form-urlencoded".equals(type)) {
-                Enumeration<String> enu = httpServletRequest.getParameterNames();
-                while (enu.hasMoreElements()) {
-                    String key = String.valueOf(enu.nextElement());
-                    String value = httpServletRequest.getParameter(key);
-                    receiveMap.put(key, value);
-                }
-            }else{	//else是text/plain、application/json这两种情况
-                BufferedReader reader = null;
-                StringBuilder sb = new StringBuilder();
-                try{
-                    reader = new BufferedReader(new InputStreamReader(httpServletRequest.getInputStream(), StandardCharsets.UTF_8));
-                    String line = null;
-                    while ((line = reader.readLine()) != null){
-                        sb.append(line);
-                    }
-                } catch (IOException e){
-                    e.printStackTrace();
-                } finally {
-                    try{
-                        if (null != reader){
-                            reader.close();
-                        }
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                if(StringUtils.isEmpty(sb.toString()))
-                {
-                    return receiveMap;
-                }
-                return JSON.parseObject(sb.toString(),HashMap.class);
+        if ("GET".equals(httpServletRequest.getMethod()) || type == null ||"multipart/form-data".equals(type)|| "application/x-www-form-urlencoded".equals(type)) {
+            Enumeration<String> enu = httpServletRequest.getParameterNames();
+            while (enu.hasMoreElements()) {
+                String key = String.valueOf(enu.nextElement());
+                String value = httpServletRequest.getParameter(key);
+                receiveMap.put(key, value);
             }
+        } else {    //else是text/plain、application/json这两种情况
+            BufferedReader reader = null;
+            StringBuilder sb = new StringBuilder();
+            try {
+                reader = new BufferedReader(new InputStreamReader(httpServletRequest.getInputStream(), StandardCharsets.UTF_8));
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (null != reader) {
+                        reader.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (StringUtils.isEmpty(sb.toString())) {
+                return receiveMap;
+            }
+            return JSON.parseObject(sb.toString(), HashMap.class);
+        }
         return receiveMap;
 
     }

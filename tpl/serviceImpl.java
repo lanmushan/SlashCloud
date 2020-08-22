@@ -12,9 +12,9 @@
         #if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}service.impl;
 
 
-import $!{tableInfo.savePackageName}.mapper.$!{tableInfo.name}Mapper;
+!{tableInfo.savePackageName}.mapper.$!{tableInfo.name}Mapper;
 import $!{tableInfo.savePackageName}.service.$!{tableInfo.name}Service;
-import site.lanmushan.framework.constant.HTTPCode;
+import site.lanmushan.framework.file.HTTPCode;
 import site.lanmushan.exception.OperateException;
 import site.lanmushan.sysservice.bo.Bo$!{tableInfo.name};
 import site.lanmushan.sysservice.entity.$!{tableInfo.name};
@@ -26,8 +26,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import org.springframework.stereotype.Service;
-
 
 
 /**
