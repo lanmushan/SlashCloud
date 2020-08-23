@@ -33,7 +33,7 @@
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
                 <choose>
                     <when test="it.key =='role_code'">
-                        ur.fk_role_key ${it.operate} #{it.value}
+                        ur.fk_role_code ${it.operate} #{it.value}
                     </when>
                     <otherwise>
                         <if test="it.operate =='in'">

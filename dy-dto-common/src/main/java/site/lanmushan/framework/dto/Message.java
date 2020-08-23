@@ -237,6 +237,9 @@ public class Message<T> implements Serializable {
         return new Message();
     }
 
+    public long getTime() {
+        return time;
+    }
 
 }
 
