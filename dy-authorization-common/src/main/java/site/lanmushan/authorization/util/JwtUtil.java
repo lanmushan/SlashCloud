@@ -24,27 +24,27 @@ public class JwtUtil {
      * @return
      * @throws JOSEException
      */
-    public static String createTokenHS512(Object payLoad,String password) throws JOSEException, NoSuchAlgorithmException {
+    public static String createTokenHS512(Object payLoad, String password) throws JOSEException, NoSuchAlgorithmException {
         JWSHeader jwsHeader = new JWSHeader(JWSAlgorithm.HS512);
         jwsHeader.getIncludedParams().add("111");
-        JSONObject json= (JSONObject) JSON.toJSON(payLoad);
+        JSONObject json = (JSONObject) JSON.toJSON(payLoad);
         Payload payload = new Payload(new net.minidev.json.JSONObject(json.getInnerMap()));
         JWSObject jwsObject = new JWSObject(jwsHeader, payload);
         JWSSigner jwsSigner = new MACSigner(getSecretKey(password));
         jwsObject.sign(jwsSigner);
         return jwsObject.serialize();
     }
+
     public static byte[] getSecretKey(String secretKey) throws NoSuchAlgorithmException {
-        if(null==secretKey)
-        {
+        if (null == secretKey) {
             throw new NoSuchAlgorithmException("密钥不能为空");
         }
-        byte[]  secretKeyBytes= secretKey.getBytes(StandardCharsets.UTF_8);
-        byte[]  result= new byte[256];
+        byte[] secretKeyBytes = secretKey.getBytes(StandardCharsets.UTF_8);
+        byte[] result = new byte[256];
         for (int i = 0; i < 256 && i < secretKeyBytes.length; i++) {
             result[i] = secretKeyBytes[i];
         }
-       return result;
+        return result;
     }
 
     /**
@@ -88,12 +88,13 @@ public class JwtUtil {
         }
         return resultMap;
     }
-    public static void main(String args[]) throws JOSEException, NoSuchAlgorithmException, ParseException {
-        Map<String,String> header=new HashMap<>();
-        header.put("xx","xxx");
 
-       String token=  JwtUtil.createTokenHS512(header,"123456789");
-        System.out.println("结果+"+JwtUtil.parseToken512(token,"1234567189"));
-       System.out.println(token);
+    public static void main(String args[]) throws JOSEException, NoSuchAlgorithmException, ParseException {
+        Map<String, String> header = new HashMap<>();
+        header.put("xx", "xxx");
+
+        String token = JwtUtil.createTokenHS512(header, "123456789");
+        System.out.println("结果+" + JwtUtil.parseToken512(token, "1234567189"));
+        System.out.println(token);
     }
 }

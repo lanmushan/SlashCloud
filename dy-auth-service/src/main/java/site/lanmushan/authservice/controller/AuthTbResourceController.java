@@ -85,29 +85,31 @@ public class AuthTbResourceController extends BaseController {
         msg.success("删除成功");
         return msg;
     }
+
     @GetMapping("/selectTreeList")
-    public Message selectTreeList(@RequestQueryInfo QueryInfo queryInfo)
-    {
-        Message msg=new Message();
+    public Message selectTreeList(@RequestQueryInfo QueryInfo queryInfo) {
+        Message msg = new Message();
         startPage();
-        List<AuthTbResource> authResourceList= authTbResourceMapper.selectList(queryInfo);
+        List<AuthTbResource> authResourceList = authTbResourceMapper.selectList(queryInfo);
         sortResource(authResourceList);
         PageInfo pageInfo = new PageInfo(authResourceList);
         msg.setCurrentPage(pageInfo.getPageNum());
         msg.setPageSize(pageInfo.getPageSize());
         msg.setTotal((int) pageInfo.getTotal());
-        msg.setRows(TreeUtil.listToTree((List)authResourceList));
+        msg.setRows(TreeUtil.listToTree((List) authResourceList));
         return msg;
     }
+
     /**
      * 返回当前用户拥有的所有菜单
+     *
      * @return
      */
     @GetMapping("/select/menu")
     public Message selectMenus() {
-        Message msg=new Message();
-        List menuList= selectResource(ResourceConstant.RESOURCE_MENU);
-        if (null!=menuList&& menuList.size() > 0) {
+        Message msg = Message.getInstance();
+        List menuList = selectResource(ResourceConstant.RESOURCE_MENU);
+        if (null != menuList && menuList.size() > 0) {
             msg.setRows(TreeUtil.listToTree(menuList));
             msg.success("查询成功");
         } else {
@@ -116,27 +118,26 @@ public class AuthTbResourceController extends BaseController {
         return msg;
     }
 
-    private List selectResource(String type){
+    private List selectResource(String type) {
         CurrentUser currentUser = CurrentUserUtil.getCurrentUser();
         List<AuthTbRole> roleList = authTbRoleMapper.selectRolesByUserId(currentUser.getUserId());
-        if (null==roleList|| roleList.size() == 0) {
-              return null;
+        if (null == roleList || roleList.size() == 0) {
+            return null;
         }
         List<AuthTbResource> authResourceList;
-        if( CurrentUserUtil.isAdmin())
-        {
+        if (CurrentUserUtil.isAdmin()) {
             authResourceList = authTbResourceMapper.selectResourceByRoleCodes(null, type);
-        }else {
-            List<String> roleCodeList=roleList.stream().map(AuthTbRole::getRoleCode).collect(Collectors.toList());
-            String roleCodes =  StringUtils.join(roleCodeList, ",");
+        } else {
+            List<String> roleCodeList = roleList.stream().map(AuthTbRole::getRoleCode).collect(Collectors.toList());
+            String roleCodes = StringUtils.join(roleCodeList, ",");
             authResourceList = authTbResourceMapper.selectResourceByRoleCodes(roleCodes, type);
         }
         sortResource(authResourceList);
-        return  authResourceList;
+        return authResourceList;
     }
-    private void sortResource(List<AuthTbResource> authResourceList)
-    {
-        authResourceList.sort((s1,s2)->{
+
+    private void sortResource(List<AuthTbResource> authResourceList) {
+        authResourceList.sort((s1, s2) -> {
             int result = s1.getFkParentId().compareTo(s2.getFkParentId());
             if (result != 0) {
                 return result;
