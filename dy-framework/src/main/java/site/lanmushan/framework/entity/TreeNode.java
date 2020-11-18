@@ -3,6 +3,7 @@ package site.lanmushan.framework.entity;
 import lombok.Data;
 
 import javax.persistence.Transient;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,16 +15,16 @@ import java.util.List;
 @Data
 public abstract class TreeNode<T extends TreeNode> {
     @Transient
-    private List<T> children= new ArrayList<T>();;
+    private List<T> children = new ArrayList<T>();
 
     /**
      * @return
      */
-    public  boolean isRoot(){
+    public boolean isRoot() {
         return false;
     }
 
-    public  boolean isChildren(TreeNode treeNode){
+    public boolean isChildren(TreeNode treeNode) {
         return false;
     }
 
