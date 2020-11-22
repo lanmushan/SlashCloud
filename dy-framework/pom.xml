@@ -20,10 +20,13 @@
             <artifactId>log-common</artifactId>
         </dependency>
         <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>file-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>eu.bitwalker</groupId>
             <artifactId>UserAgentUtils</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>

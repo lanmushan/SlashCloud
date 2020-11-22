@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
     <settings>
         <!--针对HashMap无效-->
         <setting name="mapUnderscoreToCamelCase" value="true"/> <!-- 驼峰式命名 -->
@@ -9,11 +10,10 @@
         <!--日志输出-->
         <!--<setting name="logImpl" value="STDOUT_LOGGING" />-->
     </settings>
-
     <!--数据库适配-->
-    <!--<databaseIdProvider type="DB_VENDOR">-->
-        <!--<property name="MySQL" value="mysql"/>-->
-    <!--</databaseIdProvider>-->
+  <!--  <databaseIdProvider type="DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+    </databaseIdProvider>-->
     <typeAliases>
         <typeAlias type="site.lanmushan.framework.dto.DHashMap" alias="DHashMap"></typeAlias>
         <typeAlias type="site.lanmushan.framework.dto.QueryInfo" alias="QueryInfo"></typeAlias>

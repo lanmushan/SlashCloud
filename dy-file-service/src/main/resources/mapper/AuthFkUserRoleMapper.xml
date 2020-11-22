@@ -11,7 +11,7 @@
         <result property="fkUpdateUserId" column="fk_update_user_id" jdbcType="INTEGER"/>
         <result property="fkRoleCode" column="fk_role_code" jdbcType="VARCHAR"/>
     </resultMap>
-    <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
+    <select databaseId="mysql" id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
         select id, fk_user_id, create_time, update_time, fk_create_user_id, fk_update_user_id, fk_role_code from
         auth_fk_user_role
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">

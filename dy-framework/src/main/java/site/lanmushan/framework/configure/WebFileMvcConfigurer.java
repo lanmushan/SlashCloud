@@ -1,12 +1,12 @@
 package site.lanmushan.framework.configure;
 
-import site.lanmushan.framework.util.file.LocalResourceUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import site.lanmushan.framework.file.LocalResourceUtils;
 
 /**
  * @Author dy
@@ -37,7 +37,7 @@ public class WebFileMvcConfigurer implements WebMvcConfigurer {
         {
             registry.addResourceHandler("/resource/public/**").addResourceLocations("file:"+ LocalResourceUtils.getLocalResourcePublicPath());
         }else {
-            registry.addResourceHandler("/resource/public/**").addResourceLocations("file:"+LocalResourceUtils.getLocalResourcePublicPath());
+            registry.addResourceHandler("/resource/public/**").addResourceLocations("file:"+ LocalResourceUtils.getLocalResourcePublicPath());
         }
         log.info("外部资源文件设置成功{}","file:"+ LocalResourceUtils.getLocalResourcePublicPath());
     }

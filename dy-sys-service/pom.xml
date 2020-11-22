@@ -13,6 +13,9 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>sys-service</name>
     <description>Demo project for Spring Boot</description>
+    <properties>
+        <main.class>site.lanmushan.sysservice.SysServiceApplication</main.class>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>site.lanmushan</groupId>
@@ -31,19 +34,8 @@
 
     <build>
         <plugins>
-            <plugin>
-                <!--apache编译插件-->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <skip>false</skip>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!--打包到一个Jar中-->
-            <plugin>
+            <!--如果需要打包成一个Jar-->
+           <!-- <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
@@ -53,17 +45,47 @@
                 <executions>
                     <execution>
                         <goals>
-                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                            <goal>repackage</goal>&lt;!&ndash;可以把依赖的包都打包到生成的Jar包中&ndash;&gt;
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <!--assembly打包-->
+            </plugin>-->
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-jar-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--&lt;!&ndash; 将静态资源排除出jar包 &ndash;&gt;-->
+                    <!--<excludes>-->
+                        <!--<exclude>static/**</exclude>-->
+                        <!--<exclude>templates/**</exclude>-->
+                        <!--<exclude>*.*</exclude>-->
+                    <!--</excludes>-->
+                    <!--<archive>-->
+                        <!--<manifest>-->
+                            <!--<addClasspath>true</addClasspath>-->
+                            <!--&lt;!&ndash; MANIFEST.MF 中 Class-Path 加入前缀 &ndash;&gt;-->
+                            <!--<classpathPrefix>lib/</classpathPrefix>-->
+                            <!--&lt;!&ndash; jar包不包含唯一版本标识 &ndash;&gt;-->
+                            <!--<useUniqueVersions>false</useUniqueVersions>-->
+                            <!--&lt;!&ndash; 指定启动类的包路径 &ndash;&gt;-->
+                            <!--<mainClass>site.lanmushan.sysservice.SysServiceApplication</mainClass>-->
+                        <!--</manifest>-->
+                        <!--<manifestEntries>-->
+                            <!--&lt;!&ndash;MANIFEST.MF 中 Class-Path 加入资源文件目录 &ndash;&gt;-->
+                            <!--<Class-Path>conf/</Class-Path>-->
+                        <!--</manifestEntries>-->
+                    <!--</archive>-->
+                    <!--&lt;!&ndash; 指定打出的jar包路径 &ndash;&gt;-->
+                    <!--<outputDirectory>${project.build.directory}</outputDirectory>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
+          <!--  &lt;!&ndash;assembly打包&ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                    <!-- 将静态资源排除出jar包 -->
+                    &lt;!&ndash; 将静态资源排除出jar包 &ndash;&gt;
                     <excludes>
                         <exclude>static/**</exclude>
                         <exclude>templates/**</exclude>
@@ -72,37 +94,37 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <!-- MANIFEST.MF 中 Class-Path 加入前缀 -->
+                            &lt;!&ndash; MANIFEST.MF 中 Class-Path 加入前缀 &ndash;&gt;
                             <classpathPrefix>lib/</classpathPrefix>
-                            <!-- jar包不包含唯一版本标识 -->
+                            &lt;!&ndash; jar包不包含唯一版本标识 &ndash;&gt;
                             <useUniqueVersions>false</useUniqueVersions>
-                            <!-- 指定启动类的包路径 -->
+                            &lt;!&ndash; 指定启动类的包路径 &ndash;&gt;
                             <mainClass>site.lanmushan.sysservice.SysServiceApplication</mainClass>
                         </manifest>
                         <manifestEntries>
-                            <!--MANIFEST.MF 中 Class-Path 加入资源文件目录 -->
+                            &lt;!&ndash;MANIFEST.MF 中 Class-Path 加入资源文件目录 &ndash;&gt;
                             <Class-Path>conf/</Class-Path>
                         </manifestEntries>
                     </archive>
-                    <!-- 指定打出的jar包路径 -->
+                    &lt;!&ndash; 指定打出的jar包路径 &ndash;&gt;
                     <outputDirectory>${project.build.directory}</outputDirectory>
                 </configuration>
             </plugin>
-            <!--复制jar包的-->
+            &lt;!&ndash;复制jar包的&ndash;&gt;
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <!-- 自定义 -->
+                        &lt;!&ndash; 自定义 &ndash;&gt;
                         <id>copy-dependencies</id>
                         <phase>package</phase>
                         <goals>
-                            <!-- 复制依赖的jar包 -->
+                            &lt;!&ndash; 复制依赖的jar包 &ndash;&gt;
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <!-- 将依赖的jar包复制到该路径下 -->
+                            &lt;!&ndash; 将依赖的jar包复制到该路径下 &ndash;&gt;
                             <outputDirectory>${project.build.directory}/lib</outputDirectory>
                         </configuration>
                     </execution>
@@ -112,23 +134,23 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <configuration>
-                    <!-- 这个插件需要指定一个配置文件 -->
+                    &lt;!&ndash; 这个插件需要指定一个配置文件 &ndash;&gt;
                     <descriptors>
                         <descriptor>src/main/resources/assembly.xml</descriptor>
                     </descriptors>
                 </configuration>
                 <executions>
                     <execution>
-                        <!-- 自定义 -->
+                        &lt;!&ndash; 自定义 &ndash;&gt;
                         <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
-                            <!-- 只执行一次 -->
+                            &lt;!&ndash; 只执行一次 &ndash;&gt;
                             <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin>-->
         </plugins>
 
     </build>

@@ -1,12 +1,13 @@
 package site.lanmushan.framework.configure;
 
 import site.lanmushan.framework.dto.QueryInfo;
+import site.lanmushan.framework.util.ServletUtil;
 import site.lanmushan.framework.utils.OperateException;
 import site.lanmushan.framework.annotations.RequestQueryInfo;
 
 import site.lanmushan.framework.util.ReflectionUtil;
 import site.lanmushan.framework.util.StringCommonUtil;
-import site.lanmushan.framework.util.util.ServletUtil;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -40,7 +41,6 @@ public class RequestQueryInfoHandlerMethodArgumentResolver  implements HandlerMe
 
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        log.info("自定义处理器");
         Class<?> clazz = methodParameter.getParameterType();
         if(!clazz.equals(QueryInfo.class))
         {

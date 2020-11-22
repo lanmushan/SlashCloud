@@ -17,6 +17,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>log-common</artifactId>
+        </dependency>
+        <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
         </dependency>
@@ -33,14 +37,6 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>

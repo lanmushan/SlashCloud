@@ -34,21 +34,6 @@ public class CurrentUserUtil {
         return currentUser == null ? false : true;
     }
 
-    public static boolean isAdmin() {
-        CurrentUser currentUser = getCurrentUser();
-        if (null == currentUser) {
-            throw new OperateException("用户未登录", HTTPCode.D600);
-        }
-        return isAdmin(currentUser);
-    }
-
-    public static boolean isAdmin(CurrentUser currentUser) {
-        List<String> roleList = currentUser.getRoleCodes();
-        if (null == roleList || roleList.size() == 0) {
-            return false;
-        }
-        return roleList.contains("admin");
-    }
 
     /**
      * 获取当前用户的token
@@ -65,8 +50,9 @@ public class CurrentUserUtil {
             return JSON.parseObject(jsonStr, CurrentUser.class);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
+            return null;
         }
-        return null;
+
     }
 
     /**
@@ -75,23 +61,24 @@ public class CurrentUserUtil {
      * @return
      */
     public static CurrentUser getCurrentUser() {
-        try {
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            String token = request.getHeader(AUTHORIZATION);
-            return getCurrentUser(token);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
+
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String token = request.getHeader(AUTHORIZATION);
+        CurrentUser currentUser = getCurrentUser(token);
+        if (currentUser == null) {
+            throw new OperateException("未登录", HTTPCode.D600);
+
         }
-        return null;
+        return currentUser;
     }
 
-    public static List<String> getCurrentUserApis(CurrentUser currentUser) {
+    public static List<String> getUserApis(CurrentUser currentUser) {
         List<String> list = new ArrayList<>();
         list.add("/api/test/test");
         return list;
     }
 
-    public static List<String> savaCurrentUserApis(CurrentUser currentUser, List<String> apiList) {
+    public static List<String> saveUserApis(CurrentUser currentUser, List<String> apiList) {
         return null;
     }
 

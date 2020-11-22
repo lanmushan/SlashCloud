@@ -1,6 +1,8 @@
 package site.lanmushan.authorization;
 
 import lombok.Data;
+import site.lanmushan.framework.constant.HTTPCode;
+import site.lanmushan.framework.utils.OperateException;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,5 +22,17 @@ public class CurrentUser implements Serializable {
     private Integer sex;
     private String headImgAddress;
     private List<String> roleCodes;
-    private long loginTime=System.currentTimeMillis();
+    private long loginTime = System.currentTimeMillis();
+
+    /**
+     * 返回当前用户是不是超级管理员
+     * @return
+     */
+    public boolean isAdmin() {
+        List<String> roleList = roleCodes;
+        if (null == roleList || roleList.size() == 0) {
+            return false;
+        }
+        return roleList.contains("admin");
+    }
 }

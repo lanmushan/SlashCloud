@@ -32,9 +32,9 @@ public class GlobalExceptionHandler {
      * @return
      * @throws Exception
      */
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = Throwable.class)
     @ResponseBody
-    public Message allExceptionHandler(HttpServletRequest request, Exception e) throws Exception {
+    public Message allExceptionHandler(HttpServletRequest request, Throwable e) throws Exception {
         log.error(e.getMessage(), e);
         Message msg = new Message();
         msg.setRow(e.getMessage());
@@ -64,7 +64,13 @@ public class GlobalExceptionHandler {
             }
             log.error("输入报文{}", input);
         }
-        msg.error(HTTPCode.E205, e.getMessage());
+        if (e.getHttpCode() != null) {
+            msg.setHttpCode(e.getHttpCode());
+            msg.error(e.getHttpCode(), e.getMessage());
+        } else {
+            msg.error(HTTPCode.E205, e.getMessage());
+
+        }
         return msg;
     }
 

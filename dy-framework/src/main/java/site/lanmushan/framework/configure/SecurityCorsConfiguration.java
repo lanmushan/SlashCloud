@@ -19,7 +19,7 @@ import java.util.Arrays;
 public class SecurityCorsConfiguration {
 
     @SuppressWarnings("unchecked")
-    //@Bean
+    @Bean
     public FilterRegistrationBean corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();

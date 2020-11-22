@@ -11,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 
-@Component
+//@Component
 public class CorsResponseHeaderFilter implements GlobalFilter, Ordered {
     @Override
     public int getOrder() {

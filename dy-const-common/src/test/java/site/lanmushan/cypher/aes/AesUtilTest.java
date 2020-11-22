@@ -8,8 +8,7 @@ import org.junit.Test;
  * @Date 2020/6/21 12:18
  * @Version 1.0
  */
-@Slf4j
-
+//@Slf4j
 public class AesUtilTest {
 
     @Test
