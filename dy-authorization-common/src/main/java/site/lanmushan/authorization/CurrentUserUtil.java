@@ -62,17 +62,11 @@ public class CurrentUserUtil {
     public static CurrentUser getCurrentUser(String token) {
         try {
             String jsonStr = TokenUtil.resolveToken(token, tokenSecretKey);
-            if(null==jsonStr)
-            {
-                throw new OperateException("未登录",HTTPCode.D600);
-            }
             return JSON.parseObject(jsonStr, CurrentUser.class);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
-            throw new OperateException("未登录",HTTPCode.D600);
-
         }
-
+        return null;
     }
 
     /**
@@ -81,11 +75,14 @@ public class CurrentUserUtil {
      * @return
      */
     public static CurrentUser getCurrentUser() {
-
+        try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             String token = request.getHeader(AUTHORIZATION);
             return getCurrentUser(token);
-
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return null;
     }
 
     public static List<String> getCurrentUserApis(CurrentUser currentUser) {

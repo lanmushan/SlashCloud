@@ -64,13 +64,7 @@ public class GlobalExceptionHandler {
             }
             log.error("输入报文{}", input);
         }
-        if (e.getHttpCode() != null) {
-            msg.setHttpCode(e.getHttpCode());
-            msg.error(e.getHttpCode(), e.getMessage());
-        } else {
-            msg.error(HTTPCode.E205, e.getMessage());
-
-        }
+        msg.error(HTTPCode.E205, e.getMessage());
         return msg;
     }
 

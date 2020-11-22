@@ -4,8 +4,6 @@ import java.util.Date;
 import java.io.Serializable;
 
 import com.alibaba.fastjson.JSONObject;
-import site.lanmushan.framework.entity.BaseEntity;
-import site.lanmushan.framework.entity.TreeNode;
 import site.lanmushan.framework.util.uuid.SeqGenId;
 import lombok.Data;
 
@@ -22,7 +20,7 @@ import tk.mybatis.mapper.annotation.KeySql;
  */
 @Table(name = "auth_tb_resource")
 @Data
-public class AuthTbResource extends BaseEntity implements Serializable {
+public class AuthTbResource implements Serializable {
     private static final long serialVersionUID = -48376736617826881L;
     /**
      * 编号
@@ -89,18 +87,4 @@ public class AuthTbResource extends BaseEntity implements Serializable {
     private JSONObject resourceAttr;
 
 
-    @Override
-    public boolean isRoot() {
-        if (fkParentId != null) {
-            return fkParentId.compareTo(0L) == 0;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isChildren(TreeNode treeNode) {
-        AuthTbResource authTbResource = (AuthTbResource) treeNode;
-        return this.getId().equals(authTbResource.getFkParentId());
-
-    }
 }
