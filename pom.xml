@@ -40,7 +40,7 @@
 
         <module>dy-sys-service</module>
         <module>dy-gateway-service</module>
-
+        <!--组件-->
         <module>slash-common-uuid</module>
         <module>slash-common-query</module>
         <module>slash-common-framework</module>
