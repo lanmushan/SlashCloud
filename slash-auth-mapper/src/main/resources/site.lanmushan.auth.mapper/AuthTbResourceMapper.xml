@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.lanmushan.auth.app.mapper.AuthTbResourceMapper">
+
+    <resultMap type="site.lanmushan.auth.app.entity.AuthTbResource" id="baseResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="resourceName" column="resource_name" jdbcType="VARCHAR"/>
+        <result property="resourceDescription" column="resource_description" jdbcType="VARCHAR"/>
+        <result property="resourceUrl" column="resource_url" jdbcType="VARCHAR"/>
+        <result property="iconDefault" column="icon_default" jdbcType="VARCHAR"/>
+        <result property="fkParentId" column="fk_parent_id" jdbcType="OTHER"/>
+        <result property="resourceType" column="resource_type" jdbcType="VARCHAR"/>
+        <result property="disabled" column="disabled" jdbcType="INTEGER"/>
+        <result property="resourceId" column="resource_id" jdbcType="VARCHAR"/>
+        <result property="orderIndex" column="order_index" jdbcType="INTEGER"/>
+        <result property="createUserId" column="create_user_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
+        select id, resource_name, resource_description, resource_url, icon_default, fk_parent_id, resource_type,
+        disabled, resource_id, order_index, create_user_id, create_time, update_time from auth_tb_resource
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
+                <choose>
+                    <when test="it.key == 'search_key'">
+                    </when>
+                    <otherwise>
+                        <if test="it.operate =='in'">
+                            ${it.key} ${it.operate} (#{it.value})
+                        </if>
+                        <if test="it.operate !='in'">
+                            ${it.key} ${it.operate} #{it.value}
+                        </if>
+                    </otherwise>
+                </choose>
+            </foreach>
+        </trim>
+    </select>
+    <select id="selectResourceByRoleCodes" resultMap="baseResultMap">
+        SELECT
+        distinct
+        b.*
+        FROM
+        auth_fk_role_resource AS a
+        RIGHT JOIN auth_tb_resource AS b ON a.fk_resource_id = b.id
+        WHERE
+        b.disabled=0
+        <if test="roleCodes != null">
+            and a.fk_role_code in (#{roleCodes})
+        </if>
+        <if test="type != null">
+            and b.resource_type=#{type}
+        </if>
+        order by b.order_index desc
+    </select>
+</mapper>

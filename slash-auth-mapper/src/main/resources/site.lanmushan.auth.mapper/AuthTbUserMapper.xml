@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.lanmushan.auth.app.mapper.AuthTbUserMapper">
+    <resultMap type="site.lanmushan.auth.app.vo.VoAuthTbUser" id="baseResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="idCard" column="id_card" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="INTEGER"/>
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="loginPassword" column="login_password" jdbcType="VARCHAR"/>
+        <result property="operatePassword" column="operate_password" jdbcType="VARCHAR"/>
+        <result property="salt" column="salt" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="fkPostId" column="fk_post_id" jdbcType="INTEGER"/>
+        <result property="isLock" column="is_lock" jdbcType="INTEGER"/>
+        <result property="accountType" column="account_type" jdbcType="VARCHAR"/>
+        <result property="headImgAddress" column="head_img_address" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+        <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!--用户列表查询-->
+    <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
+        select tb.id, tb.dept_id, tb.nick_name, tb.username, tb.phone, tb.id_card, tb.email, tb.sex, tb.account,
+        tb.create_time,tb. update_time, tb.fk_post_id, tb.is_lock, tb.account_type, tb.head_img_address, tb.deleted,
+        tb.create_user from
+        auth_tb_user as tb left join auth_fk_user_role as ur on tb.id=ur.fk_user_id
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
+                <choose>
+                    <when test="it.key =='role_code'">
+                        ur.fk_role_code ${it.operate} #{it.value}
+                    </when>
+                    <otherwise>
+                        <if test="it.operate =='in'">
+                            ${it.key} ${it.operate} (#{it.value})
+                        </if>
+                        <if test="it.operate !='in'">
+                            ${it.key} ${it.operate} #{it.value}
+                        </if>
+                    </otherwise>
+                </choose>
+            </foreach>
+            <if test="searchKey !=null and searchKey!=''">
+                and ( tb.phone like #{searchKey} or tb.account like #{searchKey} )
+            </if>
+        </trim>
+    </select>
+    <select id="selectLoginUser" parameterType="java.lang.String" resultMap="baseResultMap">
+        select tb.id,
+               tb.username,
+               tb.phone,
+               tb.id_card,
+               tb.email,
+               tb.sex,
+               tb.account,
+               tb.login_password,
+               tb.operate_password,
+               tb.salt,
+               tb.create_time,
+               tb.update_time,
+               tb.is_lock,
+               tb.account_type,
+               tb.head_img_address
+        from auth_tb_user as tb
+        where account = #{account}
+           or phone = #{account}
+    </select>
+    <select id="selectUserByRoleCode" parameterType="java.lang.String" resultMap="baseResultMap">
+        select *
+        from auth_tb_user as l
+                 right join (select fk_user_id as id
+                             from auth_fk_user_role
+                             where fk_role_id in (select id from auth_tb_role WHERE role_code = #{roleCode})) as r
+                            on l.id = r.id
+
+    </select>
+</mapper>

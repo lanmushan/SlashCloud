@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <groupId>site.lanmushan</groupId>
-    <artifactId>dy-parent</artifactId>
+    <artifactId>slash-cloud-pom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>dy-parent</name>
+    <name>slash-cloud-pom</name>
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
@@ -28,23 +28,56 @@
         <fastjson.version>1.2.58</fastjson.version>
     </properties>
     <modules>
-        <module>dy-auth-service</module>
+
+        <module>slash-auth-app</module>
+        <module>slash-auth-api</module>
+        <module>slash-auth-service</module>
+        <module>slash-auth-mapper</module>
+
+        <module>slash-sys-app</module>
+        <module>slash-sys-mapper</module>
+        <module>slash-sys-api</module>
+
         <module>dy-sys-service</module>
-        <module>dy-file-service</module>
-        <module>dy-framework</module>
         <module>dy-gateway-service</module>
-        <module>dy-cypher-common</module>
-        <module>dy-dto-common</module>
-        <module>dy-base-common</module>
-        <module>dy-const-common</module>
-        <module>dy-authorization-common</module>
-        <module>dy-redis-common</module>
-        <module>dy-exception-common</module>
-        <module>dy-log-common</module>
-        <module>dy-file-common</module>
+
+        <module>slash-common-uuid</module>
+        <module>slash-common-query</module>
+        <module>slash-common-framework</module>
+        <module>slash-common-cypher</module>
+        <module>slash-common-dto</module>
+        <module>slash-common-util</module>
+        <module>slash-common-authorization</module>
+        <module>slash-common-redis</module>
+        <module>slash-common-const</module>
+        <module>slash-common-log</module>
+        <module>slash-common-file</module>
+        <module>slash-common-exception</module>
+        <module>slash-common-http</module>
+        <module>slash-common-typehandler</module>
     </modules>
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-auth-api</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-log</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-query</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-uuid</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>log-common</artifactId>
@@ -52,12 +85,12 @@
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>cypher-common</artifactId>
+                <artifactId>slash-common-cypher</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>exception-common</artifactId>
+                <artifactId>slash-common-exception</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -67,7 +100,7 @@
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>authorization-common</artifactId>
+                <artifactId>slash-common-authorization</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -77,22 +110,22 @@
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>dto-common</artifactId>
+                <artifactId>slash-common-dto</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>base-common</artifactId>
+                <artifactId>slash-common-util</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>const-common</artifactId>
+                <artifactId>slash-common-const</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>file-common</artifactId>
+                <artifactId>slash-common-file</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -137,9 +170,9 @@
             </dependency>
             <!--redis相关依赖-->
             <!--<dependency>-->
-                <!--<groupId>org.springframework.session</groupId>-->
-                <!--<artifactId>spring-session-data-redis</artifactId>-->
-                <!--<version>2.0.3.RELEASE</version>-->
+            <!--<groupId>org.springframework.session</groupId>-->
+            <!--<artifactId>spring-session-data-redis</artifactId>-->
+            <!--<version>2.0.3.RELEASE</version>-->
             <!--</dependency>-->
             <!--基础工具或其他常用依赖相关-->
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -303,97 +336,6 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!--如果只需要一个jar包，采用这种方式，需要外置脚本-->
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<classifier>exec</classifier>-->
-                    <!--&lt;!&ndash; 指定启动类的包路径 这个变量在子模块定义了&ndash;&gt;-->
-                    <!--<mainClass>${main.class}</mainClass>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>repackage</goal>&lt;!&ndash;可以把依赖的包都打包到生成的Jar包中&ndash;&gt;-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-
-           <!-- assembly打包开始-->
-            <!--会打成一个压缩包，包含各种配置文件和启动脚本在外面-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <!-- 将静态资源排除出jar包 -->
-                    <excludes>
-                        <exclude>static/**</exclude>
-                        <exclude>templates/**</exclude>
-                        <exclude>*.*</exclude>
-                    </excludes>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <!-- MANIFEST.MF 中 Class-Path 加入前缀 -->
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <!-- jar包不包含唯一版本标识 -->
-                            <useUniqueVersions>false</useUniqueVersions>
-                            <!-- 指定启动类的包路径 这个变量在子模块定义了-->
-                            <mainClass>${main.class}</mainClass>
-                        </manifest>
-                        <manifestEntries>
-                            <!--MANIFEST.MF 中 Class-Path 加入资源文件目录 -->
-                            <Class-Path>conf/</Class-Path>
-                        </manifestEntries>
-                    </archive>
-                    <!-- 指定打出的jar包路径 -->
-                    <outputDirectory>${project.build.directory}</outputDirectory>
-                </configuration>
-            </plugin>
-            <!--复制jar包的-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <!-- 自定义 -->
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <!-- 复制依赖的jar包 -->
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <!-- 将依赖的jar包复制到该路径下 -->
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <!-- 这个插件需要指定一个配置文件 -->
-                    <descriptors>
-                        <descriptor>src/main/resources/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <!-- 自定义 -->
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <!-- 只执行一次 -->
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--assembly打包结束-->
         </plugins>
         <pluginManagement>
             <plugins>
