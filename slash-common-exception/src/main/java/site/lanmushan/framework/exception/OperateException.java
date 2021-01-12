@@ -1,5 +1,6 @@
 package site.lanmushan.framework.exception;
 
+
 import site.lanmushan.framework.constant.HTTPCode;
 
 /**

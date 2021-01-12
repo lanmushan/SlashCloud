@@ -18,6 +18,10 @@
     <dependencies>
         <dependency>
             <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-dto</artifactId>
         </dependency>
         <dependency>
@@ -36,11 +40,15 @@
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
-            <artifactId>log-common</artifactId>
+            <artifactId>slash-common-log</artifactId>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-const</artifactId>
         </dependency>
     </dependencies>
 

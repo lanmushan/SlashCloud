@@ -44,7 +44,7 @@
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
-            <artifactId>log-common</artifactId>
+            <artifactId>slash-common-log</artifactId>
         </dependency>
         <dependency>
             <groupId>org.bouncycastle</groupId>

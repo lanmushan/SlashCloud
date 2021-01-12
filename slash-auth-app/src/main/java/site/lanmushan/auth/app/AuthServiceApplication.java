@@ -1,5 +1,7 @@
 package site.lanmushan.auth.app;
 
+
+
 import org.apache.logging.log4j.ThreadContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,6 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import tk.mybatis.spring.annotation.MapperScan;
 
 import java.util.ResourceBundle;
+
 
 /**
  * 用户权限服务
