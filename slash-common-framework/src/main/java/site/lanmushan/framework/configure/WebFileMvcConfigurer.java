@@ -1,6 +1,7 @@
 package site.lanmushan.framework.configure;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
@@ -16,6 +17,7 @@ import site.lanmushan.framework.file.LocalResourceUtils;
  */
 @Configuration
 @Slf4j
+@ConditionalOnProperty(prefix = "slash", name = "cloud", havingValue = "false")
 public class WebFileMvcConfigurer implements WebMvcConfigurer {
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {

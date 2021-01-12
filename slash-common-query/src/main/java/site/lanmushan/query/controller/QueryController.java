@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
-import site.lanmushan.framework.utils.OperateException;
+import site.lanmushan.framework.exception.OperateException;
 import site.lanmushan.query.annotations.RequestQueryInfo;
 import site.lanmushan.query.service.BaseService;
 import site.lanmushan.query.util.ApplicationUtil;

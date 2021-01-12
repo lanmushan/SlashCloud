@@ -1,5 +1,6 @@
 package site.lanmushan.framework.configure;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +15,10 @@ import java.util.Arrays;
 /**
  * FIXME 这个东西有毛病，设置后经过网关跨域无效了，暂时不处理
  */
-//@Configuration
+@Configuration
 @Slf4j
+@ConditionalOnProperty(prefix = "slash", name = "cloud", havingValue = "false")
+
 public class SecurityCorsConfiguration {
 
     @SuppressWarnings("unchecked")

@@ -19,7 +19,7 @@
         <!--基础框架-->
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
-        <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
+        <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
         <!--数据库相关-->
         <mysql.version>8.0.16</mysql.version>
         <druid.version>1.1.9</druid.version>
@@ -33,13 +33,14 @@
         <module>slash-auth-api</module>
         <module>slash-auth-service</module>
         <module>slash-auth-mapper</module>
+        <module>slash-auth-controller</module>
 
         <module>slash-sys-app</module>
         <module>slash-sys-mapper</module>
         <module>slash-sys-api</module>
+        <module>slash-sys-service</module>
 
-        <module>dy-sys-service</module>
-        <module>dy-gateway-service</module>
+        <!--<module>dy-gateway-service</module>-->
         <!--组件-->
         <module>slash-common-uuid</module>
         <module>slash-common-query</module>
@@ -55,6 +56,7 @@
         <module>slash-common-exception</module>
         <module>slash-common-http</module>
         <module>slash-common-typehandler</module>
+        <module>slash-main-application</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -162,12 +164,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--权限控制框架shiro-->
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-spring</artifactId>
-                <version>1.5.3</version>
-            </dependency>
             <!--redis相关依赖-->
             <!--<dependency>-->
             <!--<groupId>org.springframework.session</groupId>-->
@@ -181,11 +177,11 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.7</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.directory.studio</groupId>
-                <artifactId>org.apache.commons.io</artifactId>
-                <version>2.4</version>
-            </dependency>
+            <!--<dependency>-->
+            <!--<groupId>org.apache.directory.studio</groupId>-->
+            <!--<artifactId>org.apache.commons.io</artifactId>-->
+            <!--<version>2.4</version>-->
+            <!--</dependency>-->
             <!--spring2.0集成redis所需common-pool2-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -227,11 +223,11 @@
                 <version>1.3.2</version>
             </dependency>
             <!--邮件相关开始-->
-            <dependency>
-                <groupId>com.sun.mail</groupId>
-                <artifactId>javax.mail</artifactId>
-                <version>1.6.2</version>
-            </dependency>
+            <!--<dependency>-->
+            <!--<groupId>com.sun.mail</groupId>-->
+            <!--<artifactId>javax.mail</artifactId>-->
+            <!--<version>1.6.2</version>-->
+            <!--</dependency>-->
             <!--excel工具-->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -259,11 +255,6 @@
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-annotations</artifactId>
                 <version>1.5.19</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-web</artifactId>
-                <version>2.10.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-beanutils</groupId>
@@ -294,9 +285,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <dependencies>
-    </dependencies>
-
     <profiles>
         <profile>
             <!--不同环境Profile的唯一id-->

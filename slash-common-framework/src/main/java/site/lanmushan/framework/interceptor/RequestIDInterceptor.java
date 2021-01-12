@@ -25,10 +25,9 @@ public class RequestIDInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String requestId = request.getHeader("requestId");
         if (requestId == null) {
-            requestId="0";
+            requestId = "0";
         }
-            MDC.put("requestId", requestId);
-
+        MDC.put("requestId", requestId);
         //业务代码
         return true;
     }

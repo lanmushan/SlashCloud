@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
-            <artifactId>framework</artifactId>
+            <artifactId>slash-common-framework</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

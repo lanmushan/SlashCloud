@@ -22,13 +22,15 @@ public class CustomRedisSerializer implements RedisSerializer {
 
     @Override
     public Object deserialize(byte[] bytes) throws SerializationException {
-        if(bytes == null) return null;
+        if (bytes == null){
+            return null;
+        }
         ByteArrayInputStream byteIn = new ByteArrayInputStream(bytes);
         ObjectInputStream objIn;
         Object obj;
         try {
             objIn = new ObjectInputStream(byteIn);
-            obj =objIn.readObject();
+            obj = objIn.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;

@@ -1,7 +1,6 @@
 package site.lanmushan.framework.util.excel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.metadata.BaseRowModel;
 import lombok.Data;
 
 import java.io.Serializable;
