@@ -18,7 +18,6 @@ import java.util.Arrays;
 @Configuration
 @Slf4j
 @ConditionalOnProperty(prefix = "slash", name = "cloud", havingValue = "false")
-
 public class SecurityCorsConfiguration {
 
     @SuppressWarnings("unchecked")

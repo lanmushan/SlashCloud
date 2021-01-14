@@ -3,7 +3,7 @@ package site.lanmushan.auth.service;
 
 import site.lanmushan.auth.api.bo.BoAuthTbUserLoginLog;
 import site.lanmushan.auth.api.entity.AuthTbUserLoginLog;
-import site.lanmushan.query.service.BaseService;
+import site.lanmushan.framework.query.service.BaseService;
 
 import java.util.List;
 

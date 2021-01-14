@@ -4,7 +4,7 @@ package site.lanmushan.auth.service;
 
 import site.lanmushan.auth.api.bo.BoAuthTbRole;
 import site.lanmushan.auth.api.entity.AuthTbRole;
-import site.lanmushan.query.service.BaseService;
+import site.lanmushan.framework.query.service.BaseService;
 
 import java.util.List;
 

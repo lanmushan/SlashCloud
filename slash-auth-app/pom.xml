@@ -5,16 +5,16 @@
     <parent>
         <groupId>site.lanmushan</groupId>
         <artifactId>slash-cloud-pom</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>site.lanmushan</groupId>
     <artifactId>slash-auth-app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>slash-auth-app</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <main.class>site.lanmushan.auth.app.AuthServiceApplication</main.class>
+        <main.class>site.lanmushan.auth.controller.app.AuthServiceApplication</main.class>
     </properties>
     <dependencies>
         <dependency>
@@ -24,26 +24,23 @@
         <dependency>
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-auth-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-auth-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-framework</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-authorization</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-openfeign</artifactId>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
@@ -52,6 +49,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
     </dependencies>
     <build>

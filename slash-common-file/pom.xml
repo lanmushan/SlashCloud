@@ -5,12 +5,12 @@
     <parent>
         <artifactId>slash-cloud-pom</artifactId>
         <groupId>site.lanmushan</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>site.lanmushan</groupId>
     <artifactId>slash-common-file</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>slash-common-file</name>
     <description>Demo project for Spring Boot</description>
 
@@ -28,15 +28,6 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
         </dependency>
     </dependencies>
 

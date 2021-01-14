@@ -1,7 +1,6 @@
 package site.lanmushan.auth.controller;
 
 import com.github.pagehelper.PageInfo;
-import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,13 @@ import site.lanmushan.auth.api.entity.AuthTbRole;
 import site.lanmushan.auth.mapper.AuthTbResourceMapper;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
 import site.lanmushan.auth.service.AuthTbResourceService;
-import site.lanmushan.framework.annotations.RequestQueryInfo;
 import site.lanmushan.framework.authorization.CurrentUser;
 import site.lanmushan.framework.authorization.CurrentUserUtil;
-import site.lanmushan.framework.controller.BaseController;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
-import site.lanmushan.framework.util.TreeUtil;
+import site.lanmushan.framework.query.annotations.RequestQueryInfo;
+import site.lanmushan.framework.query.controller.BaseController;
+import site.lanmushan.framework.query.util.TreeUtil;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -34,7 +33,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/authTbResource")
 @Slf4j
-@Api(tags = "资源服务接口")
 public class AuthTbResourceController extends BaseController {
     @Autowired
     private AuthTbResourceMapper authTbResourceMapper;

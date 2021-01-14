@@ -1,7 +1,5 @@
 package site.lanmushan.auth.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,14 +21,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/authTbPost")
 @Slf4j
-@Api(tags = "部门服务接口")
 public class AuthTbPostController {
     @Autowired
     private AuthTbPostMapper authTbPostMapper;
     @Autowired
     private AuthTbPostService authTbPostService;
 
-    @ApiOperation("根据ID查询")
     @GetMapping("/selectById")
     public Message selectById(@RequestParam("id") Long id) {
         Message msg = new Message();
@@ -38,8 +34,6 @@ public class AuthTbPostController {
         msg.setRow(authTbPost);
         return msg;
     }
-
-    @ApiOperation("新增")
     @PostMapping("/add")
     public Message add(@RequestBody @Valid BoAuthTbPost obj) {
         Message msg = new Message();
@@ -52,7 +46,6 @@ public class AuthTbPostController {
      * @param obj
      * @return
      */
-    @ApiOperation("修改")
     @PostMapping("/update")
     public Message update(@RequestBody @Valid BoAuthTbPost obj) {
         Message msg = new Message();
@@ -66,7 +59,6 @@ public class AuthTbPostController {
      * @return
      */
     @PostMapping("/delete")
-    @ApiOperation("删除")
     public Message delete(@RequestParam List<Long> ids) {
         Message msg = new Message();
         authTbPostService.deleteServiceByIds(ids);

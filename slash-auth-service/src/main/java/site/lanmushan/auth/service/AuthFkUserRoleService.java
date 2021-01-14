@@ -2,7 +2,7 @@ package site.lanmushan.auth.service;
 
 import site.lanmushan.auth.api.bo.BoAuthFkUserRole;
 import site.lanmushan.auth.api.entity.AuthFkUserRole;
-import site.lanmushan.query.service.BaseService;
+import site.lanmushan.framework.query.service.BaseService;
 
 
 import java.util.List;

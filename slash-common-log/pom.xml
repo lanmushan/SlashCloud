@@ -4,13 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>site.lanmushan</groupId>
-        <artifactId>dispose-engine-parent</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <artifactId>slash-cloud-pom</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>site.lanmushan</groupId>
     <artifactId>slash-common-log</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>slash-common-log</name>
     <description>Demo project for Spring Boot</description>
 

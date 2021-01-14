@@ -2,7 +2,7 @@ package site.lanmushan.auth.service;
 
 import site.lanmushan.auth.api.bo.BoAuthTbPost;
 import site.lanmushan.auth.api.entity.AuthTbPost;
-import site.lanmushan.query.service.BaseService;
+import site.lanmushan.framework.query.service.BaseService;
 
 import java.util.List;
 

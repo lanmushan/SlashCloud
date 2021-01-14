@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
     <groupId>site.lanmushan</groupId>
     <artifactId>slash-cloud-pom</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>slash-cloud-pom</name>
     <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,7 +39,7 @@
         <module>slash-sys-mapper</module>
         <module>slash-sys-api</module>
         <module>slash-sys-service</module>
-
+        <module>slash-sys-controller</module>
         <!--<module>dy-gateway-service</module>-->
         <!--组件-->
         <module>slash-common-uuid</module>
@@ -57,57 +57,86 @@
         <module>slash-common-http</module>
         <module>slash-common-typehandler</module>
         <module>slash-main-application</module>
+        <module>slash-starter-dependencies</module>
     </modules>
     <dependencyManagement>
         <dependencies>
+            <!--<dependency>-->
+                <!--<groupId>site.lanmushan</groupId>-->
+                <!--<artifactId>slash-starter-dependencies</artifactId>-->
+                <!--<version>1.0.0-SNAPSHOT</version>-->
+                <!--<type>pom</type>-->
+                <!--<scope>import</scope>-->
+            <!--</dependency>-->
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-redis</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>slash-sys-mapper</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>slash-auth-api</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>slash-sys-service</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>slash-auth-service</artifactId>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-auth-mapper</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-log</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>slash-sys-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-query</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-redis</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-auth-api</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-auth-service</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-auth-mapper</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-log</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-query</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-uuid</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-cypher</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-exception</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-authorization</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>eu.bitwalker</groupId>
@@ -117,27 +146,47 @@
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-dto</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-util</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-const</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-file</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-framework</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-sys-controller</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-http</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-auth-controller</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-typehandler</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <!--二维码-->
             <dependency>
@@ -310,6 +359,27 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.11.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.11.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.11.1</version>
+                <scope>compile</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <profiles>
@@ -379,7 +449,7 @@
                 <excludes>
                     <exclude>dev/*</exclude>
                     <exclude>prod/*</exclude>
-                    <exclude>test/*</exclude>
+                    <exclude>sit/*</exclude>
                 </excludes>
             </resource>
             <resource>
@@ -412,4 +482,15 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>releases</id>-->
+            <!--<url>http://nexus.xx.com/content/repositories/releases</url>-->
+        <!--</repository>-->
+        <!--<snapshotRepository>-->
+            <!--<id>nexus-snapshots</id>-->
+            <!--<name>Snapshots repository</name>-->
+            <!--<url>http://192.168.1.105/repository/yang/</url>-->
+        <!--</snapshotRepository>&ndash;&gt;-->
+    <!--</distributionManagement>-->
 </project>

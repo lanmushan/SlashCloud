@@ -11,7 +11,7 @@ import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
 import site.lanmushan.framework.util.utils.DateUtil;
 import site.lanmushan.framework.uuid.MyUUID;
-import site.lanmushan.query.annotations.EnabledQuickSelect;
+import site.lanmushan.framework.query.annotations.EnabledQuickSelect;
 
 import java.util.Date;
 import java.util.List;

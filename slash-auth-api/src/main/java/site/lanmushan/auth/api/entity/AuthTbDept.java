@@ -3,8 +3,8 @@ package site.lanmushan.auth.api.entity;
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
 import site.lanmushan.framework.uuid.SeqGenId;
-import site.lanmushan.query.entity.BaseEntity;
-import site.lanmushan.query.entity.TreeNode;
+import site.lanmushan.framework.query.entity.BaseEntity;
+import site.lanmushan.framework.query.entity.TreeNode;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;

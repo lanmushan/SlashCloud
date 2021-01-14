@@ -1,7 +1,7 @@
 package site.lanmushan.sys.mapper;
 
 
-import site.lanmushan.query.mapper.QueryMapper;
+import site.lanmushan.framework.query.mapper.QueryMapper;
 import site.lanmushan.sys.api.entity.SysTbDict;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.common.special.InsertListMapper;

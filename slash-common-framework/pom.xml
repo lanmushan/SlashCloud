@@ -5,12 +5,12 @@
     <parent>
         <groupId>site.lanmushan</groupId>
         <artifactId>slash-cloud-pom</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>site.lanmushan</groupId>
     <artifactId>slash-common-framework</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>slash-common-framework</name>
     <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
@@ -215,7 +215,7 @@
         <dependency>
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-cypher</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -226,7 +226,7 @@
         <dependency>
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-redis</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

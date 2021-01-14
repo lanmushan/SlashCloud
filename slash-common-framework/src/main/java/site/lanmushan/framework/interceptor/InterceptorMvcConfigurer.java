@@ -17,11 +17,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Slf4j
 public class InterceptorMvcConfigurer implements WebMvcConfigurer {
     @Autowired
-    private RequestIDInterceptor requestUIDInterceptor;
+    private RequestIDInterceptor requestIDInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(requestUIDInterceptor).addPathPatterns("/**");
-        log.info("拦截器设置成功");
+        registry.addInterceptor(requestIDInterceptor).addPathPatterns("/**");
+        log.info("requestIDInterceptor拦截器设置成功");
     }
 }

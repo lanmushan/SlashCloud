@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #source $(dirname $0)/../../env.sh
-SERVERJAR="database-project-0.0.1-SNAPSHOT.jar"
+SERVERJAR="database-project-1.0.0.jar"
 base_dir=$(dirname $0)
 cd ..
 
@@ -20,7 +20,7 @@ JAVA_OPTS="-server -Xms32m -Xmx32m -Xmn24m -Xss256K   \
 -XX:+PrintGCDetails -Xloggc:$base_dir/gc.log"
 
 echo -n "Starting server ..."
-    PID=$(ps -ef | grep database-project-0.0.1-SNAPSHOT.jar | grep -v grep |awk '{print $2}')
+    PID=$(ps -ef | grep database-project-1.0.0.jar | grep -v grep |awk '{print $2}')
 if [ -z "$PID" ]; then
    echo Application is already stopped
 else

@@ -1,6 +1,6 @@
 package site.lanmushan.sys.service;
 
-import site.lanmushan.query.service.BaseService;
+import site.lanmushan.framework.query.service.BaseService;
 import site.lanmushan.sys.api.bo.BoSysTbDictGroup;
 import site.lanmushan.sys.api.entity.SysTbDictGroup;
 

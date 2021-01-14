@@ -2,7 +2,7 @@ package site.lanmushan.auth.controller;
 
 
 import com.alibaba.fastjson.JSONObject;
-import io.swagger.annotations.Api;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +26,11 @@ import site.lanmushan.framework.constant.StateTypeConstant;
 import site.lanmushan.framework.cypher.base64.Base64Util;
 import site.lanmushan.framework.cypher.md5.MD5Util;
 import site.lanmushan.framework.dto.Message;
-import site.lanmushan.framework.util.IpUtil;
-import site.lanmushan.framework.util.ServletUtil;
 import site.lanmushan.framework.util.VerifyCodeUtils;
-import site.lanmushan.framework.util.date.DateUtil;
+import site.lanmushan.framework.util.utils.DateUtil;
+import site.lanmushan.framework.query.util.ServletUtil;
 
+import javax.management.OperationsException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -48,7 +48,6 @@ import static java.util.stream.Collectors.toList;
 @RestController
 @RequestMapping("/authLogin")
 @Slf4j
-@Api(tags = "登录服务接口")
 public class LoginController {
     @Autowired
     private AuthTbUserMapper authUserMapper;
@@ -77,20 +76,19 @@ public class LoginController {
      * @return
      */
     @PostMapping("/loginManage")
-    public Message userLogin(@RequestBody BUserLogin account, HttpServletRequest request) {
-        String ip = IpUtil.getRemoteHost(request);
+    public Message userLogin(@RequestBody BUserLogin account, HttpServletRequest request) throws OperationsException {
+        String ip = ServletUtil.getRemoteHost(request);
         String os = ServletUtil.getLoginOs(request);
         String browser = ServletUtil.getLoginBrowser(request);
         /**以ip，操作系统，浏览器，账号为基础生成uuid,在登录接口验证*/
         String uuid=MD5Util.createMD532(ip+os+browser+account.getAccount());
-
         Message msg = new Message();
         BoAuthTbUserLoginLog loginLog = new BoAuthTbUserLoginLog();
         loginLog.setLoginSource("后台登录");
         loginLog.setLoginName(account.getAccount());
         loginLog.setCreateTime(DateUtil.now());
         try {
-            loginLog.setLoginIp(IpUtil.getRemoteHost(request));
+            loginLog.setLoginIp(ServletUtil.getRemoteHost(request));
             loginLog.setLoginOs(ServletUtil.getLoginOs(request));
             loginLog.setLoginBrowser(ServletUtil.getLoginBrowser(request));
             AuthTbUser tbUser = authUserMapper.selectLoginUser(account.getAccount());
@@ -111,9 +109,13 @@ public class LoginController {
                 return msg;
             }
             String token = handerCurentUser(tbUser);
+            loginLog.setLoginMsg("登录成功");
             msg.setRow(token).success("登录成功");
             return msg;
-        } finally {
+        }catch (Exception e){
+            loginLog.setLoginMsg("系统异常");
+            throw new OperationsException("系统异常");
+        }finally {
             loginService.insertService(loginLog);
         }
 
@@ -168,7 +170,7 @@ public class LoginController {
             base64 = base64.replaceAll("\n", "").replaceAll("\r", "");
             JSONObject data = new JSONObject();
             data.put("img", "data:image/png;base64," + base64);
-            String ip = IpUtil.getRemoteHost(request);
+            String ip = ServletUtil.getRemoteHost(request);
             String os = ServletUtil.getLoginOs(request);
             String browser = ServletUtil.getLoginBrowser(request);
             /**以ip，操作系统，浏览器，账号为基础生成uuid,在登录接口验证*/

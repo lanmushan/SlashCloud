@@ -2,7 +2,7 @@ package site.lanmushan.auth.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import site.lanmushan.auth.api.entity.AuthTbResource;
-import site.lanmushan.query.mapper.QueryMapper;
+import site.lanmushan.framework.query.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.common.special.InsertListMapper;
 
