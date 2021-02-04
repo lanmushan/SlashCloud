@@ -5,6 +5,7 @@ package site.lanmushan.framework.query.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +32,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @Order(value = -99999)
+@ConditionalOnProperty(prefix = "slash", name = "query", havingValue = "true")
 public class QueryController extends BaseController {
     @GetMapping(value = "/{entityName}/{methodName}")
     public Message selectList(@PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request) {

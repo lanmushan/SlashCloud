@@ -10,11 +10,10 @@
         #end
 
         #if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}service;
-
-import $!{tableInfo.savePackageName}.bo.Bo$!{tableInfo.name};
 import java.util.List;
-import site.lanmushan.framework.service.BaseService;
-import site.lanmushan.sysservice.entity.$!{tableInfo.name};
+import $!{tableInfo.savePackageName}.api.bo.Bo$!{tableInfo.name};
+import site.lanmushan.framework.query.service.BaseService;
+import $!{tableInfo.savePackageName}.api.entity.$!{tableInfo.name};
 /**
  * $!{tableInfo.comment}($!{tableInfo.name})表服务接口
  *

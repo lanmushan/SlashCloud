@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import site.lanmushan.framework.dto.Message;
+import site.lanmushan.sys.api.bo.BoSysTbDict;
 import site.lanmushan.sys.api.bo.BoSysTbDictGroup;
 import site.lanmushan.sys.api.entity.SysTbDictGroup;
 import site.lanmushan.sys.mapper.SysTbDictGroupMapper;
@@ -57,10 +58,14 @@ public class SysTbDictGroupController {
      * @param ids
      * @return
      */
+    /**
+     * @param obj
+     * @return
+     */
     @PostMapping("/delete")
-    public Message delete(@RequestParam List<Long> ids) {
+    public Message delete(@RequestBody BoSysTbDictGroup obj) {
         Message msg = new Message();
-        sysTbDictGroupService.deleteServiceByIds(ids);
+        sysTbDictGroupService.deleteServiceByIds(obj.getIds());
         msg.success("删除成功");
         return msg;
     }

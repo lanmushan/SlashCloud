@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  * @author Administrator
  */
 @SpringBootApplication(scanBasePackages = "site.lanmushan")
-@MapperScan(value ={"site.lanmushan.auth.mapper","site.lanmushan.sys.mapper"})
+@MapperScan(value ={"site.lanmushan.*.mapper"})
 public class SlashMainApplication {
     public static void main(String[] args) {
         ResourceBundle bundle = ResourceBundle.getBundle("application");

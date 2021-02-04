@@ -16,6 +16,7 @@ import java.util.List;
 public class Message<T> implements Serializable {
     private int code = HTTPCode.E205.code;
     private String msg = HTTPCode.E205.msg;
+    private long duration;
     private long time;
     private Integer currentPage;
     private Integer pageSize;
@@ -36,7 +37,6 @@ public class Message<T> implements Serializable {
     private List<Error> errors;
     private Object row;
     private Collection<T> rows;
-
 
     public List<Error> getErrors() {
         return errors;
@@ -154,7 +154,11 @@ public class Message<T> implements Serializable {
         if (currentPage == totalPage) {
             isLastPage = 1;
         }
-        this.setPage(total % pageSize == 0 ? total / pageSize : (total / pageSize) + 1);
+        if(pageSize!=0)
+        {
+            this.setPage(total % pageSize == 0 ? total / pageSize : (total / pageSize) + 1);
+
+        }
         return this;
     }
 
@@ -240,7 +244,6 @@ public class Message<T> implements Serializable {
     public long getTime() {
         return time;
     }
-
 }
 
 

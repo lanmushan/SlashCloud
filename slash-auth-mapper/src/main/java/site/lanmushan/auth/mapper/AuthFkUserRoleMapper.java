@@ -13,7 +13,7 @@ import tk.mybatis.mapper.additional.insert.InsertListMapper;
  * @since 2020-07-13 21:33:05
  */
 @org.apache.ibatis.annotations.Mapper 
-public interface AuthFkUserRoleMapper extends QueryMapper<AuthFkUserRole>, IdListMapper<AuthFkUserRole,Long>, InsertListMapper<AuthFkUserRole> {
+public interface AuthFkUserRoleMapper extends QueryMapper<AuthFkUserRole> {
 
 
 }

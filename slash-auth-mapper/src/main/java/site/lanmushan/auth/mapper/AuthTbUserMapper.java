@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2020-06-15 22:13:48
  */
 @org.apache.ibatis.annotations.Mapper
-public interface AuthTbUserMapper extends QueryMapper<AuthTbUser>, IdListMapper<AuthTbUser, Long>, InsertListMapper<AuthTbUser> {
+public interface AuthTbUserMapper extends QueryMapper<AuthTbUser>{
 
     /**
      * 根据账号查询用户信息

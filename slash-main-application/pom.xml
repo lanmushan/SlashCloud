@@ -18,6 +18,23 @@
         <main.class>site.lanmushan.starter.SlashMainApplication</main.class>
     </properties>
     <dependencies>
+
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-cms-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-cms-mapper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-cms-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-cms-app</artifactId>
+        </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-sys-mapper</artifactId>

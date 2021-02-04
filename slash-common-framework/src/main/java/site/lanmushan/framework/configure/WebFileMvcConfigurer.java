@@ -1,13 +1,14 @@
 package site.lanmushan.framework.configure;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import site.lanmushan.framework.file.LocalResourceUtils;
+import site.lanmushan.framework.file.LocalResourceService;
 
 /**
  * @Author dy
@@ -19,6 +20,9 @@ import site.lanmushan.framework.file.LocalResourceUtils;
 @Slf4j
 @ConditionalOnProperty(prefix = "slash", name = "cloud", havingValue = "false")
 public class WebFileMvcConfigurer implements WebMvcConfigurer {
+    @Autowired
+    LocalResourceService localResourceService;
+
     @Override
     public void configurePathMatch(PathMatchConfigurer configurer) {
         AntPathMatcher matcher = new AntPathMatcher();
@@ -28,19 +32,11 @@ public class WebFileMvcConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        String localResourcePath = "file:" + localResourceService.getWebAppPath() + "/";
         registry.addResourceHandler("doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/META-INF/resources/")
-                .addResourceLocations("classpath:/resources/")
-                .addResourceLocations("classpath:/static/")
-                .addResourceLocations("classpath:/public/");
-        String os = System.getProperty("os.name");
-        if("win".equals(os.toLowerCase()))
-        {
-            registry.addResourceHandler("/resource/public/**").addResourceLocations("file:"+ LocalResourceUtils.getLocalResourcePublicPath());
-        }else {
-            registry.addResourceHandler("/resource/public/**").addResourceLocations("file:"+ LocalResourceUtils.getLocalResourcePublicPath());
-        }
-        log.info("外部资源文件设置成功{}","file:"+ LocalResourceUtils.getLocalResourcePublicPath());
+                .addResourceLocations(localResourcePath);
+        log.info("外部资源文件路径{}", localResourcePath);
+
     }
 }

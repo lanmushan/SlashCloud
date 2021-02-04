@@ -12,7 +12,7 @@ import tk.mybatis.mapper.common.special.InsertListMapper;
  * @since 2020-06-14 21:15:05
  */
 @org.apache.ibatis.annotations.Mapper
-public interface SysTbDictGroupMapper extends QueryMapper<SysTbDictGroup>, IdListMapper<SysTbDictGroup, Long>, InsertListMapper<SysTbDictGroup> {
+public interface SysTbDictGroupMapper extends QueryMapper<SysTbDictGroup> {
 
 
 }

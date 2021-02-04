@@ -21,6 +21,10 @@
             <artifactId>slash-common-log</artifactId>
         </dependency>
         <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-exception</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>

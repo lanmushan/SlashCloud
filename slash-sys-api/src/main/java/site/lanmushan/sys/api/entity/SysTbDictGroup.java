@@ -2,6 +2,7 @@ package site.lanmushan.sys.api.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
+import site.lanmushan.framework.query.entity.BaseEntity;
 import site.lanmushan.framework.uuid.SeqGenId;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 @Table(name = "sys_tb_dict_group")
 @Data
-public class SysTbDictGroup implements Serializable {
+public class SysTbDictGroup extends BaseEntity {
     private static final long serialVersionUID = 830480348476080507L;
     @Id
     @KeySql(genId = SeqGenId.class)
@@ -53,7 +54,7 @@ public class SysTbDictGroup implements Serializable {
     * 创建人
     */    
     @ExcelProperty(value = " 创建人")
-    private Long createUserId;
+    private String createUserAccount;
 
-
+    private Integer deleted;
 }

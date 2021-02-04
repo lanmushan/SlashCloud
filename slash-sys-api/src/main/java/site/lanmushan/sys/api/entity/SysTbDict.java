@@ -2,6 +2,7 @@ package site.lanmushan.sys.api.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
+import site.lanmushan.framework.query.entity.BaseEntity;
 import site.lanmushan.framework.uuid.SeqGenId;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 @Table(name = "sys_tb_dict")
 @Data
-public class SysTbDict implements Serializable {
+public class SysTbDict extends BaseEntity {
     private static final long serialVersionUID = -29556091738693085L;
 
     @Id

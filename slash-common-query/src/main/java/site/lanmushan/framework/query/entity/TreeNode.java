@@ -14,8 +14,9 @@ import java.util.List;
 @Data
 public abstract class TreeNode<T extends TreeNode> {
     @Transient
-    private List<T> children = new ArrayList<T>();
-
+    private transient List<T> children = new ArrayList<T>();
+    @Transient
+    private transient List<Long> ids;
     /**
      * @return
      */

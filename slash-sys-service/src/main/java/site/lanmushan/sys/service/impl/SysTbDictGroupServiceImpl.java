@@ -1,8 +1,10 @@
 package site.lanmushan.sys.service.impl;
 
 
+import org.apache.commons.lang3.concurrent.ConcurrentUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
@@ -37,6 +39,9 @@ public class SysTbDictGroupServiceImpl implements SysTbDictGroupService {
         Date now = DateUtil.now();
         boSysTbDictGroup.setCreateTime(now);
         boSysTbDictGroup.setUpdateTime(now);
+        boSysTbDictGroup.setAllowEdit(1);
+        boSysTbDictGroup.setDeleted(0);
+        boSysTbDictGroup.setCreateUserAccount(CurrentUserUtil.getCurrentUser().getAccount());
         sysTbDictGroupMapper.insertSelective(boSysTbDictGroup);
     }
 
@@ -59,7 +64,6 @@ public class SysTbDictGroupServiceImpl implements SysTbDictGroupService {
             throw new OperateException("新增失败", HTTPCode.Fail);
         }
     }
-
     @Override
     public void deleteServiceByIds(List<Long> ids) {
         sysTbDictGroupMapper.deleteByIdList(ids);

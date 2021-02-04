@@ -61,13 +61,11 @@ public class CurrentUserUtil {
      * @return
      */
     public static CurrentUser getCurrentUser() {
-
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String token = request.getHeader(AUTHORIZATION);
         CurrentUser currentUser = getCurrentUser(token);
         if (currentUser == null) {
             throw new OperateException("未登录", HTTPCode.D600);
-
         }
         return currentUser;
     }

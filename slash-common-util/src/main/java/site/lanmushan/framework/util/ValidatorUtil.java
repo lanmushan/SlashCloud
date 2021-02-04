@@ -12,46 +12,54 @@ public class ValidatorUtil {
     /**
      * 正则表达式：验证用户名
      */
-    public static final String REGEX_USERNAME = "^[a-zA-Z]\\w{5,20}$";
+    public static final String regex_username = "^[a-zA-Z]\\w{5,20}$";
 
     /**
      * 正则表达式：验证密码
      */
-    public static final String REGEX_PASSWORD = "^[a-zA-Z0-9]{6,20}$";
+    public static final String regex_password = "^[a-zA-Z0-9]{6,20}$";
 
     /**
      * 正则表达式：验证手机号
      */
-    public static final String REGEX_MOBILE = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
+    public static final String regex_mobile = "^((17[0-9])|(14[0-9])|(13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$";
 
     /**
      * 正则表达式：验证邮箱
      */
-    public static final String REGEX_EMAIL = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+    public static final String regex_email = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 
     /**
      * 正则表达式：验证汉字
      */
-    public static final String REGEX_CHINESE = "^[\u4e00-\u9fa5],{0,}$";
+    public static final String regex_chinese = "^[\u4e00-\u9fa5],{0,}$";
 
     /**
      * 正则表达式：验证身份证
      */
-    public static final String REGEX_ID_CARD = "(^\\d{18}$)|(^\\d{15}$)";
+    public static final String regex_id_card = "(^\\d{18}$)|(^\\d{15}$)";
 
     /**
      * 正则表达式：验证URL
      */
-    public static final String REGEX_URL = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
+    public static final String regex_url = "http(s)?://([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?";
 
     /**
      * 正则表达式：验证IP地址
      */
-    public static final String REGEX_IP_ADDR = "(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)";
+    public static final String regex_ip_addr = "(25[0-5]|2[0-4]\\d|[0-1]\\d{2}|[1-9]?\\d)";
     /**
      * 正则表达式：验证数字
      */
-    public static final String REGEX_NUMBER="^-?\\d+(\\.\\d+)?$";
+    public static final String regex_number="^-?\\d+(\\.\\d+)?$";
+    /**
+     * 由数字、26个英文字母或者下划线组成的字符串
+     */
+    public static final String regex_number_or_letter_underline="^\\w{3,20}$";
+    /**
+     * 由字母、数字组成
+     */
+    public static final String regex_number_or_letter="^[A-Za-z0-9]+$";
     /**
      * 校验用户名
      *
@@ -59,7 +67,7 @@ public class ValidatorUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isUsername(String username) {
-        return Pattern.matches(REGEX_USERNAME, username);
+        return Pattern.matches(regex_username, username);
     }
 
     /**
@@ -69,7 +77,7 @@ public class ValidatorUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isPassword(String password) {
-        return Pattern.matches(REGEX_PASSWORD, password);
+        return Pattern.matches(regex_password, password);
     }
 
     /**
@@ -79,7 +87,7 @@ public class ValidatorUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isMobile(String mobile) {
-        return Pattern.matches(REGEX_MOBILE, mobile);
+        return Pattern.matches(regex_mobile, mobile);
     }
 
     /**
@@ -89,7 +97,7 @@ public class ValidatorUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isEmail(String email) {
-        return Pattern.matches(REGEX_EMAIL, email);
+        return Pattern.matches(regex_email, email);
     }
 
     /**
@@ -99,7 +107,7 @@ public class ValidatorUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isChinese(String chinese) {
-        return Pattern.matches(REGEX_CHINESE, chinese);
+        return Pattern.matches(regex_chinese, chinese);
     }
 
     /**
@@ -109,7 +117,7 @@ public class ValidatorUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isIDCard(String idCard) {
-        return Pattern.matches(REGEX_ID_CARD, idCard);
+        return Pattern.matches(regex_id_card, idCard);
     }
 
     /**
@@ -119,7 +127,7 @@ public class ValidatorUtil {
      * @return 校验通过返回true，否则返回false
      */
     public static boolean isUrl(String url) {
-        return Pattern.matches(REGEX_URL, url);
+        return Pattern.matches(regex_url, url);
     }
 
     /**
@@ -129,7 +137,7 @@ public class ValidatorUtil {
      * @return
      */
     public static boolean isIPAddr(String ipAddr) {
-        return Pattern.matches(REGEX_IP_ADDR, ipAddr);
+        return Pattern.matches(regex_ip_addr, ipAddr);
     }
 
     /**
@@ -138,7 +146,7 @@ public class ValidatorUtil {
      * @return
      */
     public static boolean isNumber(String str) {
-      return   Pattern.matches(REGEX_NUMBER, str);
+      return   Pattern.matches(regex_number, str);
     }
 
 }

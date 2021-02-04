@@ -22,6 +22,6 @@ public class InterceptorMvcConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(requestIDInterceptor).addPathPatterns("/**");
-        log.info("requestIDInterceptor拦截器设置成功");
+        log.info("requestIDInterceptor拦截器设置 成功");
     }
 }

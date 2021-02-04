@@ -54,13 +54,13 @@ public class SysTbDictController {
         return msg;
     }
     /**
-     * @param ids
+     * @param obj
      * @return
      */
     @PostMapping("/delete")
-    public Message delete(@RequestParam List<Long> ids) {
+    public Message delete(BoSysTbDict obj) {
         Message msg = new Message();
-        sysTbDictService.deleteServiceByIds(ids);
+        sysTbDictService.deleteServiceByIds(obj.getIds());
         msg.success("删除成功");
         return msg;
     }
