@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.lanmushan.auth.mapper.AuthTbRoleMapper">
+
+    <resultMap type="site.lanmushan.auth.api.entity.AuthTbRole" id="baseResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="roleCode" column="role_code" jdbcType="VARCHAR"/>
+        <result property="isDefault" column="is_default" jdbcType="INTEGER"/>
+        <result property="priorityLevel" column="priority_level" jdbcType="INTEGER"></result>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="disabled" column="disabled" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
+        select id, role_name, role_code, is_default,priority_level,create_time, update_time, disabled from auth_tb_role
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
+                <if test="it.operate =='in'">
+                    ${it.key} ${it.operate} (#{it.value})
+                </if>
+                <if test="it.operate !='in'">
+                    ${it.key} ${it.operate} #{it.value}
+                </if>
+            </foreach>
+            and
+            <if test="searchKey != null and searchKey !=''">
+                role_code like #{searchKey}
+                or
+                role_name like #{searchKey}
+            </if>
+        </trim>
+    </select>
+    <!--根据用户ID查询所有关联的角色-->
+    <select id="selectRolesByUserId" parameterType="java.lang.Long" resultMap="baseResultMap">
+        SELECT b.*
+        FROM auth_fk_user_role AS a
+        LEFT JOIN auth_tb_role AS b ON a.fk_role_code = b.role_code
+        WHERE b.disabled = 0
+        and a.fk_user_id = #{userId}
+    </select>
+</mapper>

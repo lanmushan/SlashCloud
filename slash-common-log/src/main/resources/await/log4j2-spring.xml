@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<!--同步打印日志-->
+<configuration>
+    <Properties>
+        <!-- 配置日志文件输出目录 -->
+        <property name="PROJECT_NAME">${spring.application.name}</property>
+        <Property name="LOG_HOME" value="./logs"/>
+        <Property name="LOG_NAME">http</Property>
+    </Properties>
+    <appenders>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <!--%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%X{requestId}]%l %-5level %logger{80} - %n%msg%n-->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%X{requestId}]%l%n %-5level- %msg%n">
+            </PatternLayout>
+        </Console>
+        <RollingFile name="service_error_appender" fileName="${LOG_HOME}/error/error.log"
+                     filePattern="${LOG_HOME}/error.log.%d{yyyy-MM-dd}-%i" append="true" immediateFlush="true">
+            <Filters>
+                <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%X{requestId}] %-5level %logger{80} - %n%msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="500 MB"/>
+            </Policies>
+        </RollingFile>
+        <RollingFile name="service_info_appender" fileName="${LOG_HOME}/info/info.log"
+                     filePattern="${LOG_HOME}/error.log.%d{yyyy-MM-dd}-%i" append="true" immediateFlush="true">
+            <Filters>
+                <ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%X{requestId}] %-5level %logger{80} - %n%msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="500 MB"/>
+            </Policies>
+        </RollingFile>
+
+    </appenders>
+    <loggers>
+        <root level="info" includeLocation="true">
+            <appender-ref ref="console"></appender-ref>
+            <appender-ref ref="service_error_appender"></appender-ref>
+            <appender-ref ref="service_info_appender"></appender-ref>
+        </root>
+        <!--<asyncRoot level="INFO" includeLocation="true">-->
+        <!--<appender-ref ref="service_info_appender"></appender-ref>-->
+        <!--</asyncRoot>-->
+    </loggers>
+</configuration>

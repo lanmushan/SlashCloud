@@ -1,0 +1,11 @@
+{
+  "allows": [
+    "/authLogin/selectVerificationCode",
+    "/authLogin/loginManage",
+    "/sysLocalResource/uploadFile",
+    "/**/**.*",
+    "/",
+    "/**.*",
+    "/select/**"
+  ]
+}

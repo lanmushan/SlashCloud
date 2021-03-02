@@ -2,20 +2,24 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
     <groupId>site.lanmushan</groupId>
-    <artifactId>dy-parent</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>dy-parent</name>
+    <artifactId>slash-cloud-pom</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>slash-cloud-pom</name>
     <description>Demo project for Spring Boot</description>
+    <packaging>pom</packaging>
     <properties>
+        <!--项目环境等基础配置-->
+        <!--maven打包占位符-->
+        <resource.delimiter>@</resource.delimiter>
         <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <slash.version>1.0.0-SNAPSHOT</slash.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!--基础框架-->
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
@@ -28,79 +32,223 @@
         <fastjson.version>1.2.58</fastjson.version>
     </properties>
     <modules>
-        <module>dy-auth-service</module>
-        <module>dy-sys-service</module>
-        <module>dy-file-service</module>
-        <module>dy-framework</module>
-        <module>dy-gateway-service</module>
-        <module>dy-cypher-common</module>
-        <module>dy-dto-common</module>
-        <module>dy-base-common</module>
-        <module>dy-const-common</module>
-        <module>dy-authorization-common</module>
-        <module>dy-redis-common</module>
-        <module>dy-exception-common</module>
-        <module>dy-log-common</module>
-        <module>dy-file-common</module>
+        <!--几个主要模块-->
+        <module>slash-main-application</module>
+        <!--方便其他项目引入-->
+        <module>slash-starter-dependencies</module>
+        <!--cloud模式下独立运行gatewayApp-->
+        <module>slash-gateway-app</module>
+
+        <!--权限服务，关于用户角色部门等相关-->
+        <module>slash-auth-app</module>
+        <module>slash-auth-api</module>
+        <module>slash-auth-service</module>
+        <module>slash-auth-mapper</module>
+        <!--系统服务，数据字典，系统基础配置等-->
+        <module>slash-sys-app</module>
+        <module>slash-sys-mapper</module>
+        <module>slash-sys-api</module>
+        <module>slash-sys-service</module>
+        <!--CMS建站系统服务-->
+        <module>slash-cms-api</module>
+        <module>slash-cms-mapper</module>
+        <module>slash-cms-service</module>
+        <module>slash-cms-app</module>
+        <module>slash-cms-webapp</module>
+        <!--文件资源服务，如果使用OOS直接省略掉-->
+        <module>slash-resource-app</module>
+
+        <!--          其他基础组件等               -->
+        <!--cloud模式依赖包装-->
+        <module>slash-common-cloud</module>
+        <!--uid生成器-->
+        <module>slash-common-uuid</module>
+        <!--通用查询依赖-->
+        <module>slash-common-query</module>
+        <!--共享的基础配置等-->
+        <module>slash-common-framework</module>
+        <!--加密加解密相关封装-->
+        <module>slash-common-cypher</module>
+        <!--通用数据传输封装-->
+        <module>slash-common-dto</module>
+        <!--通用工具封装-->
+        <module>slash-common-util</module>
+        <!--项目内令牌、当前用户获取封装，如果使用JWT或者其他模式自行改造-->
+        <module>slash-common-authorization</module>
+        <!--关于Redis的封装-->
+        <module>slash-common-redis</module>
+        <!--全局常量-->
+        <module>slash-common-const</module>
+        <!--log4j2子模块-->
+        <module>slash-common-log</module>
+        <!--关于文件操作的封装-->
+        <module>slash-common-file</module>
+        <!--异常统一封装-->
+        <module>slash-common-exception</module>
+        <!--HTTP请求同一封装-->
+        <module>slash-common-http</module>
+        <!--mybatis类型处理器-->
+        <module>slash-common-typehandler</module>
+        <!--GroovyScript脚本处理-->
+        <module>slash-common-groovyscript</module>
     </modules>
     <dependencyManagement>
         <dependencies>
+            <!--CMS系统相关-->
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>log-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>slash-cms-api</artifactId>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>cypher-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>slash-cms-app</artifactId>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>exception-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>slash-cms-service</artifactId>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>redis-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>slash-cms-mapper</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+
+            <!--系统服务相关-->
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-sys-mapper</artifactId>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>authorization-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <artifactId>slash-sys-service</artifactId>
+                <version>${slash.version}</version>
             </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-sys-api</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-sys-app</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <!--权限服务相关依赖-->
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-auth-api</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-auth-service</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-auth-mapper</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-auth-app</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+
+            <!--slash基础组件-->
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-query</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-redis</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-log</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-uuid</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-cypher</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-exception</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-authorization</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-cloud</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-groovyscript</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-dto</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-util</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-const</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-file</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-framework</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-http</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-typehandler</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <!--二维码-->
             <dependency>
                 <groupId>eu.bitwalker</groupId>
                 <artifactId>UserAgentUtils</artifactId>
                 <version>1.21</version>
             </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>dto-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>base-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>const-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>file-common</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>framework</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
-            </dependency>
-            <!--二维码-->
             <dependency>
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
@@ -130,16 +278,16 @@
             </dependency>
 
             <!--权限控制框架shiro-->
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-spring</artifactId>
-                <version>1.5.3</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.apache.shiro</groupId>-->
+                <!--<artifactId>shiro-spring</artifactId>-->
+                <!--<version>1.5.3</version>-->
+            <!--</dependency>-->
             <!--redis相关依赖-->
             <!--<dependency>-->
-                <!--<groupId>org.springframework.session</groupId>-->
-                <!--<artifactId>spring-session-data-redis</artifactId>-->
-                <!--<version>2.0.3.RELEASE</version>-->
+            <!--<groupId>org.springframework.session</groupId>-->
+            <!--<artifactId>spring-session-data-redis</artifactId>-->
+            <!--<version>2.0.3.RELEASE</version>-->
             <!--</dependency>-->
             <!--基础工具或其他常用依赖相关-->
             <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
@@ -148,11 +296,11 @@
                 <artifactId>commons-lang3</artifactId>
                 <version>3.7</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.directory.studio</groupId>
-                <artifactId>org.apache.commons.io</artifactId>
-                <version>2.4</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.apache.directory.studio</groupId>-->
+                <!--<artifactId>org.apache.commons.io</artifactId>-->
+                <!--<version>2.4</version>-->
+            <!--</dependency>-->
             <!--spring2.0集成redis所需common-pool2-->
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -228,11 +376,6 @@
                 <version>1.5.19</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-web</artifactId>
-                <version>2.10.0</version>
-            </dependency>
-            <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
                 <version>1.9.3</version>
@@ -259,11 +402,66 @@
                 <artifactId>nimbus-jose-jwt</artifactId>
                 <version>8.19</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                        <groupId>org.springframework.boot</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.logging.log4j</groupId>
+                        <artifactId>log4j-to-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.11.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.11.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.11.1</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>3.0.2</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.thetransactioncompany</groupId>
+                <artifactId>java-property-utils</artifactId>
+                <version>1.9.1</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-    <dependencies>
-    </dependencies>
-
     <profiles>
         <profile>
             <!--不同环境Profile的唯一id-->
@@ -297,103 +495,12 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <skip>false</skip>
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-            <!--如果只需要一个jar包，采用这种方式，需要外置脚本-->
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<classifier>exec</classifier>-->
-                    <!--&lt;!&ndash; 指定启动类的包路径 这个变量在子模块定义了&ndash;&gt;-->
-                    <!--<mainClass>${main.class}</mainClass>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>repackage</goal>&lt;!&ndash;可以把依赖的包都打包到生成的Jar包中&ndash;&gt;-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-
-           <!-- assembly打包开始-->
-            <!--会打成一个压缩包，包含各种配置文件和启动脚本在外面-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <!-- 将静态资源排除出jar包 -->
-                    <excludes>
-                        <exclude>static/**</exclude>
-                        <exclude>templates/**</exclude>
-                        <exclude>*.*</exclude>
-                    </excludes>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <!-- MANIFEST.MF 中 Class-Path 加入前缀 -->
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <!-- jar包不包含唯一版本标识 -->
-                            <useUniqueVersions>false</useUniqueVersions>
-                            <!-- 指定启动类的包路径 这个变量在子模块定义了-->
-                            <mainClass>${main.class}</mainClass>
-                        </manifest>
-                        <manifestEntries>
-                            <!--MANIFEST.MF 中 Class-Path 加入资源文件目录 -->
-                            <Class-Path>conf/</Class-Path>
-                        </manifestEntries>
-                    </archive>
-                    <!-- 指定打出的jar包路径 -->
-                    <outputDirectory>${project.build.directory}</outputDirectory>
-                </configuration>
-            </plugin>
-            <!--复制jar包的-->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <!-- 自定义 -->
-                        <id>copy-dependencies</id>
-                        <phase>package</phase>
-                        <goals>
-                            <!-- 复制依赖的jar包 -->
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <!-- 将依赖的jar包复制到该路径下 -->
-                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <!-- 这个插件需要指定一个配置文件 -->
-                    <descriptors>
-                        <descriptor>src/main/resources/assembly.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <!-- 自定义 -->
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <!-- 只执行一次 -->
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!--assembly打包结束-->
         </plugins>
         <pluginManagement>
             <plugins>
@@ -422,8 +529,9 @@
                 <excludes>
                     <exclude>dev/*</exclude>
                     <exclude>prod/*</exclude>
-                    <exclude>test/*</exclude>
+                    <exclude>sit/*</exclude>
                 </excludes>
+                <filtering>true</filtering>
             </resource>
             <resource>
                 <!--这里是关键！ 根据不同的环境，把对应文件夹里的配置文件打包-->
@@ -455,4 +563,15 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <!--<distributionManagement>-->
+        <!--<repository>-->
+            <!--<id>releases</id>-->
+            <!--<url>http://nexus.xx.com/content/repositories/releases</url>-->
+        <!--</repository>-->
+        <!--<snapshotRepository>-->
+            <!--<id>nexus-snapshots</id>-->
+            <!--<name>Snapshots repository</name>-->
+            <!--<url>http://192.168.1.105/repository/yang/</url>-->
+        <!--</snapshotRepository>&ndash;&gt;-->
+    <!--</distributionManagement>-->
 </project>

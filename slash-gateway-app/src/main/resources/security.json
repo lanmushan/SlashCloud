@@ -1,0 +1,6 @@
+{
+  "allows": [
+    "/api/authLogin/selectVerificationCode",
+    "/api/authLogin/loginManage"
+  ]
+}

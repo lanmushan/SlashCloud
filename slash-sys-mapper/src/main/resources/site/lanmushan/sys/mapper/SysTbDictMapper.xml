@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.lanmushan.sys.mapper.SysTbDictMapper">
+
+    <resultMap type="site.lanmushan.sys.api.entity.SysTbDict" id="baseResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="dictValue" column="dict_value" jdbcType="VARCHAR"/>
+        <result property="dictName" column="dict_name" jdbcType="VARCHAR"/>
+        <result property="dictCode" column="dict_code" jdbcType="VARCHAR"/>
+        <result property="fkDictGroupCode" column="fk_dict_group_code" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="disabled" column="disabled" jdbcType="INTEGER"/>
+        <result property="createUserId" column="create_user_id" jdbcType="INTEGER"/>
+        <result property="isDefault" column="is_default" jdbcType="INTEGER"/>
+        <result property="orderIndex" column="order_index" jdbcType="INTEGER"/>
+        <result property="allowEdit" column="allow_edit" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
+        select id, dict_value, dict_name, dict_code, fk_dict_group_code, create_time, update_time, disabled,
+        create_user_id, is_default, order_index, allow_edit from sys_tb_dict
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
+                <choose>
+                    <when test="it.key == 'search_key'">
+                    </when>
+                    <otherwise>
+                        <if test="it.operate =='in'">
+                            ${it.key} ${it.operate} (#{it.value})
+                        </if>
+                        <if test="it.operate !='in'">
+                            ${it.key} ${it.operate} #{it.value}
+                        </if>
+                    </otherwise>
+                </choose>
+            </foreach>
+        </trim>
+    </select>
+
+</mapper>

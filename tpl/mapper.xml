@@ -14,28 +14,25 @@
         <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="$!{tableInfo.savePackageName}.mapper.$!{tableInfo.name}Mapper">
 
-    <resultMap type="$!{tableInfo.savePackageName}.entity.$!{tableInfo.name}" id="baseResultMap">
+    <resultMap type="$!{tableInfo.savePackageName}.api.vo.Vo$!{tableInfo.name}" id="baseResultMap">
         #foreach($column in $tableInfo.fullColumn)
         <result property="$!column.name" column="$!column.obj.name" jdbcType="$!column.ext.jdbcType"/>
         #end
     </resultMap>
     <select id="selectList" resultMap="baseResultMap" parameterType="QueryInfo">
-        select   #allSqlColumn()  from  $!tableInfo.obj.name
+        select #allSqlColumn() from $!tableInfo.obj.name
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
-                <choose>
-                    <when test="it.key == 'search_key'">
-                    </when>
-                    <otherwise>
-                        <if test="it.operate =='in'">
-                            ${it.key} ${it.operate} (#{it.value})
-                        </if>
-                        <if test="it.operate !='in'">
-                            ${it.key} ${it.operate} #{it.value}
-                        </if>
-                    </otherwise>
-                </choose>
+                <if test="it.operate =='in'">
+                    ${it.key} ${it.operate} (#{it.value})
+                </if>
+                <if test="it.operate !='in'">
+                    ${it.key} ${it.operate} #{it.value}
+                </if>
             </foreach>
+            and
+            <if test="searchKey != null and searchKey !=''">
+            </if>
         </trim>
     </select>
 
