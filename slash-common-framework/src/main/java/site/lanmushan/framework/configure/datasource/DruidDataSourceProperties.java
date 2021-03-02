@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @Slf4j
-@ConditionalOnProperty(prefix="spring",name = "datasource",matchIfMissing = true)
+@ConditionalOnProperty(prefix = "spring", name = "datasource", matchIfMissing = true)
 public class DruidDataSourceProperties {
     private String driverClassName;
     private String url;

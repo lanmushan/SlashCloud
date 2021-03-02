@@ -20,7 +20,7 @@
         #end
     </resultMap>
     <select id="selectList" resultMap="baseResultMap" parameterType="QueryInfo">
-        select   #allSqlColumn()  from  $!tableInfo.obj.name
+        select #allSqlColumn() from $!tableInfo.obj.name
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
                 <if test="it.operate =='in'">

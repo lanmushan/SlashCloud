@@ -1,12 +1,12 @@
 ##定义初始变量
-        #set($tableName = $tool.append($tableInfo.name, "Mapper"))
+        #set($tableName=$tool.append($tableInfo.name,"Mapper"))
         ##设置回调
-        $!callback.setFileName($tool.append($tableName, ".java"))
-        $!callback.setSavePath($tool.append($tableInfo.savePath, "/mapper"))
+        $!callback.setFileName($tool.append($tableName,".java"))
+        $!callback.setSavePath($tool.append($tableInfo.savePath,"/mapper"))
 
         ##拿到主键
         #if(!$tableInfo.pkColumn.isEmpty())
-        #set($pk = $tableInfo.pkColumn.get(0))
+        #set($pk=$tableInfo.pkColumn.get(0))
         #end
 
         #if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}mapper;
@@ -16,6 +16,7 @@ import tk.mybatis.mapper.common.special.InsertListMapper;
 
 import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name};
 import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ import java.util.List;
  * @since $!time.currTime()
  */
 @org.apache.ibatis.annotations.Mapper
-public interface $!{tableName} extends QueryMapper<$!{tableInfo.name}>, IdListMapper<$!{tableInfo.name},Long>, InsertListMapper<$!{tableInfo.name}>{
+public interface $!{tableName}extends QueryMapper<$!{tableInfo.name}>,IdListMapper<$!{tableInfo.name},Long>,InsertListMapper<$!{tableInfo.name}>{
 
 
         }

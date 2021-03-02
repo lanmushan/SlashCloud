@@ -12,8 +12,8 @@ import tk.mybatis.mapper.common.special.InsertListMapper;
  * @author dy
  * @since 2020-06-14 21:15:03
  */
-@org.apache.ibatis.annotations.Mapper 
-public interface SysTbDictMapper extends QueryMapper<SysTbDict>{
+@org.apache.ibatis.annotations.Mapper
+public interface SysTbDictMapper extends QueryMapper<SysTbDict> {
 
 
 }

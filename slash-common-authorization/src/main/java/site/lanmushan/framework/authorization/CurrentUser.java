@@ -24,6 +24,7 @@ public class CurrentUser implements Serializable {
 
     /**
      * 返回当前用户是不是超级管理员
+     *
      * @return
      */
     public boolean isAdmin() {

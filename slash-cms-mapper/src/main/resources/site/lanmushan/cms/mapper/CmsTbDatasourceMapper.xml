@@ -11,9 +11,11 @@
         <result property="datasourceContent" column="datasource_content" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="datasourceParams" column="datasource_params" jdbcType="VARCHAR"></result>
     </resultMap>
     <select id="selectList" resultMap="baseResultMap" parameterType="QueryInfo">
-        select id, datasource_name, datasource_code, datasource_source, fk_datasource_type_code, datasource_content,
+        select id, datasource_name, datasource_code, datasource_source, fk_datasource_type_code,
+        datasource_content,datasource_params,
         create_time, update_time from cms_tb_datasource
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
@@ -32,5 +34,7 @@
             </if>
         </trim>
     </select>
-
+    <select id="executeSql" parameterType="java.lang.String" resultType="site.lanmushan.framework.dto.DHashMap">
+        ${sql}
+    </select>
 </mapper>

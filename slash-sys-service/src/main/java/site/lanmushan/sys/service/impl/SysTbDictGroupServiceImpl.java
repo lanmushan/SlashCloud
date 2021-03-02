@@ -64,6 +64,7 @@ public class SysTbDictGroupServiceImpl implements SysTbDictGroupService {
             throw new OperateException("新增失败", HTTPCode.Fail);
         }
     }
+
     @Override
     public void deleteServiceByIds(List<Long> ids) {
         sysTbDictGroupMapper.deleteByIdList(ids);

@@ -1,10 +1,9 @@
 package site.lanmushan.framework.dto;
 
 
-
-
 /**
  * 异步校验请求接收类
+ *
  * @author dy
  */
 public class AsyncValidate {

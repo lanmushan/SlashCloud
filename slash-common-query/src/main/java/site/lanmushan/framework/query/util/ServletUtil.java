@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
 public class ServletUtil {
     private static final String N255 = "(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
     private static final Pattern PATTERN = Pattern.compile("^(?:" + N255 + "\\.){3}" + N255 + "$");
+
     /**
      * 获取登录浏览器
      *
@@ -46,6 +47,7 @@ public class ServletUtil {
         OperatingSystem operatingSystem = userAgent.getOperatingSystem();
         return operatingSystem.getName();
     }
+
     /**
      * 获取request参数
      *
@@ -55,7 +57,7 @@ public class ServletUtil {
     public static Map<String, Object> getDataFromRequest(HttpServletRequest httpServletRequest) {
         String type = httpServletRequest.getContentType();
         Map<String, Object> receiveMap = new HashMap<String, Object>();
-        if ("GET".equals(httpServletRequest.getMethod()) || type == null ||"multipart/form-data".equals(type)|| "application/x-www-form-urlencoded".equals(type)) {
+        if ("GET".equals(httpServletRequest.getMethod()) || type == null || "multipart/form-data".equals(type) || "application/x-www-form-urlencoded".equals(type)) {
             Enumeration<String> enu = httpServletRequest.getParameterNames();
             while (enu.hasMoreElements()) {
                 String key = String.valueOf(enu.nextElement());
@@ -90,6 +92,7 @@ public class ServletUtil {
         return receiveMap;
 
     }
+
     private static String longToIpV4(long longIp) {
         int octet3 = (int) ((longIp >> 24) % 256);
         int octet2 = (int) ((longIp >> 16) % 256);
@@ -133,5 +136,11 @@ public class ServletUtil {
             ip = request.getRemoteAddr();
         }
         return ip.equals("0:0:0:0:0:0:0:1") ? "127.0.0.1" : ip;
+    }
+
+    public static String getBasePath(HttpServletRequest request) {
+        StringBuffer url = request.getRequestURL();
+        String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append(request.getSession().getServletContext().getContextPath()).toString();
+        return tempContextUrl;
     }
 }

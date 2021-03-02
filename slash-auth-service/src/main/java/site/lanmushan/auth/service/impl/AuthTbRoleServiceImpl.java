@@ -24,39 +24,43 @@ import java.util.List;
  */
 @Service("authTbRoleService")
 public class AuthTbRoleServiceImpl implements AuthTbRoleService {
-     @Autowired
+    @Autowired
     private AuthTbRoleMapper authTbRoleMapper;
-      @Override
+
+    @Override
     public List selectList(QueryInfo queryInfo) {
-      return  authTbRoleMapper.selectList(queryInfo);
+        return authTbRoleMapper.selectList(queryInfo);
     }
+
     @Override
     public void insertService(BoAuthTbRole boAuthTbRole) {
-         Date now= DateUtil.now();
-         boAuthTbRole.setCreateTime(now);
-         boAuthTbRole.setUpdateTime(now);
-         authTbRoleMapper.insertSelective(boAuthTbRole);
+        Date now = DateUtil.now();
+        boAuthTbRole.setCreateTime(now);
+        boAuthTbRole.setUpdateTime(now);
+        authTbRoleMapper.insertSelective(boAuthTbRole);
     }
-      @Override
-    public  void insertServiceList(List<BoAuthTbRole> boAuthTbRoleList) {
-      Date now= DateUtil.now();
-      boAuthTbRoleList.forEach(it->{
-          it.setCreateTime(now);
-          it.setUpdateTime(now);
-          it.setId(MyUUID.getInstance().nextId());
-      });
+
+    @Override
+    public void insertServiceList(List<BoAuthTbRole> boAuthTbRoleList) {
+        Date now = DateUtil.now();
+        boAuthTbRoleList.forEach(it -> {
+            it.setCreateTime(now);
+            it.setUpdateTime(now);
+            it.setId(MyUUID.getInstance().nextId());
+        });
         authTbRoleMapper.insertList(boAuthTbRoleList);
     }
-        @Override
+
+    @Override
     public void updateService(BoAuthTbRole boAuthTbRole) {
         boAuthTbRole.setUpdateTime(DateUtil.now());
-        int reuslt= authTbRoleMapper.updateByPrimaryKeySelective(boAuthTbRole);
-        if(reuslt!=1)
-        {
+        int reuslt = authTbRoleMapper.updateByPrimaryKeySelective(boAuthTbRole);
+        if (reuslt != 1) {
             throw new OperateException("新增失败", HTTPCode.Fail);
         }
     }
-        @Override
+
+    @Override
     public void deleteServiceByIds(List<Long> ids) {
         authTbRoleMapper.deleteByIdList(ids);
     }

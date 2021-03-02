@@ -50,6 +50,7 @@ public interface CmsTbDatasourceTypeService extends BaseService<CmsTbDatasourceT
 
     /**
      * 查询TreeList
+     *
      * @param queryInfo
      * @return
      */

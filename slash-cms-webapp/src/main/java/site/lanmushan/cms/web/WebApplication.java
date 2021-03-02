@@ -1,6 +1,7 @@
 package site.lanmushan.cms.web;
 
 import org.apache.logging.log4j.ThreadContext;
+import org.jboss.logging.MDC;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,7 +22,7 @@ public class WebApplication {
     public static void main(String[] args) {
         ResourceBundle bundle = ResourceBundle.getBundle("application");
         String appName = bundle.getString("spring.application.name");
-        ThreadContext.put("appName", appName);
+        System.setProperty("appName", appName);
         SpringApplication.run(WebApplication.class, args);
     }
 

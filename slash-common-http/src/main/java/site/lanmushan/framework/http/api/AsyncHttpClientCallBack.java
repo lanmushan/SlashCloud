@@ -10,6 +10,7 @@ import site.lanmushan.framework.http.support.AsyncHttpClientServiceImpl;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
+
 @Slf4j
 public class AsyncHttpClientCallBack implements FutureCallback<HttpResponse> {
     private Consumer runnable;
@@ -30,7 +31,7 @@ public class AsyncHttpClientCallBack implements FutureCallback<HttpResponse> {
 
     @Override
     public void failed(Exception e) {
-        log.error(e.getMessage(),e);
+        log.error(e.getMessage(), e);
         runnable.accept(null);
     }
 

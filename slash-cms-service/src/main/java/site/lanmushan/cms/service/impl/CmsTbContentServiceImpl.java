@@ -38,6 +38,7 @@ public class CmsTbContentServiceImpl implements CmsTbContentService {
         boCmsTbContent.setCreateTime(now);
         boCmsTbContent.setUpdateTime(now);
         boCmsTbContent.setContentHit(0);
+        boCmsTbContent.setContentDisplay(1);
         cmsTbContentMapper.insertSelective(boCmsTbContent);
     }
 

@@ -1,7 +1,6 @@
 package site.lanmushan.framework.http.util;
 
 
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
@@ -12,6 +11,7 @@ import java.util.Map;
 
 /**
  * 将Json格式转换为URL编码格式
+ *
  * @author dy
  */
 public class JsonUrlUtil {

@@ -58,7 +58,7 @@ public class CmsTbDatasourceTypeController {
      * @param ids
      * @return
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public Message delete(@RequestBody BoCmsTbDatasourceType obj) {
         Message msg = new Message();
         cmsTbDatasourceTypeService.deleteServiceByIds(obj.getIds());

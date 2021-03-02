@@ -44,7 +44,7 @@ public class AsyncHttpClientServiceImpl extends AbstractHttpClientService implem
     @Override
     public void doPost(String url, Object data, Map<String, String> header, AsyncHttpClientCallBack callBack) {
         try {
-            doHttp(url, HTTP_POST, data, header,callBack);
+            doHttp(url, HTTP_POST, data, header, callBack);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -55,7 +55,7 @@ public class AsyncHttpClientServiceImpl extends AbstractHttpClientService implem
     @Override
     public void doGet(String url, Object data, Map<String, String> header, AsyncHttpClientCallBack callBack) {
         try {
-            doHttp(url, HTTP_POST, data, header,callBack);
+            doHttp(url, HTTP_POST, data, header, callBack);
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -87,7 +87,7 @@ public class AsyncHttpClientServiceImpl extends AbstractHttpClientService implem
     @Override
     public void doHttp(String url, String method, Object data, Map<String, String> header, AsyncHttpClientCallBack callBack) throws ExecutionException, InterruptedException {
         HttpRequestBase httpMethod = createHttpMethod(url, method, data, header);
-       getHttpClient().execute(httpMethod, callBack);
+        getHttpClient().execute(httpMethod, callBack);
     }
 
     @Override

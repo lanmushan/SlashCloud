@@ -11,7 +11,7 @@ import site.lanmushan.framework.query.mapper.QueryMapper;
  * @since 2021-01-30 14:54:17
  */
 @org.apache.ibatis.annotations.Mapper
-public interface CmsTbContentMapper extends QueryMapper<CmsTbContent>{
+public interface CmsTbContentMapper extends QueryMapper<CmsTbContent> {
 
 
 }

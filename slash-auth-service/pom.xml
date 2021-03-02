@@ -67,6 +67,10 @@
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-util</artifactId>
         </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-authorization</artifactId>
+        </dependency>
     </dependencies>
 
 

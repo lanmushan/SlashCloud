@@ -31,20 +31,22 @@ public interface AuthFkUserRoleService extends BaseService<AuthFkUserRole> {
      * @return 实例对象
      */
     void updateService(BoAuthFkUserRole authFkUserRole);
-    
-        /**
+
+    /**
      * 批量新增
-     * @param  boAuthFkUserRoleList 实例对象
+     *
+     * @param boAuthFkUserRoleList 实例对象
      * @return
      */
-      void insertServiceList(List<BoAuthFkUserRole> boAuthFkUserRoleList);
+    void insertServiceList(List<BoAuthFkUserRole> boAuthFkUserRoleList);
 
-      /**
+    /**
      * 批量删除
+     *
      * @param ids
      * @return
      */
-      void deleteServiceByIds(List<Long> ids);
+    void deleteServiceByIds(List<Long> ids);
 
 
 }

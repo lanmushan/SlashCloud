@@ -11,9 +11,9 @@
         <!--<setting name="logImpl" value="STDOUT_LOGGING" />-->
     </settings>
     <!--数据库适配-->
-  <!--  <databaseIdProvider type="DB_VENDOR">
-        <property name="MySQL" value="mysql"/>
-    </databaseIdProvider>-->
+    <!--  <databaseIdProvider type="DB_VENDOR">
+          <property name="MySQL" value="mysql"/>
+      </databaseIdProvider>-->
     <typeAliases>
         <typeAlias type="site.lanmushan.framework.dto.DHashMap" alias="DHashMap"></typeAlias>
         <typeAlias type="site.lanmushan.framework.dto.QueryInfo" alias="QueryInfo"></typeAlias>

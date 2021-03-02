@@ -32,6 +32,7 @@ public class AuthTbDeptServiceImpl implements AuthTbDeptService {
     public List selectList(QueryInfo queryInfo) {
         return authTbDeptMapper.selectList(queryInfo);
     }
+
     @Override
     public void insertService(BoAuthTbDept boAuthTbDept) {
         Date now = DateUtil.now();

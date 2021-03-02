@@ -9,7 +9,7 @@ import site.lanmushan.sys.api.entity.SysTbDictGroup;
  * @author dy
  * @since 2020-06-14 21:15:06
  */
-public class BoSysTbDictGroup  extends SysTbDictGroup {
+public class BoSysTbDictGroup extends SysTbDictGroup {
 
 
 }

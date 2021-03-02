@@ -33,13 +33,15 @@ public interface AuthTbDeptService extends BaseService<AuthTbDept> {
 
     /**
      * 批量新增
-     * @param  boAuthTbDeptList 实例对象
+     *
+     * @param boAuthTbDeptList 实例对象
      * @return
      */
     void insertServiceList(List<BoAuthTbDept> boAuthTbDeptList);
 
     /**
      * 批量删除
+     *
      * @param ids
      * @return
      */

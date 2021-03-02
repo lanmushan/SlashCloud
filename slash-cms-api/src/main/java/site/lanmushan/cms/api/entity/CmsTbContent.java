@@ -3,6 +3,7 @@ package site.lanmushan.cms.api.entity;
 import java.util.Date;
 import java.io.Serializable;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 import com.alibaba.fastjson.JSONObject;
 
@@ -74,7 +75,7 @@ public class CmsTbContent extends BaseEntity {
      * 是否显示
      */
     @ExcelProperty(value = " 是否显示")
-    private String contentDisplay;
+    private Integer contentDisplay;
     /**
      * 文章类型
      */
@@ -84,6 +85,7 @@ public class CmsTbContent extends BaseEntity {
      * 发布时间
      */
     @ExcelProperty(value = " 发布时间")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss.SSS")
     private Date contentDatetime;
     /**
      * 自定义顺序
@@ -111,5 +113,7 @@ public class CmsTbContent extends BaseEntity {
     @ExcelProperty(value = " 删除标记")
     private Integer deleted;
 
-
+    private Integer recommend;
+    private Integer top;
+    private Integer supportCount;
 }

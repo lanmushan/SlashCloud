@@ -2,14 +2,19 @@ package site.lanmushan.cms.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import site.lanmushan.cms.api.bo.BoCmsTbContent;
 import site.lanmushan.cms.api.entity.CmsTbContent;
 import site.lanmushan.cms.mapper.CmsTbContentMapper;
 import site.lanmushan.cms.service.CmsTbContentService;
+import site.lanmushan.framework.constant.GlobalInstructionConstant;
 import site.lanmushan.framework.dto.Message;
+import site.lanmushan.framework.redis.GlobalInstructionEntity;
+import site.lanmushan.framework.redis.publish.GlobalInstructionPublish;
 
 import javax.validation.Valid;
+import java.util.Set;
 
 /**
  * 文章(CmsTbContent)表控制层
@@ -25,6 +30,10 @@ public class CmsTbContentController {
     private CmsTbContentMapper cmsTbContentMapper;
     @Autowired
     private CmsTbContentService cmsTbContentService;
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+    @Autowired
+    private GlobalInstructionPublish globalInstructionPublish;
 
     @GetMapping("/selectById")
     public Message selectById(@RequestParam("id") Long id) {
@@ -58,7 +67,7 @@ public class CmsTbContentController {
      * @param ids
      * @return
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public Message delete(@RequestBody BoCmsTbContent obj) {
         Message msg = new Message();
         cmsTbContentService.deleteServiceByIds(obj.getIds());
@@ -66,4 +75,11 @@ public class CmsTbContentController {
         return msg;
     }
 
+    @RequestMapping("/clearCache")
+    public Message clearCache() {
+        GlobalInstructionEntity globalInstructionEntity = new GlobalInstructionEntity();
+        globalInstructionEntity.setCmd(GlobalInstructionConstant.CLEAR_STATICS_PAGE);
+        globalInstructionPublish.publish(globalInstructionEntity);
+        return Message.getInstance().success("清除缓存成功");
+    }
 }

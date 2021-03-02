@@ -9,13 +9,17 @@
     <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
     <properties>
+        <!--项目环境等基础配置-->
+        <!--maven打包占位符-->
+        <resource.delimiter>@</resource.delimiter>
         <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <slash.version>1.0.0-SNAPSHOT</slash.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
         <!--基础框架-->
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
@@ -28,193 +32,224 @@
         <fastjson.version>1.2.58</fastjson.version>
     </properties>
     <modules>
+        <!--几个主要模块-->
+        <module>slash-main-application</module>
+        <!--方便其他项目引入-->
+        <module>slash-starter-dependencies</module>
+        <!--cloud模式下独立运行gatewayApp-->
+        <module>slash-gateway-app</module>
 
+        <!--权限服务，关于用户角色部门等相关-->
         <module>slash-auth-app</module>
         <module>slash-auth-api</module>
         <module>slash-auth-service</module>
         <module>slash-auth-mapper</module>
-        <module>slash-auth-controller</module>
-
+        <!--系统服务，数据字典，系统基础配置等-->
         <module>slash-sys-app</module>
         <module>slash-sys-mapper</module>
         <module>slash-sys-api</module>
         <module>slash-sys-service</module>
-        <module>slash-sys-controller</module>
-        <!--<module>dy-gateway-service</module>-->
-
+        <!--CMS建站系统服务-->
         <module>slash-cms-api</module>
         <module>slash-cms-mapper</module>
         <module>slash-cms-service</module>
         <module>slash-cms-app</module>
         <module>slash-cms-webapp</module>
-        <!--组件-->
+        <!--文件资源服务，如果使用OOS直接省略掉-->
+        <module>slash-resource-app</module>
+
+        <!--          其他基础组件等               -->
+        <!--cloud模式依赖包装-->
+        <module>slash-common-cloud</module>
+        <!--uid生成器-->
         <module>slash-common-uuid</module>
+        <!--通用查询依赖-->
         <module>slash-common-query</module>
+        <!--共享的基础配置等-->
         <module>slash-common-framework</module>
+        <!--加密加解密相关封装-->
         <module>slash-common-cypher</module>
+        <!--通用数据传输封装-->
         <module>slash-common-dto</module>
+        <!--通用工具封装-->
         <module>slash-common-util</module>
+        <!--项目内令牌、当前用户获取封装，如果使用JWT或者其他模式自行改造-->
         <module>slash-common-authorization</module>
+        <!--关于Redis的封装-->
         <module>slash-common-redis</module>
+        <!--全局常量-->
         <module>slash-common-const</module>
+        <!--log4j2子模块-->
         <module>slash-common-log</module>
+        <!--关于文件操作的封装-->
         <module>slash-common-file</module>
+        <!--异常统一封装-->
         <module>slash-common-exception</module>
+        <!--HTTP请求同一封装-->
         <module>slash-common-http</module>
+        <!--mybatis类型处理器-->
         <module>slash-common-typehandler</module>
-        <module>slash-main-application</module>
-        <module>slash-starter-dependencies</module>
+        <!--GroovyScript脚本处理-->
+        <module>slash-common-groovyscript</module>
     </modules>
     <dependencyManagement>
         <dependencies>
-            <!--<dependency>-->
-                <!--<groupId>site.lanmushan</groupId>-->
-                <!--<artifactId>slash-starter-dependencies</artifactId>-->
-                <!--<version>1.0.0-SNAPSHOT</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
-            <!--</dependency>-->
+            <!--CMS系统相关-->
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-cms-api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-cms-app</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-cms-service</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-cms-mapper</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
+
+            <!--系统服务相关-->
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-sys-mapper</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-sys-service</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-sys-api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-query</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <artifactId>slash-sys-app</artifactId>
+                <version>${slash.version}</version>
             </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-redis</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
+            <!--权限服务相关依赖-->
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-auth-api</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-auth-service</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-auth-mapper</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-log</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <artifactId>slash-auth-app</artifactId>
+                <version>${slash.version}</version>
             </dependency>
+
+            <!--slash基础组件-->
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-query</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-redis</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-log</artifactId>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-uuid</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-cypher</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-exception</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-common-authorization</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${slash.version}</version>
             </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-cloud</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-groovyscript</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-dto</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-util</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-const</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-file</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-framework</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-http</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-typehandler</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+
+            <!--二维码-->
             <dependency>
                 <groupId>eu.bitwalker</groupId>
                 <artifactId>UserAgentUtils</artifactId>
                 <version>1.21</version>
             </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-dto</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-util</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-const</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-file</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-framework</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-sys-controller</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-http</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-auth-controller</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-typehandler</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
-            </dependency>
-            <!--二维码-->
             <dependency>
                 <groupId>com.google.zxing</groupId>
                 <artifactId>core</artifactId>
@@ -244,11 +279,11 @@
             </dependency>
 
             <!--权限控制框架shiro-->
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-spring</artifactId>
-                <version>1.5.3</version>
-            </dependency>
+            <!--<dependency>-->
+                <!--<groupId>org.apache.shiro</groupId>-->
+                <!--<artifactId>shiro-spring</artifactId>-->
+                <!--<version>1.5.3</version>-->
+            <!--</dependency>-->
             <!--redis相关依赖-->
             <!--<dependency>-->
             <!--<groupId>org.springframework.session</groupId>-->
@@ -342,11 +377,6 @@
                 <version>1.5.19</version>
             </dependency>
             <dependency>
-                <groupId>org.apache.logging.log4j</groupId>
-                <artifactId>log4j-web</artifactId>
-                <version>2.10.0</version>
-            </dependency>
-            <dependency>
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
                 <version>1.9.3</version>
@@ -389,6 +419,20 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring-boot.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-classic</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.logging.log4j</groupId>
+                        <artifactId>log4j-to-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
@@ -405,6 +449,17 @@
                 <artifactId>jackson-databind</artifactId>
                 <version>2.11.1</version>
                 <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>3.0.2</version>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>com.thetransactioncompany</groupId>
+                <artifactId>java-property-utils</artifactId>
+                <version>1.9.1</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -441,8 +496,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                     <skip>false</skip>
                     <encoding>UTF-8</encoding>
                 </configuration>
@@ -477,6 +532,7 @@
                     <exclude>prod/*</exclude>
                     <exclude>sit/*</exclude>
                 </excludes>
+                <filtering>true</filtering>
             </resource>
             <resource>
                 <!--这里是关键！ 根据不同的环境，把对应文件夹里的配置文件打包-->

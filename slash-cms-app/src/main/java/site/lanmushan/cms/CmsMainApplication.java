@@ -11,7 +11,7 @@ import java.util.ResourceBundle;
  * 哈哈
  */
 @SpringBootApplication(scanBasePackages = "site.lanmushan")
-@MapperScan(value ={"site.lanmushan.*.mapper"})
+@MapperScan(value = {"site.lanmushan.*.mapper"})
 public class CmsMainApplication {
     public static void main(String[] args) {
         ResourceBundle bundle = ResourceBundle.getBundle("application");

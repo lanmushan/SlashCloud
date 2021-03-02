@@ -9,7 +9,7 @@ import site.lanmushan.auth.api.entity.AuthFkUserRole;
  * @author dy
  * @since 2020-07-13 21:33:05
  */
-public class BoAuthFkUserRole  extends AuthFkUserRole {
+public class BoAuthFkUserRole extends AuthFkUserRole {
 
 
 }

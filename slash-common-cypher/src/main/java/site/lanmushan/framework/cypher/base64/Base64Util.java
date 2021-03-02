@@ -20,6 +20,7 @@ public class Base64Util {
     public static String encodeToString(String content) {
         return Base64Util.encodeToString(content.getBytes(StandardCharsets.UTF_8));
     }
+
     public static String encodeToString(byte[] bytes) {
         return base64Encoder.encode(bytes);
     }

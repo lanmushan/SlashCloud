@@ -23,13 +23,14 @@ public class LocalResourceServiceImpl implements LocalResourceService {
     public LocalResourceServiceImpl(String rootPath) throws IOException {
         File file = new File(rootPath);
         this.rootPath = file.getCanonicalPath();
+        log.info("外部资源文件目录{}", rootPath);
         File templatesFile = new File(this.getTemplatesPath());
-        if (templatesFile.exists()) {
+        if (!templatesFile.exists()) {
             log.info("创建模板文件夹{}", templatesFile.getCanonicalPath());
             templatesFile.mkdirs();
         }
         File webAppFile = new File(this.getWebAppPath());
-        if (webAppFile.exists()) {
+        if (!webAppFile.exists()) {
             log.info("创建WebApp文件夹{}", webAppFile.getCanonicalPath());
 
             webAppFile.mkdirs();
@@ -58,15 +59,20 @@ public class LocalResourceServiceImpl implements LocalResourceService {
     }
 
     @Override
+    public List<VoFile> getRootFiles(String path) {
+        if (StringUtils.isEmpty(path)) {
+            path = this.getRootPath();
+        } else {
+            path = this.getRootPath().concat(path);
+        }
+        return getFiles(path);
+    }
+
+    @Override
     public List<VoFile> getFiles(String path) {
         List<VoFile> resultList = new ArrayList<>();
-        try {
-            if (StringUtils.isEmpty(path)) {
-                path = this.getRootPath();
-            } else {
-                path = this.getRootPath().concat(path);
-            }
 
+        try {
             File file = new File(path);
             File[] tempList = file.listFiles();
             for (int i = 0; i < tempList.length; i++) {
@@ -92,11 +98,17 @@ public class LocalResourceServiceImpl implements LocalResourceService {
     }
 
     @Override
+    public List<VoFile> getTemplatesFiles() {
+        return getFiles(this.getTemplatesPath());
+    }
+
+
+    @Override
     public byte[] readFile(String path) {
         String tempFile = this.getRootPath().concat(path);
         File file = new File(tempFile);
         if (!file.exists()) {
-            throw new OperateException("文件不存在");
+            throw new OperateException("文件不存在" + path);
         }
         if (file.isDirectory()) {
             throw new OperateException("读取目标不是一个文件");
@@ -130,10 +142,48 @@ public class LocalResourceServiceImpl implements LocalResourceService {
         }
         return file.delete();
     }
+
+    @Override
+    public boolean webExists(String path) {
+        String tempFile = this.getWebAppPath().concat(path);
+        File file = new File(tempFile);
+        if (file.exists()) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public byte[] webRead(String path) {
+        String tempFile = this.getWebAppPath().concat(path);
+        File file = new File(tempFile);
+        if (!file.exists()) {
+            throw new OperateException("文件不存在" + path);
+        }
+        if (file.isDirectory()) {
+            throw new OperateException("读取目标不是一个文件");
+        } else {
+            try {
+                Long fileLength = file.length();
+                if (fileLength == -1) {
+                    return new byte[0];
+                }
+                byte resultByte[] = new byte[fileLength.intValue()];
+                FileInputStream in = new FileInputStream(file);
+                in.read(resultByte);
+                in.close();
+                return resultByte;
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+                throw new OperateException("文件读取失败");
+            }
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         LocalResourceServiceImpl localResourceService = new LocalResourceServiceImpl("./resource");
         System.out.println(localResourceService.getWebAppPath());
         System.out.println(localResourceService.getTemplatesPath());
-        System.out.println(localResourceService.getFiles(null));
+        System.out.println(localResourceService.getRootFiles(null));
     }
 }

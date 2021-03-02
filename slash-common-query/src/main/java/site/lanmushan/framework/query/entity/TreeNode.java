@@ -17,6 +17,7 @@ public abstract class TreeNode<T extends TreeNode> {
     private transient List<T> children = new ArrayList<T>();
     @Transient
     private transient List<Long> ids;
+
     /**
      * @return
      */

@@ -8,4 +8,5 @@ public class VoFile {
     private String filePath;
     private Long fileSize;
     private String fileType;
+    private String fileUrl;
 }

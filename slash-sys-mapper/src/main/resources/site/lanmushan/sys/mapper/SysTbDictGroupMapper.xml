@@ -12,7 +12,8 @@
         <result property="createUserAccount" column="create_user_account" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
-        select   id, dict_group_name, dict_group_code, allow_edit, create_time, update_time, create_user_account  from  sys_tb_dict_group
+        select id, dict_group_name, dict_group_code, allow_edit, create_time, update_time, create_user_account from
+        sys_tb_dict_group
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
                 <choose>
@@ -30,5 +31,5 @@
             </foreach>
         </trim>
     </select>
-  
+
 </mapper>

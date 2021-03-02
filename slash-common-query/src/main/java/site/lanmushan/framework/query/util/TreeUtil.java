@@ -37,7 +37,7 @@ public class TreeUtil {
     public static <T extends TreeNode<T>> T findChildren(T node, List<T> nodeList) {
 
         for (T it : nodeList) {
-            if (!it.isRoot()&&node.isChildren(it)) {
+            if (!it.isRoot() && node.isChildren(it)) {
                 if (node.getChildren() == null) {
                     node.setChildren(new ArrayList<T>());
                 }

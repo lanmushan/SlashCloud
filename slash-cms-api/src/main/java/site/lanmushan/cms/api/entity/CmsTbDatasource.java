@@ -51,5 +51,5 @@ public class CmsTbDatasource extends BaseEntity {
     @ExcelProperty(value = " ")
     private Date updateTime;
 
-
+    private String datasourceParams;
 }

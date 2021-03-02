@@ -6,9 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import site.lanmushan.framework.authorization.util.TokenUtil;
-import site.lanmushan.framework.cypher.md5.MD5Util;
 import site.lanmushan.framework.constant.HTTPCode;
+import site.lanmushan.framework.cypher.md5.MD5Util;
 import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.redis.RedisClientService;
+import site.lanmushan.framework.util.ApplicationUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -24,6 +26,18 @@ public class CurrentUserUtil {
     public final static String tokenSecretKey = "cvj5^2)(136aje,";
     public final static String USER_KEY = "currentUser";
     public final static String AUTHORIZATION = "authorization";
+    private static volatile RedisClientService redisClientService;
+
+    private RedisClientService getRedisClientService() {
+        if (redisClientService == null) {
+            synchronized (CurrentUserUtil.class) {
+                if (redisClientService == null) {
+                    redisClientService = ApplicationUtil.getBean(RedisClientService.class);
+                }
+            }
+        }
+        return redisClientService;
+    }
 
     public static String createPassword(String oldPassword, String salt) {
         return MD5Util.createMD5AndSalt(oldPassword, salt, 3);
@@ -34,14 +48,13 @@ public class CurrentUserUtil {
         return currentUser == null ? false : true;
     }
 
-
     /**
      * 获取当前用户的token
      *
      * @return
      */
     public static String createToken(CurrentUser currentUser) {
-        return TokenUtil.createToekn(currentUser, tokenSecretKey);
+        return TokenUtil.createToken(currentUser, tokenSecretKey);
     }
 
     public static CurrentUser getCurrentUser(String token) {
@@ -57,15 +70,25 @@ public class CurrentUserUtil {
 
     /**
      * 只能在含有RequestContextHolder的依赖下使用
+     * 1.首先在request.attribute中获取用户信息
+     * 2.在token中获取
+     * 3.在token中获取成功过后不直接返回，判断redis中是否过期；过期抛出异常，没有过期进行续期
      *
      * @return
      */
     public static CurrentUser getCurrentUser() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Object currentUserObj = request.getAttribute(USER_KEY);
+        if (currentUserObj != null) {
+            return (CurrentUser) currentUserObj;
+        }
         String token = request.getHeader(AUTHORIZATION);
         CurrentUser currentUser = getCurrentUser(token);
         if (currentUser == null) {
             throw new OperateException("未登录", HTTPCode.D600);
+        }
+        if (true) {
+            request.setAttribute(USER_KEY, currentUser);
         }
         return currentUser;
     }

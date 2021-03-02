@@ -7,7 +7,7 @@ package site.lanmushan.framework.cypher;
  */
 public class CypherFactory {
 
-    public  CypherFactory() {
+    public CypherFactory() {
 
     }
 }

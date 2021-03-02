@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.lanmushan.cms.mapper.CmsTbRequestMappingMapper">
+
+    <resultMap type="site.lanmushan.cms.api.vo.VoCmsTbRequestMapping" id="baseResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="requestUrl" column="request_url" jdbcType="VARCHAR"/>
+        <result property="requestMethod" column="request_method" jdbcType="VARCHAR"/>
+        <result property="mappingType" column="mapping_type" jdbcType="VARCHAR"/>
+        <result property="requestTpl" column="request_tpl" jdbcType="VARCHAR"/>
+        <result property="encoderScript" column="encoder_script" jdbcType="VARCHAR"/>
+        <result property="pageReWrite" column="page_re_write" jdbcType="INTEGER"/>
+        <result property="targetPage" column="target_page" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="selectList" resultMap="baseResultMap" parameterType="QueryInfo">
+        select id, request_url, request_method, mapping_type, request_tpl, encoder_script, page_re_write,
+        target_page,create_time,
+        update_time from cms_tb_request_mapping
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
+                <if test="it.operate =='in'">
+                    ${it.key} ${it.operate} (#{it.value})
+                </if>
+                <if test="it.operate !='in'">
+                    ${it.key} ${it.operate} #{it.value}
+                </if>
+            </foreach>
+            and
+            <if test="searchKey != null and searchKey !=''">
+            </if>
+        </trim>
+    </select>
+
+</mapper>

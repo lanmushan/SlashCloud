@@ -1,22 +1,22 @@
 package site.lanmushan.framework.query.controller;
 
 
-
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.annotation.Order;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
-import site.lanmushan.framework.query.util.ApplicationUtil;
-import site.lanmushan.framework.query.util.StringCommonUtil;
 import site.lanmushan.framework.query.annotations.RequestQueryInfo;
+import site.lanmushan.framework.query.util.StringCommonUtil;
+import site.lanmushan.framework.util.ApplicationUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -31,21 +31,28 @@ import java.util.List;
  */
 @RestController
 @Slf4j
-@Order(value = -99999)
+@Order(-9999)
 @ConditionalOnProperty(prefix = "slash", name = "query", havingValue = "true")
 public class QueryController extends BaseController {
-    @GetMapping(value = "/{entityName}/{methodName}")
+    @RequestMapping(value = "/{entityName}/{methodName:[^\\.]\\w*$}", method = RequestMethod.GET)
     public Message selectList(@PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request) {
-        log.info(JSONObject.toJSONString(queryInfo));
+        log.info("URI {} DATA:{}", request.getRequestURI(), JSONObject.toJSONString(queryInfo));
         Message msg = new Message();
         try {
             entityName = StringCommonUtil.toLowerCaseFirstOne(entityName);
-            String serviceName=entityName+ "Service";
+            String serviceName = entityName + "Service";
             Object queryService = ApplicationUtil.getBean(serviceName);
+            if (queryService == null) {
+                msg.error("服务不存在");
+                return msg;
+            }
             Method method = queryService.getClass().getMethod(methodName, queryInfo.getClass());
+            if (method == null) {
+                msg.error("服务不存在");
+                return msg;
+            }
             Type t = method.getReturnType();
             //列表查询
-            System.out.println("类型："+t.getTypeName());
             if ("java.util.List".equals(t.getTypeName())) {
                 startPage();
                 List list = (List) method.invoke(queryService, queryInfo);

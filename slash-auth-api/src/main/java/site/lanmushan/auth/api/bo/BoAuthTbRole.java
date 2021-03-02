@@ -9,7 +9,7 @@ import site.lanmushan.auth.api.entity.AuthTbRole;
  * @author dy
  * @since 2020-07-13 21:28:56
  */
-public class BoAuthTbRole  extends AuthTbRole {
+public class BoAuthTbRole extends AuthTbRole {
 
 
 }

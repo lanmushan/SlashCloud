@@ -53,8 +53,9 @@ public interface CmsTbCategoryService extends BaseService<CmsTbCategory> {
 
     /**
      * 树形结构查询
+     *
      * @param queryInfo
      * @return
      */
-     List selectTreeList(QueryInfo queryInfo);
+    List selectTreeList(QueryInfo queryInfo);
 }

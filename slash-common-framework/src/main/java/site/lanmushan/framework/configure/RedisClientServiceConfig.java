@@ -36,7 +36,7 @@ public class RedisClientServiceConfig {
         jedisPoolConfig.setTestOnBorrow(true);
         jedisPoolConfig.setTestWhileIdle(true);
         jedisPool = new JedisPool(jedisPoolConfig, host, port);
-        RedisClientService redisClientService=new  RedisClientService(jedisPool);
+        RedisClientService redisClientService = new RedisClientService(jedisPool);
         log.info("redisClientService配置成功");
         return redisClientService;
     }

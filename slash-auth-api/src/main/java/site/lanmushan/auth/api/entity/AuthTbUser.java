@@ -48,14 +48,14 @@ public class AuthTbUser implements Serializable {
      */
     @ExcelProperty(value = " 电话")
     @NotBlank(message = "联系电话不能为空")
-  //  @Length(min = 11, max = 11, message = "联系电话只能11位")
+    //  @Length(min = 11, max = 11, message = "联系电话只能11位")
     private String phone;
     /**
      * 身份证号
      */
     @ExcelProperty(value = " 身份证号")
     @NotBlank(message = "证件号码不能为空")
-  //  @Length(min = 15, max = 18, message = "身份证号长度为15或18位")
+    //  @Length(min = 15, max = 18, message = "身份证号长度为15或18位")
     private String idCard;
     /**
      * 邮箱

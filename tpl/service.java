@@ -1,26 +1,28 @@
 ##定义初始变量
-        #set($tableName = $tool.append($tableInfo.name, "Service"))
+        #set($tableName=$tool.append($tableInfo.name,"Service"))
         ##设置回调
-        $!callback.setFileName($tool.append($tableName, ".java"))
-        $!callback.setSavePath($tool.append($tableInfo.savePath, "/service"))
+        $!callback.setFileName($tool.append($tableName,".java"))
+        $!callback.setSavePath($tool.append($tableInfo.savePath,"/service"))
 
         ##拿到主键
         #if(!$tableInfo.pkColumn.isEmpty())
-        #set($pk = $tableInfo.pkColumn.get(0))
+        #set($pk=$tableInfo.pkColumn.get(0))
         #end
 
         #if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}service;
 import java.util.List;
+
 import $!{tableInfo.savePackageName}.api.bo.Bo$!{tableInfo.name};
 import site.lanmushan.framework.query.service.BaseService;
 import $!{tableInfo.savePackageName}.api.entity.$!{tableInfo.name};
+
 /**
  * $!{tableInfo.comment}($!{tableInfo.name})表服务接口
  *
  * @author $!author
  * @since $!time.currTime()
  */
-public interface $!{tableName} extends BaseService<$!{tableInfo.name}> {
+public interface $!{tableName}extends BaseService<$!{tableInfo.name}>{
 
 
         /**
@@ -29,7 +31,7 @@ public interface $!{tableName} extends BaseService<$!{tableInfo.name}> {
          * @param $!tool.firstLowerCase($!{tableInfo.name}) 实例对象
          * @return 实例对象
          */
-        void insertService(Bo$!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name}));
+        void insertService(Bo$!{tableInfo.name}$!tool.firstLowerCase($!{tableInfo.name}));
 
         /**
          * 修改数据
@@ -37,14 +39,14 @@ public interface $!{tableName} extends BaseService<$!{tableInfo.name}> {
          * @param $!tool.firstLowerCase($!{tableInfo.name}) 实例对象
          * @return 实例对象
          */
-        void updateService(Bo$!{tableInfo.name} $!tool.firstLowerCase($!{tableInfo.name}));
+        void updateService(Bo$!{tableInfo.name}$!tool.firstLowerCase($!{tableInfo.name}));
 
         /**
          * 批量新增
          * @param  bo$!{tableInfo.name}List 实例对象
          * @return
          */
-        void insertServiceList(List<Bo$!{tableInfo.name}> bo$!{tableInfo.name}List);
+        void insertServiceList(List<Bo$!{tableInfo.name}>bo$!{tableInfo.name}List);
 
         /**
          * 批量删除

@@ -51,15 +51,16 @@ public class ValidatorUtil {
     /**
      * 正则表达式：验证数字
      */
-    public static final String regex_number="^-?\\d+(\\.\\d+)?$";
+    public static final String regex_number = "^-?\\d+(\\.\\d+)?$";
     /**
      * 由数字、26个英文字母或者下划线组成的字符串
      */
-    public static final String regex_number_or_letter_underline="^\\w{3,20}$";
+    public static final String regex_number_or_letter_underline = "^\\w{3,20}$";
     /**
      * 由字母、数字组成
      */
-    public static final String regex_number_or_letter="^[A-Za-z0-9]+$";
+    public static final String regex_number_or_letter = "^[A-Za-z0-9]+$";
+
     /**
      * 校验用户名
      *
@@ -142,11 +143,12 @@ public class ValidatorUtil {
 
     /**
      * 是否为数字
+     *
      * @param str
      * @return
      */
     public static boolean isNumber(String str) {
-      return   Pattern.matches(regex_number, str);
+        return Pattern.matches(regex_number, str);
     }
 
 }

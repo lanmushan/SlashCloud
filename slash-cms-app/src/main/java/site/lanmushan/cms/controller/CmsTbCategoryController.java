@@ -62,13 +62,14 @@ public class CmsTbCategoryController {
      * @param ids
      * @return
      */
-    @DeleteMapping("/delete")
+    @PostMapping("/delete")
     public Message delete(@RequestBody BoCmsTbCategory obj) {
         Message msg = new Message();
         cmsTbCategoryService.deleteServiceByIds(obj.getIds());
         msg.success("删除成功");
         return msg;
     }
+
     @GetMapping("/selectTreeList")
     public Message selectTreeList(@RequestQueryInfo QueryInfo queryInfo) {
         List typeList = cmsTbCategoryMapper.selectList(queryInfo);

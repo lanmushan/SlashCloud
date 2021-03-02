@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
 <!--同步打印日志-->
-<configuration >
+<configuration>
     <Properties>
         <!-- 配置日志文件输出目录 -->
         <property name="PROJECT_NAME">${spring.application.name}</property>
-        <Property name="LOG_HOME" value="./logs" />
+        <Property name="LOG_HOME" value="./logs"/>
         <Property name="LOG_NAME">http</Property>
     </Properties>
     <appenders>
@@ -43,13 +43,13 @@
 
     </appenders>
     <loggers>
-        <root  level="info"  includeLocation="true">
+        <root level="info" includeLocation="true">
             <appender-ref ref="console"></appender-ref>
             <appender-ref ref="service_error_appender"></appender-ref>
             <appender-ref ref="service_info_appender"></appender-ref>
-        </root >
+        </root>
         <!--<asyncRoot level="INFO" includeLocation="true">-->
-            <!--<appender-ref ref="service_info_appender"></appender-ref>-->
+        <!--<appender-ref ref="service_info_appender"></appender-ref>-->
         <!--</asyncRoot>-->
     </loggers>
 </configuration>

@@ -12,11 +12,13 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- *  全局数据格式化配置
+ * 全局数据格式化配置
+ *
  * @author Administrator
  */
 @Configuration
@@ -28,9 +30,10 @@ public class DataFormatMvcConfigurer implements WebMvcConfigurer {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
-        SimpleModule simpleModule =new SimpleModule();
+        SimpleModule simpleModule = new SimpleModule();
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);
+        simpleModule.addSerializer(BigInteger.class, ToStringSerializer.instance);
         mapper.registerModule(simpleModule);
         converter.setObjectMapper(mapper);
         return converter;

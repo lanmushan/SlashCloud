@@ -1,7 +1,6 @@
 package site.lanmushan.auth.service.impl;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.lanmushan.auth.api.bo.BoAuthFkDeptPost;

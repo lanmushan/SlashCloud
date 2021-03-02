@@ -99,10 +99,10 @@ public class Message<T> implements Serializable {
         this.setHttpCode(HTTPCode.E200);
         return this;
     }
-    public void setHttpCode(HTTPCode httpCode)
-    {
-        this.code=httpCode.code;
-        this.msg=httpCode.msg;
+
+    public void setHttpCode(HTTPCode httpCode) {
+        this.code = httpCode.code;
+        this.msg = httpCode.msg;
     }
 
     public Collection<T> getRows() {
@@ -126,16 +126,19 @@ public class Message<T> implements Serializable {
         this.msg = msg;
         return this;
     }
-    public Message error(HTTPCode httpCode,String msg) {
+
+    public Message error(HTTPCode httpCode, String msg) {
         this.setHttpCode(httpCode);
         this.msg = msg;
         return this;
     }
+
     public Message success(String msg) {
         this.setHttpCode(HTTPCode.E200);
         this.msg = msg;
         return this;
     }
+
     public void addError(String attrName, String attrMsg) {
         if (null == errors) {
             errors = new ArrayList<>();
@@ -154,8 +157,7 @@ public class Message<T> implements Serializable {
         if (currentPage == totalPage) {
             isLastPage = 1;
         }
-        if(pageSize!=0)
-        {
+        if (pageSize != 0) {
             this.setPage(total % pageSize == 0 ? total / pageSize : (total / pageSize) + 1);
 
         }

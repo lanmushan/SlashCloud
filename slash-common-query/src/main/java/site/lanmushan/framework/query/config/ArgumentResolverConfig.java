@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * 自定义SpringMVC参数解析器
+ *
  * @Author dy
  * @Date 2020/6/7 14:06
  * @Version 1.0
@@ -19,9 +20,10 @@ import java.util.List;
 public class ArgumentResolverConfig implements WebMvcConfigurer {
     @Autowired
     RequestQueryInfoHandlerMethodArgumentResolver requestQueryInfoHandlerMethodArgumentResolver;
+
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(0,requestQueryInfoHandlerMethodArgumentResolver);
+        resolvers.add(0, requestQueryInfoHandlerMethodArgumentResolver);
         log.info("@RequestQueryInfo参数解析设置成功");
     }
 }

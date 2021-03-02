@@ -19,6 +19,7 @@ public class HomeController {
         log.info("为啥不行");
         return "index.html";
     }
+
     @RequestMapping("/classes/{classId}.html")
     public String home(@PathVariable String classId) {
         System.out.println("xxxxxxxxxxxxx");

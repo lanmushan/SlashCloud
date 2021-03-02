@@ -47,5 +47,11 @@ public interface AuthTbUserService extends BaseService<AuthTbUser> {
      */
     void deleteServiceByIds(List<Long> ids);
 
-
+    /**
+     * 重置指定用户密码
+     *
+     * @param userId
+     * @param password
+     */
+    void resetLoginPassword(Long userId, String password);
 }

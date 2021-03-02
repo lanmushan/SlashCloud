@@ -6,27 +6,42 @@ import org.springframework.boot.CommandLineRunner;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.ReflectionUtils;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
-import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import site.lanmushan.cms.web.controller.HomeController;
+import site.lanmushan.cms.api.entity.CmsTbRequestMapping;
+import site.lanmushan.cms.mapper.CmsTbRequestMappingMapper;
+import site.lanmushan.cms.service.CmsTbRequestMappingService;
+import site.lanmushan.cms.web.dynamicrequest.DynamicRequestMappingRegisterComponent;
+import site.lanmushan.cms.web.dynamicrequest.HttpRequest;
+import site.lanmushan.framework.dto.QueryInfo;
 
-import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * @author Administrator
+ */
 @Slf4j
-@Configuration
+//@Configuration
 public class InitRequestMappingRunner implements CommandLineRunner {
     @Autowired
     ApplicationContext applicationContext;
     @Autowired
-    RequestMappingRegisterService requestMappingRegisterService;
+    DynamicRequestMappingRegisterComponent requestMappingRegisterService;
+    @Autowired
+    CmsTbRequestMappingMapper cmsTbRequestMappingMapper;
+
     @Override
     public void run(String... args) throws Exception {
+        List<CmsTbRequestMapping> cmsTbRequestMappingList = cmsTbRequestMappingMapper.selectAll();
+        List<HttpRequest> httpRequestList = new ArrayList<>(cmsTbRequestMappingList.size());
+        cmsTbRequestMappingList.forEach(it -> {
+            HttpRequest httpRequest = new HttpRequest();
+            httpRequest.setRequestMethod(it.getRequestMethod());
+            httpRequest.setRequestUrl(it.getRequestUrl());
+            httpRequestList.add(httpRequest);
+        });
+        requestMappingRegisterService.registerHttpRequestList(httpRequestList);
         log.info("动态注册");
-        requestMappingRegisterService.registerRequestMapping("/{test}/home");
+        //  requestMappingRegisterService.registerRequestMapping("/{test}/home");
 //
 //        RequestMappingHandlerMapping requestMappingHandlerMapping = applicationContext.getBean(RequestMappingHandlerMapping.class);
 //        Method targetMethod = ReflectionUtils.findMethod(HomeController.class, "index");

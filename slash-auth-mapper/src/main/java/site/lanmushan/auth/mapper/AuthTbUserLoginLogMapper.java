@@ -13,7 +13,7 @@ import tk.mybatis.mapper.additional.insert.InsertListMapper;
  * @since 2020-06-15 22:13:48
  */
 @org.apache.ibatis.annotations.Mapper
-public interface AuthTbUserLoginLogMapper extends QueryMapper<AuthTbUserLoginLog>{
+public interface AuthTbUserLoginLogMapper extends QueryMapper<AuthTbUserLoginLog> {
 
 
 }

@@ -1,4 +1,4 @@
 package site.lanmushan.framework.http.api;
 
-public interface AsyncHttpClientService extends HttpClientService{
+public interface AsyncHttpClientService extends HttpClientService {
 }

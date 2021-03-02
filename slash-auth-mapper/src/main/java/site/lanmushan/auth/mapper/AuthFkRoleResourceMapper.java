@@ -8,12 +8,12 @@ import tk.mybatis.mapper.common.special.InsertListMapper;
 /**
  * (AuthFkRoleResource)表数据库访问层
  *
- * @see QueryMapper#selectQueryById(QueryInfo)
  * @author dy
+ * @see QueryMapper#selectQueryById(QueryInfo)
  * @since 2020-06-15 22:13:47
  */
 @org.apache.ibatis.annotations.Mapper
-public interface AuthFkRoleResourceMapper extends QueryMapper<AuthFkRoleResource>{
+public interface AuthFkRoleResourceMapper extends QueryMapper<AuthFkRoleResource> {
 
 
 }

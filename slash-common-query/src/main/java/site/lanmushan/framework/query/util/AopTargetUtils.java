@@ -18,38 +18,39 @@ public class AopTargetUtils {
 
     /**
      * 获取 目标对象
+     *
      * @param proxy 代理对象
      * @return
      * @throws Exception
      */
     public static Object getTarget(Object proxy) throws Exception {
 
-        if(!AopUtils.isAopProxy(proxy)) {
+        if (!AopUtils.isAopProxy(proxy)) {
             return proxy;//不是代理对象
         }
-        if(AopUtils.isJdkDynamicProxy(proxy)) {
+        if (AopUtils.isJdkDynamicProxy(proxy)) {
             return getJdkDynamicProxyTargetObject(proxy);
-        } else  if (AopUtils.isCglibProxy(proxy)){ //cglib
+        } else if (AopUtils.isCglibProxy(proxy)) { //cglib
             return getCglibProxyTargetObject(proxy);
-        }else {
+        } else {
             return getTarget(proxy);
         }
 
 
-
     }
-    private static Boolean isMapperProxy(Object proxy)  {
-        try {
-         return Proxy.isProxyClass(proxy.getClass());
 
-        }catch (Exception e)
-        {
+    private static Boolean isMapperProxy(Object proxy) {
+        try {
+            return Proxy.isProxyClass(proxy.getClass());
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
 
-    return null;
+        return null;
     }
+
     private static Object getCglibProxyTargetObject(Object proxy) throws Exception {
         Field h = proxy.getClass().getDeclaredField("CGLIB$CALLBACK_0");
         h.setAccessible(true);
@@ -57,7 +58,7 @@ public class AopTargetUtils {
         Field advised = dynamicAdvisedInterceptor.getClass().getDeclaredField("advised");
         advised.setAccessible(true);
         Object target = ((AdvisedSupport) advised.get(dynamicAdvisedInterceptor)).getTargetSource().getTarget();
-        log.info("get target object ["+target.getClass().getName()+"] from Cglib reflect ,from proxy:"+proxy.getClass().getName());
+        log.info("get target object [" + target.getClass().getName() + "] from Cglib reflect ,from proxy:" + proxy.getClass().getName());
         return target;
     }
 
@@ -68,7 +69,7 @@ public class AopTargetUtils {
         Field advised = aopProxy.getClass().getDeclaredField("advised");
         advised.setAccessible(true);
         Object target = ((AdvisedSupport) advised.get(aopProxy)).getTargetSource().getTarget();
-        log.info("get target object ["+target.getClass().getName()+"] from Jdk reflect ,from proxy:"+proxy.getClass().getName());
+        log.info("get target object [" + target.getClass().getName() + "] from Jdk reflect ,from proxy:" + proxy.getClass().getName());
         return target;
     }
 

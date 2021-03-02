@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2020-06-15 22:13:48
  */
 @org.apache.ibatis.annotations.Mapper
-public interface AuthTbRoleMapper extends QueryMapper<AuthTbRole>{
+public interface AuthTbRoleMapper extends QueryMapper<AuthTbRole> {
     /**
      * 根据用户ID查询所有的关联角色
      *

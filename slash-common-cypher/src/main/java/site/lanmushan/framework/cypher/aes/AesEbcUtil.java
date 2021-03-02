@@ -22,9 +22,11 @@ public class AesEbcUtil {
     private static final String KEY_ALGORITHM = "AES";
     private static final String DEFAULT_CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";//默认的加密算法
     private static final String password = "23slfjlajwaljosj78/123";
+
     static {
         Security.addProvider(new BouncyCastlePQCProvider());
     }
+
     public static String encryptBase64(String content, String password) {
         try {
             Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);// 创建密码器
@@ -38,6 +40,7 @@ public class AesEbcUtil {
         }
         return null;
     }
+
     public static String encryptToHex(String content, String password) {
         try {
             Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);// 创建密码器
@@ -51,6 +54,7 @@ public class AesEbcUtil {
         }
         return null;
     }
+
     /**
      * AES 解密操作
      *
@@ -76,11 +80,11 @@ public class AesEbcUtil {
 
         return null;
     }
+
     public static String decryptByHex(String content, String password) {
 
         try {
-            if(StringUtils.isEmpty(content))
-            {
+            if (StringUtils.isEmpty(content)) {
                 throw new NullPointerException("解密内容不能为空");
             }
             //实例化
@@ -91,13 +95,14 @@ public class AesEbcUtil {
             //执行操作
             byte[] result = cipher.doFinal(HexUtil.hexToByte(content));
 
-            return  new String(result,StandardCharsets.UTF_8);
+            return new String(result, StandardCharsets.UTF_8);
         } catch (Exception ex) {
             Logger.getLogger(AesEbcUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
     }
+
     /**
      * 生成加密秘钥
      *

@@ -65,10 +65,11 @@ public class CmsTbDatasourceTypeServiceImpl implements CmsTbDatasourceTypeServic
     public void deleteServiceByIds(List<Long> ids) {
         cmsTbDatasourceTypeMapper.deleteByIdList(ids);
     }
+
     @Override
     public List selectTreeList(QueryInfo queryInfo) {
         List categoryList = cmsTbDatasourceTypeMapper.selectList(queryInfo);
-        List resultList= TreeUtil.listToTree(categoryList);
+        List resultList = TreeUtil.listToTree(categoryList);
         return resultList;
     }
 }

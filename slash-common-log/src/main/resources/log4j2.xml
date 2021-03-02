@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
-<configuration >
+<configuration>
     <Properties>
         <!-- 配置日志文件输出目录 -->
         <property name="PROJECT_NAME">${spring.application.name}</property>
-        <Property name="LOG_HOME" value="./logs/${ctx:appName}" />
+        <Property name="LOG_HOME" value="./logs/${sys:appName}"/>
         <Property name="LOG_NAME">http</Property>
     </Properties>
     <appenders>
@@ -42,10 +42,10 @@
 
     </appenders>
     <loggers>
-        <root  level="info">
+        <root level="info">
             <appender-ref ref="console"></appender-ref>
             <appender-ref ref="service_error_appender"></appender-ref>
             <appender-ref ref="service_info_appender"></appender-ref>
-        </root >
+        </root>
     </loggers>
 </configuration>

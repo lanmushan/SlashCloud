@@ -26,33 +26,33 @@ public class SysTbDictGroup extends BaseEntity {
     @ExcelProperty(value = " ")
     private Long id;
     /**
-    * 字典名称
-    */    
+     * 字典名称
+     */
     @ExcelProperty(value = " 字典名称")
     private String dictGroupName;
     /**
-    * 字典编码
-    */    
+     * 字典编码
+     */
     @ExcelProperty(value = " 字典编码")
     private String dictGroupCode;
     /**
-    * 允许编辑
-    */    
+     * 允许编辑
+     */
     @ExcelProperty(value = " 允许编辑")
     private Integer allowEdit;
     /**
-    * 创建时间
-    */    
+     * 创建时间
+     */
     @ExcelProperty(value = " 创建时间")
     private Date createTime;
     /**
-    * 更新时间
-    */    
+     * 更新时间
+     */
     @ExcelProperty(value = " 更新时间")
     private Date updateTime;
     /**
-    * 创建人
-    */    
+     * 创建人
+     */
     @ExcelProperty(value = " 创建人")
     private String createUserAccount;
 

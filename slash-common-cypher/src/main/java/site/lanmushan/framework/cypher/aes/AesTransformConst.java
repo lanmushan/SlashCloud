@@ -9,8 +9,8 @@ public class AesTransformConst {
     /**
      * 默认算法
      */
-    public static final String ECB_PKCS5Padding="AES/ECB/PKCS5Padding";
-    public static final String CBC_PKCS5Padding="AES/CBC/PKCS5Padding";
+    public static final String ECB_PKCS5Padding = "AES/ECB/PKCS5Padding";
+    public static final String CBC_PKCS5Padding = "AES/CBC/PKCS5Padding";
 
 
 }

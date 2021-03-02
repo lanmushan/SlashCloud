@@ -22,7 +22,7 @@ public class CustomRedisSerializer implements RedisSerializer {
 
     @Override
     public Object deserialize(byte[] bytes) throws SerializationException {
-        if (bytes == null){
+        if (bytes == null) {
             return null;
         }
         ByteArrayInputStream byteIn = new ByteArrayInputStream(bytes);

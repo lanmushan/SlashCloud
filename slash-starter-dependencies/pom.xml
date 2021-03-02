@@ -42,7 +42,7 @@
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
-            <artifactId>slash-sys-controller</artifactId>
+            <artifactId>slash-sys-app</artifactId>
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
@@ -57,6 +57,11 @@
         <dependency>
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-auth-api</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-auth-app</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>

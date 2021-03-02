@@ -10,6 +10,7 @@ import java.util.List;
 public interface BaseService<T> {
     /**
      * 列表查询
+     *
      * @param queryInfo
      * @return
      */

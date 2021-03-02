@@ -9,18 +9,18 @@ public class StateTypeConstant {
     /**
      * 禁用、锁定
      */
-    public static Integer DISABLED=1;
+    public static Integer DISABLED = 1;
     /**
      * 启用、可用
      */
-    public static Integer ENABLED=0;
+    public static Integer ENABLED = 0;
 
     /**
      * 默认值
      */
-    public static Integer DEFAULT_STATE=1;
+    public static Integer DEFAULT_STATE = 1;
     /**
      * 非默认值
      */
-    public static Integer NO_DEFAULT_STATE=0;
+    public static Integer NO_DEFAULT_STATE = 0;
 }

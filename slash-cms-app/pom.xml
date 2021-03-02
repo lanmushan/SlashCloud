@@ -33,38 +33,6 @@
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
-            <artifactId>slash-sys-mapper</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>site.lanmushan</groupId>
-            <artifactId>slash-sys-service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>site.lanmushan</groupId>
-            <artifactId>slash-sys-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>site.lanmushan</groupId>
-            <artifactId>slash-sys-controller</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>site.lanmushan</groupId>
-            <artifactId>slash-auth-controller</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>site.lanmushan</groupId>
-            <artifactId>slash-auth-mapper</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>site.lanmushan</groupId>
-            <artifactId>slash-auth-service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>site.lanmushan</groupId>
-            <artifactId>slash-auth-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-framework</artifactId>
         </dependency>
         <dependency>
@@ -74,6 +42,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-cloud</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -153,6 +125,5 @@
             <!--assembly打包结束-->
         </plugins>
     </build>
-
 
 </project>

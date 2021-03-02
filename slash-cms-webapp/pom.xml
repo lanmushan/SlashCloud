@@ -15,7 +15,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <main.class>site.lanmushan.cms.CmsMainApplication</main.class>
+        <main.class>site.lanmushan.cms.web.WebApplication</main.class>
     </properties>
 
     <dependencies>
@@ -58,12 +58,24 @@
             <artifactId>slash-common-authorization</artifactId>
         </dependency>
         <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-groovyscript</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-log</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-redis</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -143,6 +155,5 @@
             <!--assembly打包结束-->
         </plugins>
     </build>
-
 
 </project>
