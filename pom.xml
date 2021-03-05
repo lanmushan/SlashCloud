@@ -243,6 +243,12 @@
                 <artifactId>slash-common-typehandler</artifactId>
                 <version>${slash.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-resource-app</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
             <!--二维码-->
             <dependency>
                 <groupId>eu.bitwalker</groupId>

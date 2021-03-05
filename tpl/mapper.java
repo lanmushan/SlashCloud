@@ -27,7 +27,8 @@ import tk.mybatis.mapper.common.special.InsertListMapper;
  * @since $!time.currTime()
  */
 @org.apache.ibatis.annotations.Mapper
-public interface $!{tableName}extends QueryMapper<$!{tableInfo.name}>,InsertListMapper<$!{tableInfo.name}>,IdListMapper<$!{tableInfo.name},Long>{
+public interface $!{tableName}extends QueryMapper<$!{tableInfo.name}>{
 
 
-        }
+
+}

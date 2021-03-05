@@ -42,7 +42,7 @@ public class GroovyScriptUtil {
      */
     public static String transform(String content, Map<String, Object> data) {
         try {
-            log.info("传入内容{} 数据:{}", content, JSONObject.toJSONString(data));
+            log.info("传入内容:{}\n数据:{}", content, JSONObject.toJSONString(data));
             if (content == null || StringUtils.isEmpty(content.trim())) {
                 return null;
             }

@@ -54,4 +54,15 @@
         </if>
         order by b.order_index desc
     </select>
+    <!---->
+    <select id="selectApiRelationRoles" parameterType="java.lang.String" resultType="site.lanmushan.auth.api.vo.VoUrlRoles">
+        SELECT resource_url as resourceUrl,GROUP_CONCAT(fk_role_code) as roles FROM (SELECT id,resource_url from auth_tb_resource WHERE resource_type="api") as api
+      LEFT JOIN auth_fk_role_resource AS role ON role.fk_resource_id = api.id
+      <where>
+          <if test="url !=null and url!=''">
+              resource_url=#{url}
+          </if>
+      </where>
+      GROUP BY resource_url
+    </select>
 </mapper>

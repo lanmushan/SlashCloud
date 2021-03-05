@@ -3,18 +3,17 @@ package site.lanmushan.framework.authorization;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import site.lanmushan.framework.authorization.util.TokenUtil;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.cypher.md5.MD5Util;
 import site.lanmushan.framework.exception.OperateException;
-import site.lanmushan.framework.redis.RedisClientService;
 import site.lanmushan.framework.util.ApplicationUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author dy
@@ -26,17 +25,13 @@ public class CurrentUserUtil {
     public final static String tokenSecretKey = "cvj5^2)(136aje,";
     public final static String USER_KEY = "currentUser";
     public final static String AUTHORIZATION = "authorization";
-    private static volatile RedisClientService redisClientService;
+    /**过期时间*/
+    private final static int AUTHORIZATION_EXPIRATION_TIME = 5000;
+    public final static String REDIS_ONLINE_USER_KEY_PREFIX = "ONLINE_USER|";
+    public final static String REDIS_API_HASH_KEY = "REDIS_API_HASH_KEY";
 
-    private RedisClientService getRedisClientService() {
-        if (redisClientService == null) {
-            synchronized (CurrentUserUtil.class) {
-                if (redisClientService == null) {
-                    redisClientService = ApplicationUtil.getBean(RedisClientService.class);
-                }
-            }
-        }
-        return redisClientService;
+    private static RedisTemplate<Object, Object> getRedisTemplate() {
+        return ApplicationUtil.getRedisTemplate();
     }
 
     public static String createPassword(String oldPassword, String salt) {
@@ -87,21 +82,22 @@ public class CurrentUserUtil {
         if (currentUser == null) {
             throw new OperateException("未登录", HTTPCode.D600);
         }
-        if (true) {
+        String redisUserKey = REDIS_ONLINE_USER_KEY_PREFIX + currentUser.getUserId();
+        if (getRedisTemplate().hasKey(redisUserKey)) {
             request.setAttribute(USER_KEY, currentUser);
+            getRedisTemplate().expire(redisUserKey, AUTHORIZATION_EXPIRATION_TIME, TimeUnit.MILLISECONDS);
+        } else {
+            throw new OperateException("登录过期", HTTPCode.D600);
         }
         return currentUser;
     }
-
-    public static List<String> getUserApis(CurrentUser currentUser) {
-        List<String> list = new ArrayList<>();
-        list.add("/api/test/test");
-        return list;
+    public static Boolean currentUserHasUriPermissions(String uri){
+       Object value=  getRedisTemplate().opsForHash().get(REDIS_API_HASH_KEY,uri);
+       log.info("获取到的权限{}",value);
+       return true;
     }
 
-    public static List<String> saveUserApis(CurrentUser currentUser, List<String> apiList) {
-        return null;
-    }
+
 
     public static void main(String args[]) {
         CurrentUser currentUser = new CurrentUser();

@@ -8,7 +8,6 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import site.lanmushan.cms.web.view.FreeMarkerStaticView;
 import site.lanmushan.framework.file.LocalResourceService;
-import site.lanmushan.framework.redis.RedisClientService;
 import site.lanmushan.framework.util.OSUtil;
 import site.lanmushan.framework.util.ServletUtil;
 
@@ -23,27 +22,26 @@ import java.io.IOException;
 @Component
 public class StaticHandlerInterceptor implements HandlerInterceptor {
     @Autowired
-    RedisTemplate<String, String> redisTemplate;
+    RedisTemplate<Object, Object> redisTemplate;
     public static String STATIC_URL_PREFIX = FreeMarkerStaticView.STATIC_URL_PREFIX;
     @Autowired
     LocalResourceService localResourceService;
-    @Autowired
-    RedisClientService redisClientService;
 
     //请求
     @Override
     public boolean preHandle(HttpServletRequest servletRequest, HttpServletResponse servletResponse, Object handler) throws IOException {
-        String host= ServletUtil.getBasePath(servletRequest);
+        String host = ServletUtil.getBasePath(servletRequest);
         Long startTime = System.currentTimeMillis();
         servletRequest.setAttribute("startTime", startTime);
         String uri = servletRequest.getRequestURI();
         String path = OSUtil.convertToCurrentOsPath(uri);
-        String resultStr = redisClientService.get(STATIC_URL_PREFIX +host+ uri);
+        String key = STATIC_URL_PREFIX + host + uri;
+        Object resultStr = redisTemplate.opsForValue().get(key);
         //TODO 这里有缺陷，contentType，没有存储
         if (resultStr != null) {
             servletResponse.setContentType("text/html;charset=UTF-8");
-            servletResponse.getOutputStream().write(resultStr.getBytes());
-            log.info("命中Redis静态化耗时 url:{}: 时耗{}", servletRequest.getRequestURI(), System.currentTimeMillis() - startTime);
+            servletResponse.getOutputStream().write(((String) resultStr).getBytes());
+            log.info("命中Redis静态化耗时 url:{}: 时耗{}", key, System.currentTimeMillis() - startTime);
             return false;
         }
         //磁盘静态化只处理html后缀的数据

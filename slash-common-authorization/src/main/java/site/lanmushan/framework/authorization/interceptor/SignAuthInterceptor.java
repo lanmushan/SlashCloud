@@ -30,8 +30,7 @@ public class SignAuthInterceptor implements HandlerInterceptor {
         if (currentUser.isAdmin()) {
             return true;
         }
-        List<String> userApisList = CurrentUserUtil.getUserApis(currentUser);
-        if (!userApisList.contains(uri)) {
+        if (!CurrentUserUtil.currentUserHasUriPermissions(uri)) {
             throw new OperateException("无访问权限", HTTPCode.D601);
         }
         /**

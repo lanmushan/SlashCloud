@@ -3,12 +3,14 @@ package site.lanmushan.cms.web.view;
 import freemarker.template.SimpleHash;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.data.redis.core.RedisTemplate;
+
 import org.springframework.web.servlet.support.RequestContextUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
-import site.lanmushan.framework.redis.RedisClientService;
+
 import site.lanmushan.framework.util.ApplicationUtil;
+import site.lanmushan.framework.util.ServletUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Administrator
@@ -23,8 +26,7 @@ import java.util.Map;
 public class FreeMarkerStaticView extends FreeMarkerView {
     public static String STATIC_URL_PREFIX = "STATIC_URL_PREFIX|";
     public static String PAGE_RE_WRITE_TIME = "PAGE_RE_WRITE_TIME";
-    @Autowired
-    RedisTemplate<String, String> redisTemplate;
+
 
     @Override
     protected void doRender(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -46,10 +48,12 @@ public class FreeMarkerStaticView extends FreeMarkerView {
         template.process(model, out);
         out.flush();
         out.close();
-        RedisClientService redisClientService = ApplicationUtil.getBean(RedisClientService.class);
+        RedisTemplate<Object,Object> redisTemplate= ApplicationUtil.getRedisTemplate();
+        String key=STATIC_URL_PREFIX + ServletUtil.getBasePath(request)+request.getRequestURI();
+
         Integer staticTime = (Integer) request.getAttribute(PAGE_RE_WRITE_TIME);
         if (staticTime != null && staticTime != 0) {
-            redisClientService.setex(STATIC_URL_PREFIX + request.getRequestURI(), staticTime, byteArrayOutputStream.toString());
+            redisTemplate.opsForValue().set(key,byteArrayOutputStream.toString(),staticTime, TimeUnit.MILLISECONDS);
         }
         /* 将请求转发到生成的htm文件 */
     }
