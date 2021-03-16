@@ -96,7 +96,7 @@ public class CmsController {
             datasourceParamsMap.put("requestBody", requestBody);
             for (int i = 0; i < cmsTbRequestMappingDatasourceList.size(); i++) {
                 CmsTbRequestMappingDatasource it = cmsTbRequestMappingDatasourceList.get(i);
-                String jsonString = GroovyScriptUtil.transform(it.getFkDatasourceParamsMapping(), datasourceParamsMap);
+                String jsonString = GroovyScriptUtil.transformUseClass(it.getFkDatasourceParamsMapping(), null,datasourceParamsMap);
                 Map<String, Object> parm = JSONObject.parseObject(jsonString, HashMap.class);
                 Object obj = dataSourceHandlerService.getDataSource(it.getFkDatasourceCode(), parm);
                 if (obj == null && it.getAllowNull() != null && it.getAllowNull() == 0) {

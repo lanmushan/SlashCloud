@@ -7,7 +7,7 @@ import site.lanmushan.framework.dto.Message;
 import site.lanmushan.sys.api.bo.BoSysTbDictGroup;
 import site.lanmushan.sys.api.entity.SysTbDictGroup;
 import site.lanmushan.sys.mapper.SysTbDictGroupMapper;
-import site.lanmushan.sys.service.SysTbDictGroupService;
+import site.lanmushan.sys.api.service.SysTbDictGroupService;
 
 import javax.validation.Valid;
 

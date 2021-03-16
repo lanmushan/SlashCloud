@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import site.lanmushan.cms.api.bo.BoCmsTbCategory;
 import site.lanmushan.cms.api.entity.CmsTbCategory;
 import site.lanmushan.cms.mapper.CmsTbCategoryMapper;
-import site.lanmushan.cms.service.CmsTbCategoryService;
+import site.lanmushan.cms.api.service.CmsTbCategoryService;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.query.annotations.RequestQueryInfo;

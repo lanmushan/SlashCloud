@@ -16,6 +16,9 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Administrator
+ */
 @Component
 @Slf4j
 public class UpdateRequestMappingGlobalInstructionHandler implements GlobalInstructionHandler {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import site.lanmushan.cms.api.entity.CmsTbCategory;
 import site.lanmushan.cms.api.entity.CmsTbContent;
 import site.lanmushan.cms.mapper.CmsTbContentMapper;
-import site.lanmushan.cms.service.CmsTbCategoryService;
+import site.lanmushan.cms.api.service.CmsTbCategoryService;
 import site.lanmushan.cms.web.datasource.DataSourceHandler;
 import site.lanmushan.framework.dto.QueryInfo;
 

@@ -11,7 +11,7 @@ import site.lanmushan.auth.api.entity.AuthTbResource;
 import site.lanmushan.auth.api.entity.AuthTbRole;
 import site.lanmushan.auth.mapper.AuthTbResourceMapper;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
-import site.lanmushan.auth.service.AuthTbResourceService;
+import site.lanmushan.auth.api.service.AuthTbResourceService;
 import site.lanmushan.framework.authorization.CurrentUser;
 import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.dto.Message;

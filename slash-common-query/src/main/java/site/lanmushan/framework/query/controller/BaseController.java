@@ -17,19 +17,44 @@ public class BaseController {
     /**
      * 开始分页
      */
-    public void startPage() {
+    protected void startPage() {
+        startPage(getCurrentPage(), getPageSize());
+    }
+
+    /**
+     * 获取当前页面
+     *
+     * @return
+     */
+    protected int getCurrentPage() {
         Integer currentPage = 1;
-        Integer pageSize = 10000;
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String currentPageStr = request.getParameter("currentPage");
-        String pageSizeStr = request.getParameter("pageSize");
         if (StringUtils.isNotBlank(currentPageStr)) {
             currentPage = Integer.parseInt(currentPageStr);
         }
+        return currentPage;
+    }
+
+    /**
+     * 获取分页大小
+     *
+     * @param defaultPageSize
+     * @return
+     */
+    protected int getPageSize(int defaultPageSize) {
+        Integer pageSize = defaultPageSize;
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String pageSizeStr = request.getParameter("pageSize");
         if (StringUtils.isNotBlank(pageSizeStr)) {
             pageSize = Integer.parseInt(pageSizeStr);
         }
-        startPage(currentPage, pageSize);
+        return pageSize;
+    }
+
+    protected int getPageSize() {
+        Integer pageSize = 10000;
+        return getPageSize(pageSize);
     }
 
     /**

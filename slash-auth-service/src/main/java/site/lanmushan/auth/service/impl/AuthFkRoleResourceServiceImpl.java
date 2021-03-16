@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import site.lanmushan.auth.api.bo.BoAuthFkRoleResource;
 
 import site.lanmushan.auth.mapper.AuthFkRoleResourceMapper;
-import site.lanmushan.auth.service.AuthFkRoleResourceService;
+import site.lanmushan.auth.api.service.AuthFkRoleResourceService;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;

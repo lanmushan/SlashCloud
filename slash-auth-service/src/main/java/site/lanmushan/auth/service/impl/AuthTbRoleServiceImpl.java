@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.lanmushan.auth.api.bo.BoAuthTbRole;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
-import site.lanmushan.auth.service.AuthTbRoleService;
+import site.lanmushan.auth.api.service.AuthTbRoleService;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
@@ -56,7 +56,7 @@ public class AuthTbRoleServiceImpl implements AuthTbRoleService {
         boAuthTbRole.setUpdateTime(DateUtil.now());
         int reuslt = authTbRoleMapper.updateByPrimaryKeySelective(boAuthTbRole);
         if (reuslt != 1) {
-            throw new OperateException("新增失败", HTTPCode.Fail);
+            throw new OperateException("更新失败", HTTPCode.Fail);
         }
     }
 

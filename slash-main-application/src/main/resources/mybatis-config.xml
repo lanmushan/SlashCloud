@@ -25,8 +25,9 @@
 
     </typeAliases>
     <plugins>
+
         <!-- com.github.pagehelper为PageHelper类所在包名 -->
-        <plugin interceptor="com.github.pagehelper.PageHelper">
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
             <!-- 4.0.0以后版本可以不设置该参数 -->
             <property name="helperDialect" value="mysql"/>
             <!-- 该参数默认为false -->
@@ -53,5 +54,6 @@
             <!-- always总是返回PageInfo类型,check检查返回类型是否为PageInfo,none返回Page -->
             <property name="returnPageInfo" value="check"/>
         </plugin>
+        <plugin interceptor="site.lanmushan.framework.datasope.interceptor.QueryMybatisInterceptor"></plugin>
     </plugins>
 </configuration>

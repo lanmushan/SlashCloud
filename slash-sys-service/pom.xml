@@ -69,6 +69,10 @@
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-query</artifactId>
         </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-http</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

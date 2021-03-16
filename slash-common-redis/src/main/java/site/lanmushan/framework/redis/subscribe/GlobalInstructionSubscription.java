@@ -32,14 +32,17 @@ public class GlobalInstructionSubscription implements MessageListener {
         globalInstructionSubscriptionMappingList.forEach(it -> {
             try {
                 //完全匹配
-                if (it.getCmd().equals(globalInstructionEntity.getCmd())) {
+                if (it.getCmd().equals(globalInstructionEntity.getCmd())&&it.getType()!=null&&it.getType().equals(globalInstructionEntity.getType())) {
                     it.getGlobalInstructionHander().doInstructionExecute(globalInstructionEntity);
+                }else if(it.getCmd().equals(globalInstructionEntity.getCmd()))
+                {
+                    it.getGlobalInstructionHander().doInstructionExecute(globalInstructionEntity);
+
                 }
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
             }
         });
-        System.out.println("收到订阅消息");
     }
 
 

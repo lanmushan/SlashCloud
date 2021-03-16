@@ -86,10 +86,11 @@ public class RequestMappingRegisterComponentImpl implements DynamicRequestMappin
 
     @Override
     public synchronized void removeAll() {
+        this.requestList.clear();
+
         this.requestList.forEach(it -> {
             this.registerHttpRequest(it);
         });
-        this.requestList.clear();
     }
 
     public RequestMethod getRequestMethod(String method) {

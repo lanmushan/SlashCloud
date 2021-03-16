@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import site.lanmushan.framework.constant.HTTPCode;
+import site.lanmushan.framework.datasope.annotation.EnabledDataScope;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
@@ -34,6 +35,7 @@ import java.util.List;
 @Order(-9999)
 @ConditionalOnProperty(prefix = "slash", name = "query", havingValue = "true")
 public class QueryController extends BaseController {
+    @EnabledDataScope
     @RequestMapping(value = "/{entityName}/{methodName:[^\\.]\\w*$}", method = RequestMethod.GET)
     public Message selectList(@PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request) {
         log.info("URI {} DATA:{}", request.getRequestURI(), JSONObject.toJSONString(queryInfo));
@@ -55,7 +57,8 @@ public class QueryController extends BaseController {
             //列表查询
             if ("java.util.List".equals(t.getTypeName())) {
                 startPage();
-                List list = (List) method.invoke(queryService, queryInfo);
+               Object data= method.invoke(queryService, queryInfo);
+                List list = (List)data;
                 PageInfo pageInfo = new PageInfo(list);
                 msg.setCurrentPage(pageInfo.getPageNum());
                 msg.setPageSize(pageInfo.getPageSize());

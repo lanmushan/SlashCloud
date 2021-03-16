@@ -3,7 +3,7 @@ package site.lanmushan.sys.mapper;
 import site.lanmushan.framework.query.mapper.QueryMapper;
 import site.lanmushan.sys.api.entity.SysTbDictGroup;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
-import tk.mybatis.mapper.common.special.InsertListMapper;
+import tk.mybatis.mapper.additional.insert.InsertListMapper;
 
 /**
  * (SysTbDictGroup)表数据库访问层

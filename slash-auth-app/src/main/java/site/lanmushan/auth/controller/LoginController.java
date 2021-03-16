@@ -17,8 +17,8 @@ import site.lanmushan.auth.mapper.AuthTbResourceMapper;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
 import site.lanmushan.auth.mapper.AuthTbUserMapper;
 import site.lanmushan.auth.req.ModifyPasswordReq;
-import site.lanmushan.auth.service.AuthTbUserLoginLogService;
-import site.lanmushan.auth.service.AuthTbUserService;
+import site.lanmushan.auth.api.service.AuthTbUserLoginLogService;
+import site.lanmushan.auth.api.service.AuthTbUserService;
 import site.lanmushan.framework.authorization.CurrentUser;
 import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.constant.GlobalConstant;
@@ -30,7 +30,6 @@ import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.query.util.ServletUtil;
 import site.lanmushan.framework.util.VerifyCodeUtils;
 import site.lanmushan.framework.util.utils.DateUtil;
-import site.lanmushan.framework.util.utils.StringCommonUtil;
 
 import javax.management.OperationsException;
 import javax.servlet.http.HttpServletRequest;
@@ -134,7 +133,9 @@ public class LoginController {
                 loginLog.setLoginMsg(msg.getMsg());
                 return msg;
             }
-            String token = handerCurentUser(tbUser);
+            CurrentUser  currentUser= handerCurentUser(tbUser);
+            String token = CurrentUserUtil.createToken(currentUser);
+            CurrentUserUtil.saveUserToRedis(currentUser,token);
             loginLog.setLoginMsg("登录成功");
             msg.setRow(token).success("登录成功");
             return msg;
@@ -147,7 +148,7 @@ public class LoginController {
 
     }
 
-    private String handerCurentUser(AuthTbUser tbUser) {
+    private CurrentUser handerCurentUser(AuthTbUser tbUser) {
         /**设置一些常用参数到当前用户，方便使用*/
         CurrentUser currentUser = new CurrentUser();
         currentUser.setAccount(tbUser.getAccount());
@@ -167,8 +168,7 @@ public class LoginController {
         List<AuthTbResource> resourceList = authTbResourceMapper.selectResourceByRoleCodes(roleCodeJoin, ResourceConstant.RESOURCE_API);
         List<String> apiList = resourceList.stream().map(AuthTbResource::getResourceUrl).collect(toList());
 
-        String token = CurrentUserUtil.createToken(currentUser);
-        return token;
+      return currentUser;
     }
 
     /**

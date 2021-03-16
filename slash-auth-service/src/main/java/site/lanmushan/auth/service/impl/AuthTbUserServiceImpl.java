@@ -8,7 +8,7 @@ import site.lanmushan.auth.api.entity.AuthTbUser;
 import site.lanmushan.auth.api.vo.VoAuthTbUser;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
 import site.lanmushan.auth.mapper.AuthTbUserMapper;
-import site.lanmushan.auth.service.AuthTbUserService;
+import site.lanmushan.auth.api.service.AuthTbUserService;
 import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.cypher.md5.MD5Util;

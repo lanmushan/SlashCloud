@@ -33,6 +33,10 @@ public class ServletUtil {
         UserAgent userAgent = UserAgent.parseUserAgentString(request.getHeader("User-Agent"));
         Browser browser = userAgent.getBrowser();
         Version browserVersion = userAgent.getBrowserVersion();
+        if ("Unknown".equals(browser.getName()))
+        {
+            return request.getHeader("User-Agent");
+        }
         return browser.getName() + browserVersion.getVersion();
     }
 

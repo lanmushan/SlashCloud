@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.lanmushan.auth.api.bo.BoAuthFkUserRole;
 import site.lanmushan.auth.mapper.AuthFkUserRoleMapper;
-import site.lanmushan.auth.service.AuthFkUserRoleService;
+import site.lanmushan.auth.api.service.AuthFkUserRoleService;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;

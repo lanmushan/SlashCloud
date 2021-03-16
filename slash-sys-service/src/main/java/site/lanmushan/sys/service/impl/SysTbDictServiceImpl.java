@@ -10,7 +10,7 @@ import site.lanmushan.framework.util.utils.DateUtil;
 import site.lanmushan.framework.uuid.MyUUID;
 import site.lanmushan.sys.api.bo.BoSysTbDict;
 import site.lanmushan.sys.mapper.SysTbDictMapper;
-import site.lanmushan.sys.service.SysTbDictService;
+import site.lanmushan.sys.api.service.SysTbDictService;
 
 import java.util.Date;
 import java.util.List;

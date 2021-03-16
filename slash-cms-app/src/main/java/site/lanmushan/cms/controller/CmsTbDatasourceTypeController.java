@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import site.lanmushan.cms.api.bo.BoCmsTbDatasourceType;
 import site.lanmushan.cms.api.entity.CmsTbDatasourceType;
 import site.lanmushan.cms.mapper.CmsTbDatasourceTypeMapper;
-import site.lanmushan.cms.service.CmsTbDatasourceTypeService;
+import site.lanmushan.cms.api.service.CmsTbDatasourceTypeService;
 import site.lanmushan.framework.dto.Message;
 
 import javax.validation.Valid;

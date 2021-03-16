@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import site.lanmushan.cms.api.bo.BoCmsTbContent;
 import site.lanmushan.cms.api.entity.CmsTbContent;
 import site.lanmushan.cms.mapper.CmsTbContentMapper;
-import site.lanmushan.cms.service.CmsTbContentService;
+import site.lanmushan.cms.api.service.CmsTbContentService;
 import site.lanmushan.framework.constant.GlobalInstructionConstant;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.redis.GlobalInstructionEntity;
 import site.lanmushan.framework.redis.publish.GlobalInstructionPublish;
 
 import javax.validation.Valid;
-import java.util.Set;
 
 /**
  * 文章(CmsTbContent)表控制层

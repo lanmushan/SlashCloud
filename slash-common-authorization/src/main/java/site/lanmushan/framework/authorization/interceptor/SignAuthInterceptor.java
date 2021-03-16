@@ -22,7 +22,6 @@ public class SignAuthInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String uri = request.getRequestURI();
-        log.info("请求URI {}", uri);
         if (SignAuthInterceptorWebMvcConfigurer.allowUrlList.contains(uri)) {
             return true;
         }

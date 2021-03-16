@@ -12,7 +12,7 @@
         #if($tableInfo.savePackageName)package $!{tableInfo.savePackageName}.#{end}mapper;
 import site.lanmushan.framework.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
-import tk.mybatis.mapper.common.special.InsertListMapper;
+import tk.mybatis.mapper.additional.insert.InsertListMapper;
 
 import $!{tableInfo.savePackageName}.entity.$!{tableInfo.name};
 import org.apache.ibatis.annotations.Param;

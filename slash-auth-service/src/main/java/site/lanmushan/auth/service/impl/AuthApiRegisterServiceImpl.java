@@ -5,7 +5,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import site.lanmushan.auth.api.vo.VoUrlRoles;
 import site.lanmushan.auth.mapper.AuthTbResourceMapper;
-import site.lanmushan.auth.service.AuthApiRegisterService;
+import site.lanmushan.auth.api.service.AuthApiRegisterService;
 import site.lanmushan.framework.authorization.CurrentUserUtil;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 将所有的api存储到redis中
  * @author Administrator
  */
 @Service
@@ -50,6 +51,7 @@ public class AuthApiRegisterServiceImpl implements AuthApiRegisterService {
     @PostConstruct
     public void init() {
         this.refreshAllApiJurisdiction();
+
     }
 
 }

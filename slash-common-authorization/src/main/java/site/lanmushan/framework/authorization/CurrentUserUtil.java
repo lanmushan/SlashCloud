@@ -26,7 +26,7 @@ public class CurrentUserUtil {
     public final static String USER_KEY = "currentUser";
     public final static String AUTHORIZATION = "authorization";
     /**过期时间*/
-    private final static int AUTHORIZATION_EXPIRATION_TIME = 5000;
+    private final static int AUTHORIZATION_EXPIRATION_TIME = 30*60*1000;
     public final static String REDIS_ONLINE_USER_KEY_PREFIX = "ONLINE_USER|";
     public final static String REDIS_API_HASH_KEY = "REDIS_API_HASH_KEY";
 
@@ -83,13 +83,18 @@ public class CurrentUserUtil {
             throw new OperateException("未登录", HTTPCode.D600);
         }
         String redisUserKey = REDIS_ONLINE_USER_KEY_PREFIX + currentUser.getUserId();
-        if (getRedisTemplate().hasKey(redisUserKey)) {
+        //用户只能在一个地方登陆
+        if (token.equals(getRedisTemplate().opsForValue().get(redisUserKey))) {
             request.setAttribute(USER_KEY, currentUser);
             getRedisTemplate().expire(redisUserKey, AUTHORIZATION_EXPIRATION_TIME, TimeUnit.MILLISECONDS);
         } else {
             throw new OperateException("登录过期", HTTPCode.D600);
         }
         return currentUser;
+    }
+    public static void saveUserToRedis(CurrentUser currentUser,String token){
+        String redisUserKey = REDIS_ONLINE_USER_KEY_PREFIX + currentUser.getUserId();
+        getRedisTemplate().opsForValue().set(redisUserKey,token,AUTHORIZATION_EXPIRATION_TIME, TimeUnit.MILLISECONDS);
     }
     public static Boolean currentUserHasUriPermissions(String uri){
        Object value=  getRedisTemplate().opsForHash().get(REDIS_API_HASH_KEY,uri);

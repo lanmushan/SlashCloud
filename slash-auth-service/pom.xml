@@ -71,7 +71,21 @@
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-authorization</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-http</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.3</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-datasope</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 

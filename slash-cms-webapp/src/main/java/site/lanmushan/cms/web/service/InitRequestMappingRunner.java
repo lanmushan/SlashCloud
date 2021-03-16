@@ -5,13 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Configuration;
 import site.lanmushan.cms.api.entity.CmsTbRequestMapping;
 import site.lanmushan.cms.mapper.CmsTbRequestMappingMapper;
-import site.lanmushan.cms.service.CmsTbRequestMappingService;
 import site.lanmushan.cms.web.dynamicrequest.DynamicRequestMappingRegisterComponent;
 import site.lanmushan.cms.web.dynamicrequest.HttpRequest;
-import site.lanmushan.framework.dto.QueryInfo;
 
 import java.util.ArrayList;
 import java.util.List;

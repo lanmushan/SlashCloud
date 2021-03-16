@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.lanmushan.framework.query.mapper.DataScopeMapper">
+
+
+    <select id="selectAllTable" resultType="site.lanmushan.framework.dto.DHashMap">
+        SELECT
+	`engine` AS `engine`,
+	table_collation AS table_collation,
+	table_schema AS table_schema,
+	table_name AS table_name,
+	table_comment AS table_comment,
+	create_time AS create_time,
+	update_time AS update_time
+FROM
+	information_schema.TABLES
+WHERE
+	table_schema = ( SELECT DATABASE ( ) )
+    </select>
+    <select id="selectFieldByTableName" parameterType="java.lang.String" resultType="site.lanmushan.framework.dto.DHashMap">
+      SELECT
+      COLUMN_NAME "field_name",
+      COLUMN_TYPE "field_length",
+      IS_NULLABLE "field_allow_null",
+      COLUMN_COMMENT "field_desc"
+    FROM
+        information_schema. COLUMNS
+    WHERE   TABLE_NAME = #{tableName};
+    </select>
+
+</mapper>

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import site.lanmushan.auth.api.bo.BoAuthTbDept;
 import site.lanmushan.auth.api.entity.AuthTbDept;
 import site.lanmushan.auth.mapper.AuthTbDeptMapper;
-import site.lanmushan.auth.service.AuthTbDeptService;
+import site.lanmushan.auth.api.service.AuthTbDeptService;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.query.annotations.RequestQueryInfo;

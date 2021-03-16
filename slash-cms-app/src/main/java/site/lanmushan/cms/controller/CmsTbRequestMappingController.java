@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import site.lanmushan.cms.api.bo.BoCmsTbRequestMapping;
 import site.lanmushan.cms.api.entity.CmsTbRequestMapping;
 import site.lanmushan.cms.mapper.CmsTbRequestMappingMapper;
-import site.lanmushan.cms.service.CmsTbRequestMappingService;
+import site.lanmushan.cms.api.service.CmsTbRequestMappingService;
 import site.lanmushan.framework.constant.GlobalInstructionConstant;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.redis.GlobalInstructionEntity;

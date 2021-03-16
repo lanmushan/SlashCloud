@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import site.lanmushan.auth.api.bo.BoAuthTbUserLoginLog;
 import site.lanmushan.auth.api.entity.AuthTbUserLoginLog;
 import site.lanmushan.auth.mapper.AuthTbUserLoginLogMapper;
-import site.lanmushan.auth.service.AuthTbUserLoginLogService;
+import site.lanmushan.auth.api.service.AuthTbUserLoginLogService;
 import site.lanmushan.framework.dto.Message;
 
 import javax.validation.Valid;

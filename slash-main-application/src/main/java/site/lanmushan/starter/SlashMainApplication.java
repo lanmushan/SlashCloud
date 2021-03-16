@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  * @author Administrator
  */
 @SpringBootApplication(scanBasePackages = "site.lanmushan", exclude = {SeataHandlerInterceptorConfiguration.class, GlobalTransactionAutoConfiguration.class})
-@MapperScan(value = {"site.lanmushan.*.mapper"})
+@MapperScan(value = {"site.lanmushan.*.mapper","site.lanmushan.framework.query.mapper"})
 @Controller
 public class SlashMainApplication {
     public static void main(String[] args) {

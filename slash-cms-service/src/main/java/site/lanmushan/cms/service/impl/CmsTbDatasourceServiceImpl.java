@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.lanmushan.cms.api.bo.BoCmsTbDatasource;
 import site.lanmushan.cms.mapper.CmsTbDatasourceMapper;
-import site.lanmushan.cms.service.CmsTbDatasourceService;
+import site.lanmushan.cms.api.service.CmsTbDatasourceService;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;

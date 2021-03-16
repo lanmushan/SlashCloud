@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="site.lanmushan.auth.mapper.AuthTbDatascopeMapper">
+
+    <resultMap type="site.lanmushan.auth.api.vo.VoAuthTbDatascope" id="baseResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="appName" column="app_name" jdbcType="VARCHAR"/>
+        <result property="databaseName" column="database_name" jdbcType="VARCHAR"/>
+        <result property="tableName" column="table_name" jdbcType="VARCHAR"/>
+        <result property="ruleName" column="rule_name" jdbcType="VARCHAR"/>
+        <result property="rulePriority" column="rule_priority" jdbcType="INTEGER"/>
+        <result property="ruleValue" column="rule_value" jdbcType="VARCHAR"/>
+        <result property="ruleCondition" column="rule_condition" jdbcType="VARCHAR"/>
+        <result property="ruleType" column="rule_type" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectList" resultMap="baseResultMap" parameterType="QueryInfo">
+        select id, app_name, database_name, table_name, rule_name, rule_priority, rule_value, rule_condition, rule_type
+        from auth_tb_datascope
+        <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
+            <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
+                <if test="it.operate =='in'">
+                    ${it.key} ${it.operate} (#{it.value})
+                </if>
+                <if test="it.operate !='in'">
+                    ${it.key} ${it.operate} #{it.value}
+                </if>
+            </foreach>
+            and
+            <if test="searchKey != null and searchKey !=''">
+            </if>
+        </trim>
+    </select>
+
+</mapper>

@@ -33,19 +33,9 @@ public class GroovyScriptDataHandler implements DataSourceHandler {
             applicationContext.getAutowireCapableBeanFactory().autowireBean(obj);
             Object result = method.invoke(obj, dataSourceName, content, params);
             return result;
-        } catch (NoSuchMethodException e) {
+        } catch (NoSuchMethodException|IllegalAccessException|InvocationTargetException e) {
             log.error(e.getMessage(), e);
             log.info("调用{} 内容{} 参数{}", dataSourceName, content, params);
-
-
-        } catch (IllegalAccessException e) {
-            log.error(e.getMessage(), e);
-            log.info("调用{} 内容{} 参数{}", dataSourceName, content, params);
-
-        } catch (InvocationTargetException e) {
-            log.error(e.getMessage(), e);
-            log.info("调用{} 内容{} 参数{}", dataSourceName, content, params);
-
         }
         return null;
     }

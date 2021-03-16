@@ -37,7 +37,7 @@ public class SignAuthInterceptorWebMvcConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(requestIdInterceptor).addPathPatterns("/**");
         InterceptorRegistration registration= registry.addInterceptor(signAuthInterceptor);
         allowUrlList.forEach(it->{
-            log.info("匿名:{}",it);
+            log.info("加载匿名访问接口:{}",it);
             registration.excludePathPatterns(it);
         });
     }

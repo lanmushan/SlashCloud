@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.lanmushan.auth.api.bo.BoAuthTbResource;
 import site.lanmushan.auth.mapper.AuthTbResourceMapper;
-import site.lanmushan.auth.service.AuthTbResourceService;
+import site.lanmushan.auth.api.service.AuthTbResourceService;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;

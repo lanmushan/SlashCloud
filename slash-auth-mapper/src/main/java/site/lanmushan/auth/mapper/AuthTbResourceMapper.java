@@ -5,7 +5,7 @@ import site.lanmushan.auth.api.entity.AuthTbResource;
 import site.lanmushan.auth.api.vo.VoUrlRoles;
 import site.lanmushan.framework.query.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
-import tk.mybatis.mapper.common.special.InsertListMapper;
+import tk.mybatis.mapper.additional.insert.InsertListMapper;
 
 import java.util.List;
 

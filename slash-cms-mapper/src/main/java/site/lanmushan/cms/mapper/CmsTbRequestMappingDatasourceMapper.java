@@ -3,7 +3,7 @@ package site.lanmushan.cms.mapper;
 import site.lanmushan.cms.api.entity.CmsTbRequestMappingDatasource;
 import site.lanmushan.framework.query.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
-import tk.mybatis.mapper.common.special.InsertListMapper;
+import tk.mybatis.mapper.additional.insert.InsertListMapper;
 
 /**
  * (CmsTbRequestMappingDatasource)表数据库访问层

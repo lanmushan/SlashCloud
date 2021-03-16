@@ -18,7 +18,7 @@ import java.util.List;
 
 import site.lanmushan.framework.query.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
-import tk.mybatis.mapper.common.special.InsertListMapper;
+import tk.mybatis.mapper.additional.insert.InsertListMapper;
 
 /**
  * $!{tableInfo.comment}($!{tableInfo.name})表数据库访问层

@@ -9,7 +9,7 @@ import site.lanmushan.cms.api.entity.CmsTbRequestMapping;
 import site.lanmushan.cms.api.entity.CmsTbRequestMappingDatasource;
 import site.lanmushan.cms.mapper.CmsTbRequestMappingDatasourceMapper;
 import site.lanmushan.cms.mapper.CmsTbRequestMappingMapper;
-import site.lanmushan.cms.service.CmsTbRequestMappingService;
+import site.lanmushan.cms.api.service.CmsTbRequestMappingService;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
@@ -79,11 +79,13 @@ public class CmsTbRequestMappingServiceImpl implements CmsTbRequestMappingServic
     public void deleteServiceByIds(List<Long> ids) {
         ids.forEach(it -> {
             CmsTbRequestMapping cmsTbRequestMapping = cmsTbRequestMappingMapper.selectByPrimaryKey(it);
-            cmsTbRequestMapping.getRequestUrl();
-            Example example = new Example(CmsTbRequestMappingDatasource.class);
-            example.createCriteria().andEqualTo("fkRequestUrl", cmsTbRequestMapping.getRequestUrl());
-            int result = cmsTbRequestMappingDatasourceMapper.deleteByExample(example);
-            System.out.println(result);
+            if(cmsTbRequestMapping!=null)
+            {
+                cmsTbRequestMapping.getRequestUrl();
+                Example example = new Example(CmsTbRequestMappingDatasource.class);
+                example.createCriteria().andEqualTo("fkRequestUrl", cmsTbRequestMapping.getRequestUrl());
+                int result = cmsTbRequestMappingDatasourceMapper.deleteByExample(example);
+            }
         });
         cmsTbRequestMappingMapper.deleteByIdList(ids);
     }

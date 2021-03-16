@@ -28,6 +28,10 @@
             <artifactId>UserAgentUtils</artifactId>
         </dependency>
         <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-authorization</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <exclusions>
@@ -179,6 +183,19 @@
         <dependency>
             <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-http</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-cloud</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-datasope</artifactId>
         </dependency>
         <!--thymeleaf相关jar-->
         <!--<dependency>-->

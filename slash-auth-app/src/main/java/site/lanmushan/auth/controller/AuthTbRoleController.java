@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import site.lanmushan.auth.api.bo.BoAuthTbRole;
 import site.lanmushan.auth.api.entity.AuthTbRole;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
-import site.lanmushan.auth.service.AuthTbRoleService;
+import site.lanmushan.auth.api.service.AuthTbRoleService;
+import site.lanmushan.framework.datasope.annotation.EnabledDataScope;
 import site.lanmushan.framework.dto.Message;
 
 import javax.validation.Valid;
@@ -48,6 +49,7 @@ public class AuthTbRoleController {
      * @return
      */
     @PostMapping("/update")
+    @EnabledDataScope
     public Message update(@RequestBody @Valid BoAuthTbRole obj) {
         Message msg = new Message();
         authTbRoleService.updateService(obj);

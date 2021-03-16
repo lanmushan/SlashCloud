@@ -9,5 +9,5 @@ import lombok.Data;
 public class GlobalInstructionEntity {
     private String cmd;
     private String type;
-    private String data;
+    private Object data;
 }
