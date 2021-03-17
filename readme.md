@@ -65,8 +65,19 @@
 ### 其他
 - 代码生成：提供代码生成模板，自行使用IDEA中EasyCode插件进行生成（暂无前端模板）。
 ## 开发运行部署
-请参考 [《开发手册》]((https://www.yuque.com/u134302/slash))
+请参考 [开发手册](https://www.yuque.com/u134302/slash)
 
 
 
 ![登录效果](https://cdn.nlark.com/yuque/0/2021/png/271631/1615991423771-6c1584b2-6cf9-4754-b8c5-c72992acb226.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_14%2Ctext_U2xhc2g%3D%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_746)
+
+![img](https://cdn.nlark.com/yuque/0/2021/png/271631/1615991479484-fb57c31f-35e0-40b2-9664-b0d328736340.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_14%2Ctext_U2xhc2g%3D%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_746)
+
+![img](https://cdn.nlark.com/yuque/0/2021/png/271631/1615991489091-3dfc966d-f13f-4f9a-9166-86fc296676fe.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_14%2Ctext_U2xhc2g%3D%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_746)
+
+![img](https://cdn.nlark.com/yuque/0/2021/png/271631/1615991500261-45e5ec9d-70c6-4dba-9c46-bb8973dddd28.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_14%2Ctext_U2xhc2g%3D%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_746)
+
+![img](https://cdn.nlark.com/yuque/0/2021/png/271631/1615991517736-ab10ffe7-4f08-4e2b-a536-27a00345d937.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_14%2Ctext_U2xhc2g%3D%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_746)
+
+![img](https://cdn.nlark.com/yuque/0/2021/png/271631/1615991787711-474003e1-5046-4fea-93d6-af11d0a1f11d.png?x-oss-process=image%2Fwatermark%2Ctype_d3F5LW1pY3JvaGVp%2Csize_14%2Ctext_U2xhc2g%3D%2Ccolor_FFFFFF%2Cshadow_50%2Ct_80%2Cg_se%2Cx_10%2Cy_10%2Fresize%2Cw_746)
+
