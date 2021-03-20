@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,7 @@ import java.util.List;
  */
 @RestController
 @Slf4j
-@Order(-9999)
+@Order(Ordered.LOWEST_PRECEDENCE)
 @ConditionalOnProperty(prefix = "slash", name = "query", havingValue = "true")
 public class QueryController extends BaseController {
     @EnabledDataScope

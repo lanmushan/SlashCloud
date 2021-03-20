@@ -34,5 +34,20 @@
             </foreach>
         </trim>
     </select>
+    <select id="selectOnlineUserInfoByAccount" parameterType="java.lang.String" resultType="DHashMap">
+SELECT
+	a.*,
+	a.create_time as login_time,
+	b.account_type,
+	b.account,
+	b.username
+FROM
+	auth_tb_user_login_log AS a
+	LEFT JOIN auth_tb_user AS b ON a.fk_user_id = b.id
+WHERE
+	login_name = #{account}
+ORDER BY
+	id DESC LIMIT 0,1
+    </select>
 
 </mapper>

@@ -5,15 +5,14 @@ import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 
 import javax.sql.DataSource;
 
@@ -24,31 +23,13 @@ import javax.sql.DataSource;
 @ConditionalOnProperty(prefix = "spring", name = "datasource", matchIfMissing = true)
 @Slf4j
 public class DruidConfiguration {
-    @Autowired
-    private DruidDataSourceProperties properties;
 
     @Bean
-    @ConfigurationProperties("spring.datasource")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource druidDataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setDriverClassName(properties.getDriverClassName());
-        dataSource.setUrl(properties.getUrl());
-        dataSource.setUsername(properties.getUsername());
-        dataSource.setPassword(properties.getPassword());
-        dataSource.setInitialSize(properties.getInitialSize());
-        dataSource.setMinIdle(properties.getMinIdle());
-        dataSource.setMaxActive(properties.getMaxActive());
-        dataSource.setMaxWait(properties.getMaxWait());
-        dataSource.setTimeBetweenEvictionRunsMillis(properties.getTimeBetweenEvictionRunsMillis());
-        dataSource.setMinEvictableIdleTimeMillis(properties.getMinEvictableIdleTimeMillis());
-        dataSource.setValidationQuery(properties.getValidationQuery());
-        dataSource.setTestWhileIdle(properties.isTestWhileIdle());
-        dataSource.setTestOnBorrow(properties.isTestOnBorrow());
-        dataSource.setTestOnReturn(properties.isTestOnReturn());
-        dataSource.setPoolPreparedStatements(properties.isPoolPreparedStatements());
-        dataSource.setMaxPoolPreparedStatementPerConnectionSize(properties.getMaxPoolPreparedStatementPerConnectionSize());
-        log.info("初始化数据库成功...");
-        return dataSource;
+        DruidDataSource druidDataSource = new DruidDataSource();
+        log.info("数据源连接成功");
+        return druidDataSource;
     }
 
     @Bean
@@ -61,8 +42,8 @@ public class DruidConfiguration {
         //IP黑名单 (存在共同时，deny优先于allow) : 如果满足deny的话提示:Sorry, you are not permitted to view this page.
         //  servletRegistrationBean.addInitParameter("deny","192.168.1.73");
         //登录查看信息的账号密码.
-        servletRegistrationBean.addInitParameter("loginUsername", "admin");
-        servletRegistrationBean.addInitParameter("loginPassword", "123456");
+//        servletRegistrationBean.addInitParameter("loginUsername", "admin");
+//        servletRegistrationBean.addInitParameter("loginPassword", "123456");
         //是否能够重置数据.
         servletRegistrationBean.addInitParameter("resetEnable", "false");
         return servletRegistrationBean;
@@ -75,7 +56,6 @@ public class DruidConfiguration {
      */
     @Bean
     public FilterRegistrationBean druidStatFilter() {
-
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
         //添加过滤规则.
         filterRegistrationBean.addUrlPatterns("/*");
@@ -83,5 +63,13 @@ public class DruidConfiguration {
         filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
         return filterRegistrationBean;
     }
-
+    @Bean
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    public FilterRegistrationBean druidPageFilter() {
+        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new DruidFilter());
+        //添加过滤规则.
+        filterRegistrationBean.addUrlPatterns("/druid/*");
+        //添加不需要忽略的格式信息.
+        return filterRegistrationBean;
+    }
 }

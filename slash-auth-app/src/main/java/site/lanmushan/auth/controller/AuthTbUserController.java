@@ -2,12 +2,17 @@ package site.lanmushan.auth.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import site.lanmushan.auth.api.bo.BoAuthTbUser;
 import site.lanmushan.auth.api.entity.AuthTbUser;
-import site.lanmushan.auth.mapper.AuthTbUserMapper;
 import site.lanmushan.auth.api.service.AuthTbUserService;
+import site.lanmushan.auth.mapper.AuthTbUserMapper;
+import site.lanmushan.auth.req.RejectUser;
+import site.lanmushan.framework.authorization.CurrentUser;
+import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.dto.Message;
+import site.lanmushan.framework.query.controller.BaseController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -22,11 +27,13 @@ import java.util.List;
 @RequestMapping("/authTbUser")
 @Slf4j
 
-public class AuthTbUserController {
+public class AuthTbUserController extends BaseController {
     @Autowired
     private AuthTbUserMapper authTbUserMapper;
     @Autowired
     private AuthTbUserService authTbUserService;
+    @Autowired
+    RedisTemplate<String, String> redisTemplate;
 
     /**
      * 查询单个用户信息
@@ -73,6 +80,33 @@ public class AuthTbUserController {
         Message msg = new Message();
         authTbUserService.deleteServiceByIds(ids);
         msg.success("删除成功");
+        return msg;
+    }
+
+    /**
+     * 删除用户信息
+     *
+     * @param rejectUser 剔除账号
+     * @return code=200 操作成功
+     */
+    @PostMapping("/rejectUser")
+    public Message rejectUser(@RequestBody RejectUser rejectUser) {
+        Message msg = new Message();
+        if (rejectUser == null || rejectUser.getAccount()==null) {
+            msg.error("剔除账号错误");
+            return msg;
+        }
+        CurrentUser currentUser = CurrentUserUtil.getCurrentUser();
+        if (!currentUser.isAdmin()) {
+            msg.error("只有管理员可以剔除在线用户");
+            return msg;
+        }
+        if (currentUser.getAccount().equals(rejectUser.getAccount())) {
+            msg.error("不能剔除自己");
+            return msg;
+        }
+        redisTemplate.delete(CurrentUserUtil.REDIS_ONLINE_USER_KEY_PREFIX+rejectUser.getAccount());
+        msg.success("剔除成功");
         return msg;
     }
 

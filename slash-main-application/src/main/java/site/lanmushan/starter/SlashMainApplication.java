@@ -7,6 +7,7 @@ import org.apache.logging.log4j.ThreadContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 @SpringBootApplication(scanBasePackages = "site.lanmushan", exclude = {SeataHandlerInterceptorConfiguration.class, GlobalTransactionAutoConfiguration.class})
 @MapperScan(value = {"site.lanmushan.*.mapper","site.lanmushan.framework.query.mapper"})
 @Controller
+@ServletComponentScan
 public class SlashMainApplication {
     public static void main(String[] args) {
         ResourceBundle bundle = ResourceBundle.getBundle("application");

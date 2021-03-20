@@ -1,5 +1,6 @@
 package site.lanmushan.framework.cypher.md5;
 
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -31,7 +32,7 @@ public class MD5Util {
         String re_md5 = "";
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(plainText.getBytes());
+            md.update(plainText.getBytes(StandardCharsets.UTF_8));
             byte[] b = md.digest();
             int i;
             StringBuffer buf = new StringBuffer();

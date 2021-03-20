@@ -19,14 +19,14 @@ import java.util.UUID;
 public class RequestIdInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        long start=System.currentTimeMillis();
+        long start = System.currentTimeMillis();
         String requestId = request.getHeader("requestId");
         if (requestId == null) {
             requestId = UUID.randomUUID().toString().replace("-", "").toUpperCase();
             reflectSetparam(request, "requestId", requestId);
         }
         response.setHeader("requestId", requestId);
-        request.setAttribute("startTime",start);
+        request.setAttribute("startTime", start);
         return true;
     }
 
@@ -50,9 +50,8 @@ public class RequestIdInterceptor implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-      Long startTime= (Long) request.getAttribute("startTime");
-      log.info("请求URL:{} 耗时:{}",request.getRequestURI(),System.currentTimeMillis()-startTime);
-
+        Long startTime = (Long) request.getAttribute("startTime");
+        log.info("请求URL:{} 耗时:{}", request.getRequestURI(), System.currentTimeMillis() - startTime);
     }
 
     @Override

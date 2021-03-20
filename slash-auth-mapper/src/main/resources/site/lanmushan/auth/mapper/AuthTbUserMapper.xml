@@ -70,6 +70,7 @@
         where account = #{account}
         or phone = #{account}
     </select>
+
     <select id="selectUserByRoleCode" parameterType="java.lang.String" resultMap="baseResultMap">
         select *
         from auth_tb_user as l

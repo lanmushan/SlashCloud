@@ -27,6 +27,7 @@ import site.lanmushan.framework.constant.StateTypeConstant;
 import site.lanmushan.framework.cypher.base64.Base64Util;
 import site.lanmushan.framework.cypher.md5.MD5Util;
 import site.lanmushan.framework.dto.Message;
+import site.lanmushan.framework.query.controller.BaseController;
 import site.lanmushan.framework.query.util.ServletUtil;
 import site.lanmushan.framework.util.VerifyCodeUtils;
 import site.lanmushan.framework.util.utils.DateUtil;
@@ -50,7 +51,7 @@ import static java.util.stream.Collectors.toList;
 @RestController
 @RequestMapping("/authLogin")
 @Slf4j
-public class LoginController {
+public class LoginController extends BaseController {
     @Autowired
     private AuthTbUserMapper authUserMapper;
     @Autowired

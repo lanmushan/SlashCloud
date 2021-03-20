@@ -1,7 +1,9 @@
 package site.lanmushan.auth.mapper;
 
 
+import org.apache.ibatis.annotations.Param;
 import site.lanmushan.auth.api.entity.AuthTbUserLoginLog;
+import site.lanmushan.framework.dto.DHashMap;
 import site.lanmushan.framework.query.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.additional.insert.InsertListMapper;
@@ -15,5 +17,6 @@ import tk.mybatis.mapper.additional.insert.InsertListMapper;
 @org.apache.ibatis.annotations.Mapper
 public interface AuthTbUserLoginLogMapper extends QueryMapper<AuthTbUserLoginLog> {
 
+    DHashMap selectOnlineUserInfoByAccount(@Param("account") String account);
 
 }

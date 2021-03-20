@@ -25,8 +25,10 @@ public class CurrentUserUtil {
     public final static String tokenSecretKey = "cvj5^2)(136aje,";
     public final static String USER_KEY = "currentUser";
     public final static String AUTHORIZATION = "authorization";
-    /**过期时间*/
-    private final static int AUTHORIZATION_EXPIRATION_TIME = 30*60*1000;
+    /**
+     * 过期时间
+     */
+    private final static int AUTHORIZATION_EXPIRATION_TIME = 30 * 60 * 1000;
     public final static String REDIS_ONLINE_USER_KEY_PREFIX = "ONLINE_USER|";
     public final static String REDIS_API_HASH_KEY = "REDIS_API_HASH_KEY";
 
@@ -82,26 +84,31 @@ public class CurrentUserUtil {
         if (currentUser == null) {
             throw new OperateException("未登录", HTTPCode.D600);
         }
-        String redisUserKey = REDIS_ONLINE_USER_KEY_PREFIX + currentUser.getUserId();
-        //用户只能在一个地方登陆
-        if (token.equals(getRedisTemplate().opsForValue().get(redisUserKey))) {
+        String redisUserKey = REDIS_ONLINE_USER_KEY_PREFIX + currentUser.getAccount();
+        Object value = getRedisTemplate().opsForValue().get(redisUserKey);
+        if (value == null) {
+            throw new OperateException("登录过期", HTTPCode.D600);
+        }
+        //用户只能在一个地方登陆，如果允许多端登录修改规则
+        if (token.equals(value)) {
             request.setAttribute(USER_KEY, currentUser);
             getRedisTemplate().expire(redisUserKey, AUTHORIZATION_EXPIRATION_TIME, TimeUnit.MILLISECONDS);
         } else {
-            throw new OperateException("登录过期", HTTPCode.D600);
+            throw new OperateException("您的账号已经在其他地方登录", HTTPCode.D600);
         }
         return currentUser;
     }
-    public static void saveUserToRedis(CurrentUser currentUser,String token){
-        String redisUserKey = REDIS_ONLINE_USER_KEY_PREFIX + currentUser.getUserId();
-        getRedisTemplate().opsForValue().set(redisUserKey,token,AUTHORIZATION_EXPIRATION_TIME, TimeUnit.MILLISECONDS);
-    }
-    public static Boolean currentUserHasUriPermissions(String uri){
-       Object value=  getRedisTemplate().opsForHash().get(REDIS_API_HASH_KEY,uri);
-       log.info("获取到的权限{}",value);
-       return true;
+
+    public static void saveUserToRedis(CurrentUser currentUser, String token) {
+        String redisUserKey = REDIS_ONLINE_USER_KEY_PREFIX + currentUser.getAccount();
+        getRedisTemplate().opsForValue().set(redisUserKey, token, AUTHORIZATION_EXPIRATION_TIME, TimeUnit.MILLISECONDS);
     }
 
+    public static Boolean currentUserHasUriPermissions(String uri) {
+        Object value = getRedisTemplate().opsForHash().get(REDIS_API_HASH_KEY, uri);
+        log.info("获取到的权限{}", value);
+        return true;
+    }
 
 
     public static void main(String args[]) {

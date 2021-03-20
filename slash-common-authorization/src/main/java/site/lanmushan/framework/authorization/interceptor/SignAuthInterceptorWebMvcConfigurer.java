@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
@@ -23,8 +25,8 @@ import java.util.List;
 public class SignAuthInterceptorWebMvcConfigurer implements WebMvcConfigurer {
     @Autowired
     RequestIdInterceptor requestIdInterceptor;
-    @Autowired
-    SignAuthInterceptor signAuthInterceptor;
+   @Autowired
+   SignAuthInterceptor signAuthInterceptor;
     public static List<String> allowUrlList;
 
     static {
@@ -41,5 +43,7 @@ public class SignAuthInterceptorWebMvcConfigurer implements WebMvcConfigurer {
             registration.excludePathPatterns(it);
         });
     }
+  
+
 
 }

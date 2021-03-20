@@ -3,8 +3,8 @@
     "/authLogin/selectVerificationCode",
     "/authLogin/loginManage",
     "/sysLocalResource/uploadFile",
-    "/**/**.*",
     "/",
+    "/**/**.*",
     "/**.*",
     "/select/**"
   ]

@@ -2,6 +2,7 @@ package site.lanmushan.auth.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import site.lanmushan.auth.api.entity.AuthTbUser;
+import site.lanmushan.framework.dto.DHashMap;
 import site.lanmushan.framework.query.mapper.QueryMapper;
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.additional.insert.InsertListMapper;
@@ -33,4 +34,5 @@ public interface AuthTbUserMapper extends QueryMapper<AuthTbUser> {
      * @return
      */
     List<AuthTbUser> selectUserByRoleCode(@Param("roleCode") String roleCode);
+
 }

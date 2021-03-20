@@ -22,7 +22,7 @@ public class QueryInfo implements Serializable {
     private Integer pageSize;
     private Integer currentPage = 1;
     private String sort = "desc";
-    private String fixed = "";
+    private String fixed = "id";
     private String searchKey;
 
     private Map<String, Object> map = new HashMap<String, Object>(0);
