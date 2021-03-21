@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.lanmushan.cms.mapper.CmsTbCategoryMapper">
-
     <resultMap type="site.lanmushan.cms.api.vo.VoCmsTbCategory" id="baseResultMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="categoryCode" column="category_code" jdbcType="VARCHAR"/>
@@ -28,5 +27,4 @@
             </if>
         </trim>
     </select>
-
 </mapper>
