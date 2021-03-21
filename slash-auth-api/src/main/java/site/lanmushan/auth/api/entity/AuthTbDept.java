@@ -39,6 +39,14 @@ public class AuthTbDept extends BaseEntity implements Serializable {
      */
     @ExcelProperty(value = " 部门名称")
     private String deptName;
+    /**
+     * 部门编码
+     */
+    private String deptCode;
+    /**
+     * 上级编码
+     */
+    private String fkParentDeptCode;
 
     @ExcelProperty(value = "部门全称")
     private String fullDeptName;
@@ -90,8 +98,8 @@ public class AuthTbDept extends BaseEntity implements Serializable {
 
     @Override
     public boolean isRoot() {
-        if (fkParentId != null) {
-            return fkParentId.compareTo(0L) == 0;
+        if (fkParentDeptCode != null&&deptCode!=null) {
+         return    this.deptCode.equals(fkParentDeptCode);
         }
         return false;
     }
@@ -99,7 +107,9 @@ public class AuthTbDept extends BaseEntity implements Serializable {
     @Override
     public boolean isChildren(TreeNode treeNode) {
         AuthTbDept authTbDept = (AuthTbDept) treeNode;
-        return this.getId().equals(authTbDept.getFkParentId());
-
+        if (fkParentDeptCode != null&&authTbDept!=null) {
+          return   this.deptCode.equals(authTbDept.getFkParentDeptCode());
+        }
+        return true;
     }
 }

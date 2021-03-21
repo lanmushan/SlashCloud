@@ -59,7 +59,7 @@ public class CurrentUserUtil {
             String jsonStr = TokenUtil.resolveToken(token, tokenSecretKey);
             return JSON.parseObject(jsonStr, CurrentUser.class);
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            //  log.error(e.getMessage(), e);
             return null;
         }
 
@@ -84,6 +84,13 @@ public class CurrentUserUtil {
         if (currentUser == null) {
             throw new OperateException("未登录", HTTPCode.D600);
         }
+        if (isLoginOverdue(currentUser, token)) {
+            request.setAttribute(USER_KEY, currentUser);
+        }
+        return currentUser;
+    }
+
+    public static boolean isLoginOverdue(CurrentUser currentUser, String token) {
         String redisUserKey = REDIS_ONLINE_USER_KEY_PREFIX + currentUser.getAccount();
         Object value = getRedisTemplate().opsForValue().get(redisUserKey);
         if (value == null) {
@@ -91,12 +98,11 @@ public class CurrentUserUtil {
         }
         //用户只能在一个地方登陆，如果允许多端登录修改规则
         if (token.equals(value)) {
-            request.setAttribute(USER_KEY, currentUser);
             getRedisTemplate().expire(redisUserKey, AUTHORIZATION_EXPIRATION_TIME, TimeUnit.MILLISECONDS);
         } else {
-            throw new OperateException("您的账号已经在其他地方登录", HTTPCode.D600);
+            throw new OperateException("您的账号已经在其他地方登录或登录过期", HTTPCode.D600);
         }
-        return currentUser;
+        return true;
     }
 
     public static void saveUserToRedis(CurrentUser currentUser, String token) {
@@ -104,12 +110,16 @@ public class CurrentUserUtil {
         getRedisTemplate().opsForValue().set(redisUserKey, token, AUTHORIZATION_EXPIRATION_TIME, TimeUnit.MILLISECONDS);
     }
 
-    public static Boolean currentUserHasUriPermissions(String uri) {
+    public static Boolean currentUserHasUriPermissions(String uri, CurrentUser currentUser) {
         Object value = getRedisTemplate().opsForHash().get(REDIS_API_HASH_KEY, uri);
         log.info("获取到的权限{}", value);
         return true;
     }
 
+    public static Boolean currentUserHasUriPermissions(String uri) {
+        CurrentUser currentUser = getCurrentUser();
+        return currentUserHasUriPermissions(uri, currentUser);
+    }
 
     public static void main(String args[]) {
         CurrentUser currentUser = new CurrentUser();

@@ -96,7 +96,12 @@ public class Message<T> implements Serializable {
 
     public Message setRow(Object row) {
         this.row = row;
-        this.setHttpCode(HTTPCode.E200);
+        if(row!=null)
+        {
+            this.setHttpCode(HTTPCode.E200);
+        }else {
+            this.setHttpCode(HTTPCode.E204);
+        }
         return this;
     }
 

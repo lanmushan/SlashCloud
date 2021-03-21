@@ -14,7 +14,7 @@
     <name>slash-auth-app</name>
     <description>Demo project for Spring Boot</description>
     <properties>
-        <main.class>site.lanmushan.auth.app.AuthServiceApplication</main.class>
+        <main.class>site.lanmushan.auth.AuthServiceApplication</main.class>
     </properties>
     <dependencies>
         <dependency>

@@ -86,6 +86,14 @@
             <artifactId>slash-common-datasope</artifactId>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-sys-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-cloud</artifactId>
+        </dependency>
     </dependencies>
 
 

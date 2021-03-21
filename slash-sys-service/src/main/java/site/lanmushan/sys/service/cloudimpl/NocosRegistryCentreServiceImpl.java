@@ -1,5 +1,6 @@
-package site.lanmushan.sys.service.impl;
+package site.lanmushan.sys.service.cloudimpl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import site.lanmushan.framework.http.api.HttpClientService;
 import site.lanmushan.sys.api.vo.AppInfo;
 import site.lanmushan.sys.api.service.RegistryCentreService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +36,16 @@ public class NocosRegistryCentreServiceImpl implements RegistryCentreService {
         queryJson.put("hasIpCount", Boolean.TRUE);
         queryJson.put("withInstances", Boolean.FALSE);
         queryJson.put("pageNo", 1);
-        queryJson.put("pageSize", 100);
-        JSONObject resultJson = (JSONObject) httpClientService.doPostJson(url, queryJson, null, JSONObject.class);
-        return null;
+        queryJson.put("pageSize", 500);
+        JSONObject resultJson = (JSONObject) httpClientService.doGet(url, queryJson, null, JSONObject.class);
+        JSONArray jsonArray=resultJson.getJSONArray("serviceList");
+        List<AppInfo> list=new ArrayList<>(jsonArray.size());
+        for (Object obj:jsonArray) {
+                JSONObject json= (JSONObject) obj;
+                AppInfo appInfo=new AppInfo();
+                appInfo.setAppName(json.getString("name"));
+                list.add(appInfo);
+        }
+        return list;
     }
 }

@@ -1,4 +1,4 @@
-package site.lanmushan.gateway.util;
+package site.lanmushan.framework.authorization.gateway;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.core.io.buffer.DataBuffer;

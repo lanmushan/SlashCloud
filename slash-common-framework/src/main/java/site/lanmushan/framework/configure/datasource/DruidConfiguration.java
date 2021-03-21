@@ -63,13 +63,13 @@ public class DruidConfiguration {
         filterRegistrationBean.addInitParameter("exclusions", "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
         return filterRegistrationBean;
     }
-    @Bean
-    @Order(Ordered.HIGHEST_PRECEDENCE)
-    public FilterRegistrationBean druidPageFilter() {
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new DruidFilter());
-        //添加过滤规则.
-        filterRegistrationBean.addUrlPatterns("/druid/*");
-        //添加不需要忽略的格式信息.
-        return filterRegistrationBean;
-    }
+//    @Bean
+//    @Order(Ordered.HIGHEST_PRECEDENCE)
+//    public FilterRegistrationBean druidPageFilter() {
+//        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new DruidFilter());
+//        //添加过滤规则.
+//        filterRegistrationBean.addUrlPatterns("/druid/*");
+//        //添加不需要忽略的格式信息.
+//        return filterRegistrationBean;
+//    }
 }

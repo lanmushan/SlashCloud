@@ -49,14 +49,14 @@ public class QueryMybatisInterceptor implements Interceptor {
         final Object parameter = queryArgs[PARAMETER_INDEX];
         final MappedStatement mappedStatement = (MappedStatement) queryArgs[MAPPED_STATEMENT_INDEX];
         final BoundSql boundSql = mappedStatement.getBoundSql(parameter);
-        log.info("查询SQl {}", boundSql.getSql());
+//        log.info("查询SQl {}", boundSql.getSql());
         String typeName = mappedStatement.getSqlCommandType().name().toLowerCase();
 
         if (DataScopeBus.isEnable()||typeName.equals(DataScopeMethodConstant.UPDATE)||typeName.equals(DataScopeMethodConstant.DELETE)) {
             long start = System.currentTimeMillis();
             String resultSql = ApplicationUtil.getBean(IDataScopeHandler.class).parseSql(boundSql.getSql(), typeName.toLowerCase());
             long end = System.currentTimeMillis();
-            log.info("转换SQL耗时:{}毫秒 结果:{}", end - start, resultSql);
+          //  log.info("转换SQL耗时:{}毫秒 结果:{}", end - start, resultSql);
             // 重新new一个查询语句对像
             BoundSql newBoundSql = new BoundSql(mappedStatement.getConfiguration(), resultSql, boundSql.getParameterMappings(), boundSql.getParameterObject());
             //这里要兼容pageHelper

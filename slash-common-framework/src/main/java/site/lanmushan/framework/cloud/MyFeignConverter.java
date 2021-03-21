@@ -6,8 +6,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import site.lanmushan.framework.constant.HTTPCode;
+import site.lanmushan.framework.constant.annotation.ConditionalCloud;
 import site.lanmushan.framework.dto.Message;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpInputMessage;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * @Version 1.0
  */
 @Slf4j
-@ConditionalOnProperty(prefix = "slash", name = "cloud", havingValue = "true")
+@ConditionalCloud
 public class MyFeignConverter extends MappingJackson2HttpMessageConverter {
     public MyFeignConverter(ObjectMapper objectMapper) {
         super(objectMapper);

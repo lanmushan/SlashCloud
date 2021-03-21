@@ -29,6 +29,10 @@
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-typehandler</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
             <artifactId>slash-common-authorization</artifactId>
         </dependency>
         <dependency>

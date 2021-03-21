@@ -141,6 +141,7 @@ public class LoginController extends BaseController {
             msg.setRow(token).success("登录成功");
             return msg;
         } catch (Exception e) {
+            log.error(e.getMessage(),e);
             loginLog.setLoginMsg("系统异常");
             throw new OperationsException("系统异常");
         } finally {

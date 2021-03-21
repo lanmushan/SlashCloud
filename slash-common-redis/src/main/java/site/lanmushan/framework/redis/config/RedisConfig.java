@@ -30,9 +30,9 @@ public class RedisConfig {
     int port;
     @Value("${spring.redis.password}")
     private String pwd;
-    @Value("${spring.redis.sentinel.master}")
+    @Value("${spring.redis.sentinel.master:}")
     private String master;
-    @Value("${spring.redis.sentinel.nodes}")
+    @Value("${spring.redis.sentinel.nodes:}")
     private String nodes;
     @Value("${spring.redis.database:0}")
     private int dbIndex;

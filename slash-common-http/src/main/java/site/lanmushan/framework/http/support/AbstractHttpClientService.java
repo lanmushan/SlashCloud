@@ -75,7 +75,7 @@ public abstract class AbstractHttpClientService implements HttpClientService {
     protected HttpRequestBase createHttpMethod(String url, String method, Object data, Map<String, String> header) {
         HttpRequestBase httpMethod = null;
         if ("GET".equalsIgnoreCase(method)) {
-            httpMethod = new HttpGet(url + "？" + data);
+            httpMethod = new HttpGet(url + "?" + getFillData(method,data,header));
         } else {
             HttpPost post = new HttpPost(url);
             if (header != null) {
@@ -85,7 +85,7 @@ public abstract class AbstractHttpClientService implements HttpClientService {
                     post.addHeader(mapKey, mapValue);
                 }
             }
-            Object inputData = getFillData(url, data, header);
+            Object inputData = getFillData(method, data, header);
             HttpEntity entity = null;
             if (inputData instanceof String) {
                 entity = new StringEntity((String) inputData, StandardCharsets.UTF_8);

@@ -37,11 +37,15 @@ public class DataBaseManageController extends BaseController {
             searchKey="";
         }
         List<DHashMap>  tableList= dataBaseManageService.selectAllTableList(appName);
+        if(tableList==null)
+        {
+            msg.setRows(null);
+            return msg;
+        }
         //这里性能低一点儿没关系了，功能要正常
         final String fsearchKey=searchKey;
         tableList=tableList.stream().filter((it)->{
-            System.out.println(it.get("tableName"));
-             return   it.get("tableName").toString().startsWith(fsearchKey);
+             return  it.get("tableName").toString().startsWith(fsearchKey);
         }).collect(Collectors.toList());
         msg.setTotal(tableList.size());
         tableList=tableList.stream().skip((getCurrentPage()-1)*getPageSize()).limit(getPageSize()).collect(Collectors.toList());

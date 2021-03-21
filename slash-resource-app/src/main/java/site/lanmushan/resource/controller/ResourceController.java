@@ -13,6 +13,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+
 /**
  * @author Administrator
  */
@@ -74,5 +76,28 @@ public class ResourceController {
             resultUri = resultUri.replaceAll("\\\\", "/");
         }
         return resultUri;
+    }
+
+
+    @GetMapping("/selectList")
+    public Message selectList(String path) {
+        return Message.getInstance().setRows(localResourceService.getRootFiles(path));
+    }
+
+    @RequestMapping("/readContent")
+    public Message readContent(String path) {
+        String result = new String(localResourceService.readFile(path), StandardCharsets.UTF_8);
+        return Message.getInstance().setRow(result);
+    }
+    @RequestMapping("/selectTemplates")
+    public Message selectTemplates() {
+        return Message.getInstance().setRows(localResourceService.getTemplatesFiles());
+    }
+
+
+    public static void main(String[] args) {
+        String uri = "\\images\\test.jpg";
+        File file = new File(uri);
+        System.out.println(file.getPath());
     }
 }

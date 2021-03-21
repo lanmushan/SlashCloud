@@ -21,8 +21,17 @@
             <artifactId>slash-common-log</artifactId>
         </dependency>
         <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-const</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
             <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt -->
@@ -64,6 +73,11 @@
             <artifactId>spring-data-redis</artifactId>
             <version>2.2.6.RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>site.lanmushan</groupId>
+            <artifactId>slash-common-cloud</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

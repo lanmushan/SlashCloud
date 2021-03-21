@@ -74,9 +74,9 @@ public class AuthTbResourceController extends BaseController {
      * @return
      */
     @PostMapping("/delete")
-    public Message delete(@RequestParam List<Long> ids) {
+    public Message delete(@RequestBody BoAuthTbResource obj) {
         Message msg = new Message();
-        authTbResourceService.deleteServiceByIds(ids);
+        authTbResourceService.deleteServiceByIds(obj.getIds());
         msg.success("删除成功");
         return msg;
     }

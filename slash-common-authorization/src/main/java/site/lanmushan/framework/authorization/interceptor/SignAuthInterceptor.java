@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * @author Administrator
  */
-@Configuration
 @Slf4j
 public class SignAuthInterceptor implements HandlerInterceptor {
     @Override

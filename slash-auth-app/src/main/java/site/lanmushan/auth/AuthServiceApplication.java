@@ -1,7 +1,6 @@
-package site.lanmushan.auth.app;
+package site.lanmushan.auth;
 
 
-import org.apache.logging.log4j.ThreadContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -20,13 +19,16 @@ import java.util.ResourceBundle;
 @SpringBootApplication(scanBasePackages = "site.lanmushan")
 @EnableDiscoveryClient
 @EnableHystrix
-@EnableFeignClients
-@MapperScan(value = "site.lanmushan.auth.mapper")
+@EnableFeignClients(basePackages = {"site.lanmushan.sys.api"})
+@MapperScan(value = {"site.lanmushan.*.mapper","site.lanmushan.framework.query.mapper"})
 public class AuthServiceApplication {
-    public static void main(String[] args) {
+    static {
         ResourceBundle bundle = ResourceBundle.getBundle("application");
         String appName = bundle.getString("spring.application.name");
-        ThreadContext.put("appName", appName);
+        System.setProperty("appName", appName);
+    }
+    public static void main(String[] args) {
+
         SpringApplication.run(AuthServiceApplication.class, args);
     }
 }

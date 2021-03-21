@@ -18,13 +18,15 @@
             <outputDirectory>lib</outputDirectory>
         </fileSet>
         <fileSet>
+            <directory>${project.build.directory}/conf/</directory>
+            <outputDirectory>conf</outputDirectory>
+        </fileSet>
+        <fileSet>
             <directory>${project.build.directory}/classes/</directory>
             <includes>
                 <include>*.properties</include>
                 <include>*.xml</include>
-                <include>*.conf</include>
             </includes>
-            <filtered>true</filtered>
             <outputDirectory>conf</outputDirectory>
         </fileSet>
         <fileSet>
@@ -32,7 +34,6 @@
             <includes>
                 <include>*.*</include>
             </includes>
-            <filtered>true</filtered>
             <outputDirectory>bin</outputDirectory>
         </fileSet>
         <fileSet>

@@ -10,4 +10,5 @@ public class AppInfo {
     private String appName;
     private String appHost;
     private String appPort;
+    private String groupName;
 }

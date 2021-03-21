@@ -14,7 +14,6 @@ import java.util.UUID;
 /**
  * @author Administrator
  */
-@Configuration
 @Slf4j
 public class RequestIdInterceptor implements HandlerInterceptor {
     @Override
@@ -44,7 +43,7 @@ public class RequestIdInterceptor implements HandlerInterceptor {
             MimeHeaders o2 = (MimeHeaders) headers.get(o1);
             o2.addValue(key).setString(value);
         } catch (Exception e) {
-            //  e.printStackTrace();
+             e.printStackTrace();
         }
     }
 

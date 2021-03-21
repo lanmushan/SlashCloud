@@ -97,10 +97,10 @@ public class AesEbcUtil {
 
             return new String(result, StandardCharsets.UTF_8);
         } catch (Exception ex) {
-            Logger.getLogger(AesEbcUtil.class.getName()).log(Level.SEVERE, null, ex);
+            throw  new RuntimeException("解密错误");
         }
 
-        return null;
+        //return null;
     }
 
     /**

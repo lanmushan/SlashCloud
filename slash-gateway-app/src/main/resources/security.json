@@ -1,6 +1,11 @@
 {
   "allows": [
-    "/api/authLogin/selectVerificationCode",
-    "/api/authLogin/loginManage"
+    "/authLogin/selectVerificationCode",
+    "/authLogin/loginManage",
+    "/sysLocalResource/uploadFile",
+    "/",
+    "/**/**.*",
+    "/**.*",
+    "/select/**"
   ]
 }
