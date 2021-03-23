@@ -39,7 +39,7 @@
         <!--cloud模式下独立运行gatewayApp-->
         <module>slash-gateway-app</module>
 
-        <module>slash-common-datascope</module>
+        <module>slash-common-datacope</module>
         <!--权限服务，关于用户角色部门等相关-->
         <module>slash-auth-app</module>
         <module>slash-auth-api</module>
@@ -204,7 +204,7 @@
             </dependency>
             <dependency>
                 <groupId>site.lanmushan</groupId>
-                <artifactId>slash-common-datasope</artifactId>
+                <artifactId>slash-common-datacope</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
