@@ -42,7 +42,7 @@ public class QueryInfo implements Serializable {
     }
 
     public String getOrders() {
-        if (fixed.equals("")) {
+        if ("".equals(fixed)) {
             return null;
         }
         this.fixed = StringCommonUtil.camelToUnderline(fixed, '_');

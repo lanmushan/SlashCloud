@@ -25,6 +25,7 @@ public class CurrentUserUtil {
     public final static String tokenSecretKey = "cvj5^2)(136aje,";
     public final static String USER_KEY = "currentUser";
     public final static String AUTHORIZATION = "authorization";
+    public final static String ADMIN_CODE = "admin";
     /**
      * 过期时间
      */
@@ -42,7 +43,7 @@ public class CurrentUserUtil {
 
     public static boolean isLogin() {
         CurrentUser currentUser = getCurrentUser();
-        return currentUser == null ? false : true;
+        return currentUser!=null;
     }
 
     /**

@@ -2,6 +2,7 @@ package site.lanmushan.framework.util.utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -60,7 +61,7 @@ public class StringCommonUtil {
 
     public synchronized static String createMark() {
         Date date = new Date();
-        DateFormat df = new SimpleDateFormat("yyMMddhhmm");
+        DateFormat df = new SimpleDateFormat("yyMMddHHmm");
         String str1 = Long.toString(Long.parseLong(df.format(date)), 36).toUpperCase();
         String str2 = Long.toString(StringCommonUtil.createRandom(2), 36).toString().toUpperCase();
         return str1 + str2;
@@ -133,7 +134,7 @@ public class StringCommonUtil {
 
     public static String getRandomString(int length) {
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";
-        Random random = new Random();
+        SecureRandom  random = new SecureRandom();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < length; i++) {
             int number = random.nextInt(base.length());

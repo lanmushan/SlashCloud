@@ -2,6 +2,7 @@ package site.lanmushan.auth.api.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
+import site.lanmushan.framework.query.entity.BaseEntity;
 import site.lanmushan.framework.uuid.SeqGenId;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -19,7 +20,7 @@ import java.util.Date;
  */
 @Table(name = "auth_tb_user")
 @Data
-public class AuthTbUser implements Serializable {
+public class AuthTbUser  extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -76669382002540303L;
     /**
      * 编号

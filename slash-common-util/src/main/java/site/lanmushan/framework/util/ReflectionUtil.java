@@ -67,13 +67,13 @@ public class ReflectionUtil {
         makeAccessible(field);
 
         try {
-            if (field.getType().toString().equals("class java.lang.Integer")) {
+            if ("class java.lang.Integer".equals(field.getType().toString())) {
                 field.set(object, Integer.parseInt(value.toString()));
-            } else if (field.getType().toString().equals("class java.lang.String")) {
+            } else if ("class java.lang.String".equals(field.getType().toString())) {
                 field.set(object, value.toString());
-            } else if (field.getType().toString().equals("class java.lang.Long")) {
+            } else if ("class java.lang.Long".equals(field.getType().toString())) {
                 field.set(object, Long.parseLong(value.toString()));
-            } else if (field.getType().toString().equals("class java.util.Date")) {
+            } else if ("class java.util.Date".equals(field.getType().toString())) {
                 if (value instanceof Long) {
                     field.set(object, value);
                 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.lanmushan.auth.api.bo.BoAuthTbDept;
 
+import site.lanmushan.auth.api.entity.AuthTbDept;
 import site.lanmushan.auth.mapper.AuthTbDeptMapper;
 import site.lanmushan.auth.api.service.AuthTbDeptService;
 import site.lanmushan.framework.constant.HTTPCode;
@@ -63,6 +64,15 @@ public class AuthTbDeptServiceImpl implements AuthTbDeptService {
 
     @Override
     public void deleteServiceByIds(List<Long> ids) {
+        if(ids!=null)
+        {
+            ids.forEach(it->{
+                AuthTbDept authTbDept=authTbDeptMapper.selectByPrimaryKey(it);
+                if("0".equals(authTbDept.getDeptCode())){
+                    throw new OperateException("不能删除顶级部门");
+                }
+            });
+        }
         authTbDeptMapper.deleteByIdList(ids);
     }
 }

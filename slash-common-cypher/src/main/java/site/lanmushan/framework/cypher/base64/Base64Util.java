@@ -13,8 +13,8 @@ import java.nio.charset.StandardCharsets;
  */
 @Slf4j
 public class Base64Util {
-    public static BASE64Encoder base64Encoder = new BASE64Encoder();
-    public static BASE64Decoder base64Decoder = new BASE64Decoder();
+    public static final BASE64Encoder base64Encoder = new BASE64Encoder();
+    public static final BASE64Decoder base64Decoder = new BASE64Decoder();
 
 
     public static String encodeToString(String content) {

@@ -4,13 +4,11 @@
 
     <resultMap type="site.lanmushan.auth.api.entity.AuthTbDept" id="baseResultMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="fkParentId" column="fk_parent_id" jdbcType="INTEGER"/>
         <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
         <result property="deptCode" column="dept_code" jdbcType="VARCHAR"/>
         <result property="fkParentDeptCode" column="fk_parent_dept_code" jdbcType="VARCHAR"></result>
         <result property="fullDeptName" column="full_dept_name" jdbcType="VARCHAR"/>
         <result property="orderIndex" column="order_index" jdbcType="INTEGER"/>
-
         <result property="deleted" column="deleted" jdbcType="INTEGER"/>
         <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -18,23 +16,22 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
     <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
-        select id, fk_parent_id, dept_name,dept_code,fk_parent_dept_code,full_dept_name, order_index, create_user_id,
+        select id, dept_name,dept_code,fk_parent_dept_code,full_dept_name, order_index, create_user_id,
         create_time, update_user_id, update_time from auth_tb_dept
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
-                <choose>
-                    <when test="it.key == 'search_key'">
-                    </when>
-                    <otherwise>
-                        <if test="it.operate =='in'">
-                            ${it.key} ${it.operate} (#{it.value})
-                        </if>
-                        <if test="it.operate !='in'">
-                            ${it.key} ${it.operate} #{it.value}
-                        </if>
-                    </otherwise>
-                </choose>
+                <if test="it.operate =='in'">
+                    ${it.key} ${it.operate} (#{it.value})
+                </if>
+                <if test="it.operate !='in'">
+                    ${it.key} ${it.operate} #{it.value}
+                </if>
             </foreach>
+            and
+            <if test="searchKey != null and searchKey !=''">
+                dept_code like #{searchKey} or
+                dept_name like #{searchKey}
+            </if>
         </trim>
     </select>
 

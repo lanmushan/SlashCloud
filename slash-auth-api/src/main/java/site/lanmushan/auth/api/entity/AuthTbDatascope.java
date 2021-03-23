@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @Table(name = "auth_tb_datascope")
 @Data
-public class AuthTbDatascope extends BaseEntity {
+public class AuthTbDatascope  extends BaseEntity {
     private static final long serialVersionUID = 147390444505364371L;
     /**
      * 编号

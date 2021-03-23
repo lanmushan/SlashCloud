@@ -23,21 +23,11 @@ import java.util.List;
 public class FilterConfig {
     @Autowired
     SignAuthGatewayFilter signAuthGatewayFilter;
-    public static List<String> allowUrlList;
-
-    static {
-        JSONObject json = JsonUtil.loadJsonByClassPath("security.json");
-        allowUrlList = json.getJSONArray("allows").toJavaList(String.class);
-    }
-
+ 
     @Bean
     public GlobalFilter tokenFilter() {
         return signAuthGatewayFilter;
     }
 
-    @Bean
-    public SignFilterManager signFilterManager() {
-        return new SignFilterManager(allowUrlList);
-    }
 
 }

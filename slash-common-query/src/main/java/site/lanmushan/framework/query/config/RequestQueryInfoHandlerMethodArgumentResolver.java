@@ -163,7 +163,7 @@ public class RequestQueryInfoHandlerMethodArgumentResolver implements HandlerMet
      */
     private boolean specialField(Object obj, String key, Object value) {
         try {
-            if (key.equals("searchKey")) {
+            if ("searchKey".equals(key)) {
                 ReflectionUtil.setFieldValue(obj, key, value.toString() + "%");
             } else {
                 ReflectionUtil.setFieldValue(obj, key, value);

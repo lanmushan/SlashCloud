@@ -3,9 +3,9 @@ package site.lanmushan.auth.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import site.lanmushan.auth.api.service.AuthApiRegisterService;
 import site.lanmushan.auth.api.vo.VoUrlRoles;
 import site.lanmushan.auth.mapper.AuthTbResourceMapper;
-import site.lanmushan.auth.api.service.AuthApiRegisterService;
 import site.lanmushan.framework.authorization.CurrentUserUtil;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +15,7 @@ import java.util.Map;
 
 /**
  * 将所有的api存储到redis中
+ *
  * @author Administrator
  */
 @Service
@@ -30,7 +31,7 @@ public class AuthApiRegisterServiceImpl implements AuthApiRegisterService {
         if (urlRolesList == null || urlRolesList.isEmpty()) {
             return;
         }
-        Map<String, String> maps = new HashMap<>();
+        Map<String, String> maps = new HashMap<>(urlRolesList.size());
         for (VoUrlRoles it : urlRolesList) {
             maps.put(it.getResourceUrl(), it.getRoles());
         }

@@ -24,7 +24,7 @@ public class RequestIdInterceptor implements HandlerInterceptor {
             requestId = UUID.randomUUID().toString().replace("-", "").toUpperCase();
             reflectSetparam(request, "requestId", requestId);
         }
-        response.setHeader("requestId", requestId);
+        //response.setHeader("requestId", requestId);
         request.setAttribute("startTime", start);
         return true;
     }

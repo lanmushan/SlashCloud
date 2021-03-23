@@ -15,7 +15,6 @@ import java.util.List;
  * @author Administrator
  */
 @Service
-//@ConditionalOnProperty(value = "slash.cloud", havingValue = "true", matchIfMissing = false)
 @ConditionalCloud
 public class DataBaseManageServiceCloudImpl implements DataBaseManageService {
     @Autowired

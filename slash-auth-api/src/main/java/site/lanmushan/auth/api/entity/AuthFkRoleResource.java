@@ -2,6 +2,7 @@ package site.lanmushan.auth.api.entity;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.Data;
+import site.lanmushan.framework.query.entity.BaseEntity;
 import site.lanmushan.framework.uuid.SeqGenId;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 @Table(name = "auth_fk_role_resource")
 @Data
-public class AuthFkRoleResource implements Serializable {
+public class AuthFkRoleResource  extends BaseEntity implements Serializable {
     private static final long serialVersionUID = -53753227212321539L;
     @Id
     @KeySql(genId = SeqGenId.class)

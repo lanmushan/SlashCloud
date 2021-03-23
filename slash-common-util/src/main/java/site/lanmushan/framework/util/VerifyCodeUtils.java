@@ -8,13 +8,14 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Random;
 
 public class VerifyCodeUtils {
     //使用到Algerian字体，系统里没有的话需要安装字体，字体只显示大写，去掉了1,0,i,o几个容易混淆的字符
     public static final String VERIFY_CODES = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
-    private static Random random = new Random();
+    private static SecureRandom random = new SecureRandom();
 
 
     /**

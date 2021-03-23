@@ -69,9 +69,9 @@ public class AuthTbDeptController {
      * @return
      */
     @PostMapping("/delete")
-    public Message delete(@RequestParam List<Long> ids) {
+    public Message delete(@RequestBody @Valid BoAuthTbDept obj) {
         Message msg = new Message();
-        authTbDeptService.deleteServiceByIds(ids);
+        authTbDeptService.deleteServiceByIds(obj.getIds());
         msg.success("删除成功");
         return msg;
     }

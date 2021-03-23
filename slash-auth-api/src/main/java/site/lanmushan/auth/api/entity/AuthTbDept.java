@@ -30,11 +30,6 @@ public class AuthTbDept extends BaseEntity implements Serializable {
     @ExcelProperty(value = " 部门id")
     private Long id;
     /**
-     * 父部门id
-     */
-    @ExcelProperty(value = " 父部门id")
-    private Long fkParentId;
-    /**
      * 部门名称
      */
     @ExcelProperty(value = " 部门名称")

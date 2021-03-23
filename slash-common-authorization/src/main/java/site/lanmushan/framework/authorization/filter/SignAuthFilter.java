@@ -49,6 +49,8 @@ public class SignAuthFilter implements Filter {
             httpServletResponse.setStatus(HttpStatus.OK.value());
             httpServletResponse.setHeader("Content-Type", "application/json;charset=utf-8");
             httpServletResponse.getOutputStream().write(JSONObject.toJSONString(msg).getBytes(StandardCharsets.UTF_8));
+        }finally {
+            log.info("鉴权完毕");
         }
     }
 

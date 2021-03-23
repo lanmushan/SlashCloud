@@ -4,8 +4,10 @@ package site.lanmushan.auth.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.lanmushan.auth.api.bo.BoAuthTbRole;
-import site.lanmushan.auth.mapper.AuthTbRoleMapper;
+import site.lanmushan.auth.api.entity.AuthTbRole;
 import site.lanmushan.auth.api.service.AuthTbRoleService;
+import site.lanmushan.auth.mapper.AuthTbRoleMapper;
+import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
@@ -62,6 +64,15 @@ public class AuthTbRoleServiceImpl implements AuthTbRoleService {
 
     @Override
     public void deleteServiceByIds(List<Long> ids) {
-        authTbRoleMapper.deleteByIdList(ids);
+        if (ids != null) {
+            ids.forEach(it -> {
+                AuthTbRole authTbRole = authTbRoleMapper.selectByPrimaryKey(it);
+                if (CurrentUserUtil.ADMIN_CODE.equals(authTbRole.getRoleCode())) {
+                    throw new OperateException("不能删除管理员角色");
+                }
+            });
+            authTbRoleMapper.deleteByIdList(ids);
+        }
+
     }
 }

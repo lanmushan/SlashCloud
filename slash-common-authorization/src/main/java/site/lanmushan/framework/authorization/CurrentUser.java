@@ -32,6 +32,6 @@ public class CurrentUser implements Serializable {
         if (null == roleList || roleList.size() == 0) {
             return false;
         }
-        return roleList.contains("admin");
+        return roleList.contains(CurrentUserUtil.ADMIN_CODE);
     }
 }

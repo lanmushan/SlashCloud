@@ -57,14 +57,10 @@ public class AuthTbRoleController {
         return msg;
     }
 
-    /**
-     * @param ids
-     * @return
-     */
     @PostMapping("/delete")
-    public Message delete(@RequestParam List<Long> ids) {
+    public Message delete(@RequestBody @Valid BoAuthTbRole obj) {
         Message msg = new Message();
-        authTbRoleService.deleteServiceByIds(ids);
+        authTbRoleService.deleteServiceByIds(obj.getIds());
         msg.success("删除成功");
         return msg;
     }

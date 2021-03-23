@@ -6,11 +6,10 @@ import org.bouncycastle.pqc.jcajce.provider.BouncyCastlePQCProvider;
 import site.lanmushan.framework.cypher.base64.Base64Util;
 import site.lanmushan.framework.cypher.hex.HexUtil;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
+import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.Security;
@@ -18,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+@SuppressWarnings("ALL")
 public class AesEbcUtil {
     private static final String KEY_ALGORITHM = "AES";
     private static final String DEFAULT_CIPHER_ALGORITHM = "AES/ECB/PKCS5Padding";//默认的加密算法
@@ -88,7 +88,10 @@ public class AesEbcUtil {
                 throw new NullPointerException("解密内容不能为空");
             }
             //实例化
-            Cipher cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
+            Cipher cipher = null;
+
+            cipher = Cipher.getInstance(DEFAULT_CIPHER_ALGORITHM);
+
             //使用密钥初始化，设置为解密模式
             cipher.init(Cipher.DECRYPT_MODE, getSecretKey(password));
 
@@ -96,10 +99,20 @@ public class AesEbcUtil {
             byte[] result = cipher.doFinal(HexUtil.hexToByte(content));
 
             return new String(result, StandardCharsets.UTF_8);
-        } catch (Exception ex) {
-            throw  new RuntimeException("解密错误");
-        }
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("解密算法错误");
+        } catch (NoSuchPaddingException e) {
+            throw new RuntimeException("填充模式错误");
 
+        } catch (BadPaddingException e) {
+            throw new RuntimeException("数据填充错误");
+
+        } catch (IllegalBlockSizeException e) {
+            throw new RuntimeException("数据分组错误");
+
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException("无效秘钥");
+        }
         //return null;
     }
 

@@ -35,7 +35,7 @@ public class SignAuthInterceptorWebMvcConfigurer implements WebMvcConfigurer {
     RequestIdInterceptor requestIdInterceptor;
      @Autowired
     SignAuthInterceptor signAuthInterceptor;
-    public static List<String> allowUrlList;
+    public final static List<String> allowUrlList;
 
     static {
         JSONObject json = JsonUtil.loadJsonByClassPath("security.json");
