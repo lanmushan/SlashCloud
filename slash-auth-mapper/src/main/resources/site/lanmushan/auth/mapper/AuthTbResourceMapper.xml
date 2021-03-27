@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.lanmushan.auth.mapper.AuthTbResourceMapper">
 
-    <resultMap type="site.lanmushan.auth.api.entity.AuthTbResource" id="baseResultMap">
+    <resultMap type="site.lanmushan.auth.api.vo.VoAuthTbResource" id="baseResultMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="resourceName" column="resource_name" jdbcType="VARCHAR"/>
         <result property="resourceDescription" column="resource_description" jdbcType="VARCHAR"/>
@@ -18,12 +18,17 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
     <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
-        select id, resource_name, resource_description, resource_url, icon_default, fk_parent_id, resource_type,
-        disabled, resource_id, order_index, create_user_id, create_time, update_time from auth_tb_resource
+        SELECT
+        DISTINCT
+        ar.*
+        FROM
+        auth_tb_resource AS ar
+        LEFT JOIN auth_fk_role_resource AS arr ON ar.id = arr.fk_resource_id
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
                 <choose>
-                    <when test="it.key == 'search_key'">
+                    <when test="it.key =='role_code'">
+                        arr.fk_role_code= #{it.value}
                     </when>
                     <otherwise>
                         <if test="it.operate =='in'">
@@ -35,6 +40,9 @@
                     </otherwise>
                 </choose>
             </foreach>
+            <if test="searchKey !=null and searchKey!=''">
+                and ( ar.resource_url like #{searchKey} or ar.resource_name like #{searchKey} )
+            </if>
         </trim>
     </select>
     <select id="selectResourceByRoleCodes" resultMap="baseResultMap">
@@ -55,14 +63,33 @@
         order by b.order_index desc
     </select>
     <!---->
-    <select id="selectApiRelationRoles" parameterType="java.lang.String" resultType="site.lanmushan.auth.api.vo.VoUrlRoles">
-        SELECT resource_url as resourceUrl,GROUP_CONCAT(fk_role_code) as roles FROM (SELECT id,resource_url from auth_tb_resource WHERE resource_type="api") as api
-      LEFT JOIN auth_fk_role_resource AS role ON role.fk_resource_id = api.id
-      <where>
-          <if test="url !=null and url!=''">
-              resource_url=#{url}
-          </if>
-      </where>
-      GROUP BY resource_url
+    <select id="selectApiRelationRoles" parameterType="java.lang.String"
+            resultType="site.lanmushan.auth.api.vo.VoUrlRoles">
+        SELECT resource_url as resourceUrl,GROUP_CONCAT(fk_role_code) as roles,order_index FROM (SELECT
+        id,resource_url,order_index from auth_tb_resource WHERE resource_type="api") as api
+        LEFT JOIN auth_fk_role_resource AS role ON role.fk_resource_id = api.id
+        <where>
+            <if test="url !=null and url!=''">
+                resource_url=#{url}
+            </if>
+        </where>
+        GROUP BY resource_url
+    </select>
+    <select id="selectResourceByRoleCode" resultMap="baseResultMap">
+        SELECT
+        r.*
+        FROM
+        auth_fk_role_resource AS l
+        LEFT JOIN auth_tb_resource AS r ON l.fk_resource_id = r.id
+        where r.id is not null
+
+        <if test="roleCode !=null and roleCode!=''">
+            and fk_role_code = #{roleCode}
+
+        </if>
+        <if test="resourceType !=null and resourceType!=''">
+            and r.resource_type = #{resourceType}
+        </if>
+
     </select>
 </mapper>

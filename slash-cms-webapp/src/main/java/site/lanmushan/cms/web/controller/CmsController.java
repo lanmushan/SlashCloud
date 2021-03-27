@@ -72,6 +72,7 @@ public class CmsController {
      * @return
      */
     public String httpServletRequestHandle(ModelMap modelMap, HttpServletRequest request) {
+        log.info("请求地址:{}", request.getRequestURL().toString());
         String requestMapping = (String) request.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
         String requestMethod = request.getMethod();
         CmsTbRequestMapping queryCmsTbRequestMapping = new CmsTbRequestMapping();
@@ -96,8 +97,12 @@ public class CmsController {
             datasourceParamsMap.put("requestBody", requestBody);
             for (int i = 0; i < cmsTbRequestMappingDatasourceList.size(); i++) {
                 CmsTbRequestMappingDatasource it = cmsTbRequestMappingDatasourceList.get(i);
-                String jsonString = GroovyScriptUtil.transformUseClass(it.getFkDatasourceParamsMapping(), null,datasourceParamsMap);
-                Map<String, Object> parm = JSONObject.parseObject(jsonString, HashMap.class);
+                log.info("转换数据映射:{} 内容:{}", it.getFkDatasourceCode(), it.getFkDatasourceParamsMapping());
+                Map<String, Object> parm = datasourceParamsMap;
+                if (it.getFkDatasourceParamsMapping() != null && "".equals(it.getFkDatasourceParamsMapping().trim())) {
+                    String jsonString = GroovyScriptUtil.transformUseClass(it.getFkDatasourceParamsMapping(), null, datasourceParamsMap);
+                    parm = JSONObject.parseObject(jsonString, HashMap.class);
+                }/**/
                 Object obj = dataSourceHandlerService.getDataSource(it.getFkDatasourceCode(), parm);
                 if (obj == null && it.getAllowNull() != null && it.getAllowNull() == 0) {
                     return "404.ftl";

@@ -13,10 +13,11 @@ import site.lanmushan.auth.api.constant.ResourceConstant;
 import site.lanmushan.auth.api.entity.AuthTbResource;
 import site.lanmushan.auth.api.entity.AuthTbRole;
 import site.lanmushan.auth.api.entity.AuthTbUser;
+import site.lanmushan.auth.api.vo.VoAuthTbResource;
 import site.lanmushan.auth.mapper.AuthTbResourceMapper;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
 import site.lanmushan.auth.mapper.AuthTbUserMapper;
-import site.lanmushan.auth.req.ModifyPasswordReq;
+import site.lanmushan.auth.api.req.ModifyPasswordReq;
 import site.lanmushan.auth.api.service.AuthTbUserLoginLogService;
 import site.lanmushan.auth.api.service.AuthTbUserService;
 import site.lanmushan.framework.authorization.CurrentUser;
@@ -155,7 +156,7 @@ public class LoginController extends BaseController {
         CurrentUser currentUser = new CurrentUser();
         currentUser.setAccount(tbUser.getAccount());
         currentUser.setUserId(tbUser.getId());
-        currentUser.setDeptId(tbUser.getDeptId());
+        currentUser.setDeptCode(tbUser.getFkDeptCode());
         currentUser.setHeadImgAddress(tbUser.getHeadImgAddress());
         currentUser.setNickName(tbUser.getNickName());
         currentUser.setSex(tbUser.getSex());
@@ -167,7 +168,7 @@ public class LoginController extends BaseController {
         currentUser.setRoleCodes(roleCodes);
 
         /**查询并设置所有的api权限*/
-        List<AuthTbResource> resourceList = authTbResourceMapper.selectResourceByRoleCodes(roleCodeJoin, ResourceConstant.RESOURCE_API);
+        List<VoAuthTbResource> resourceList = authTbResourceMapper.selectResourceByRoleCodes(roleCodeJoin, ResourceConstant.RESOURCE_API);
         List<String> apiList = resourceList.stream().map(AuthTbResource::getResourceUrl).collect(toList());
 
       return currentUser;

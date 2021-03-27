@@ -45,31 +45,14 @@ public class AuthTbDept extends BaseEntity implements Serializable {
 
     @ExcelProperty(value = "部门全称")
     private String fullDeptName;
+
+    private String fkLeaderUserId;
     /**
      * 显示顺序
      */
     @ExcelProperty(value = " 显示顺序")
     private Integer orderIndex;
-    /**
-     * 负责人
-     */
-    @ExcelProperty(value = " 负责人")
-    private String leader;
-    /**
-     * 联系电话
-     */
-    @ExcelProperty(value = " 联系电话")
-    private String phone;
-    /**
-     * 邮箱
-     */
-    @ExcelProperty(value = " 邮箱")
-    private String email;
-    /**
-     * 部门状态（0正常 1停用）
-     */
-    @ExcelProperty(value = " 部门状态（0正常 1停用）")
-    private Integer deleted;
+
     /**
      * 创建者
      */
@@ -91,6 +74,12 @@ public class AuthTbDept extends BaseEntity implements Serializable {
     @ExcelProperty(value = " 更新时间")
     private Date updateTime;
 
+
+    /**
+     * 部门状态（0正常 1停用）
+     */
+    @ExcelProperty(value = " 部门状态（0正常 1停用）")
+    private Integer deleted;
     @Override
     public boolean isRoot() {
         if (fkParentDeptCode != null&&deptCode!=null) {

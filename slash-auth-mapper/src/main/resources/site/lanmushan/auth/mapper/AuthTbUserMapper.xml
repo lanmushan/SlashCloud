@@ -3,7 +3,7 @@
 <mapper namespace="site.lanmushan.auth.mapper.AuthTbUserMapper">
     <resultMap type="site.lanmushan.auth.api.vo.VoAuthTbUser" id="baseResultMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="deptId" column="dept_id" jdbcType="INTEGER"/>
+        <result property="fkDeptCode" column="fk_dept_code" jdbcType="VARCHAR"/>
         <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
         <result property="username" column="username" jdbcType="VARCHAR"/>
         <result property="phone" column="phone" jdbcType="VARCHAR"/>
@@ -25,7 +25,7 @@
     </resultMap>
     <!--用户列表查询-->
     <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
-        select tb.id, tb.dept_id, tb.nick_name, tb.username, tb.phone, tb.id_card, tb.email, tb.sex, tb.account,
+        select distinct tb.id, tb.fk_dept_code, tb.nick_name, tb.username, tb.phone, tb.id_card, tb.email, tb.sex, tb.account,
         tb.create_time,tb. update_time, tb.fk_post_id, tb.is_lock, tb.account_type, tb.head_img_address, tb.deleted,
         tb.create_user from
         auth_tb_user as tb left join auth_fk_user_role as ur on tb.id=ur.fk_user_id
@@ -80,4 +80,5 @@
         on l.id = r.id
 
     </select>
+
 </mapper>

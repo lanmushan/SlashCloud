@@ -4,7 +4,7 @@
 
     <resultMap type="site.lanmushan.auth.api.entity.AuthFkRoleResource" id="baseResultMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="fkRoleId" column="fk_role_id" jdbcType="INTEGER"/>
+        <result property="fkRoleCode" column="fk_role_code" jdbcType="INTEGER"/>
         <result property="fkResourceId" column="fk_resource_id" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>

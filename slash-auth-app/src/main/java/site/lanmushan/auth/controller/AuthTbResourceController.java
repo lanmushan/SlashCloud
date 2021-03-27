@@ -9,6 +9,7 @@ import site.lanmushan.auth.api.bo.BoAuthTbResource;
 import site.lanmushan.auth.api.constant.ResourceConstant;
 import site.lanmushan.auth.api.entity.AuthTbResource;
 import site.lanmushan.auth.api.entity.AuthTbRole;
+import site.lanmushan.auth.api.vo.VoAuthTbResource;
 import site.lanmushan.auth.mapper.AuthTbResourceMapper;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
 import site.lanmushan.auth.api.service.AuthTbResourceService;
@@ -21,6 +22,7 @@ import site.lanmushan.framework.query.controller.BaseController;
 import site.lanmushan.framework.query.util.TreeUtil;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,7 +87,7 @@ public class AuthTbResourceController extends BaseController {
     public Message selectTreeList(@RequestQueryInfo QueryInfo queryInfo) {
         Message msg = new Message();
         startPage();
-        List<AuthTbResource> authResourceList = authTbResourceMapper.selectList(queryInfo);
+        List<VoAuthTbResource> authResourceList =(ArrayList<VoAuthTbResource>) authTbResourceService.selectList(queryInfo);
         sortResource(authResourceList);
         PageInfo pageInfo = new PageInfo(authResourceList);
         msg.setCurrentPage(pageInfo.getPageNum());
@@ -115,14 +117,14 @@ public class AuthTbResourceController extends BaseController {
 
     private List selectResource(String type) {
         CurrentUser currentUser = CurrentUserUtil.getCurrentUser();
-        List<AuthTbRole> roleList = authTbRoleMapper.selectRolesByUserId(currentUser.getUserId());
-        if (null == roleList || roleList.size() == 0) {
-            return null;
-        }
-        List<AuthTbResource> authResourceList;
+        List<VoAuthTbResource> authResourceList;
         if (currentUser.isAdmin()) {
             authResourceList = authTbResourceMapper.selectResourceByRoleCodes(null, type);
         } else {
+            List<AuthTbRole> roleList = authTbRoleMapper.selectRolesByUserId(currentUser.getUserId());
+            if (null == roleList || roleList.size() == 0) {
+                return null;
+            }
             List<String> roleCodeList = roleList.stream().map(AuthTbRole::getRoleCode).collect(Collectors.toList());
             String roleCodes = StringUtils.join(roleCodeList, ",");
             authResourceList = authTbResourceMapper.selectResourceByRoleCodes(roleCodes, type);
@@ -131,7 +133,7 @@ public class AuthTbResourceController extends BaseController {
         return authResourceList;
     }
 
-    private void sortResource(List<AuthTbResource> authResourceList) {
+    private void sortResource(List<VoAuthTbResource> authResourceList) {
         authResourceList.sort((s1, s2) -> {
             int result = s1.getFkParentId().compareTo(s2.getFkParentId());
             if (result != 0) {

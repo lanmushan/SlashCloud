@@ -8,6 +8,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
+
 /**
  * @author dy
  */
@@ -16,12 +18,18 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Slf4j
 public class ApplicationUtil implements ApplicationContextAware {
     private static ApplicationContext application = null;
+    private static RedisTemplate<String,String> stringStringRedisTemplate;
 
-
-    public static RedisTemplate<Object, Object> getRedisTemplate() {
-        return (RedisTemplate<Object, Object>) application.getBean("redisTemplate");
+    public static RedisTemplate<String, Object> getRedisTemplate() {
+        return (RedisTemplate<String, Object>) application.getBean("redisTemplate");
     }
-
+    public static RedisTemplate<String, String> getStringRedisTemplate(){
+        return stringStringRedisTemplate;
+    }
+    @Resource
+    public void setStringRedisTemplate(RedisTemplate<String,String> redisTemplate){
+        stringStringRedisTemplate=redisTemplate;
+    }
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         if (application == null) {

@@ -85,7 +85,10 @@ public class AuthTbResource extends BaseEntity implements Serializable {
 
     @ExcelProperty(value = " ")
     private Date updateTime;
-
+    /**
+     * 所属app
+     */
+    private String appName;
     private JSONObject resourceAttr;
 
 

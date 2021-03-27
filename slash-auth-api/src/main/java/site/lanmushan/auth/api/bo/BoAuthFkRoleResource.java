@@ -11,5 +11,4 @@ import site.lanmushan.auth.api.entity.AuthFkRoleResource;
  */
 public class BoAuthFkRoleResource extends AuthFkRoleResource {
 
-
 }

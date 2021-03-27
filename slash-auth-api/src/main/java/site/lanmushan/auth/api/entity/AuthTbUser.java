@@ -33,7 +33,7 @@ public class AuthTbUser  extends BaseEntity implements Serializable {
      * 部门编号
      */
     @ExcelProperty(value = " 部门编号")
-    private Long deptId;
+    private String fkDeptCode;
 
     @ExcelProperty(value = " ")
     @NotBlank(message = "用户名称不能为空")

@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 public class CurrentUser implements Serializable {
     private Long userId;
-    private Long deptId;
+    private String deptCode;
     private String nickName;
     private String username;
     private String account;

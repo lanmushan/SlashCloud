@@ -64,6 +64,10 @@ public class RequestQueryInfoHandlerMethodArgumentResolver implements HandlerMet
                 continue;
             }
             QueryInfo.QueryParam queryParam = new QueryInfo.QueryParam();
+            if(key.indexOf("#")>-1)
+            {
+                continue;
+            }
             String[] keys = key.split("-");
             String fiexedName = "";
             String operateCode = "";

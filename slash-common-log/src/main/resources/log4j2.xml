@@ -10,7 +10,7 @@
     <appenders>
         <Console name="console" target="SYSTEM_OUT" follow="true">
             <!--%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%X{requestId}]%l %-5level %logger{80} - %n%msg%n-->
-            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%X{requestId}]%l %-5level- %n%msg%n">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS}[%thread][%X{account}][%X{requestId}]%l %-5level- %n%msg%n">
             </PatternLayout>
         </Console>
         <RollingFile name="service_error_appender" fileName="${LOG_HOME}/error/error.log"

@@ -16,5 +16,9 @@ public class GlobalInstructionConstant {
     public static final String GET_DATA_SCOPE = "GET_DATA_SCOPE";
 
     public static final String UPDATE_DATA_SCOPE = "UPDATE_DATA_SCOPE";
+    /**
+     * 更新动态API
+     */
+    public static final String UPDATE_API_DATA="UPDATE_API_DATA";
 
 }

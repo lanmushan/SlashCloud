@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import site.lanmushan.auth.api.bo.BoAuthTbRole;
 import site.lanmushan.auth.api.entity.AuthTbRole;
 import site.lanmushan.auth.api.service.AuthTbRoleService;
+import site.lanmushan.auth.api.vo.VoAuthTbResource;
+import site.lanmushan.auth.api.vo.VoAuthTbRole;
+import site.lanmushan.auth.mapper.AuthTbResourceMapper;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
 import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.constant.HTTPCode;
@@ -16,6 +19,7 @@ import site.lanmushan.framework.uuid.MyUUID;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -28,10 +32,21 @@ import java.util.List;
 public class AuthTbRoleServiceImpl implements AuthTbRoleService {
     @Autowired
     private AuthTbRoleMapper authTbRoleMapper;
+    @Autowired
+    private AuthTbResourceMapper authTbResourceMapper;
 
     @Override
     public List selectList(QueryInfo queryInfo) {
-        return authTbRoleMapper.selectList(queryInfo);
+
+        List<VoAuthTbRole> authTbRoleList = authTbRoleMapper.selectList(queryInfo);
+        if (authTbRoleList != null && authTbRoleList.size() > 0) {
+            authTbRoleList.forEach(it -> {
+                List<VoAuthTbResource> authTbResources=  authTbResourceMapper.selectResourceByRoleCode(it.getRoleCode(), "menu");
+                List<Long> longList=  authTbResources.stream().map(item->{ return item.getId();}).collect(Collectors.toList());
+                it.setMenuIdList(longList);
+            });
+        }
+        return authTbRoleList;
     }
 
     @Override

@@ -140,7 +140,6 @@ public class ServletUtil {
 
     public static String getBasePath(HttpServletRequest request) {
         StringBuffer url = request.getRequestURL();
-        String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append(request.getSession().getServletContext().getContextPath()).toString();
-        return tempContextUrl;
+        return   url.toString().replace(request.getRequestURI(),"");
     }
 }

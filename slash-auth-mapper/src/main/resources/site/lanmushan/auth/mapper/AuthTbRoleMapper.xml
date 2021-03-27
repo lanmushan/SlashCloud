@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="site.lanmushan.auth.mapper.AuthTbRoleMapper">
 
-    <resultMap type="site.lanmushan.auth.api.entity.AuthTbRole" id="baseResultMap">
+    <resultMap type="site.lanmushan.auth.api.vo.VoAuthTbRole" id="baseResultMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
         <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
         <result property="roleCode" column="role_code" jdbcType="VARCHAR"/>
@@ -41,5 +41,12 @@
         LEFT JOIN auth_tb_role AS b ON a.fk_role_code = b.role_code
         WHERE b.disabled = 0
         and a.fk_user_id = #{userId}
+    </select>
+    <select id="selectRolesByResourceId" parameterType="java.lang.Long"  resultType="site.lanmushan.auth.api.entity.AuthTbRole">
+        SELECT
+	r.*
+FROM
+	( SELECT * FROM auth_fk_role_resource AS l WHERE fk_resource_id = #{id} AND fk_role_code is NOT NULL ) AS ll
+	LEFT JOIN auth_tb_role AS r ON ll.fk_role_code = r.role_code WHERE r.id is NOT NULL
     </select>
 </mapper>

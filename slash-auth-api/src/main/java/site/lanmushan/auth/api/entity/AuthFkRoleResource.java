@@ -26,8 +26,7 @@ public class AuthFkRoleResource  extends BaseEntity implements Serializable {
     @ExcelProperty(value = " ")
     private Long id;
 
-    @ExcelProperty(value = " ")
-    private Long fkRoleId;
+
 
     @ExcelProperty(value = " ")
     private Long fkResourceId;
@@ -38,5 +37,7 @@ public class AuthFkRoleResource  extends BaseEntity implements Serializable {
     @ExcelProperty(value = " ")
     private Date updateTime;
 
+    @ExcelProperty(value = " ")
+    private String fkRoleCode;
 
 }

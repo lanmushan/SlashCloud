@@ -7,12 +7,12 @@
         <result property="fkUserId" column="fk_user_id" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
-        <result property="fkCreateUserId" column="fk_create_user_id" jdbcType="INTEGER"/>
-        <result property="fkUpdateUserId" column="fk_update_user_id" jdbcType="INTEGER"/>
+        <result property="createUserAccount" column="create_user_account" jdbcType="INTEGER"/>
+        <result property="updateUserAccount" column="update_user_account" jdbcType="INTEGER"/>
         <result property="fkRoleCode" column="fk_role_code" jdbcType="VARCHAR"/>
     </resultMap>
     <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
-        select id, fk_user_id, create_time, update_time, fk_create_user_id, fk_update_user_id, fk_role_code from
+        select id, fk_user_id, create_time, update_time, create_user_account, update_user_account, fk_role_code from
         auth_fk_user_role
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">

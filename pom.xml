@@ -92,6 +92,7 @@
         <module>slash-common-typehandler</module>
         <!--GroovyScript脚本处理-->
         <module>slash-common-groovyscript</module>
+        <module>slash-common-swagger</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -253,6 +254,11 @@
             <dependency>
                 <groupId>site.lanmushan</groupId>
                 <artifactId>slash-resource-app</artifactId>
+                <version>${slash.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>site.lanmushan</groupId>
+                <artifactId>slash-common-swagger</artifactId>
                 <version>${slash.version}</version>
             </dependency>
             <!--二维码-->

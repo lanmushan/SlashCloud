@@ -45,12 +45,12 @@ public class AuthFkUserRole  extends BaseEntity implements Serializable {
     private Date updateTime;
 
     @ExcelProperty(value = " ")
-    private Long fkCreateUserId;
+    private String createUserAccount;
     /**
      * 1
      */
     @ExcelProperty(value = " 1")
-    private Long fkUpdateUserId;
+    private String updateUserAccount;
 
     @ExcelProperty(value = " ")
     private String fkRoleCode;

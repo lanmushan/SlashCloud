@@ -35,4 +35,6 @@ public interface AuthTbUserMapper extends QueryMapper<AuthTbUser> {
      */
     List<AuthTbUser> selectUserByRoleCode(@Param("roleCode") String roleCode);
 
+
+
 }

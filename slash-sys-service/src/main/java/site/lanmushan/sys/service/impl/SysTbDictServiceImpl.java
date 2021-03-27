@@ -3,14 +3,15 @@ package site.lanmushan.sys.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
 import site.lanmushan.framework.util.utils.DateUtil;
 import site.lanmushan.framework.uuid.MyUUID;
 import site.lanmushan.sys.api.bo.BoSysTbDict;
-import site.lanmushan.sys.mapper.SysTbDictMapper;
 import site.lanmushan.sys.api.service.SysTbDictService;
+import site.lanmushan.sys.mapper.SysTbDictMapper;
 
 import java.util.Date;
 import java.util.List;
@@ -37,6 +38,8 @@ public class SysTbDictServiceImpl implements SysTbDictService {
         Date now = DateUtil.now();
         boSysTbDict.setCreateTime(now);
         boSysTbDict.setUpdateTime(now);
+        boSysTbDict.setCreateUserAccount(CurrentUserUtil.getCurrentUser().getAccount());
+
         sysTbDictMapper.insertSelective(boSysTbDict);
     }
 
@@ -47,6 +50,7 @@ public class SysTbDictServiceImpl implements SysTbDictService {
             it.setCreateTime(now);
             it.setUpdateTime(now);
             it.setId(MyUUID.getInstance().nextId());
+            it.setCreateUserAccount(CurrentUserUtil.getCurrentUser().getAccount());
         });
         sysTbDictMapper.insertList(boSysTbDictList);
     }

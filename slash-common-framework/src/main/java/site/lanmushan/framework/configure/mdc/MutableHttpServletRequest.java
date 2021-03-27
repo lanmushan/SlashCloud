@@ -1,4 +1,4 @@
-package site.lanmushan.framework.configure.logid;
+package site.lanmushan.framework.configure.mdc;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

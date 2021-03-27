@@ -143,8 +143,10 @@ public class ServletUtil {
     }
 
     public static String getBasePath(HttpServletRequest request) {
-        StringBuffer url = request.getRequestURL();
-        String tempContextUrl = url.delete(url.length() - request.getRequestURI().length(), url.length()).append(request.getSession().getServletContext().getContextPath()).toString();
+        String url = request.getRequestURL().toString();
+        String uri=request.getRequestURI();
+        String tempContextUrl=url.substring(url.length()-uri.length());
+        log.info("根路径:{}",tempContextUrl);
         return tempContextUrl;
     }
 }

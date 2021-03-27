@@ -13,6 +13,8 @@ import site.lanmushan.framework.exception.OperateException;
 import site.lanmushan.framework.util.ApplicationUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,6 +28,7 @@ public class CurrentUserUtil {
     public final static String USER_KEY = "currentUser";
     public final static String AUTHORIZATION = "authorization";
     public final static String ADMIN_CODE = "admin";
+    public final static String ANON_CODE = "anon";
     /**
      * 过期时间
      */
@@ -33,8 +36,8 @@ public class CurrentUserUtil {
     public final static String REDIS_ONLINE_USER_KEY_PREFIX = "ONLINE_USER|";
     public final static String REDIS_API_HASH_KEY = "REDIS_API_HASH_KEY";
 
-    private static RedisTemplate<Object, Object> getRedisTemplate() {
-        return ApplicationUtil.getRedisTemplate();
+    private static RedisTemplate<String, String> getRedisTemplate() {
+        return ApplicationUtil.getStringRedisTemplate();
     }
 
     public static String createPassword(String oldPassword, String salt) {
@@ -43,7 +46,7 @@ public class CurrentUserUtil {
 
     public static boolean isLogin() {
         CurrentUser currentUser = getCurrentUser();
-        return currentUser!=null;
+        return currentUser != null;
     }
 
     /**
@@ -92,6 +95,10 @@ public class CurrentUserUtil {
     }
 
     public static boolean isLoginOverdue(CurrentUser currentUser, String token) {
+        if (currentUser == null) {
+            throw new OperateException("未登录", HTTPCode.D600);
+
+        }
         String redisUserKey = REDIS_ONLINE_USER_KEY_PREFIX + currentUser.getAccount();
         Object value = getRedisTemplate().opsForValue().get(redisUserKey);
         if (value == null) {
@@ -113,8 +120,24 @@ public class CurrentUserUtil {
 
     public static Boolean currentUserHasUriPermissions(String uri, CurrentUser currentUser) {
         Object value = getRedisTemplate().opsForHash().get(REDIS_API_HASH_KEY, uri);
-        log.info("获取到的权限{}", value);
-        return true;
+        if (value == null) {
+            return false;
+        }
+
+        List roleCodes = Arrays.asList(((String) value).split(","));
+        if(roleCodes.contains(ANON_CODE))
+        {
+            return true;
+        }
+        if(roleCodes.contains(ANON_CODE))
+        {
+            return true;
+        }
+        if(currentUser==null)
+        {
+            return false;
+        }
+        return roleCodes.contains(ANON_CODE) || roleCodes.containsAll(currentUser.getRoleCodes());
     }
 
     public static Boolean currentUserHasUriPermissions(String uri) {

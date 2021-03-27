@@ -3,6 +3,7 @@ package site.lanmushan.framework.authorization.gateway;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ import java.util.List;
 @ConditionalOnClass(GlobalFilter.class)
 @Import(SignAuthGatewayFilter.class)
 @ConditionalCloud
+@ConditionalOnProperty(value = "slash.auth",havingValue = "true",matchIfMissing = true)
 public class FilterConfig {
     @Autowired
     SignAuthGatewayFilter signAuthGatewayFilter;

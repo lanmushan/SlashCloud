@@ -2,6 +2,7 @@ package site.lanmushan.auth.api.service;
 
 import site.lanmushan.auth.api.bo.BoAuthFkRoleResource;
 import site.lanmushan.auth.api.entity.AuthFkRoleResource;
+import site.lanmushan.auth.api.req.RoleRelationResource;
 import site.lanmushan.framework.query.service.BaseService;
 
 
@@ -48,5 +49,9 @@ public interface AuthFkRoleResourceService extends BaseService<AuthFkRoleResourc
      */
     void deleteServiceByIds(List<Long> ids);
 
-
+    /**
+     * 角色关联多个资源，以前的直接删掉
+     * @param roleRelationResource
+     */
+    void updateRoleRelationResource(RoleRelationResource roleRelationResource);
 }

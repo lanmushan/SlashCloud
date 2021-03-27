@@ -16,6 +16,7 @@ import site.lanmushan.framework.datasope.annotation.EnabledDataScope;
 import site.lanmushan.framework.dto.Message;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.query.annotations.EnabledQuickSelect;
 import site.lanmushan.framework.query.annotations.RequestQueryInfo;
 import site.lanmushan.framework.query.util.StringCommonUtil;
 import site.lanmushan.framework.util.ApplicationUtil;
@@ -36,7 +37,10 @@ import java.util.List;
 @Order(Ordered.LOWEST_PRECEDENCE)
 @ConditionalOnProperty(prefix = "slash", name = "query", havingValue = "true")
 public class QueryController extends BaseController {
+
+    //
     @EnabledDataScope
+//    @RequestMapping(value = "/{entityName}/selectList", method = RequestMethod.GET)
     @RequestMapping(value = "/{entityName}/{methodName:[^\\.]\\w*$}", method = RequestMethod.GET)
     public Message selectList(@PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request) {
         log.info("URI {} DATA:{}", request.getRequestURI(), JSONObject.toJSONString(queryInfo));
@@ -54,15 +58,21 @@ public class QueryController extends BaseController {
                 msg.error("服务不存在");
                 return msg;
             }
+            EnabledQuickSelect enabledQuickSelect=  method.getAnnotation(EnabledQuickSelect.class);
+            if(!"selectList".equals(methodName)&&enabledQuickSelect==null)
+            {
+                msg.error("未开放通用调用权限");
+                return msg;
+            }
             Type t = method.getReturnType();
             //列表查询
             if ("java.util.List".equals(t.getTypeName())) {
                 startPage();
-               Object data= method.invoke(queryService, queryInfo);
-                List list = (List)data;
+                Object data = method.invoke(queryService, queryInfo);
+                List list = (List) data;
                 PageInfo pageInfo = new PageInfo(list);
-                msg.setCurrentPage(pageInfo.getPageNum());
-                msg.setPageSize(pageInfo.getPageSize());
+                msg.setCurrentPage(getCurrentPage());
+                msg.setPageSize(getPageSize());
                 msg.setTotal((int) pageInfo.getTotal());
                 msg.setRows(list);
                 return msg;
@@ -78,10 +88,11 @@ public class QueryController extends BaseController {
             }
         } catch (OperateException e) {
             msg.setHttpCode(HTTPCode.C400);
+            msg.error("查询失败");
             log.error("查询失败:{};Exception:", request.getRequestURI(), e);
         } catch (Exception e) {
             msg.setHttpCode(HTTPCode.C404);
-            msg.error("查询失败" + e.getLocalizedMessage());
+            msg.error("查询失败");
             log.error("查询失败:{};Exception:", request.getRequestURI(), e);
         }
         return msg;

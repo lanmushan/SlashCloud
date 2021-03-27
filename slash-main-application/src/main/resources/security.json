@@ -2,7 +2,9 @@
   "allows": [
     "/authLogin/selectVerificationCode",
     "/authLogin/loginManage",
-    "/sysLocalResource/uploadFile",
+    "/sysLocalResource/uploadFile"
+  ],
+  "temp": [
     "/",
     "/**/**.*",
     "/**.*",

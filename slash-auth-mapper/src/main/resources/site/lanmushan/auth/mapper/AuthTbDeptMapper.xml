@@ -16,7 +16,7 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
     <select id="selectList" resultMap="baseResultMap" parameterType="site.lanmushan.framework.dto.QueryInfo">
-        select id, dept_name,dept_code,fk_parent_dept_code,full_dept_name, order_index, create_user_id,
+        select id, dept_name,dept_code,fk_parent_dept_code,full_dept_name, fk_leader_user_id,order_index, create_user_id,
         create_time, update_user_id, update_time from auth_tb_dept
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">

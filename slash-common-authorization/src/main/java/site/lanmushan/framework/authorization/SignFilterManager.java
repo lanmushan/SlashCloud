@@ -1,40 +1,102 @@
 package site.lanmushan.framework.authorization;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.util.PathMatcher;
-import site.lanmushan.framework.constant.HTTPCode;
-import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.constant.GlobalInstructionConstant;
+import site.lanmushan.framework.redis.GlobalInstructionEntity;
+import site.lanmushan.framework.redis.subscribe.GlobalInstructionHandler;
+import site.lanmushan.framework.redis.subscribe.GlobalInstructionSubscription;
 
-import java.util.ArrayList;
+import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author Administrator
  */
 @Slf4j
-public class SignFilterManager {
-    public SignFilterManager(List<String> excludePatterns) {
-        this.excludePatterns = excludePatterns;
+public class SignFilterManager implements GlobalInstructionHandler {
+    @Autowired
+    GlobalInstructionSubscription globalInstructionSubscription;
+    private final CopyOnWriteArrayList<Authority> dynamicAuthorityList = new CopyOnWriteArrayList<>();
+    final PathMatcher pathMatcher = new AntPathMatcher();
+
+    public SignFilterManager(List<Authority> authorities) {
+        dynamicAuthorityList.addAll(authorities);
     }
 
-    private List<String> excludePatterns = new ArrayList();
-    PathMatcher pathMatcher = new AntPathMatcher();
+    public SignFilterManager() {
+    }
+
+    @PostConstruct
+    private void init() {
+        globalInstructionSubscription.registerGlobalInstructionHandler(GlobalInstructionConstant.UPDATE_API_DATA, null, this);
+
+    }
 
     public Boolean allow(String targetUri, String token) {
         CurrentUser currentUser = CurrentUserUtil.getCurrentUser(token);
-        for (int i = 0; i < excludePatterns.size(); i++) {
-            Boolean result = pathMatcher.match(excludePatterns.get(i), targetUri);
-            if (result) {
+        //判断动态的
+        for (Authority authority : dynamicAuthorityList) {
+            Boolean result = pathMatcher.match(authority.getUrl(), targetUri);
+            if (!result) {
+                continue;
+            }
+            if (authority.getRoleCodes().contains(CurrentUserUtil.ANON_CODE)) {
+                return true;
+            } else if (authority.getRoleCodes().containsAll(currentUser.getRoleCodes())) {
                 return true;
             }
         }
-        //需要用户
-        if (currentUser == null) {
-            throw new OperateException("未登录", HTTPCode.D600);
+        //先判断是不是admin
+        if (currentUser != null && currentUser.isAdmin()) {
+            return true;
         }
-        CurrentUserUtil.isLoginOverdue(currentUser,token);
-        //验证配置式权限
-        return CurrentUserUtil.currentUserHasUriPermissions(targetUri, currentUser);
+        if (CurrentUserUtil.currentUserHasUriPermissions(targetUri, currentUser)) {
+            return true;
+        }
+        //判断是不是指定url，不然所有的都判断性能太低
+        if (CurrentUserUtil.isLoginOverdue(currentUser, token)) {
+            return true;
+        }
+        return false;
+    }
+
+    public void registerUrl(String url, String roleCodes[], Integer order) {
+        Authority authority = new Authority();
+        authority.setOrder(order);
+        authority.setRoleCodes(Arrays.asList(roleCodes));
+        authority.setUrl(url);
+        this.registerUrl(authority);
+    }
+
+    public void registerUrl(Authority authority) {
+        this.dynamicAuthorityList.add(authority);
+        this.dynamicAuthorityList.stream().sorted((a, b) -> {
+            return a.getOrder() - b.getOrder();
+        });
+    }
+
+    public void removeUrl(String url) {
+        this.dynamicAuthorityList.remove(url);
+    }
+
+    @Override
+    public void doInstructionExecute(GlobalInstructionEntity instruction) {
+        JSONArray jsonArray = (JSONArray) instruction.getData();
+        List<Authority> authorityList = jsonArray.toJavaList(Authority.class);
+        for (Authority authority : authorityList) {
+            if (pathMatcher.isPattern(authority.getUrl())) {
+                this.registerUrl(authority);
+            }
+            log.info("注册新的动态API权限{}={}", authority.getUrl(), JSON.toJSONString(authority.getRoleCodes()));
+        }
+
     }
 }
+

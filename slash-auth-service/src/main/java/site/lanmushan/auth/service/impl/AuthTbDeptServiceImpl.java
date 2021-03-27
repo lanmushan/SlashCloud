@@ -11,6 +11,7 @@ import site.lanmushan.auth.api.service.AuthTbDeptService;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.dto.QueryInfo;
 import site.lanmushan.framework.exception.OperateException;
+import site.lanmushan.framework.query.annotations.EnabledQuickSelect;
 import site.lanmushan.framework.util.utils.DateUtil;
 import site.lanmushan.framework.uuid.MyUUID;
 

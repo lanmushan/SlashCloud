@@ -29,6 +29,9 @@
                     </otherwise>
                 </choose>
             </foreach>
+            <if test="searchKey !=null and searchKey!=''">
+                and ( dict_group_name like #{searchKey} or dict_group_code like #{searchKey} )
+            </if>
         </trim>
     </select>
 

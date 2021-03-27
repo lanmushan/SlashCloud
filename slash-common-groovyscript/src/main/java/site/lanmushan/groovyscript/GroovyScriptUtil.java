@@ -97,6 +97,11 @@ public class GroovyScriptUtil {
      */
     public static String transformUseClass(String content, Object ctxObj,Map<String, Object> data) {
         try {
+            //简单判断，后面优化
+            if(content==null||"\n\n".equals(content)||"".equals(content))
+            {
+                return null;
+            }
             String md5 = MD5Util.createMD532(content);
             StringBuilder script = new StringBuilder();
             //content = content.replaceAll("\\\"", "\\\\\"").replaceAll("\n", "");
@@ -114,6 +119,7 @@ public class GroovyScriptUtil {
                         .append(content)
                         .append(";").append("return str;")
                         .append("}}");
+                log.info("脚本{}",script.toString());
                 classz = loadClass(className, script.toString());
             }
             Constructor<?> constructor = classz.getConstructor(Map.class);

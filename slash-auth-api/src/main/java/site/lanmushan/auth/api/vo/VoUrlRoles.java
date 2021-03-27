@@ -9,4 +9,5 @@ import lombok.Data;
 public class VoUrlRoles {
     private String resourceUrl;
     private String roles;
+    private Integer orderIndex;
 }

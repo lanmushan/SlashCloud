@@ -65,7 +65,7 @@ public class SysTbDict extends BaseEntity {
      * 创建人
      */
     @ExcelProperty(value = " 创建人")
-    private Integer createUserId;
+    private String createUserAccount;
     /**
      * 默认
      */

@@ -1,4 +1,4 @@
-package site.lanmushan.auth.req;
+package site.lanmushan.auth.api.req;
 
 import lombok.Data;
 

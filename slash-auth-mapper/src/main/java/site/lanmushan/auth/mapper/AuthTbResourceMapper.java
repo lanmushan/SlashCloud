@@ -2,10 +2,9 @@ package site.lanmushan.auth.mapper;
 
 import org.apache.ibatis.annotations.Param;
 import site.lanmushan.auth.api.entity.AuthTbResource;
+import site.lanmushan.auth.api.vo.VoAuthTbResource;
 import site.lanmushan.auth.api.vo.VoUrlRoles;
 import site.lanmushan.framework.query.mapper.QueryMapper;
-import tk.mybatis.mapper.additional.idlist.IdListMapper;
-import tk.mybatis.mapper.additional.insert.InsertListMapper;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public interface AuthTbResourceMapper extends QueryMapper<AuthTbResource> {
      * @param type
      * @return
      */
-    List<AuthTbResource> selectResourceByRoleCodes(@Param("roleCodes") String roleCodes, @Param("type") String type);
+    List<VoAuthTbResource> selectResourceByRoleCodes(@Param("roleCodes") String roleCodes, @Param("type") String type);
 
     /**
      * 根据url查询关联的角色信息
@@ -34,4 +33,6 @@ public interface AuthTbResourceMapper extends QueryMapper<AuthTbResource> {
      * @return
      */
     List<VoUrlRoles> selectApiRelationRoles(@Param("url") String url);
+
+    List<VoAuthTbResource> selectResourceByRoleCode(@Param("roleCode") String roleCode,@Param("resourceType") String resourceType);
 }

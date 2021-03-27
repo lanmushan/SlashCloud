@@ -1,6 +1,7 @@
 package site.lanmushan.framework.query.service;
 
 import site.lanmushan.framework.dto.QueryInfo;
+import site.lanmushan.framework.query.annotations.EnabledQuickSelect;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface BaseService<T> {
      * @param queryInfo
      * @return
      */
-    List<T> selectList(QueryInfo queryInfo);
+    List selectList(QueryInfo queryInfo);
 }

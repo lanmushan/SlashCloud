@@ -27,7 +27,6 @@ public class SignAuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("TokenFilter开始............");
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         String token = httpServletRequest.getHeader(CurrentUserUtil.AUTHORIZATION);
@@ -40,17 +39,19 @@ public class SignAuthFilter implements Filter {
             }
             throw new OperateException("无访问权限", HTTPCode.D601);
         } catch (OperateException e) {
+            log.error("请求地址:{}",((HttpServletRequest) request).getRequestURL().toString());
+            log.error(e.getMessage(),e);
             Message msg = Message.getInstance().error(e.getHttpCode(), e.getMessage());
             httpServletResponse.setStatus(HttpStatus.OK.value());
             httpServletResponse.setHeader("Content-Type", "application/json;charset=utf-8");
             httpServletResponse.getOutputStream().write(JSONObject.toJSONString(msg).getBytes(StandardCharsets.UTF_8));
         } catch (Throwable e) {
+            log.error("请求地址:{}",((HttpServletRequest) request).getRequestURL().toString());
+            log.error(e.getMessage(),e);
             Message msg = Message.getInstance().error(HTTPCode.S500, "服务器内部错误");
             httpServletResponse.setStatus(HttpStatus.OK.value());
             httpServletResponse.setHeader("Content-Type", "application/json;charset=utf-8");
             httpServletResponse.getOutputStream().write(JSONObject.toJSONString(msg).getBytes(StandardCharsets.UTF_8));
-        }finally {
-            log.info("鉴权完毕");
         }
     }
 
