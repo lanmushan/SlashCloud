@@ -9,7 +9,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <groupId>site.lanmushan</groupId>
-    <artifactId>slash-common-datacope</artifactId>
+    <artifactId>slash-common-datasope</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>slash-common-datasope</name>
     <description>Demo project for Spring Boot</description>
