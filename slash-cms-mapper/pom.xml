@@ -13,11 +13,6 @@
     <version>1.0.0-SNAPSHOT</version>
     <name>slash-cms-mapper</name>
     <description>Demo project for Spring Boot</description>
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>site.lanmushan</groupId>
@@ -32,6 +27,4 @@
             <artifactId>slash-cms-api</artifactId>
         </dependency>
     </dependencies>
-
-
 </project>

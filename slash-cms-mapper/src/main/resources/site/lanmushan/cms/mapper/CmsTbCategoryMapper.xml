@@ -11,8 +11,7 @@
         <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
     <select id="selectList" resultMap="baseResultMap" parameterType="QueryInfo">
-        select id, category_code, fk_parent_category_code, category_desc, category_name, create_time, update_time from
-        cms_tb_category
+        select id, category_code, fk_parent_category_code, category_desc, category_name, create_time, update_time from cms_tb_category
         <trim prefix="where" prefixOverrides="and|or" suffixOverrides="and|or">
             <foreach collection="parList" index="key" item="it" separator="and" open=" (" close=") ">
                 <if test="it.operate =='in'">

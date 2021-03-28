@@ -11,7 +11,6 @@
     <groupId>site.lanmushan</groupId>
     <artifactId>slash-auth-api</artifactId>
     <name>slash-auth-api</name>
-    <description>Demo project for Spring Boot</description>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

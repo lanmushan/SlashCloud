@@ -5,6 +5,5 @@ import site.lanmushan.cms.api.entity.CmsTbCategory;
 import site.lanmushan.framework.query.mapper.QueryMapper;
 
 @Mapper
-public interface CmsTbCategoryMapper  extends QueryMapper<CmsTbCategory> {
-
+public interface CmsTbCategoryMapper extends QueryMapper<CmsTbCategory> {
 }
