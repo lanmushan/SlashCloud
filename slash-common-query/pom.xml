@@ -104,7 +104,7 @@
         </dependency>
         <dependency>
             <groupId>site.lanmushan</groupId>
-            <artifactId>slash-common-datasope</artifactId>
+            <artifactId>slash-common-datacope</artifactId>
         </dependency>
     </dependencies>
 

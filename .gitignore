@@ -1,5 +1,5 @@
 HELP.md
-slash-common-datasope/target/
+slash-common-datacope/target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
