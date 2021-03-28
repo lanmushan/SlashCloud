@@ -6,13 +6,12 @@
 ## 在线体验
 - 后管地址：
   [http://slash.lanmushan.site:6688/](http://slash.lanmushan.site:6688)
-
 - CMS展示体验
 
   http://blog.lanmushan.site
 
 - 登录账号：admin   登录密码：123456 
-
+- 前端仓库 [https://gitee.com/lanmushan/slash-vue](https://gitee.com/lanmushan/slash-vue)
 - 详细文档地址：[开发手册](https://www.yuque.com/u134302/slash)
 ## 技术简介
 ### 后端主要技术框架
