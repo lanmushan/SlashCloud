@@ -11,16 +11,7 @@
   http://blog.lanmushan.site 暂时没搭环境
 
 - 登录账号(单账号不能同时登陆，逻辑这么设计的，不适合场景自己改改)：
-| 账号                          |       密码          |
-| :---------------------------- | :-----------------: |
-| admin                 |  123456  |
-| admin1  |    123456    |
-| admin2          |    123456    |
-| admin3                 | 123456      |
-| admin4 | 123456 |
-| admin5                    | 123456 |
-| admin6 |        123456        |
-| admin7                    |        123456        |
+    账号:admin(1-10)   统一密码:123456  
 
 - 前端仓库 [https://gitee.com/lanmushan/slash-vue](https://gitee.com/lanmushan/slash-vue)
 - 详细文档地址：[开发手册](https://www.yuque.com/u134302/slash)
