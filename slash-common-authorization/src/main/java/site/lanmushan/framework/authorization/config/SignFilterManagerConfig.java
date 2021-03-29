@@ -17,17 +17,13 @@ import java.util.List;
  * @author Administrator
  */
 @Configuration
-@ConditionalOnProperty(value = "slash.auth",havingValue = "true",matchIfMissing = true)
+@ConditionalOnProperty(value = "slash.auth",havingValue = "true",matchIfMissing = false)
 public class SignFilterManagerConfig {
-    public static final List<String> allowUrlList;
-
-    static {
-        JSONObject json = JsonUtil.loadJsonByClassPath("security.json");
-        allowUrlList = json.getJSONArray("allows").toJavaList(String.class);
-    }
 
     @Bean
     public SignFilterManager signFilterManager() {
+        JSONObject json = JsonUtil.loadJsonByClassPath("security.json");
+        List<String> allowUrlList = json.getJSONArray("allows").toJavaList(String.class);
         List<Authority> authorityList = new ArrayList<>();
         allowUrlList.forEach(it -> {
             Authority authority =new Authority();

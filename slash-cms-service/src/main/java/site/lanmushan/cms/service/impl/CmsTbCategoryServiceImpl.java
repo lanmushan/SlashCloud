@@ -25,7 +25,7 @@ import java.util.List;
  */
 @Service("cmsTbCategoryService")
 public class CmsTbCategoryServiceImpl implements CmsTbCategoryService {
-    @Autowired
+//    @Autowired
     private CmsTbCategoryMapper cmsTbCategoryMapper;
 
     @Override

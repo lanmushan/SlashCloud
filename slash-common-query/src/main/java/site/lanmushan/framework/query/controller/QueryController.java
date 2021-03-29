@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.constant.HTTPCode;
 import site.lanmushan.framework.datasope.annotation.EnabledDataScope;
 import site.lanmushan.framework.dto.Message;
@@ -22,6 +23,7 @@ import site.lanmushan.framework.query.util.StringCommonUtil;
 import site.lanmushan.framework.util.ApplicationUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -44,6 +46,7 @@ public class QueryController extends BaseController {
     @RequestMapping(value = "/{entityName}/{methodName:[^\\.]\\w*$}", method = RequestMethod.GET)
     public Message selectList(@PathVariable("entityName") String entityName, @PathVariable("methodName") String methodName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request) {
         log.info("URI {} DATA:{}", request.getRequestURI(), JSONObject.toJSONString(queryInfo));
+        CurrentUserUtil.isLogin();
         Message msg = new Message();
         try {
             entityName = StringCommonUtil.toLowerCaseFirstOne(entityName);
@@ -86,17 +89,19 @@ public class QueryController extends BaseController {
                 }
                 return msg;
             }
-        } catch (OperateException e) {
-            msg.setHttpCode(HTTPCode.C400);
-            msg.error("查询失败");
+        } catch (NoSuchMethodException e) {
+            msg.setHttpCode(HTTPCode.S500);
             log.error("查询失败:{};Exception:", request.getRequestURI(), e);
-        } catch (Exception e) {
-            msg.setHttpCode(HTTPCode.C404);
-            msg.error("查询失败");
+        } catch (IllegalAccessException e) {
+            msg.setHttpCode(HTTPCode.S500);
+            log.error("查询失败:{};Exception:", request.getRequestURI(), e);
+        } catch (InvocationTargetException e) {
+            msg.setHttpCode(HTTPCode.S500);
             log.error("查询失败:{};Exception:", request.getRequestURI(), e);
         }
         return msg;
     }
+
 //
 //    @GetMapping(value = "/{entityName}/export")
 //    public void export(@PathVariable("entityName") String entityName, @RequestQueryInfo QueryInfo queryInfo, HttpServletRequest request, HttpServletResponse response) {

@@ -29,6 +29,7 @@ public class ResourceController {
     @CrossOrigin
     public Message uploadFile(@RequestParam("uploadFormFile") MultipartFile uploadFormFile, String uploadPath, HttpServletRequest request) throws IOException {
         Message msg = new Message();
+        BufferedOutputStream stream=null;
         try {
             String filePathName = localResourceService.getRootPath();
             if (uploadPath != null) {
@@ -49,9 +50,8 @@ public class ResourceController {
             if (!uploadFormFile.isEmpty()) {
                 file.createNewFile();
                 byte[] bytes = uploadFormFile.getBytes();
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
+                 stream = new BufferedOutputStream(new FileOutputStream(file));
                 stream.write(bytes);
-                stream.close();
                 msg.success("文件上传成功");
                 msg.setRow(ServletUtil.getBasePath(request)+this.convertResponsePath(fileFullName));
                 log.info("访问URL:{}", msg.getRow());
@@ -62,6 +62,12 @@ public class ResourceController {
             log.error(e.getMessage(), e);
             msg.error("文件上传失败！");
 
+        }finally {
+          if(stream!=null)
+          {
+              stream.flush();
+              stream.close();
+          }
         }
         return msg;
     }

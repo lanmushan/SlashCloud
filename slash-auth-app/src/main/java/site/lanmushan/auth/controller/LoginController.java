@@ -13,13 +13,13 @@ import site.lanmushan.auth.api.constant.ResourceConstant;
 import site.lanmushan.auth.api.entity.AuthTbResource;
 import site.lanmushan.auth.api.entity.AuthTbRole;
 import site.lanmushan.auth.api.entity.AuthTbUser;
+import site.lanmushan.auth.api.req.ModifyPasswordReq;
+import site.lanmushan.auth.api.service.AuthTbUserLoginLogService;
+import site.lanmushan.auth.api.service.AuthTbUserService;
 import site.lanmushan.auth.api.vo.VoAuthTbResource;
 import site.lanmushan.auth.mapper.AuthTbResourceMapper;
 import site.lanmushan.auth.mapper.AuthTbRoleMapper;
 import site.lanmushan.auth.mapper.AuthTbUserMapper;
-import site.lanmushan.auth.api.req.ModifyPasswordReq;
-import site.lanmushan.auth.api.service.AuthTbUserLoginLogService;
-import site.lanmushan.auth.api.service.AuthTbUserService;
 import site.lanmushan.framework.authorization.CurrentUser;
 import site.lanmushan.framework.authorization.CurrentUserUtil;
 import site.lanmushan.framework.constant.GlobalConstant;
@@ -40,6 +40,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import static java.util.stream.Collectors.toList;
@@ -104,12 +105,19 @@ public class LoginController extends BaseController {
      */
     @PostMapping("/loginManage")
     public Message userLogin(@RequestBody BUserLogin account, HttpServletRequest request) throws OperationsException {
+        Message msg = new Message();
         String ip = ServletUtil.getRemoteHost(request);
         String os = ServletUtil.getLoginOs(request);
         String browser = ServletUtil.getLoginBrowser(request);
         /**以ip，操作系统，浏览器，账号为基础生成uuid,在登录接口验证*/
         String uuid = MD5Util.createMD532(ip + os + browser + account.getAccount());
-        Message msg = new Message();
+        String identifyingCode = redisTemplate.opsForValue().get(GlobalConstant.IMG_VERIFICATION_CODE + uuid);
+        if (identifyingCode == null || account.getVerificationCode() == null) {
+            return msg.error("请输入验证码");
+        }
+        if (!identifyingCode.toLowerCase(Locale.ENGLISH).equals(account.getVerificationCode().toLowerCase(Locale.ENGLISH))) {
+            return msg.error("请输入正确的验证码");
+        }
         BoAuthTbUserLoginLog loginLog = new BoAuthTbUserLoginLog();
         loginLog.setLoginSource("后台登录");
         loginLog.setLoginName(account.getAccount());
@@ -135,16 +143,16 @@ public class LoginController extends BaseController {
                 loginLog.setLoginMsg(msg.getMsg());
                 return msg;
             }
-            CurrentUser  currentUser= handerCurentUser(tbUser);
+            CurrentUser currentUser = handerCurentUser(tbUser);
             String token = CurrentUserUtil.createToken(currentUser);
-            CurrentUserUtil.saveUserToRedis(currentUser,token);
+            CurrentUserUtil.saveUserToRedis(currentUser, token);
             loginLog.setLoginMsg("登录成功");
             msg.setRow(token).success("登录成功");
             return msg;
         } catch (Exception e) {
-            log.error(e.getMessage(),e);
+            log.error(e.getMessage(), e);
             loginLog.setLoginMsg("系统异常");
-            throw new OperationsException("系统异常");
+            return msg.error("系统异常");
         } finally {
             loginService.insertService(loginLog);
         }
@@ -171,7 +179,7 @@ public class LoginController extends BaseController {
         List<VoAuthTbResource> resourceList = authTbResourceMapper.selectResourceByRoleCodes(roleCodeJoin, ResourceConstant.RESOURCE_API);
         List<String> apiList = resourceList.stream().map(AuthTbResource::getResourceUrl).collect(toList());
 
-      return currentUser;
+        return currentUser;
     }
 
     /**
@@ -201,7 +209,7 @@ public class LoginController extends BaseController {
             String browser = ServletUtil.getLoginBrowser(request);
             /**以ip，操作系统，浏览器，账号为基础生成uuid,在登录接口验证*/
             String uuid = MD5Util.createMD532(ip + os + browser + account);
-            redisTemplate.opsForValue().set(GlobalConstant.IMG_VERIFICATION_CODE + uuid, code, 300, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set(GlobalConstant.IMG_VERIFICATION_CODE + uuid, code.toLowerCase(Locale.ENGLISH), 300, TimeUnit.SECONDS);
             msg.setRow(data);
         } catch (Exception e) {
             log.error(e.getMessage(), e);

@@ -166,6 +166,7 @@ public class LocalResourceServiceImpl implements LocalResourceService {
     public byte[] webRead(String path) {
         String tempFile = this.getWebAppPath().concat(path);
         File file = new File(tempFile);
+        FileInputStream in=null;
         if (!file.exists()) {
             throw new OperateException("文件不存在" + path);
         }
@@ -178,13 +179,22 @@ public class LocalResourceServiceImpl implements LocalResourceService {
                     return new byte[0];
                 }
                 byte[] resultByte = new byte[fileLength.intValue()];
-                FileInputStream in = new FileInputStream(file);
+                 in = new FileInputStream(file);
                 in.read(resultByte);
                 in.close();
                 return resultByte;
             } catch (Exception e) {
                 log.error(e.getMessage(), e);
                 throw new OperateException("文件读取失败");
+            }finally {
+              if(in!=null)
+              {
+                  try {
+                      in.close();
+                  } catch (IOException e) {
+                      e.printStackTrace();
+                  }
+              }
             }
         }
     }

@@ -8,9 +8,20 @@
   [http://slash.lanmushan.site:6688/](http://slash.lanmushan.site:6688)
 - CMS展示体验
 
-  http://blog.lanmushan.site
+  http://blog.lanmushan.site 暂时没搭环境
 
-- 登录账号：admin   登录密码：123456 
+- 登录账号(单账号不能同时登陆，逻辑这么设计的，不适合场景自己改改)：
+| 账号                          |       密码          |
+| :---------------------------- | :-----------------: |
+| admin                 |  123456  |
+| admin1  |    123456    |
+| admin2          |    123456    |
+| admin3                 | 123456      |
+| admin4 | 123456 |
+| admin5                    | 123456 |
+| admin6 |        123456        |
+| admin7                    |        123456        |
+
 - 前端仓库 [https://gitee.com/lanmushan/slash-vue](https://gitee.com/lanmushan/slash-vue)
 - 详细文档地址：[开发手册](https://www.yuque.com/u134302/slash)
 ## 技术简介
@@ -50,7 +61,7 @@
 ### 权限服务
 - 用户管理：用户是系统操作者，该功能主要完成系统用户配置。
 - 部门管理：配置树结构展现支持。
-- 菜单管理：配置系统菜单，操作权限，按钮权限标识等。
+- 菜单管理：配置系统菜单，操作权限。
 - 角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。
 - 在线用户：实时查看在线用户（单个账号只能单处登录）
 ### CMS服务
