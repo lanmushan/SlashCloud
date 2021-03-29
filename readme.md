@@ -10,7 +10,7 @@
 
   http://blog.lanmushan.site 暂时没搭环境
 
-- 登录账号(单账号不能同时登陆，逻辑这么设计的，不适合场景自己改改)：
+- 登录账号(单账号不能同时登陆，逻辑这么设计的，不适合场景自己改改):  
     账号:admin(1-10)   统一密码:123456  
 
 - 前端仓库 [https://gitee.com/lanmushan/slash-vue](https://gitee.com/lanmushan/slash-vue)
