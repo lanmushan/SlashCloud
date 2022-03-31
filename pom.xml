@@ -23,7 +23,7 @@
         <!--基础框架-->
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.0.RELEASE</spring-cloud-alibaba.version>
-        <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
+        <spring-boot.version>2.5.12</spring-boot.version>
         <!--数据库相关-->
         <mysql.version>8.0.16</mysql.version>
         <druid.version>1.2.4</druid.version>
